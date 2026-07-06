@@ -2,205 +2,182 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Training Log - Ian | IM70.3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="IM70.3">
+<meta name="theme-color" content="#0b1f3a">
+<link rel="apple-touch-icon" href="icon.png">
+<title>Training | IM70.3</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f8f9fa; color: #24292e;
-    padding: 28px 20px;
+  :root{
+    --bg:#f2f4f7; --card:#fff; --line:#e3e7eb; --ink:#1c2733; --muted:#5b6b7b;
+    --swim:#2980B9; --bike:#E67500; --run:#27AE60; --lift:#8E44AD;
+    --header:#0b1f3a; --accent:#4da3ff;
   }
-  .page-wrap { max-width: 960px; margin: 0 auto; }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    -webkit-text-size-adjust:100%;}
+  body{padding-bottom:calc(40px + env(safe-area-inset-bottom));}
 
-  h1 { font-size: 1.5rem; font-weight: 700; }
-  .subtitle { color: #586069; font-size: 0.86rem; margin: 4px 0 22px; }
+  /* Sticky app header + tab bar */
+  .app-header{position:sticky;top:0;z-index:50;background:var(--header);color:#fff;
+    padding-top:env(safe-area-inset-top);box-shadow:0 1px 8px rgba(0,0,0,.18);}
+  .app-header-inner{max-width:820px;margin:0 auto;padding:11px 16px 0;}
+  .app-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
+  .app-title-row h1{font-size:1.12rem;font-weight:800;letter-spacing:-.02em;}
+  .app-sub{font-weight:500;font-size:.78rem;opacity:.68;margin-left:6px;}
+  .countdown{font-size:.7rem;font-weight:700;background:rgba(255,255,255,.14);
+    padding:4px 10px;border-radius:20px;white-space:nowrap;}
+  .tabbar{display:flex;gap:6px;margin-top:10px;}
+  .tab{flex:1;border:none;background:transparent;color:rgba(255,255,255,.6);
+    font-size:.92rem;font-weight:700;padding:10px 0 12px;cursor:pointer;
+    border-bottom:2.5px solid transparent;transition:.15s;}
+  .tab.active{color:#fff;border-bottom-color:var(--accent);}
 
-  /* Stats bar */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px; margin-bottom: 22px;
-  }
-  .stat {
-    background: white; border: 1px solid #e1e4e8;
-    border-radius: 8px; padding: 12px; text-align: center;
-  }
-  .stat-val { font-size: 1.35rem; font-weight: 700; }
-  .stat-lbl { font-size: 0.72rem; color: #586069; margin-top: 3px; }
+  .page-wrap{max-width:820px;margin:0 auto;padding:16px 14px;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:11px;
+    padding:11px 6px;text-align:center;}
+  .stat-val{font-size:1.12rem;font-weight:800;line-height:1.1;}
+  .stat-lbl{font-size:.62rem;color:var(--muted);margin-top:3px;
+    text-transform:uppercase;letter-spacing:.03em;}
 
   /* Filter pills */
-  .filter-bar {
-    display: flex; gap: 8px; flex-wrap: wrap;
-    margin-bottom: 18px; align-items: center;
-  }
-  .filter-bar strong {
-    font-size: 0.78rem; color: #586069; margin-right: 4px;
-  }
-  .pill {
-    border: 1px solid #d0d7de; background: white;
-    border-radius: 20px; padding: 5px 14px;
-    font-size: 0.82rem; cursor: pointer;
-    font-weight: 500; color: #24292e;
-    transition: all 0.15s;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .pill:hover { background: #f6f8fa; }
-  .pill.active { background: #24292e; color: white; border-color: #24292e; }
-  .pill .swatch {
-    width: 9px; height: 9px; border-radius: 50%; display: inline-block;
-  }
-  .sw-swim { background: #2980B9; }
-  .sw-bike { background: #E67500; }
-  .sw-run  { background: #27AE60; }
-  .sw-lift { background: #8E44AD; }
+  .filter-bar{display:flex;gap:7px;overflow-x:auto;padding-bottom:5px;margin-bottom:14px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .filter-bar::-webkit-scrollbar{display:none;}
+  .pill{flex:0 0 auto;border:1px solid #d0d7de;background:#fff;border-radius:20px;
+    padding:8px 15px;font-size:.82rem;font-weight:600;color:var(--ink);
+    display:flex;align-items:center;gap:6px;cursor:pointer;}
+  .pill.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .swatch{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .sw-swim{background:var(--swim);}.sw-bike{background:var(--bike);}
+  .sw-run{background:var(--run);}.sw-lift{background:var(--lift);}
 
-  /* Week card */
-  .week-card {
-    background: white; border: 1px solid #e1e4e8;
-    border-radius: 8px; margin-bottom: 12px; overflow: hidden;
-  }
-  .week-head {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 16px; cursor: pointer;
-    background: white; border-bottom: 1px solid transparent;
-    transition: background 0.1s;
-  }
-  .week-head:hover { background: #f6f8fa; }
-  .week-card.open .week-head { border-bottom-color: #e1e4e8; }
-  .phase-badge {
-    font-size: 0.7rem; font-weight: 700; color: white;
-    padding: 3px 9px; border-radius: 4px;
-  }
-  .phase-base       { background: #0969da; }
-  .phase-recovery   { background: #2da44e; }
-  .phase-build      { background: #e36209; }
-  .phase-peak       { background: #cf222e; }
-  .phase-benchmark  { background: #6f42c1; }
-  .phase-transition { background: #586069; }
-  .week-title { font-weight: 600; font-size: 0.96rem; }
-  .week-dates { color: #586069; font-size: 0.82rem; }
-  .week-spacer { flex: 1; }
-  .week-meta {
-    display: flex; align-items: center; gap: 10px;
-    color: #586069; font-size: 0.78rem;
-  }
-  .week-score {
-    font-weight: 700; padding: 3px 9px; border-radius: 4px;
-    color: white; font-size: 0.78rem;
-  }
-  .ws-high { background: #1a7f37; }
-  .ws-mid  { background: #e36209; }
-  .ws-low  { background: #c0392b; }
-  .caret {
-    font-size: 0.7rem; color: #586069; transition: transform 0.2s;
-  }
-  .week-card.open .caret { transform: rotate(90deg); }
+  /* Week card (shared by Log + Plan) */
+  .week-card{background:var(--card);border:1px solid var(--line);border-radius:11px;
+    margin-bottom:10px;overflow:hidden;}
+  .week-head{display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;}
+  .week-card.open .week-head{border-bottom:1px solid var(--line);}
+  .phase-badge{font-size:.6rem;font-weight:800;color:#fff;padding:3px 8px;
+    border-radius:5px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;}
+  .phase-base{background:#0969da;}.phase-recovery{background:#2da44e;}
+  .phase-build{background:#e36209;}.phase-peak{background:#cf222e;}
+  .phase-benchmark{background:#6f42c1;}.phase-transition{background:#586069;}
+  .week-title{font-weight:700;font-size:.9rem;white-space:nowrap;}
+  .week-dates{color:var(--muted);font-size:.74rem;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;}
+  .week-spacer{flex:1;}
+  .week-meta{color:var(--muted);font-size:.74rem;}
+  .week-score{font-weight:800;padding:3px 8px;border-radius:5px;color:#fff;font-size:.72rem;white-space:nowrap;}
+  .ws-high{background:#1a7f37;}.ws-mid{background:#e36209;}.ws-low{background:#c0392b;}
+  .now-badge{font-size:.58rem;font-weight:800;background:var(--accent);color:#04213f;
+    padding:3px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.03em;}
+  .caret{font-size:.7rem;color:var(--muted);transition:transform .2s;}
+  .week-card.open .caret{transform:rotate(90deg);}
+  .week-card.current{border-color:var(--accent);box-shadow:0 0 0 2px rgba(77,163,255,.25);}
+  .week-body{display:none;}
+  .week-card.open .week-body{display:block;}
+  .week-card.empty{display:none;}
 
-  .week-body { display: none; padding: 4px 0 8px; }
-  .week-card.open .week-body { display: block; }
+  /* Log session row (tap to expand) */
+  .session-wrap{border-bottom:1px solid #f1f3f5;}
+  .session-wrap:last-child{border-bottom:none;}
+  .session-wrap.hidden{display:none;}
+  .session{display:grid;grid-template-columns:50px 1fr 32px;gap:11px;align-items:center;
+    padding:11px 14px 11px 11px;border-left:4px solid #ccc;cursor:pointer;}
+  .session-wrap.disc-swim .session{border-left-color:var(--swim);}
+  .session-wrap.disc-bike .session{border-left-color:var(--bike);}
+  .session-wrap.disc-run  .session{border-left-color:var(--run);}
+  .session-wrap.disc-lift .session{border-left-color:var(--lift);}
+  .sess-date{font-size:.72rem;font-weight:700;color:var(--muted);}
+  .sess-day{font-size:.62rem;color:#9aa4ad;}
+  .sess-main{min-width:0;}
+  .sess-title{font-weight:600;font-size:.86rem;}
+  .sess-detail{font-size:.74rem;color:var(--muted);margin-top:2px;
+    display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+  .session-wrap.expanded .sess-detail{-webkit-line-clamp:unset;overflow:visible;}
+  .score{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-weight:800;font-size:.84rem;color:#fff;}
+  .sc-9,.sc-10{background:#1a7f37;}
+  .sc-7,.sc-8{background:#40c463;color:#14361f;}
+  .sc-5,.sc-6{background:#9be9a8;color:#14361f;}
+  .sc-3,.sc-4{background:#f0a500;}
+  .sc-1,.sc-2{background:#e05c2a;}
+  .sc-0{background:#c0392b;}
+  .sess-expand{display:none;padding:2px 15px 13px;font-size:.8rem;line-height:1.55;color:#33414f;}
+  .session-wrap.expanded .sess-expand{display:block;}
+  .sess-expand .lbl{font-weight:800;color:var(--header);}
+  .sess-expand .block{margin-top:7px;}
 
-  /* Session row */
-  .session {
-    display: grid;
-    grid-template-columns: 90px 1fr auto 44px;
-    gap: 12px; align-items: center;
-    padding: 9px 16px 9px 12px;
-    border-left: 4px solid #ccc;
-    margin: 0 12px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  .session:last-child { border-bottom: none; }
-  .session.disc-swim { border-left-color: #2980B9; }
-  .session.disc-bike { border-left-color: #E67500; }
-  .session.disc-run  { border-left-color: #27AE60; }
-  .session.disc-lift { border-left-color: #8E44AD; }
+  /* Plan rows */
+  .plan-row{display:grid;grid-template-columns:52px 1fr;gap:11px;
+    padding:10px 14px 10px 11px;border-left:4px solid #d0d7de;border-bottom:1px solid #f1f3f5;}
+  .plan-row:last-child{border-bottom:none;}
+  .plan-row.disc-swim{border-left-color:var(--swim);}
+  .plan-row.disc-bike{border-left-color:var(--bike);}
+  .plan-row.disc-run{border-left-color:var(--run);}
+  .plan-row.disc-lift{border-left-color:var(--lift);}
+  .plan-day{font-size:.66rem;font-weight:800;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.02em;padding-top:1px;}
+  .plan-sess{font-weight:600;font-size:.85rem;}
+  .plan-target{font-size:.76rem;color:var(--muted);margin-top:2px;line-height:1.4;}
+  .plan-note{padding:11px 14px;font-size:.79rem;line-height:1.5;color:#3a4753;
+    border-bottom:1px solid #f1f3f5;}
+  .plan-note:last-child{border-bottom:none;}
+  .plan-intro{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.4;}
 
-  .sess-date {
-    font-size: 0.74rem; color: #586069; font-weight: 600;
-  }
-  .sess-day { font-size: 0.68rem; color: #8c959f; }
-  .sess-main { min-width: 0; }
-  .sess-title {
-    font-weight: 600; font-size: 0.88rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .sess-detail {
-    font-size: 0.76rem; color: #586069;
-    margin-top: 2px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .sess-tag {
-    font-size: 0.68rem; font-weight: 700;
-    padding: 2px 7px; border-radius: 4px;
-    text-transform: uppercase; letter-spacing: 0.04em;
-  }
-  .tag-swim { background: #e1f0fa; color: #2980B9; }
-  .tag-bike { background: #fdebd9; color: #b85a00; }
-  .tag-run  { background: #d8f3df; color: #1a7f37; }
-  .tag-lift { background: #ecdcfa; color: #6f42c1; }
+  .empty-state{text-align:center;padding:30px;color:var(--muted);font-size:.85rem;
+    border:2px dashed var(--line);border-radius:11px;}
 
-  .score {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 0.92rem; color: white;
-  }
-  .sc-9, .sc-10 { background: #1a7f37; }
-  .sc-7, .sc-8  { background: #40c463; color: #14361f; }
-  .sc-5, .sc-6  { background: #9be9a8; color: #14361f; }
-  .sc-3, .sc-4  { background: #f0a500; }
-  .sc-1, .sc-2  { background: #e05c2a; }
-  .sc-0         { background: #c0392b; }
-
-  /* Hidden state for filtering */
-  .session.hidden { display: none; }
-  .week-card.empty { display: none; }
-
-  /* Session tooltip */
-  #logTooltip {
-    position: fixed; display: none; z-index: 1000;
-    background: #24292e; color: white;
-    padding: 9px 12px; border-radius: 6px;
-    font-size: 0.78rem; line-height: 1.5;
-    max-width: 320px; pointer-events: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  }
-  #logTooltip strong { color: #ffd57e; }
-
-  /* Empty state */
-  .empty-state {
-    text-align: center; padding: 28px;
-    color: #586069; font-size: 0.85rem;
-    border: 2px dashed #e1e4e8; border-radius: 8px;
-  }
-
-  @media (max-width: 600px) {
-    .session { grid-template-columns: 70px 1fr 38px; }
-    .sess-tag { display: none; }
+  @media (min-width:560px){
+    .stats{grid-template-columns:repeat(6,1fr);}
+    .session{grid-template-columns:58px 1fr 34px;}
   }
 </style>
 </head>
 <body>
-<div class="page-wrap">
 
-  <h1>Training Log</h1>
-  <p class="subtitle">Ian &nbsp;|&nbsp; IM70.3 Dallas Little Elm &nbsp;|&nbsp; Race: March 14, 2027 &nbsp;|&nbsp; Updated: July 05, 2026</p>
-
-  <div class="stats" id="stats"></div>
-
-  <div class="filter-bar">
-    <strong>Filter:</strong>
-    <button class="pill active" data-disc="all">All</button>
-    <button class="pill" data-disc="swim"><span class="swatch sw-swim"></span>Swim</button>
-    <button class="pill" data-disc="bike"><span class="swatch sw-bike"></span>Bike</button>
-    <button class="pill" data-disc="run"><span class="swatch sw-run"></span>Run</button>
-    <button class="pill" data-disc="lift"><span class="swatch sw-lift"></span>Lift</button>
+<header class="app-header">
+  <div class="app-header-inner">
+    <div class="app-title-row">
+      <h1>IM 70.3<span class="app-sub">Ian &middot; Dallas Little Elm</span></h1>
+      <span class="countdown" id="countdown"></span>
+    </div>
+    <nav class="tabbar">
+      <button class="tab active" data-view="log">Log</button>
+      <button class="tab" data-view="plan">Plan</button>
+    </nav>
   </div>
+</header>
 
-  <div id="weeks-container"></div>
-  <div id="logTooltip"></div>
+<main class="page-wrap">
 
-</div>
+  <section id="view-log" class="view active">
+    <div class="stats" id="stats"></div>
+    <div class="filter-bar">
+      <button class="pill active" data-disc="all">All</button>
+      <button class="pill" data-disc="swim"><span class="swatch sw-swim"></span>Swim</button>
+      <button class="pill" data-disc="bike"><span class="swatch sw-bike"></span>Bike</button>
+      <button class="pill" data-disc="run"><span class="swatch sw-run"></span>Run</button>
+      <button class="pill" data-disc="lift"><span class="swatch sw-lift"></span>Lift</button>
+    </div>
+    <div id="weeks-container"></div>
+  </section>
+
+  <section id="view-plan" class="view">
+    <p class="plan-intro">Full training block &middot; updated July 06, 2026. Tap any week to expand &mdash; your current week is highlighted.</p>
+    <div id="plan-container"></div>
+  </section>
+
+</main>
 
 <script>
 const WEEKS_DATA = [
@@ -781,177 +758,1113 @@ const WEEKS_DATA = [
     ]
   }
 ];
+const PLAN_DATA  = [
+  {
+    "num": 1,
+    "start": "2026-05-04",
+    "label": "May 4-10",
+    "phase": "Benchmark",
+    "rows": [
+      {
+        "day": "Mon",
+        "disc": "run",
+        "session": "Mile TT",
+        "target": "[DONE] 5:57"
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "FTP Test",
+        "target": "[MISS] deferred to Wk5"
+      },
+      {
+        "day": "Wed",
+        "disc": "swim",
+        "session": "1000m TT",
+        "target": "[DONE] 18:48 active"
+      },
+      {
+        "day": "Sat",
+        "disc": "lift",
+        "session": "Strength Benchmarks",
+        "target": "[DONE]"
+      }
+    ],
+    "notes": [
+      "Notes: All run/swim baselines set. Bike FTP deferred. VDOT: Mile 48.9, 5K 41.0."
+    ]
+  },
+  {
+    "num": 2,
+    "start": "2026-05-25",
+    "label": "May 25-31",
+    "phase": "Base",
+    "rows": [
+      {
+        "day": "Mon",
+        "disc": "lift",
+        "session": "Push (off-plan Murph)",
+        "target": "[MOD] Load 212 \u2014 caused cascade"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Lake Atlanta Hills 5 loops",
+        "target": "[MOD] 7/10 \u2014 4/5 loops"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold 3x4 min",
+        "target": "[MISS] 0 \u2014 Murph fatigue"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment 1200 yd",
+        "target": "[MOD] 5/10 \u2014 1000m, HR spiked"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "swim",
+        "session": "Technique 1200 yd",
+        "target": "[MOD] 6/10 \u2014 900m, HR 152"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Foundation Run",
+        "target": "[MISS] 0"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Foundation Bike 1:15 Z2",
+        "target": "[MOD] 5/10 \u2014 HR 170 (Z3 drift)"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "swim",
+        "session": "Long Swim 1000m",
+        "target": "[MOD] 6/10 \u2014 over-breathing diagnosed"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "run",
+        "session": "Long Run 50 min",
+        "target": "[MOD] 5/10 \u2014 HR 179 at 90F, cut early"
+      }
+    ],
+    "notes": [
+      "(Vacation May 11-24 preceded this week.)",
+      "Notes: Murph cascade wiped threshold + foundation run. First swim over-breathing diagnosis (hyperventilation). Buddy-ride pulled bike to Z3."
+    ]
+  },
+  {
+    "num": 3,
+    "start": "2026-06-01",
+    "label": "Jun 1-7",
+    "phase": "Base",
+    "rows": [
+      {
+        "day": "Mon",
+        "disc": "lift",
+        "session": "Push",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Lake Atlanta Hills 5 loops",
+        "target": "[DONE] 8/10 \u2014 5/5, HR 159"
+      },
+      {
+        "day": "Wed",
+        "disc": "unknown",
+        "session": "9-hr drive",
+        "target": "\u2014"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold 3x4 min",
+        "target": "[MISS] 0 \u2014 rescheduled Fri"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment Swim 1400 yd",
+        "target": "[MISS] 0 \u2014 travel"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Norwegian Threshold 3x4 min",
+        "target": "[DONE] 8/10 \u2014 7:51/7:41/7:23 at HR 182-186"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Equipment Swim (fins)",
+        "target": "[MOD] 5/10 \u2014 1008 yd, HR 192 with fins"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Foundation Bike 1:15",
+        "target": "[DONE] 9/10 \u2014 HR 139, textbook Z2"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "lift",
+        "session": "Legs",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "run",
+        "session": "Foundation Run",
+        "target": "[MISS] 0"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run 8 mi",
+        "target": "[MOD] 5/10 \u2014 8 mi hit, HR 171 at 88F, bonked"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim 1150 yd",
+        "target": "[MISS] 0 \u2014 legs toasted"
+      }
+    ],
+    "notes": [
+      "Notes: Travel day wiped Wednesday. 1/3 swims completed. Foundation bike textbook Z2 (best of block). Long run distance hit but heat/fasted caused bonk. Swim gap widening."
+    ]
+  },
+  {
+    "num": 4,
+    "start": "2026-06-08",
+    "label": "Jun 8-14",
+    "phase": "Base",
+    "rows": [
+      {
+        "day": "Mon",
+        "disc": "lift",
+        "session": "Push",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Lake Atlanta Hills 5 loops",
+        "target": "[DONE] 8/10 \u2014 avg 6:45/loop (7s faster than Wk3)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold 3x4 min",
+        "target": "[DONE] 9/10 \u2014 6:55/6:43/7:18 at HR 184"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "swim",
+        "session": "Pull Buoy (makeup)",
+        "target": "[DONE] 8/10 \u2014 breakthrough: pull buoy confirmed kick diagnosis"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Foundation Run 5 mi",
+        "target": "[MOD] 5/10 \u2014 4 mi, GAP 8:36 (SubT on easy day)"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim (Pull Buoy)",
+        "target": "[DONE] 8/10 \u2014 1205 yd PR, 200yd continuous first time"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Foundation Bike",
+        "target": "[MISS] 0 \u2014 wedding cascade"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "[MISS] 0 \u2014 Readiness 25, correct call"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "[MISS] 0 \u2014 same"
+      }
+    ],
+    "notes": [
+      "Notes: Swim BREAKTHROUGH \u2014 pull buoy unlocked aerobic swimming. 200yd continuous = 4.5x from baseline. Threshold at 6:58/mi (32s faster than Wk3). Foundation run pace still too fast (GAP 8:36 vs 9:25+ target). Wedding cascade + low readiness \u2192 3 missed Sunday sessions."
+    ]
+  },
+  {
+    "num": 5,
+    "start": "2026-06-15",
+    "label": "Jun 15-21",
+    "phase": "Recovery",
+    "rows": [
+      {
+        "day": "Mon",
+        "disc": "lift",
+        "session": "Push (deload)",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Zwift FTP Ramp Test",
+        "target": "[DONE] 8/10 \u2014 216W established"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold 2x4 min (rec)",
+        "target": "[MOD] 7/10 \u2014 did 3x4 (overshot deload)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment Swim 1100 yd",
+        "target": "[DONE] 10/10 \u2014 PRs on pace/DPS/Swolf"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull (deload)",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Zwift 30 min Z2",
+        "target": "[DONE] 9/10 \u2014 power on target, cadence 74"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "swim",
+        "session": "Base Swim 1300 yd",
+        "target": "[MOD] 9/10 \u2014 1200 yd, 300m continuous PR"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "run",
+        "session": "Base Run 3.5 mi",
+        "target": "[DONE] 8/10 \u2014 HR 165 above Z2 but big improvement"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Zwift Long 45 min Z2",
+        "target": "[DONE] 9/10 \u2014 142W, NP/AP 1.014, cadence 77"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "lift",
+        "session": "Legs (deload)",
+        "target": "[DONE]"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run 6 mi",
+        "target": "[MOD] 7/10 \u2014 5.09 mi, mi 3 surge to 8:57 (28s under floor)"
+      }
+    ],
+    "notes": [
+      "Notes: Best week of block. FTP baseline set (216W). Swim continuous PR 200yd\u2192300m. T pace locked 6:47/mi via LacTrace. E pace recalibrated 9:25-10:00. Cadence still capped at 74-77 (SPD pedal fix pending). Run pace discipline flag on mile 3 long run."
+    ]
+  },
+  {
+    "num": 6,
+    "start": "2026-06-22",
+    "label": "Jun 22-28",
+    "phase": "Base",
+    "rows": [
+      {
+        "day": "Mon",
+        "disc": "lift",
+        "session": "Push",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Zwift Intervals",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold",
+        "target": "[INJ] 0 \u2014 ankle"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment Swim 1300 yd",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Foundation Run 5 mi",
+        "target": "[INJ] 0 \u2014 ankle"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Continuity Swim 1000 yd",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Foundation Bike 1:15",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "lift",
+        "session": "Legs (modify \u2014 avoid ankle load)",
+        "target": "Update when completed"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run 7 mi",
+        "target": "[INJ] 0 \u2014 ankle"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim 1300 yd",
+        "target": "Update when completed"
+      }
+    ],
+    "notes": [
+      "FLAG: Grade II ankle sprain (basketball, Jun 21). No running this week. All run sessions = 0.",
+      "Notes: Ankle sprain day 1 of Wk6. All runs automatic 0. Bike and swim completed as able \u2014 log actuals when known. Return-to-run gated by pain-free walking restored."
+    ]
+  },
+  {
+    "num": 7,
+    "start": "2026-06-29",
+    "label": "Jun 29 - Jul 5",
+    "phase": "Base",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Push",
+        "target": "Bench Press 4x5 (max) / OHP 3x5 (max) / Cable Tricep Ext 3x10-12 / Ab Roller 3x10"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Zwift Intervals",
+        "target": "45 min \u2014 3x8 min @ 196-216W (Z4), 3 min rec"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold OR bike sub",
+        "target": "3x5 min @ T pace 6:47/mi (IF ankle clear) \u2014 [MISS] ankle still gated"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment Swim",
+        "target": "[DONE Thu] 10/10 \u2014 1,451 yd CONTINUOUS PR (4.4x prior best), last 100yd no buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": "Lat Pulldown 4x6-8 / Barbell Row 3x5 (max) / Barbell Curl 3x8-10 / Ab Roller 3x10 \u2014 [MISS] holiday (boat)"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Zwift 30 min Z2",
+        "target": "[DONE] 9/10 \u2014 138W avg, cadence 87 rpm (\u2191 from 74-83 historical)"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Foundation Run (modified)",
+        "target": "3-4 mi @ 9:25-10:00/mi (ankle cleared only) \u2014 [MISS] ankle still gated"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Continuity Swim",
+        "target": "[DONE] 6/10 \u2014 1,022yd OW improvised (lifejacket, head-up); metrics quarantined, not leg-sink data"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Foundation Bike",
+        "target": "1:15 Zwift Z2 (130-163W) \u2014 [MISS] July 4th, on boat"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "lift",
+        "session": "Legs",
+        "target": "Modified \u2014 no heavy ankle load until cleared \u2014 [MISS] holiday (boat)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run (shortened)",
+        "target": "5 mi easy IF ankle clear (defer if not) \u2014 [MISS] ankle still gated"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "1,300 yd pull buoy continuous \u2014 [MISS] week closed out"
+      }
+    ],
+    "notes": [
+      "Ankle clearance: Return to run only when pain-free walking fully restored. Start with 2-3 mi easy if cleared.",
+      "Bike and swim: proceed as planned. Legs lift: avoid direct ankle-load exercises."
+    ]
+  },
+  {
+    "num": 8,
+    "start": "2026-07-06",
+    "label": "Jul 6-12",
+    "phase": "Base",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Push",
+        "target": "Progression from Wk7"
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Lake Atlanta Hills OR Zwift",
+        "target": "5 loops OR 3x10 min @ Z4"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian Threshold",
+        "target": "3x5 min @ T pace 6:47/mi"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment Swim",
+        "target": "~1,400 yd (drills + pull buoy sets)"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": "Standard"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Foundation Run",
+        "target": "5 mi @ 9:25-10:00/mi"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Continuity Swim",
+        "target": "1,100 yd \u2014 begin extending rep distance"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Foundation/Long Bike",
+        "target": "1:30 Z2 (130-163W)"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "lift",
+        "session": "Legs",
+        "target": "Full volume"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "8 mi @ 9:25-10:00/mi (pre-sunrise)"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "1,400 yd pull buoy"
+      }
+    ],
+    "notes": []
+  },
+  {
+    "num": 9,
+    "start": "2026-07-13",
+    "label": "Jul 13-19",
+    "phase": "Benchmark",
+    "rows": [
+      {
+        "day": "",
+        "disc": "run",
+        "session": "Mile TT",
+        "target": "10 min WU + 4x20s strides, then all-out mile \u2014 Beat 5:57"
+      },
+      {
+        "day": "",
+        "disc": "run",
+        "session": "5K TT",
+        "target": "Separate day, 48h+ after mile \u2014 Beat 23:35 (7:36/mi)"
+      },
+      {
+        "day": "",
+        "disc": "swim",
+        "session": "Swim 1000m",
+        "target": "300m WU + 4x50 drills, then 1100yd sustained \u2014 Beat 18:48 active"
+      },
+      {
+        "day": "",
+        "disc": "bike",
+        "session": "FTP Test",
+        "target": "15 min WU incl. 2x30s hard, then 20 min all-out \u2014 Beat 216W"
+      },
+      {
+        "day": "",
+        "disc": "lift",
+        "session": "Lifting",
+        "target": "Full top-set protocol \u2014 all 6 lifts \u2014 Document vs baselines"
+      },
+      {
+        "day": "",
+        "disc": "unknown",
+        "session": "Body Comp",
+        "target": "Morning fasted, VeSync scale \u2014 Document vs May 14 baseline"
+      }
+    ],
+    "notes": [
+      "Pure testing. No training sessions. Compare all numbers to Week 1."
+    ]
+  },
+  {
+    "num": 10,
+    "start": "2026-07-20",
+    "label": "Jul 20-26",
+    "phase": "Build",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Push",
+        "target": ""
+      },
+      {
+        "day": "Tue AM",
+        "disc": "bike",
+        "session": "Zwift Intervals",
+        "target": "4x8 min @ Z4 (196-216W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Norwegian \u2014 Medium Intervals",
+        "target": "4x6 min @ HM pace 6:55-7:08/mi, 2 min rec"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Equipment Swim",
+        "target": "~1,500 yd"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Foundation Run",
+        "target": "6 mi @ 9:25-10:00/mi"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Continuity Swim",
+        "target": "1,200 yd \u2014 push continuous distance"
+      },
+      {
+        "day": "Sat AM",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "1:45 Z2"
+      },
+      {
+        "day": "Sat PM",
+        "disc": "lift",
+        "session": "Legs",
+        "target": ""
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "10 mi @ E pace (pre-sunrise mandatory)"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "1,600 yd"
+      }
+    ],
+    "notes": []
+  },
+  {
+    "num": 11,
+    "start": "2026-07-27",
+    "label": "Jul 27 - Aug 2",
+    "phase": "Build",
+    "rows": [],
+    "notes": [
+      "Same structure as Wk10. Volume increments:",
+      "- Long run: 10.5 mi",
+      "- Long swim: 1,700 yd",
+      "- Bike: 1:50 Z2",
+      "- Intervals: 4x7 min @ HM pace"
+    ]
+  },
+  {
+    "num": 12,
+    "start": "2026-08-03",
+    "label": "Aug 3-9",
+    "phase": "Build",
+    "rows": [],
+    "notes": [
+      "- Long run: 11 mi",
+      "- Long swim: 1,800 yd",
+      "- Bike: 2:00 Z2 (first 2h ride)",
+      "- Intervals: 4x8 min @ HM pace",
+      "- Begin practicing race nutrition on long rides and runs (gel timing, fluid strategy)"
+    ]
+  },
+  {
+    "num": 13,
+    "start": "2026-08-10",
+    "label": "Aug 10-16",
+    "phase": "Recovery",
+    "rows": [],
+    "notes": [
+      "Volume drop ~35%. Same frequency. All intensities maintained.",
+      "- Long run: 7 mi",
+      "- Long swim: 1,200 yd",
+      "- Bike: 1:15 Z2",
+      "- Intervals: 3x5 min @ T pace (not build volume)"
+    ]
+  },
+  {
+    "num": 14,
+    "start": "2026-08-17",
+    "label": "Aug 17-23",
+    "phase": "Build",
+    "rows": [],
+    "notes": [
+      "- Long run: 11.5 mi",
+      "- Long swim: 1,900 yd",
+      "- Bike: 2:00 Z2 + begin brick sessions (bike-to-run transitions)",
+      "- START race nutrition practice this week. Gel every 45 min on long rides. Hydration protocol TBD."
+    ]
+  },
+  {
+    "num": 15,
+    "start": "2026-08-24",
+    "label": "Aug 24-30",
+    "phase": "Build",
+    "rows": [],
+    "notes": [
+      "- Long run: 12 mi",
+      "- Long swim: 2,000 yd (closing on race distance \u2014 2,112 yd target)",
+      "- Bike: 2:15 Z2 + brick session",
+      "- Intervals: 5x7 min @ HM pace"
+    ]
+  },
+  {
+    "num": 16,
+    "start": "2026-08-31",
+    "label": "Aug 31 - Sep 6",
+    "phase": "Peak",
+    "rows": [],
+    "notes": [
+      "- Long run: 12.5 mi",
+      "- Long swim: 2,100 yd (at or near race distance)",
+      "- Bike: 2:30 Z2 + brick (longest brick session to date)",
+      "- Norwegian: Transition to sustained tempo \u2014 20 min continuous @ T pace 6:47/mi",
+      "- Potential early Fall HM race this window \u2014 confirm date by Wk12"
+    ]
+  },
+  {
+    "num": 17,
+    "start": "2026-09-07",
+    "label": "Sep 7-13",
+    "phase": "Benchmark",
+    "rows": [
+      {
+        "day": "",
+        "disc": "run",
+        "session": "Mile TT",
+        "target": "Beat Wk9 time"
+      },
+      {
+        "day": "",
+        "disc": "run",
+        "session": "5K TT",
+        "target": "Beat Wk9 time"
+      },
+      {
+        "day": "",
+        "disc": "swim",
+        "session": "Swim 1000m",
+        "target": "Beat Wk9 time"
+      },
+      {
+        "day": "",
+        "disc": "bike",
+        "session": "FTP Test",
+        "target": "Beat Wk9 power"
+      },
+      {
+        "day": "",
+        "disc": "lift",
+        "session": "Lifting",
+        "target": "Document progression"
+      },
+      {
+        "day": "",
+        "disc": "unknown",
+        "session": "Body Comp",
+        "target": "3rd check-in"
+      }
+    ],
+    "notes": [
+      "Same protocol as Wk9. Compare to Wk1 and Wk9."
+    ]
+  },
+  {
+    "num": 18,
+    "start": "2026-09-14",
+    "label": "Sep 14-20",
+    "phase": "Peak",
+    "rows": [],
+    "notes": [
+      "- Long run: 13 mi (peak long run of Block 1)",
+      "- Long swim: 2,112 yd (race distance \u2014 first time)",
+      "- Bike: 2:45 Z2 + brick",
+      "- Norwegian: 22 min sustained tempo"
+    ]
+  },
+  {
+    "num": 19,
+    "start": "2026-09-21",
+    "label": "Sep 21-27",
+    "phase": "Peak",
+    "rows": [],
+    "notes": [
+      "Hold peak long run (12-13 mi). Swim at or near race distance. Begin sharpening brick transitions.",
+      "Norwegian: 24-26 min sustained tempo.",
+      "Bike: Work toward 3h Z2 ride with brick run off it."
+    ]
+  },
+  {
+    "num": 20,
+    "start": "2026-09-28",
+    "label": "Sep 28 - Oct 4",
+    "phase": "Peak",
+    "rows": [],
+    "notes": [
+      "Hold peak long run (12-13 mi). Swim at or near race distance. Begin sharpening brick transitions.",
+      "Norwegian: 24-26 min sustained tempo.",
+      "Bike: Work toward 3h Z2 ride with brick run off it."
+    ]
+  },
+  {
+    "num": 21,
+    "start": "2026-10-05",
+    "label": "Oct 5-11",
+    "phase": "Recovery",
+    "rows": [],
+    "notes": [
+      "Volume drop ~35%. Maintain frequency. Recover from peak block.",
+      "- Long run: 8 mi",
+      "- Swim: 1,400 yd",
+      "- Bike: 1:30 Z2"
+    ]
+  },
+  {
+    "num": 22,
+    "start": "2026-10-12",
+    "label": "Oct 12-18",
+    "phase": "Peak",
+    "rows": [],
+    "notes": [
+      "Final high-load weeks of Block 1. Volume matches or approaches Wk18-20.",
+      "Focus: race-pace brick work, nutrition execution, mental confidence in long swim."
+    ]
+  },
+  {
+    "num": 23,
+    "start": "2026-10-19",
+    "label": "Oct 19-25",
+    "phase": "Peak",
+    "rows": [],
+    "notes": [
+      "Final high-load weeks of Block 1. Volume matches or approaches Wk18-20.",
+      "Focus: race-pace brick work, nutrition execution, mental confidence in long swim."
+    ]
+  },
+  {
+    "num": 24,
+    "start": "2026-10-26",
+    "label": "Oct 26 - Nov 1",
+    "phase": "Recovery",
+    "rows": [],
+    "notes": [
+      "Full deload before final benchmark. Easy movement only."
+    ]
+  },
+  {
+    "num": 25,
+    "start": "2026-11-02",
+    "label": "Nov 2-8",
+    "phase": "Benchmark",
+    "rows": [],
+    "notes": [
+      "All four test categories. Compare Wk1 \u2192 Wk9 \u2192 Wk17 \u2192 Wk25 progression.",
+      "Results define Block 2 baseline. Body comp 4th check-in."
+    ]
+  },
+  {
+    "num": 26,
+    "start": "2026-11-09",
+    "label": "Nov 9-15",
+    "phase": "Transition",
+    "rows": [],
+    "notes": [
+      "Easy movement only. No structured sessions. Recharge mentally and physically.",
+      "Block 1 complete. Block 2 race prep begins Nov 16, 2026."
+    ]
+  }
+];
 
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-function dayOfWeek(iso) {
-  const [y,m,d] = iso.split('-').map(Number);
-  return DOW[new Date(y, m-1, d).getDay()];
-}
-function monthDay(iso) {
-  const [y,m,d] = iso.split('-').map(Number);
-  return `${m}/${d}`;
-}
+function dow(iso){const [y,m,d]=iso.split('-').map(Number);return DOW[new Date(y,m-1,d).getDay()];}
+function md(iso){const [y,m,d]=iso.split('-').map(Number);return m+'/'+d;}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function wsClass(s){if(s==null)return '';if(s>=80)return 'ws-high';if(s>=60)return 'ws-mid';return 'ws-low';}
+function phaseClass(p){return 'phase-'+p.toLowerCase();}
+function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
 
-function wsClass(score) {
-  if (score === null || score === undefined) return '';
-  if (score >= 80) return 'ws-high';
-  if (score >= 60) return 'ws-mid';
-  return 'ws-low';
-}
+/* Race countdown */
+(function(){
+  const race=new Date(2027,2,14);
+  const now=new Date();now.setHours(0,0,0,0);
+  const days=Math.round((race-now)/86400000);
+  document.getElementById('countdown').textContent=days>0?days+'d to race':(days===0?'Race day!':'Race done');
+})();
 
-function phaseClass(p) {
-  return 'phase-' + p.toLowerCase();
-}
-
-function renderStats() {
-  let totalSessions = 0;
-  let scoreSum = 0, scoreCount = 0;
-  let discCount = { swim:0, bike:0, run:0, lift:0 };
-  let weeklyScores = [];
-
-  WEEKS_DATA.forEach(w => {
-    if (w.score !== null && w.score !== undefined) weeklyScores.push(w.score);
-    w.sessions.forEach(s => {
+function renderStats(){
+  let totalSessions=0,scoreSum=0,scoreCount=0;
+  const disc={swim:0,bike:0,run:0,lift:0};
+  const weekly=[];
+  WEEKS_DATA.forEach(w=>{
+    if(w.score!=null)weekly.push(w.score);
+    w.sessions.forEach(s=>{
       totalSessions++;
-      if (s.score > 0) { scoreSum += s.score; scoreCount++; }
-      if (discCount[s.discipline] !== undefined) discCount[s.discipline]++;
+      if(s.score>0){scoreSum+=s.score;scoreCount++;}
+      if(disc[s.discipline]!==undefined)disc[s.discipline]++;
     });
   });
-
-  const avgWeekly = weeklyScores.length
-    ? (weeklyScores.reduce((a,b) => a+b, 0) / weeklyScores.length).toFixed(0)
-    : '-';
-  const avgSession = scoreCount
-    ? (scoreSum / scoreCount).toFixed(1)
-    : '-';
-  const bestWeek = weeklyScores.length ? Math.max(...weeklyScores) : '-';
-
-  const stats = [
-    { v: WEEKS_DATA.length, l: 'Weeks logged' },
-    { v: totalSessions, l: 'Sessions' },
-    { v: avgSession, l: 'Avg session' },
-    { v: avgWeekly, l: 'Avg week' },
-    { v: bestWeek, l: 'Best week' },
-    { v: discCount.swim + 'S / ' + discCount.bike + 'B / ' + discCount.run + 'R / ' + discCount.lift + 'L',
-      l: 'By discipline' },
+  const avgWeek=weekly.length?(weekly.reduce((a,b)=>a+b,0)/weekly.length).toFixed(0):'-';
+  const avgSess=scoreCount?(scoreSum/scoreCount).toFixed(1):'-';
+  const best=weekly.length?Math.max(...weekly):'-';
+  const items=[
+    {v:WEEKS_DATA.length,l:'Weeks'},
+    {v:totalSessions,l:'Sessions'},
+    {v:avgSess,l:'Avg sess'},
+    {v:avgWeek,l:'Avg week'},
+    {v:best,l:'Best week'},
+    {v:disc.swim+'/'+disc.bike+'/'+disc.run+'/'+disc.lift,l:'S/B/R/L'},
   ];
-
-  const root = document.getElementById('stats');
-  stats.forEach(s => {
-    const card = document.createElement('div');
-    card.className = 'stat';
-    card.innerHTML = `<div class="stat-val">${s.v}</div><div class="stat-lbl">${s.l}</div>`;
-    root.appendChild(card);
+  const root=document.getElementById('stats');
+  items.forEach(s=>{
+    const c=document.createElement('div');
+    c.className='stat';
+    c.innerHTML='<div class="stat-val">'+s.v+'</div><div class="stat-lbl">'+s.l+'</div>';
+    root.appendChild(c);
   });
 }
 
-function renderWeeks() {
-  const root = document.getElementById('weeks-container');
-
-  if (WEEKS_DATA.length === 0) {
-    root.innerHTML = '<div class="empty-state">No sessions logged yet. Run <code>python3 tools/build_training_log.py</code> after logging a session.</div>';
+function renderLog(){
+  const root=document.getElementById('weeks-container');
+  if(!WEEKS_DATA.length){
+    root.innerHTML='<div class="empty-state">No sessions logged yet.</div>';
     return;
   }
-
-  WEEKS_DATA.forEach((week, idx) => {
-    const card = document.createElement('div');
-    card.className = 'week-card' + (idx === 0 ? ' open' : '');  // newest expanded
-    card.dataset.weekNum = week.num;
-
-    const scoreBadge = week.score !== null && week.score !== undefined
-      ? `<span class="week-score ${wsClass(week.score)}">${week.score}/100</span>`
-      : '';
-
-    card.innerHTML = `
-      <div class="week-head">
-        <span class="phase-badge ${phaseClass(week.phase)}">${week.phase}</span>
-        <span class="week-title">Week ${week.num}</span>
-        <span class="week-dates">${week.label}</span>
-        <span class="week-spacer"></span>
-        <span class="week-meta">${week.sessions.length} sessions</span>
-        ${scoreBadge}
-        <span class="caret">&#9656;</span>
-      </div>
-      <div class="week-body"></div>
-    `;
-
-    const body = card.querySelector('.week-body');
-    week.sessions.forEach(s => {
-      const row = document.createElement('div');
-      row.className = `session disc-${s.discipline}`;
-      row.dataset.disc = s.discipline;
-
-      const detail = [s.actual, s.key_metric].filter(Boolean).join(' · ');
-      const discLabel = s.discipline.charAt(0).toUpperCase() + s.discipline.slice(1);
-
-      row.innerHTML = `
-        <div>
-          <div class="sess-date">${monthDay(s.date)}</div>
-          <div class="sess-day">${dayOfWeek(s.date)}</div>
-        </div>
-        <div class="sess-main">
-          <div class="sess-title">${s.title}</div>
-          <div class="sess-detail">${detail || '-'}</div>
-        </div>
-        <span class="sess-tag tag-${s.discipline}">${discLabel}</span>
-        <div class="score sc-${s.score}">${s.score}</div>
-      `;
-
-      // Tooltip on hover
-      const logTooltip = document.getElementById('logTooltip');
-      row.addEventListener('mousemove', (e) => {
-        let html = `<strong>${s.title}</strong><br>`;
-        html += `${dayOfWeek(s.date)} ${s.date} &middot; Score ${s.score}/10<br>`;
-        if (s.actual) html += `<br><strong>Actual:</strong> ${s.actual}<br>`;
-        if (s.key_metric) html += `<strong>Key:</strong> ${s.key_metric}<br>`;
-        if (s.verdict) html += `<br>${s.verdict}`;
-        logTooltip.innerHTML = html;
-        logTooltip.style.display = 'block';
-        const x = Math.min(e.clientX + 14, window.innerWidth - 340);
-        const y = Math.min(e.clientY + 14, window.innerHeight - 200);
-        logTooltip.style.left = x + 'px';
-        logTooltip.style.top  = y + 'px';
-      });
-      row.addEventListener('mouseleave', () => {
-        logTooltip.style.display = 'none';
-      });
-
-      body.appendChild(row);
+  WEEKS_DATA.forEach((w,idx)=>{
+    const card=document.createElement('div');
+    card.className='week-card'+(idx===0?' open':'');
+    const badge=w.score!=null?'<span class="week-score '+wsClass(w.score)+'">'+w.score+'/100</span>':'';
+    card.innerHTML=
+      '<div class="week-head">'+
+        '<span class="phase-badge '+phaseClass(w.phase)+'">'+w.phase+'</span>'+
+        '<span class="week-title">Wk '+w.num+'</span>'+
+        '<span class="week-dates">'+w.label+'</span>'+
+        '<span class="week-spacer"></span>'+
+        '<span class="week-meta">'+w.sessions.length+'</span>'+
+        badge+
+        '<span class="caret">&#9656;</span>'+
+      '</div><div class="week-body"></div>';
+    const body=card.querySelector('.week-body');
+    w.sessions.forEach(s=>{
+      const wrap=document.createElement('div');
+      wrap.className='session-wrap disc-'+s.discipline;
+      wrap.dataset.disc=s.discipline;
+      const detail=[s.actual,s.key_metric].filter(Boolean).join(' \u00b7 ');
+      let exp='';
+      if(s.actual)exp+='<div class="block"><span class="lbl">Actual:</span> '+esc(s.actual)+'</div>';
+      if(s.key_metric)exp+='<div class="block"><span class="lbl">Key:</span> '+esc(s.key_metric)+'</div>';
+      if(s.verdict)exp+='<div class="block">'+esc(s.verdict)+'</div>';
+      wrap.innerHTML=
+        '<div class="session">'+
+          '<div><div class="sess-date">'+md(s.date)+'</div><div class="sess-day">'+dow(s.date)+'</div></div>'+
+          '<div class="sess-main"><div class="sess-title">'+esc(s.title)+'</div>'+
+            '<div class="sess-detail">'+(esc(detail)||'\u2014')+'</div></div>'+
+          '<div class="score sc-'+s.score+'">'+s.score+'</div>'+
+        '</div>'+
+        '<div class="sess-expand">'+(exp||'No detail logged.')+'</div>';
+      wrap.querySelector('.session').addEventListener('click',()=>wrap.classList.toggle('expanded'));
+      body.appendChild(wrap);
     });
-
-    // Toggle on header click
-    card.querySelector('.week-head').addEventListener('click', () => {
-      card.classList.toggle('open');
-    });
-
+    card.querySelector('.week-head').addEventListener('click',()=>card.classList.toggle('open'));
     root.appendChild(card);
   });
 }
 
-function applyFilter(disc) {
-  document.querySelectorAll('.pill').forEach(p => {
-    p.classList.toggle('active', p.dataset.disc === disc);
+function currentWeekNum(){
+  const t=new Date();t.setHours(0,0,0,0);
+  let cur=null;
+  PLAN_DATA.forEach(w=>{
+    const [y,m,d]=w.start.split('-').map(Number);
+    if(t>=new Date(y,m-1,d))cur=w.num;
   });
+  return cur;
+}
 
-  document.querySelectorAll('.week-card').forEach(card => {
-    let visible = 0;
-    card.querySelectorAll('.session').forEach(row => {
-      const show = (disc === 'all' || row.dataset.disc === disc);
-      row.classList.toggle('hidden', !show);
-      if (show) visible++;
+function renderPlan(){
+  const root=document.getElementById('plan-container');
+  const cur=currentWeekNum();
+  PLAN_DATA.forEach(w=>{
+    const card=document.createElement('div');
+    const isCur=w.num===cur;
+    card.className='week-card'+(isCur?' current open':'');
+    const now=isCur?'<span class="now-badge">Now</span>':'';
+    card.innerHTML=
+      '<div class="week-head">'+
+        '<span class="phase-badge '+phaseClass(w.phase)+'">'+w.phase+'</span>'+
+        '<span class="week-title">Wk '+w.num+'</span>'+
+        '<span class="week-dates">'+w.label+'</span>'+
+        '<span class="week-spacer"></span>'+
+        now+
+        '<span class="caret">&#9656;</span>'+
+      '</div><div class="week-body"></div>';
+    const body=card.querySelector('.week-body');
+    (w.rows||[]).forEach(r=>{
+      const row=document.createElement('div');
+      row.className='plan-row disc-'+discClass(r.disc);
+      row.innerHTML=
+        '<div class="plan-day">'+esc(r.day)+'</div>'+
+        '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
+          (r.target?'<div class="plan-target">'+esc(r.target)+'</div>':'')+'</div>';
+      body.appendChild(row);
     });
-    card.classList.toggle('empty', visible === 0);
-    // Auto-expand cards when filtering to a discipline
-    if (disc !== 'all' && visible > 0) card.classList.add('open');
+    (w.notes||[]).forEach(txt=>{
+      const n=document.createElement('div');
+      n.className='plan-note';
+      n.textContent=txt;
+      body.appendChild(n);
+    });
+    if(!(w.rows&&w.rows.length)&&!(w.notes&&w.notes.length)){
+      const n=document.createElement('div');
+      n.className='plan-note';
+      n.textContent='See training calendar.';
+      body.appendChild(n);
+    }
+    card.querySelector('.week-head').addEventListener('click',()=>card.classList.toggle('open'));
+    root.appendChild(card);
   });
 }
 
-document.querySelectorAll('.pill').forEach(p => {
-  p.addEventListener('click', () => applyFilter(p.dataset.disc));
-});
+function applyFilter(disc){
+  document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('active',p.dataset.disc===disc));
+  document.querySelectorAll('#view-log .week-card').forEach(card=>{
+    let vis=0;
+    card.querySelectorAll('.session-wrap').forEach(w=>{
+      const show=(disc==='all'||w.dataset.disc===disc);
+      w.classList.toggle('hidden',!show);
+      if(show)vis++;
+    });
+    card.classList.toggle('empty',vis===0);
+    if(disc!=='all'&&vis>0)card.classList.add('open');
+  });
+}
+
+function switchView(v){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>applyFilter(p.dataset.disc)));
 
 renderStats();
-renderWeeks();
+renderLog();
+renderPlan();
 </script>
 </body>
 </html>
