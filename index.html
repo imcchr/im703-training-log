@@ -139,7 +139,7 @@
   .sess-expand .lbl{font-weight:800;color:var(--header);}
   .sess-expand .block{margin-top:7px;}
 
-  /* Plan rows */
+  /* Plan list rows (benchmark / no-day weeks) */
   .plan-row{display:grid;grid-template-columns:52px 1fr;gap:11px;
     padding:10px 14px 10px 11px;border-left:4px solid #d0d7de;border-bottom:1px solid #f1f3f5;}
   .plan-row:last-child{border-bottom:none;}
@@ -155,6 +155,30 @@
     border-bottom:1px solid #f1f3f5;}
   .plan-note:last-child{border-bottom:none;}
   .plan-intro{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.4;}
+
+  /* Plan weekly grid (day rows x AM/PM columns) */
+  .plan-grid{border-top:1px solid #f1f3f5;}
+  .pg-head{display:grid;grid-template-columns:34px 1fr 1fr;font-size:.56rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:#fafbfc;
+    border-bottom:1px solid var(--line);}
+  .pg-head>div{padding:5px 9px;}
+  .pg-head>div+div{border-left:1px solid var(--line);}
+  .pg-row{display:grid;grid-template-columns:34px 1fr 1fr;border-bottom:1px solid #f1f3f5;}
+  .pg-row:last-child{border-bottom:none;}
+  .pg-daylabel{display:flex;align-items:center;justify-content:center;
+    font-size:.63rem;font-weight:800;color:var(--muted);background:#fafbfc;
+    border-right:1px solid var(--line);}
+  .pg-slot{padding:7px 8px;border-right:1px solid #f1f3f5;min-height:38px;}
+  .pg-slot:last-child{border-right:none;}
+  .pg-item{border-left:3px solid #d0d7de;padding-left:7px;}
+  .pg-item + .pg-item{margin-top:7px;padding-top:7px;border-top:1px solid #f1f3f5;}
+  .pg-item.disc-swim{border-left-color:var(--swim);}
+  .pg-item.disc-bike{border-left-color:var(--bike);}
+  .pg-item.disc-run{border-left-color:var(--run);}
+  .pg-item.disc-lift{border-left-color:var(--lift);}
+  .pg-sess{font-weight:600;font-size:.77rem;line-height:1.25;}
+  .pg-tgt{font-size:.67rem;color:var(--muted);margin-top:2px;line-height:1.3;}
+  .pg-empty{color:#ccd3da;font-size:.9rem;}
 
   /* Completed-weeks archive drawer */
   .week-card.done{opacity:.6;}
@@ -1712,6 +1736,7 @@ const PLAN_DATA  = [
 
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 function dateParts(iso){return iso.split('-').map(Number);}
 function dow(iso){const [y,m,d]=dateParts(iso);return DOW[new Date(y,m-1,d).getDay()];}
 function md(iso){const [y,m,d]=dateParts(iso);return m+'/'+d;}
@@ -1744,8 +1769,8 @@ function renderHeatmap(){
     if(!maxD||dt>maxD)maxD=dt;
   }));
   if(!minD){document.getElementById('heatmap-card').style.display='none';return;}
-  const start=new Date(minD);start.setDate(start.getDate()-start.getDay());  // back to Sunday
-  const end=new Date(maxD);end.setDate(end.getDate()+(6-end.getDay()));      // fwd to Saturday
+  const start=new Date(minD);start.setDate(start.getDate()-start.getDay());
+  const end=new Date(maxD);end.setDate(end.getDate()+(6-end.getDay()));
   let lastMonth=-1;
   const cur=new Date(start);
   while(cur<=end){
@@ -1862,6 +1887,66 @@ function currentWeekNum(){
   return cur;
 }
 
+/* Parse a day cell ("Mon AM" / "Wed PM" / "Tue") -> {idx, slot|null} */
+function parseDay(dayStr){
+  const s=dayStr||'';
+  const m=s.match(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/i);
+  if(!m)return null;
+  const name=m[1].charAt(0).toUpperCase()+m[1].slice(1,3).toLowerCase();
+  const idx=DAYS.indexOf(name);
+  if(idx<0)return null;
+  let slot=null;
+  if(/PM/i.test(s))slot='PM';
+  else if(/AM/i.test(s))slot='AM';
+  return {idx:idx,slot:slot};
+}
+
+function planItemHTML(r){
+  return '<div class="pg-item disc-'+discClass(r.disc)+'">'+
+    '<div class="pg-sess">'+esc(r.session)+'</div>'+
+    (r.target?'<div class="pg-tgt">'+esc(r.target)+'</div>':'')+'</div>';
+}
+function slotEl(items){
+  const cell=document.createElement('div');
+  cell.className='pg-slot';
+  cell.innerHTML=items.length?items.map(planItemHTML).join(''):'<span class="pg-empty">&middot;</span>';
+  return cell;
+}
+function planGridEl(rows){
+  const byDay=DAYS.map(function(){return {am:[],pm:[]};});
+  rows.forEach(function(r){
+    const p=parseDay(r.day);if(!p)return;
+    let slot=p.slot;
+    if(!slot)slot=byDay[p.idx].am.length?'PM':'AM';
+    if(slot==='PM')byDay[p.idx].pm.push(r);
+    else byDay[p.idx].am.push(r);
+  });
+  const grid=document.createElement('div');
+  grid.className='plan-grid';
+  const head=document.createElement('div');
+  head.className='pg-head';
+  head.innerHTML='<div></div><div>AM</div><div>PM</div>';
+  grid.appendChild(head);
+  DAYS.forEach(function(d,i){
+    const row=document.createElement('div');row.className='pg-row';
+    const dl=document.createElement('div');dl.className='pg-daylabel';dl.textContent=d;
+    row.appendChild(dl);
+    row.appendChild(slotEl(byDay[i].am));
+    row.appendChild(slotEl(byDay[i].pm));
+    grid.appendChild(row);
+  });
+  return grid;
+}
+function planRowEl(r){
+  const row=document.createElement('div');
+  row.className='plan-row disc-'+discClass(r.disc);
+  row.innerHTML=
+    '<div class="plan-day">'+esc(r.day)+'</div>'+
+    '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
+      (r.target?'<div class="plan-target">'+esc(r.target)+'</div>':'')+'</div>';
+  return row;
+}
+
 function makePlanCard(w,cur){
   const card=document.createElement('div');
   const isCur=w.num===cur;
@@ -1880,22 +1965,22 @@ function makePlanCard(w,cur){
       '<span class="caret">&#9656;</span>'+
     '</div><div class="week-body"></div>';
   const body=card.querySelector('.week-body');
-  (w.rows||[]).forEach(r=>{
-    const row=document.createElement('div');
-    row.className='plan-row disc-'+discClass(r.disc);
-    row.innerHTML=
-      '<div class="plan-day">'+esc(r.day)+'</div>'+
-      '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
-        (r.target?'<div class="plan-target">'+esc(r.target)+'</div>':'')+'</div>';
-    body.appendChild(row);
-  });
-  (w.notes||[]).forEach(txt=>{
+  const rows=w.rows||[];
+  const dayRows=rows.filter(function(r){return parseDay(r.day);});
+  const otherRows=rows.filter(function(r){return !parseDay(r.day);});
+  if(dayRows.length){
+    body.appendChild(planGridEl(dayRows));
+    otherRows.forEach(function(r){body.appendChild(planRowEl(r));});
+  }else{
+    rows.forEach(function(r){body.appendChild(planRowEl(r));});
+  }
+  (w.notes||[]).forEach(function(txt){
     const n=document.createElement('div');
     n.className='plan-note';
     n.textContent=txt;
     body.appendChild(n);
   });
-  if(!(w.rows&&w.rows.length)&&!(w.notes&&w.notes.length)){
+  if(!rows.length&&!(w.notes&&w.notes.length)){
     const n=document.createElement('div');
     n.className='plan-note';
     n.textContent='See training calendar.';
