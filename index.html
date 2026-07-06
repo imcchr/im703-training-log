@@ -134,6 +134,19 @@
   .plan-note:last-child{border-bottom:none;}
   .plan-intro{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.4;}
 
+  /* Completed-weeks archive drawer */
+  .week-card.done{opacity:.6;}
+  .done-badge{font-size:.58rem;font-weight:800;background:#d8dee4;color:#4a5763;
+    padding:3px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.03em;}
+  .archive{margin-top:18px;}
+  .archive-toggle{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+    background:transparent;border:1px dashed #c4ccd4;border-radius:11px;color:var(--muted);
+    font-size:.82rem;font-weight:700;padding:13px;cursor:pointer;}
+  .archive-toggle .caret{transition:transform .2s;}
+  .archive.open .archive-toggle .caret{transform:rotate(90deg);}
+  .archive-body{display:none;margin-top:10px;}
+  .archive.open .archive-body{display:block;}
+
   .empty-state{text-align:center;padding:30px;color:var(--muted);font-size:.85rem;
     border:2px dashed var(--line);border-radius:11px;}
 
@@ -173,7 +186,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Full training block &middot; updated July 06, 2026. Tap any week to expand &mdash; your current week is highlighted.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 06, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -769,30 +782,28 @@ const PLAN_DATA  = [
         "day": "Mon",
         "disc": "run",
         "session": "Mile TT",
-        "target": "[DONE] 5:57"
+        "target": ""
       },
       {
         "day": "Tue",
         "disc": "bike",
         "session": "FTP Test",
-        "target": "[MISS] deferred to Wk5"
+        "target": ""
       },
       {
         "day": "Wed",
         "disc": "swim",
         "session": "1000m TT",
-        "target": "[DONE] 18:48 active"
+        "target": ""
       },
       {
         "day": "Sat",
         "disc": "lift",
         "session": "Strength Benchmarks",
-        "target": "[DONE]"
+        "target": ""
       }
     ],
-    "notes": [
-      "Notes: All run/swim baselines set. Bike FTP deferred. VDOT: Mile 48.9, 5K 41.0."
-    ]
+    "notes": []
   },
   {
     "num": 2,
@@ -804,60 +815,59 @@ const PLAN_DATA  = [
         "day": "Mon",
         "disc": "lift",
         "session": "Push (off-plan Murph)",
-        "target": "[MOD] Load 212 \u2014 caused cascade"
+        "target": ""
       },
       {
         "day": "Tue AM",
         "disc": "bike",
         "session": "Lake Atlanta Hills 5 loops",
-        "target": "[MOD] 7/10 \u2014 4/5 loops"
+        "target": ""
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Norwegian Threshold 3x4 min",
-        "target": "[MISS] 0 \u2014 Murph fatigue"
+        "target": ""
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Equipment 1200 yd",
-        "target": "[MOD] 5/10 \u2014 1000m, HR spiked"
+        "target": ""
       },
       {
         "day": "Thu PM",
         "disc": "swim",
         "session": "Technique 1200 yd",
-        "target": "[MOD] 6/10 \u2014 900m, HR 152"
+        "target": ""
       },
       {
         "day": "Fri AM",
         "disc": "run",
         "session": "Foundation Run",
-        "target": "[MISS] 0"
+        "target": ""
       },
       {
         "day": "Sat AM",
         "disc": "bike",
         "session": "Foundation Bike 1:15 Z2",
-        "target": "[MOD] 5/10 \u2014 HR 170 (Z3 drift)"
+        "target": ""
       },
       {
         "day": "Sat PM",
         "disc": "swim",
         "session": "Long Swim 1000m",
-        "target": "[MOD] 6/10 \u2014 over-breathing diagnosed"
+        "target": ""
       },
       {
         "day": "Sat PM",
         "disc": "run",
         "session": "Long Run 50 min",
-        "target": "[MOD] 5/10 \u2014 HR 179 at 90F, cut early"
+        "target": ""
       }
     ],
     "notes": [
-      "(Vacation May 11-24 preceded this week.)",
-      "Notes: Murph cascade wiped threshold + foundation run. First swim over-breathing diagnosis (hyperventilation). Buddy-ride pulled bike to Z3."
+      "(Vacation May 11-24 preceded this week.)"
     ]
   },
   {
@@ -870,84 +880,82 @@ const PLAN_DATA  = [
         "day": "Mon",
         "disc": "lift",
         "session": "Push",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Tue AM",
         "disc": "bike",
         "session": "Lake Atlanta Hills 5 loops",
-        "target": "[DONE] 8/10 \u2014 5/5, HR 159"
+        "target": ""
       },
       {
         "day": "Wed",
         "disc": "unknown",
         "session": "9-hr drive",
-        "target": "\u2014"
+        "target": ""
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Norwegian Threshold 3x4 min",
-        "target": "[MISS] 0 \u2014 rescheduled Fri"
+        "target": ""
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Equipment Swim 1400 yd",
-        "target": "[MISS] 0 \u2014 travel"
+        "target": ""
       },
       {
         "day": "Thu AM",
         "disc": "lift",
         "session": "Pull",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Fri AM",
         "disc": "run",
         "session": "Norwegian Threshold 3x4 min",
-        "target": "[DONE] 8/10 \u2014 7:51/7:41/7:23 at HR 182-186"
+        "target": ""
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Equipment Swim (fins)",
-        "target": "[MOD] 5/10 \u2014 1008 yd, HR 192 with fins"
+        "target": ""
       },
       {
         "day": "Sat AM",
         "disc": "bike",
         "session": "Foundation Bike 1:15",
-        "target": "[DONE] 9/10 \u2014 HR 139, textbook Z2"
+        "target": ""
       },
       {
         "day": "Sat PM",
         "disc": "lift",
         "session": "Legs",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Sat AM",
         "disc": "run",
         "session": "Foundation Run",
-        "target": "[MISS] 0"
+        "target": ""
       },
       {
         "day": "Sun AM",
         "disc": "run",
         "session": "Long Run 8 mi",
-        "target": "[MOD] 5/10 \u2014 8 mi hit, HR 171 at 88F, bonked"
+        "target": ""
       },
       {
         "day": "Sun PM",
         "disc": "swim",
         "session": "Long Swim 1150 yd",
-        "target": "[MISS] 0 \u2014 legs toasted"
+        "target": ""
       }
     ],
-    "notes": [
-      "Notes: Travel day wiped Wednesday. 1/3 swims completed. Foundation bike textbook Z2 (best of block). Long run distance hit but heat/fasted caused bonk. Swim gap widening."
-    ]
+    "notes": []
   },
   {
     "num": 4,
@@ -959,66 +967,64 @@ const PLAN_DATA  = [
         "day": "Mon",
         "disc": "lift",
         "session": "Push",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Tue AM",
         "disc": "bike",
         "session": "Lake Atlanta Hills 5 loops",
-        "target": "[DONE] 8/10 \u2014 avg 6:45/loop (7s faster than Wk3)"
+        "target": ""
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Norwegian Threshold 3x4 min",
-        "target": "[DONE] 9/10 \u2014 6:55/6:43/7:18 at HR 184"
+        "target": ""
       },
       {
         "day": "Thu AM",
         "disc": "swim",
         "session": "Pull Buoy (makeup)",
-        "target": "[DONE] 8/10 \u2014 breakthrough: pull buoy confirmed kick diagnosis"
+        "target": ""
       },
       {
         "day": "Thu AM",
         "disc": "lift",
         "session": "Pull",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Fri AM",
         "disc": "run",
         "session": "Foundation Run 5 mi",
-        "target": "[MOD] 5/10 \u2014 4 mi, GAP 8:36 (SubT on easy day)"
+        "target": ""
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Base Swim (Pull Buoy)",
-        "target": "[DONE] 8/10 \u2014 1205 yd PR, 200yd continuous first time"
+        "target": ""
       },
       {
         "day": "Sat AM",
         "disc": "bike",
         "session": "Foundation Bike",
-        "target": "[MISS] 0 \u2014 wedding cascade"
+        "target": ""
       },
       {
         "day": "Sun AM",
         "disc": "run",
         "session": "Long Run",
-        "target": "[MISS] 0 \u2014 Readiness 25, correct call"
+        "target": ""
       },
       {
         "day": "Sun PM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "[MISS] 0 \u2014 same"
+        "target": ""
       }
     ],
-    "notes": [
-      "Notes: Swim BREAKTHROUGH \u2014 pull buoy unlocked aerobic swimming. 200yd continuous = 4.5x from baseline. Threshold at 6:58/mi (32s faster than Wk3). Foundation run pace still too fast (GAP 8:36 vs 9:25+ target). Wedding cascade + low readiness \u2192 3 missed Sunday sessions."
-    ]
+    "notes": []
   },
   {
     "num": 5,
@@ -1030,72 +1036,70 @@ const PLAN_DATA  = [
         "day": "Mon",
         "disc": "lift",
         "session": "Push (deload)",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Tue AM",
         "disc": "bike",
         "session": "Zwift FTP Ramp Test",
-        "target": "[DONE] 8/10 \u2014 216W established"
+        "target": ""
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Norwegian Threshold 2x4 min (rec)",
-        "target": "[MOD] 7/10 \u2014 did 3x4 (overshot deload)"
+        "target": ""
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Equipment Swim 1100 yd",
-        "target": "[DONE] 10/10 \u2014 PRs on pace/DPS/Swolf"
+        "target": ""
       },
       {
         "day": "Thu AM",
         "disc": "lift",
         "session": "Pull (deload)",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Thu AM",
         "disc": "bike",
         "session": "Zwift 30 min Z2",
-        "target": "[DONE] 9/10 \u2014 power on target, cadence 74"
+        "target": ""
       },
       {
         "day": "Fri AM",
         "disc": "swim",
         "session": "Base Swim 1300 yd",
-        "target": "[MOD] 9/10 \u2014 1200 yd, 300m continuous PR"
+        "target": ""
       },
       {
         "day": "Fri PM",
         "disc": "run",
         "session": "Base Run 3.5 mi",
-        "target": "[DONE] 8/10 \u2014 HR 165 above Z2 but big improvement"
+        "target": ""
       },
       {
         "day": "Sat AM",
         "disc": "bike",
         "session": "Zwift Long 45 min Z2",
-        "target": "[DONE] 9/10 \u2014 142W, NP/AP 1.014, cadence 77"
+        "target": ""
       },
       {
         "day": "Sat PM",
         "disc": "lift",
         "session": "Legs (deload)",
-        "target": "[DONE]"
+        "target": ""
       },
       {
         "day": "Sun AM",
         "disc": "run",
         "session": "Long Run 6 mi",
-        "target": "[MOD] 7/10 \u2014 5.09 mi, mi 3 surge to 8:57 (28s under floor)"
+        "target": ""
       }
     ],
-    "notes": [
-      "Notes: Best week of block. FTP baseline set (216W). Swim continuous PR 200yd\u2192300m. T pace locked 6:47/mi via LacTrace. E pace recalibrated 9:25-10:00. Cadence still capped at 74-77 (SPD pedal fix pending). Run pace discipline flag on mile 3 long run."
-    ]
+    "notes": []
   },
   {
     "num": 6,
@@ -1119,7 +1123,7 @@ const PLAN_DATA  = [
         "day": "Wed AM",
         "disc": "run",
         "session": "Norwegian Threshold",
-        "target": "[INJ] 0 \u2014 ankle"
+        "target": ""
       },
       {
         "day": "Wed PM",
@@ -1137,7 +1141,7 @@ const PLAN_DATA  = [
         "day": "Fri AM",
         "disc": "run",
         "session": "Foundation Run 5 mi",
-        "target": "[INJ] 0 \u2014 ankle"
+        "target": ""
       },
       {
         "day": "Fri PM",
@@ -1161,7 +1165,7 @@ const PLAN_DATA  = [
         "day": "Sun AM",
         "disc": "run",
         "session": "Long Run 7 mi",
-        "target": "[INJ] 0 \u2014 ankle"
+        "target": ""
       },
       {
         "day": "Sun PM",
@@ -1171,8 +1175,7 @@ const PLAN_DATA  = [
       }
     ],
     "notes": [
-      "FLAG: Grade II ankle sprain (basketball, Jun 21). No running this week. All run sessions = 0.",
-      "Notes: Ankle sprain day 1 of Wk6. All runs automatic 0. Bike and swim completed as able \u2014 log actuals when known. Return-to-run gated by pain-free walking restored."
+      "FLAG: Grade II ankle sprain (basketball, Jun 21). No running this week. All run sessions = 0."
     ]
   },
   {
@@ -1197,61 +1200,61 @@ const PLAN_DATA  = [
         "day": "Wed AM",
         "disc": "run",
         "session": "Norwegian Threshold OR bike sub",
-        "target": "3x5 min @ T pace 6:47/mi (IF ankle clear) \u2014 [MISS] ankle still gated"
+        "target": "3x5 min @ T pace 6:47/mi (IF ankle clear)"
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Equipment Swim",
-        "target": "[DONE Thu] 10/10 \u2014 1,451 yd CONTINUOUS PR (4.4x prior best), last 100yd no buoy"
+        "target": ""
       },
       {
         "day": "Thu AM",
         "disc": "lift",
         "session": "Pull",
-        "target": "Lat Pulldown 4x6-8 / Barbell Row 3x5 (max) / Barbell Curl 3x8-10 / Ab Roller 3x10 \u2014 [MISS] holiday (boat)"
+        "target": "Lat Pulldown 4x6-8 / Barbell Row 3x5 (max) / Barbell Curl 3x8-10 / Ab Roller 3x10"
       },
       {
         "day": "Thu AM",
         "disc": "bike",
         "session": "Zwift 30 min Z2",
-        "target": "[DONE] 9/10 \u2014 138W avg, cadence 87 rpm (\u2191 from 74-83 historical)"
+        "target": ""
       },
       {
         "day": "Fri AM",
         "disc": "run",
         "session": "Foundation Run (modified)",
-        "target": "3-4 mi @ 9:25-10:00/mi (ankle cleared only) \u2014 [MISS] ankle still gated"
+        "target": "3-4 mi @ 9:25-10:00/mi (ankle cleared only)"
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Continuity Swim",
-        "target": "[DONE] 6/10 \u2014 1,022yd OW improvised (lifejacket, head-up); metrics quarantined, not leg-sink data"
+        "target": ""
       },
       {
         "day": "Sat AM",
         "disc": "bike",
         "session": "Foundation Bike",
-        "target": "1:15 Zwift Z2 (130-163W) \u2014 [MISS] July 4th, on boat"
+        "target": "1:15 Zwift Z2 (130-163W)"
       },
       {
         "day": "Sat PM",
         "disc": "lift",
         "session": "Legs",
-        "target": "Modified \u2014 no heavy ankle load until cleared \u2014 [MISS] holiday (boat)"
+        "target": "Modified \u2014 no heavy ankle load until cleared"
       },
       {
         "day": "Sun AM",
         "disc": "run",
         "session": "Long Run (shortened)",
-        "target": "5 mi easy IF ankle clear (defer if not) \u2014 [MISS] ankle still gated"
+        "target": "5 mi easy IF ankle clear (defer if not)"
       },
       {
         "day": "Sun PM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "1,300 yd pull buoy continuous \u2014 [MISS] week closed out"
+        "target": "1,300 yd pull buoy continuous"
       }
     ],
     "notes": [
@@ -1795,48 +1798,69 @@ function currentWeekNum(){
   return cur;
 }
 
+function makePlanCard(w,cur){
+  const card=document.createElement('div');
+  const isCur=w.num===cur;
+  const isDone=cur!=null&&w.num<cur;
+  card.className='week-card'+(isCur?' current open':'')+(isDone?' done':'');
+  let badge='';
+  if(isCur)badge='<span class="now-badge">Now</span>';
+  else if(isDone)badge='<span class="done-badge">Done</span>';
+  card.innerHTML=
+    '<div class="week-head">'+
+      '<span class="phase-badge '+phaseClass(w.phase)+'">'+w.phase+'</span>'+
+      '<span class="week-title">Wk '+w.num+'</span>'+
+      '<span class="week-dates">'+w.label+'</span>'+
+      '<span class="week-spacer"></span>'+
+      badge+
+      '<span class="caret">&#9656;</span>'+
+    '</div><div class="week-body"></div>';
+  const body=card.querySelector('.week-body');
+  (w.rows||[]).forEach(r=>{
+    const row=document.createElement('div');
+    row.className='plan-row disc-'+discClass(r.disc);
+    row.innerHTML=
+      '<div class="plan-day">'+esc(r.day)+'</div>'+
+      '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
+        (r.target?'<div class="plan-target">'+esc(r.target)+'</div>':'')+'</div>';
+    body.appendChild(row);
+  });
+  (w.notes||[]).forEach(txt=>{
+    const n=document.createElement('div');
+    n.className='plan-note';
+    n.textContent=txt;
+    body.appendChild(n);
+  });
+  if(!(w.rows&&w.rows.length)&&!(w.notes&&w.notes.length)){
+    const n=document.createElement('div');
+    n.className='plan-note';
+    n.textContent='See training calendar.';
+    body.appendChild(n);
+  }
+  card.querySelector('.week-head').addEventListener('click',()=>card.classList.toggle('open'));
+  return card;
+}
+
 function renderPlan(){
   const root=document.getElementById('plan-container');
   const cur=currentWeekNum();
-  PLAN_DATA.forEach(w=>{
-    const card=document.createElement('div');
-    const isCur=w.num===cur;
-    card.className='week-card'+(isCur?' current open':'');
-    const now=isCur?'<span class="now-badge">Now</span>':'';
-    card.innerHTML=
-      '<div class="week-head">'+
-        '<span class="phase-badge '+phaseClass(w.phase)+'">'+w.phase+'</span>'+
-        '<span class="week-title">Wk '+w.num+'</span>'+
-        '<span class="week-dates">'+w.label+'</span>'+
-        '<span class="week-spacer"></span>'+
-        now+
-        '<span class="caret">&#9656;</span>'+
-      '</div><div class="week-body"></div>';
-    const body=card.querySelector('.week-body');
-    (w.rows||[]).forEach(r=>{
-      const row=document.createElement('div');
-      row.className='plan-row disc-'+discClass(r.disc);
-      row.innerHTML=
-        '<div class="plan-day">'+esc(r.day)+'</div>'+
-        '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
-          (r.target?'<div class="plan-target">'+esc(r.target)+'</div>':'')+'</div>';
-      body.appendChild(row);
-    });
-    (w.notes||[]).forEach(txt=>{
-      const n=document.createElement('div');
-      n.className='plan-note';
-      n.textContent=txt;
-      body.appendChild(n);
-    });
-    if(!(w.rows&&w.rows.length)&&!(w.notes&&w.notes.length)){
-      const n=document.createElement('div');
-      n.className='plan-note';
-      n.textContent='See training calendar.';
-      body.appendChild(n);
-    }
-    card.querySelector('.week-head').addEventListener('click',()=>card.classList.toggle('open'));
-    root.appendChild(card);
-  });
+  const upcoming=PLAN_DATA.filter(w=>cur==null||w.num>=cur);
+  const done=PLAN_DATA.filter(w=>cur!=null&&w.num<cur);
+  upcoming.forEach(w=>root.appendChild(makePlanCard(w,cur)));
+  if(done.length){
+    const sec=document.createElement('div');
+    sec.className='archive';
+    const btn=document.createElement('button');
+    btn.className='archive-toggle';
+    btn.innerHTML='&#10003; Completed weeks ('+done.length+') <span class="caret">&#9656;</span>';
+    const wrap=document.createElement('div');
+    wrap.className='archive-body';
+    done.reverse().forEach(w=>wrap.appendChild(makePlanCard(w,cur)));
+    btn.addEventListener('click',()=>sec.classList.toggle('open'));
+    sec.appendChild(btn);
+    sec.appendChild(wrap);
+    root.appendChild(sec);
+  }
 }
 
 function applyFilter(disc){
