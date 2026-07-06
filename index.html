@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Log - Ian | IM70.3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8f9fa; color: #24292e;
+    padding: 28px 20px;
+  }
+  .page-wrap { max-width: 960px; margin: 0 auto; }
+
+  h1 { font-size: 1.5rem; font-weight: 700; }
+  .subtitle { color: #586069; font-size: 0.86rem; margin: 4px 0 22px; }
+
+  /* Stats bar */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px; margin-bottom: 22px;
+  }
+  .stat {
+    background: white; border: 1px solid #e1e4e8;
+    border-radius: 8px; padding: 12px; text-align: center;
+  }
+  .stat-val { font-size: 1.35rem; font-weight: 700; }
+  .stat-lbl { font-size: 0.72rem; color: #586069; margin-top: 3px; }
+
+  /* Filter pills */
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 18px; align-items: center;
+  }
+  .filter-bar strong {
+    font-size: 0.78rem; color: #586069; margin-right: 4px;
+  }
+  .pill {
+    border: 1px solid #d0d7de; background: white;
+    border-radius: 20px; padding: 5px 14px;
+    font-size: 0.82rem; cursor: pointer;
+    font-weight: 500; color: #24292e;
+    transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pill:hover { background: #f6f8fa; }
+  .pill.active { background: #24292e; color: white; border-color: #24292e; }
+  .pill .swatch {
+    width: 9px; height: 9px; border-radius: 50%; display: inline-block;
+  }
+  .sw-swim { background: #2980B9; }
+  .sw-bike { background: #E67500; }
+  .sw-run  { background: #27AE60; }
+  .sw-lift { background: #8E44AD; }
+
+  /* Week card */
+  .week-card {
+    background: white; border: 1px solid #e1e4e8;
+    border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+  }
+  .week-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; cursor: pointer;
+    background: white; border-bottom: 1px solid transparent;
+    transition: background 0.1s;
+  }
+  .week-head:hover { background: #f6f8fa; }
+  .week-card.open .week-head { border-bottom-color: #e1e4e8; }
+  .phase-badge {
+    font-size: 0.7rem; font-weight: 700; color: white;
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .phase-base       { background: #0969da; }
+  .phase-recovery   { background: #2da44e; }
+  .phase-build      { background: #e36209; }
+  .phase-peak       { background: #cf222e; }
+  .phase-benchmark  { background: #6f42c1; }
+  .phase-transition { background: #586069; }
+  .week-title { font-weight: 600; font-size: 0.96rem; }
+  .week-dates { color: #586069; font-size: 0.82rem; }
+  .week-spacer { flex: 1; }
+  .week-meta {
+    display: flex; align-items: center; gap: 10px;
+    color: #586069; font-size: 0.78rem;
+  }
+  .week-score {
+    font-weight: 700; padding: 3px 9px; border-radius: 4px;
+    color: white; font-size: 0.78rem;
+  }
+  .ws-high { background: #1a7f37; }
+  .ws-mid  { background: #e36209; }
+  .ws-low  { background: #c0392b; }
+  .caret {
+    font-size: 0.7rem; color: #586069; transition: transform 0.2s;
+  }
+  .week-card.open .caret { transform: rotate(90deg); }
+
+  .week-body { display: none; padding: 4px 0 8px; }
+  .week-card.open .week-body { display: block; }
+
+  /* Session row */
+  .session {
+    display: grid;
+    grid-template-columns: 90px 1fr auto 44px;
+    gap: 12px; align-items: center;
+    padding: 9px 16px 9px 12px;
+    border-left: 4px solid #ccc;
+    margin: 0 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .session:last-child { border-bottom: none; }
+  .session.disc-swim { border-left-color: #2980B9; }
+  .session.disc-bike { border-left-color: #E67500; }
+  .session.disc-run  { border-left-color: #27AE60; }
+  .session.disc-lift { border-left-color: #8E44AD; }
+
+  .sess-date {
+    font-size: 0.74rem; color: #586069; font-weight: 600;
+  }
+  .sess-day { font-size: 0.68rem; color: #8c959f; }
+  .sess-main { min-width: 0; }
+  .sess-title {
+    font-weight: 600; font-size: 0.88rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sess-detail {
+    font-size: 0.76rem; color: #586069;
+    margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sess-tag {
+    font-size: 0.68rem; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .tag-swim { background: #e1f0fa; color: #2980B9; }
+  .tag-bike { background: #fdebd9; color: #b85a00; }
+  .tag-run  { background: #d8f3df; color: #1a7f37; }
+  .tag-lift { background: #ecdcfa; color: #6f42c1; }
+
+  .score {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.92rem; color: white;
+  }
+  .sc-9, .sc-10 { background: #1a7f37; }
+  .sc-7, .sc-8  { background: #40c463; color: #14361f; }
+  .sc-5, .sc-6  { background: #9be9a8; color: #14361f; }
+  .sc-3, .sc-4  { background: #f0a500; }
+  .sc-1, .sc-2  { background: #e05c2a; }
+  .sc-0         { background: #c0392b; }
+
+  /* Hidden state for filtering */
+  .session.hidden { display: none; }
+  .week-card.empty { display: none; }
+
+  /* Session tooltip */
+  #logTooltip {
+    position: fixed; display: none; z-index: 1000;
+    background: #24292e; color: white;
+    padding: 9px 12px; border-radius: 6px;
+    font-size: 0.78rem; line-height: 1.5;
+    max-width: 320px; pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  #logTooltip strong { color: #ffd57e; }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center; padding: 28px;
+    color: #586069; font-size: 0.85rem;
+    border: 2px dashed #e1e4e8; border-radius: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .session { grid-template-columns: 70px 1fr 38px; }
+    .sess-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <h1>Training Log</h1>
+  <p class="subtitle">Ian &nbsp;|&nbsp; IM70.3 Dallas Little Elm &nbsp;|&nbsp; Race: March 14, 2027 &nbsp;|&nbsp; Updated: July 05, 2026</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="filter-bar">
+    <strong>Filter:</strong>
+    <button class="pill active" data-disc="all">All</button>
+    <button class="pill" data-disc="swim"><span class="swatch sw-swim"></span>Swim</button>
+    <button class="pill" data-disc="bike"><span class="swatch sw-bike"></span>Bike</button>
+    <button class="pill" data-disc="run"><span class="swatch sw-run"></span>Run</button>
+    <button class="pill" data-disc="lift"><span class="swatch sw-lift"></span>Lift</button>
+  </div>
+
+  <div id="weeks-container"></div>
+  <div id="logTooltip"></div>
+
+</div>
+
+<script>
+const WEEKS_DATA = [
+  {
+    "num": 7,
+    "start": "2026-06-29",
+    "label": "Jun 29 - Jul 5",
+    "phase": "Base",
+    "score": 34,
+    "sessions": [
+      {
+        "date": "2026-06-29",
+        "discipline": "lift",
+        "title": "Push Day",
+        "actual": "13,548 lb",
+        "key_metric": "13,548 lb | 1 PR | 36 min",
+        "score": 7,
+        "verdict": "Strong return after ~6-week gap. Max effort delivered on both compounds. Bench at 94% and OHP at 89% of May baseline \u2014 expected given the layoff. Short 1 set on bench (3x6 vs prescribed 4x5). Ab roller underdone (2x6 vs 3x10). Did not know updated prescription. These 1RM numbers are the new working baseline to beat."
+      },
+      {
+        "date": "2026-06-30",
+        "discipline": "bike",
+        "title": "Bike Intervals (Zwift)",
+        "actual": "30:22 \u00b7 10.16 mi \u00b7 2 of 3 intervals \u00b7 Int1: 8:00 @ 204W \u00b7 Int2: 8:00 @ 204W \u00b7 HR 157/176 \u00b7 79-83 rpm",
+        "key_metric": "204W = 94% FTP on both intervals; HR drift +2 bpm between sets (167\u2192169)",
+        "score": 6,
+        "verdict": "First-ever sustained Z4 interval session \u2014 no prior baseline for holding 204W x 8 min. Bike training has been continuous through Wk2-5 (Wk5 FTP 216W + Z2 base), so this is a new-stimulus test, not a return-from-layoff. Both completed intervals nailed prescribed power exactly (204W = 94% FTP). Bailed interval 3 = new-stimulus muscular ceiling on first attempt. 2/3 at exact prescribed watts is a strong baseline; 3/3 next time = adaptation. HR drift +2 bpm (167->169) confirms cardiac system was managing the load fine. Cadence 79-83 = improvement over Wk4-5 stuck range (74-77). Docked 4: missed 33% of prescribed work."
+      },
+      {
+        "date": "2026-07-01",
+        "discipline": "bike",
+        "title": "Run (Norwegian Threshold OR bike sub)",
+        "actual": "MISS \u2014 ankle still gated (no bike sub logged)",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Conditional on ankle clearance; condition not met. No running on a Grade II sprain."
+      },
+      {
+        "date": "2026-07-02",
+        "discipline": "bike",
+        "title": "Bike Z2 (Zwift)",
+        "actual": "30:10 \u00b7 6.02 mi \u00b7 138W avg / 143W max \u00b7 HR 146 avg / 157 max \u00b7 87 rpm avg / 97 max",
+        "key_metric": "138W = 64% FTP; max power 143W = 5W spread (exceptional Z2 ceiling discipline); cadence 87 rpm (\u2191 from historical 74-83 flag)",
+        "score": 9,
+        "verdict": "Textbook Z2 execution. Duration hit (30:10), power locked in zone, consistency exceptional \u2014 30 min at 138W avg with max never exceeding 143W. Cadence 87 rpm = first-ever above the historical 74-83 floor; likely SPD/shoe adaptation. HR 146 (76% LTHR) aerobically controlled for output. Training Effect 0.0 = stayed perfectly in aerobic base territory, zero drift. Docked 1: top cadence 97 rpm suggests brief spikes above sustainable stroke; consistency not yet fully locked."
+      },
+      {
+        "date": "2026-07-02",
+        "discipline": "swim",
+        "title": "Swim (Continuous PR)",
+        "actual": "1,451 yd CONTINUOUS \u00b7 39:22 \u00b7 2:42/100yd avg \u00b7 HR 160 avg / 174 max \u00b7 27 spm \u00b7 DPS 1.24 \u00b7 TE 3.3 aero / 0.0 anaero \u00b7 last 100yd NO buoy",
+        "key_metric": "**Continuous-distance breakthrough: 1,451 yd unbroken vs prior best 300m (~328yd) = 4.4x PR.** ~69% of full 70.3 swim leg in one go. No-buoy final 100yd: pace 3:10-3:18/100yd + HR 167-169 + DPS\u21921.06 (leg-sink signature)",
+        "score": 10,
+        "verdict": "Session of the block. Exceeded prescribed ~1,300 yd (did 1,451), and did it FULLY continuous vs prescribed \"continuous sets\" \u2014 two dimensions beyond prescription. HR held 155-169 the entire swim with aerobic-only TE (3.3/0.0) = effortless, steady, exactly as reported. Then went BEYOND prescription: dropped the pull buoy for the final 100yd. Data confirms the self-diagnosed limiter \u2014 legs sink without buoy: pace faded ~40s/100yd (2:42 avg \u2192 3:10-3:18), HR climbed +7-9 bpm, DPS collapsed 1.24\u21921.06 as strokes shortened fighting to stay level. That's a body-position/kick issue, not fitness \u2014 aerobic system was never stressed. NEXT FOCUS: core/hip engagement + hip-driven flutter to hold horizontal without buoy. Nothing docked \u2014 massive PR + self-identified next lever."
+      },
+      {
+        "date": "2026-07-03",
+        "discipline": "run",
+        "title": "Run (Foundation, modified)",
+        "actual": "MISS \u2014 ankle still gated",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Conditional on ankle clearance; condition not met."
+      },
+      {
+        "date": "2026-07-03",
+        "discipline": "swim",
+        "title": "Swim (Continuity \u2014 improvised OW)",
+        "actual": "1,022 yd continuous \u00b7 33:12 \u00b7 3:14/100yd \u00b7 HR 151 avg / 173 max \u00b7 26 spm \u00b7 DPS 1.07 \u00b7 TE 3.0 aero / 0.4 anaero \u00b7 OW 86F \u00b7 NO goggles/cap/buoy + lifejacket (head-up)",
+        "key_metric": "Distance hit (1,022 vs 1,000) aerobically under lifejacket drag; pace 3:14 + DPS 1.07 CONFOUNDED by head-up/lifejacket \u2014 NOT leg-sink trend data",
+        "score": 6,
+        "verdict": "July 4th-weekend improvised open-water swim. Showed up despite being on the boat Fri-Sun. Hit the distance target (1,022 vs 1,000 yd) and held HR aerobic (151, 79% LTHR) with a lifejacket drag handicap + head-up position (no goggles/cap). Docked 4: NOT the prescribed stimulus \u2014 no pull buoy, head-up form \u2014 so it builds neither pull-buoy continuity nor the horizontal-position work Wk7 called for; and pace/DPS are confounded and must NOT be read as leg-sink regression (clean buoy-off swims are the only valid trend source). Habit-maintenance win, not an adaptation session."
+      },
+      {
+        "date": "2026-07-04",
+        "discipline": "bike",
+        "title": "Bike (Foundation)",
+        "actual": "MISS \u2014 July 4th weekend, on boat",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Holiday weekend; not completed."
+      },
+      {
+        "date": "2026-07-05",
+        "discipline": "run",
+        "title": "Run (Long)",
+        "actual": "MISS \u2014 ankle still gated",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Conditional on ankle clearance; condition not met."
+      },
+      {
+        "date": "2026-07-05",
+        "discipline": "swim",
+        "title": "Swim (Long)",
+        "actual": "MISS \u2014 week closed out Sunday",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not completed; week closed."
+      }
+    ]
+  },
+  {
+    "num": 6,
+    "start": "2026-06-22",
+    "label": "Jun 22-28",
+    "phase": "Base",
+    "score": 5,
+    "sessions": [
+      {
+        "date": "2026-06-22",
+        "discipline": "lift",
+        "title": "Push Day",
+        "actual": "~1,920 lb (est)",
+        "key_metric": "~1,920 lb (est) | ~30 min (est)",
+        "score": 6,
+        "verdict": "Modified push session, Day 1 of Wk6 immediately after Jun 21 ankle sprain. 80s for 3x8 (volume-focused, lighter than typical max sets), upper body only \u2014 deliberately avoided any compound lifts that load the ankle (no standing OHP, no anything that requires bracing). Reduced volume + intensity by design. Pre-Strong-app session, exact data not captured."
+      },
+      {
+        "date": "2026-06-23",
+        "discipline": "run",
+        "title": "Threshold Run",
+        "actual": "MISS \u2014 ankle",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "No running."
+      },
+      {
+        "date": "2026-06-23",
+        "discipline": "swim",
+        "title": "Equipment Swim",
+        "actual": "MISS \u2014 ankle fatigue",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not completed."
+      },
+      {
+        "date": "2026-06-24",
+        "discipline": "bike",
+        "title": "Bike (Zwift)",
+        "actual": "MISS \u2014 ankle fatigue",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not completed. Trainer was an option (no ankle load) but full-body injury response prevented session."
+      },
+      {
+        "date": "2026-06-25",
+        "discipline": "lift",
+        "title": "Pull Day",
+        "actual": "0 lb",
+        "key_metric": "0 lb | \u2014",
+        "score": 0,
+        "verdict": "MISSED. Thu pull session not completed \u2014 full-body fatigue from ankle injury response. Upper-body pull was technically available (rows, curls, lat pulldown all neutral to ankle) but session did not happen. Should have been salvageable."
+      },
+      {
+        "date": "2026-06-25",
+        "discipline": "run",
+        "title": "Foundation Run",
+        "actual": "MISS \u2014 ankle",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "No running."
+      },
+      {
+        "date": "2026-06-26",
+        "discipline": "swim",
+        "title": "Continuity Swim",
+        "actual": "~670 yd \u00b7 15:46 \u00b7 HR 157/190 \u00b7 2:21/100yd \u00b7 OW \u00b7 5 AM \u00b7 pull buoy",
+        "key_metric": "2:21/100yd (vs 1:54 PR Wk5)",
+        "score": 4,
+        "verdict": "PARTIAL. Distance 33% short (670 of 1000 yd). Pace regression vs PR but injury week OW cold start. Max HR 190 = effort spikes. Credit: only completed tri session of week."
+      },
+      {
+        "date": "2026-06-27",
+        "discipline": "bike",
+        "title": "Foundation Bike",
+        "actual": "MISS \u2014 ankle fatigue",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not completed."
+      },
+      {
+        "date": "2026-06-27",
+        "discipline": "lift",
+        "title": "Legs Day",
+        "actual": "0 lb",
+        "key_metric": "0 lb | \u2014",
+        "score": 0,
+        "verdict": "MISSED. Sat legs session not completed \u2014 ankle sprain Day 7 prevented any squat/RDL/lunge loading. Correct call (ankle could not tolerate compressive load). No data."
+      },
+      {
+        "date": "2026-06-28",
+        "discipline": "run",
+        "title": "Long Run",
+        "actual": "MISS \u2014 ankle",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "No running."
+      },
+      {
+        "date": "2026-06-28",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "actual": "MISS \u2014 ankle fatigue",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not completed."
+      }
+    ]
+  },
+  {
+    "num": 5,
+    "start": "2026-06-15",
+    "label": "Jun 15-21",
+    "phase": "Recovery",
+    "score": 84,
+    "sessions": [
+      {
+        "date": "2026-06-16",
+        "discipline": "bike",
+        "title": "Bike (Zwift FTP)",
+        "actual": "Ramp Test \u00b7 26:11 \u00b7 Avg 131W / Max 304W \u00b7 HR 145/189 \u00b7 FTP: 216W",
+        "key_metric": "FTP 216W = 2.37 W/kg; max HR 189 at failure",
+        "score": 8,
+        "verdict": "Clean ramp to failure. FTP baseline established. Docked 2: test not recovery ride as prescribed."
+      },
+      {
+        "date": "2026-06-17",
+        "discipline": "run",
+        "title": "Norwegian Threshold",
+        "actual": "3x4 min executed \u00b7 Int: 7:08/6:47/7:01 (avg 6:58) \u00b7 GAP: 7:03/6:51/6:55 \u00b7 HR: 186/184/189 / Max: 194/195/199",
+        "key_metric": "Held Wk4 fitness; PC +7",
+        "score": 7,
+        "verdict": "Execution clean. Docked 3: did 3x4 instead of prescribed 2x4 in recovery week. Worked against deload."
+      },
+      {
+        "date": "2026-06-17",
+        "discipline": "swim",
+        "title": "Equipment Swim",
+        "actual": "OW \u00b7 1,100 yd \u00b7 100yd sets \u00b7 HR 157/175 \u00b7 1:54/100yd \u00b7 29 spm \u00b7 5.12 ft/str \u00b7 Swolf 51",
+        "key_metric": "PR: pace (1:54), DPS (5.12), Swolf (51)",
+        "score": 10,
+        "verdict": "Textbook. Hit 1,100 yd. PRs on pace, DPS, Swolf. HR controlled. Rest intervals within target."
+      },
+      {
+        "date": "2026-06-18",
+        "discipline": "bike",
+        "title": "Base Bike (Zwift)",
+        "actual": "30:50 \u00b7 Avg 136W / NP 138W \u00b7 HR 144/157 \u00b7 74 rpm \u00b7 Load 25",
+        "key_metric": "NP/AP 1.015 = flat effort; Recovery TE 1.8",
+        "score": 9,
+        "verdict": "Power on target. HR solidly Z2. Docked 1: cadence 74 (below 80-90 target)."
+      },
+      {
+        "date": "2026-06-19",
+        "discipline": "run",
+        "title": "Base Run",
+        "actual": "3.5 mi \u00b7 38:47 \u00b7 11:04/mi \u00b7 GAP 10:30 \u00b7 HR 165/181 \u00b7 512 ft \u00b7 post-swim",
+        "key_metric": "Neg HR split 169\u2192159; GAP 10:30 (Wk4: 8:36)",
+        "score": 8,
+        "verdict": "Massive improvement from Wk4 same route (HR 165 vs 178, GAP 10:30 vs 8:36). Docked 2: HR 165 above Z2 ceiling."
+      },
+      {
+        "date": "2026-06-19",
+        "discipline": "swim",
+        "title": "Swim (Pull Buoy)",
+        "actual": "OW \u00b7 1,200 yd \u00b7 100yd sets + 300m continuous finisher \u00b7 HR 164/186 \u00b7 2:00/100yd \u00b7 4.56 ft/str \u00b7 Swolf 56",
+        "key_metric": "New continuous PR: 300m (up 64% from 200yd Wk4)",
+        "score": 9,
+        "verdict": "PR in rough conditions. Misread prescription as 1,200 not 1,300. Docked 1: HR 164 above recovery intent."
+      },
+      {
+        "date": "2026-06-20",
+        "discipline": "bike",
+        "title": "Long Bike (Zwift)",
+        "actual": "45:32 \u00b7 Avg 142W / NP 144W / Max 149W \u00b7 HR 140/155 \u00b7 77 rpm \u00b7 391 kJ \u00b7 Load 39",
+        "key_metric": "NP/AP 1.014 = textbook flat; \"grind\" final 10 min",
+        "score": 9,
+        "verdict": "Power and HR on target. Duration exact. Docked 1: cadence 77 \u2014 mechanical (flat pedals), not aerobic."
+      },
+      {
+        "date": "2026-06-21",
+        "discipline": "run",
+        "title": "Long Run",
+        "actual": "5.09 mi \u00b7 47:25 \u00b7 9:19/mi \u00b7 GAP 9:19 \u00b7 HR 162/178 \u00b7 155 spm \u00b7 80F overcast",
+        "key_metric": "Mile splits: 9:28/9:22/8:57/9:08/9:42; mi 3 surge",
+        "score": 7,
+        "verdict": "Real fitness gain (Wk4: 10:30/mi at HR 170 \u2192 Wk5: 9:19 at HR 162). Docked 3: mi 3 surge to 8:57 (28s under E floor), distance short (5.09/6)."
+      }
+    ]
+  },
+  {
+    "num": 4,
+    "start": "2026-06-08",
+    "label": "Jun 8-14",
+    "phase": "Base",
+    "score": 48,
+    "sessions": [
+      {
+        "date": "2026-06-09",
+        "discipline": "bike",
+        "title": "Bike (Lake Atlanta)",
+        "actual": "40:39 \u00b7 10.27 mi \u00b7 15.1 mph \u00b7 HR 160/200 \u00b7 Load 132 \u00b7 430 ft",
+        "key_metric": "5/5 loops; avg 6:45/loop (Wk3: 6:52)",
+        "score": 8,
+        "verdict": "7s/loop faster than Wk3. Max HR 200 on climbs. Consistent week-over-week progression."
+      },
+      {
+        "date": "2026-06-10",
+        "discipline": "run",
+        "title": "Norwegian Threshold",
+        "actual": "33:20 \u00b7 3.43 mi \u00b7 Int: 6:55/6:43/7:18 (avg 6:58) \u00b7 GAP: 6:53/6:50/7:00 \u00b7 Int HR: 184/183/186 / Max: 193/195/197",
+        "key_metric": "HR-guided; peaks at LTHR; 32s/mi faster than Wk3",
+        "score": 9,
+        "verdict": "Textbook Norwegian. HR reached threshold at peaks. Int 3 fade mostly terrain."
+      },
+      {
+        "date": "2026-06-11",
+        "discipline": "swim",
+        "title": "Swim (Pull Buoy)",
+        "actual": "OW \u00b7 ~950m \u00b7 100m sets \u00b7 HR 152/180 \u00b7 1:58/100yd \u00b7 30 spm \u00b7 4.82 ft/str",
+        "key_metric": "Pull buoy confirmed kick = bottleneck; 40m\u2192100m",
+        "score": 8,
+        "verdict": "Diagnostic breakthrough. Aerobic swim unlocked. Rotator cuff twinge post-session."
+      },
+      {
+        "date": "2026-06-13",
+        "discipline": "run",
+        "title": "Foundation Run",
+        "actual": "4 mi \u00b7 36:10 \u00b7 9:02/mi \u00b7 GAP 8:36 \u00b7 HR 178/193 \u00b7 515 ft \u00b7 Load 173",
+        "key_metric": "GAP 8:36 = SubT not E; HR 178 = above Z4 floor",
+        "score": 5,
+        "verdict": "Hilly (515 ft in 4 mi) but GAP confirms pace too fast. 1 mi short. Added GAP to data screens."
+      },
+      {
+        "date": "2026-06-13",
+        "discipline": "swim",
+        "title": "Swim (Pull Buoy)",
+        "actual": "OW \u00b7 1,205 yd \u00b7 100yd sets + 200yd continuous \u00b7 HR 161/174 \u00b7 2:03/100yd",
+        "key_metric": "Volume PR; first 200yd continuous; max HR 174",
+        "score": 8,
+        "verdict": "Best swim of block. 200yd continuous = 4.5x from 40m max. No shoulder pain."
+      },
+      {
+        "date": "2026-06-14",
+        "discipline": "bike",
+        "title": "Foundation Bike",
+        "actual": "MISSED \u2014 wedding cascade",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Schedule compression. Swim and run prioritized."
+      },
+      {
+        "date": "2026-06-14",
+        "discipline": "run",
+        "title": "Long Run",
+        "actual": "MISSED \u2014 Readiness 25 (Low), 44h recovery needed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Rest day. Correct call heading into deload."
+      },
+      {
+        "date": "2026-06-14",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "actual": "MISSED \u2014 same as above",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Bundled with long run miss."
+      }
+    ]
+  },
+  {
+    "num": 3,
+    "start": "2026-06-01",
+    "label": "Jun 1-7",
+    "phase": "Base",
+    "score": 44,
+    "sessions": [
+      {
+        "date": "2026-06-02",
+        "discipline": "bike",
+        "title": "Bike (Lake Atlanta)",
+        "actual": "42:00 \u00b7 10.25 mi \u00b7 14.6 mph \u00b7 HR 159/192 \u00b7 Load 122 \u00b7 423 ft",
+        "key_metric": "5/5 loops; 6:41-6:57 range; neg split",
+        "score": 8,
+        "verdict": "All 5 loops. HR 159 vs 169 Wk2 = 10 beats lower at same effort. Best session of week."
+      },
+      {
+        "date": "2026-06-03",
+        "discipline": "swim",
+        "title": "Swim",
+        "actual": "MISSED \u2014 travel",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Travel wiped Wednesday."
+      },
+      {
+        "date": "2026-06-05",
+        "discipline": "run",
+        "title": "Norwegian Threshold",
+        "actual": "36:00 \u00b7 3.50 mi \u00b7 Int: 7:51/7:41/7:23 \u00b7 HR 182-186/195",
+        "key_metric": "All 3 faster than T pace; neg split",
+        "score": 8,
+        "verdict": "Paces 7:23-7:51 at sub-threshold HR (182-186 vs LTHR 192). Fitness ahead of VDOT 41."
+      },
+      {
+        "date": "2026-06-05",
+        "discipline": "swim",
+        "title": "Swim (Fins)",
+        "actual": "1,008 yd \u00b7 HR 157/192 \u00b7 2:08/100yd \u00b7 27 spm",
+        "key_metric": "HR 192 with fins = efficiency bottleneck",
+        "score": 5,
+        "verdict": "Under distance. HR spiking to LTHR with assisted propulsion. Revised diagnosis needed."
+      },
+      {
+        "date": "2026-06-06",
+        "discipline": "bike",
+        "title": "Foundation Bike",
+        "actual": "1:11:57 \u00b7 12.8 mph \u00b7 HR 139/168 \u00b7 Load 43 \u00b7 427 ft \u00b7 downpour",
+        "key_metric": "HR 139 = solid Z2; aerobic TE 0.0",
+        "score": 9,
+        "verdict": "Textbook Z2. HR 139 vs 170 Wk2. Night-and-day improvement. Best foundation session of block."
+      },
+      {
+        "date": "2026-06-06",
+        "discipline": "run",
+        "title": "Foundation Run",
+        "actual": "MISSED",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
+      },
+      {
+        "date": "2026-06-07",
+        "discipline": "run",
+        "title": "Long Run",
+        "actual": "8 mi \u00b7 1:19:23 \u00b7 9:55/mi \u00b7 HR 171/189 \u00b7 88F avg \u00b7 Load 197",
+        "key_metric": "HR 171 (Z3) on easy run = heat; bonked mi 5-6",
+        "score": 5,
+        "verdict": "Distance hit. Pace 9:55 (E range). HR 171 = heat-driven. Fasted + no water = bonk + GI at mi 3."
+      },
+      {
+        "date": "2026-06-07",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "actual": "MISSED \u2014 legs toasted from long run",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "3rd swim missed. 1/3 swims completed this week. Swim gap widening."
+      }
+    ]
+  },
+  {
+    "num": 2,
+    "start": "2026-05-25",
+    "label": "May 25-31",
+    "phase": "Base",
+    "score": 43,
+    "sessions": [
+      {
+        "date": "2026-05-27",
+        "discipline": "bike",
+        "title": "Bike (Lake Atlanta)",
+        "actual": "~34 min \u00b7 8.5 mi \u00b7 15.0 mph \u00b7 HR 169/193 \u00b7 Load 145",
+        "key_metric": "4 of 5 loops",
+        "score": 7,
+        "verdict": "Solid first rep. HR 169 appropriate for Z4-Z5 hills. 1 loop short."
+      },
+      {
+        "date": "2026-05-27",
+        "discipline": "run",
+        "title": "Norwegian Threshold",
+        "actual": "MISSED \u2014 Murph fatigue",
+        "key_metric": "Stimulus lost",
+        "score": 0,
+        "verdict": "Murph cascade. Both threshold and foundation run lost."
+      },
+      {
+        "date": "2026-05-28",
+        "discipline": "swim",
+        "title": "Swim",
+        "actual": "1000m \u00b7 47 min total / 25:10 active \u00b7 HR 162 \u00b7 50m reps",
+        "key_metric": "Anaerobic TE 2.9 \u2014 spiked, not aerobic",
+        "score": 5,
+        "verdict": "Max-effort 50s with breakdown ~40m. Over-breathing not yet diagnosed."
+      },
+      {
+        "date": "2026-05-29",
+        "discipline": "swim",
+        "title": "Swim",
+        "actual": "~900m \u00b7 HR 152 \u00b7 ~3:00/100m \u00b7 1 min rest per 50m",
+        "key_metric": "HR control better vs 05-28",
+        "score": 6,
+        "verdict": "HR 152 = better aerobic control. Ankle pain (anterior tib). Cut short on time."
+      },
+      {
+        "date": "2026-05-30",
+        "discipline": "run",
+        "title": "Foundation Run",
+        "actual": "MISSED",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not completed."
+      },
+      {
+        "date": "2026-05-31",
+        "discipline": "bike",
+        "title": "Foundation Bike",
+        "actual": "15.5 mi \u00b7 1:05:19 \u00b7 15.0 mph \u00b7 HR 170/186 \u00b7 Load 194",
+        "key_metric": "Z3 not Z2 \u2014 intensity drift",
+        "score": 5,
+        "verdict": "HR 170 (89% LTHR). Buddy-ride pace pull. Bike version of \"runs too fast.\""
+      },
+      {
+        "date": "2026-05-31",
+        "discipline": "run",
+        "title": "Long Run",
+        "actual": "4.5 mi \u00b7 44:44 \u00b7 9:56/mi \u00b7 HR 179/197 \u00b7 90F",
+        "key_metric": "HR 179 (93% LTHR) on easy run = heat blowout",
+        "score": 5,
+        "verdict": "Cut early \u2014 correct call. Pace on target but heat drove easy effort to threshold HR."
+      },
+      {
+        "date": "2026-05-31",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "actual": "1000m \u00b7 22:00 active / 42:00 elapsed \u00b7 HR 160/193 \u00b7 snorkel",
+        "key_metric": "Over-breathing diagnosed",
+        "score": 6,
+        "verdict": "Hit 1000m. Root cause: hyperventilation (1s in / 1s out). Fix: 2-count in / 4-count out."
+      }
+    ]
+  },
+  {
+    "num": 1,
+    "start": "2026-05-04",
+    "label": "May 4-10",
+    "phase": "Benchmark",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-05-05",
+        "discipline": "bike",
+        "title": "Bike FTP Test",
+        "actual": "NOT PERFORMED \u2014 deferred to Wk5",
+        "key_metric": "Deferred",
+        "score": 0,
+        "verdict": "Deferred. FTP ultimately tested Wk5 via Zwift ramp (216W)."
+      },
+      {
+        "date": "2026-05-05",
+        "discipline": "run",
+        "title": "Mile Time Trial",
+        "actual": "5:57 \u00b7 HR 195 avg / 203 max \u00b7 running power 615W avg",
+        "key_metric": "VDOT 48.9 (LacTrace)",
+        "score": 10,
+        "verdict": "Baseline locked. Strong opening. Sprint background visible in power numbers."
+      },
+      {
+        "date": "2026-05-06",
+        "discipline": "swim",
+        "title": "Swim 1000m TT",
+        "actual": "1000m \u00b7 18:48 active / 41:50 total \u00b7 1:50/100m active",
+        "key_metric": "Beginner baseline established",
+        "score": 10,
+        "verdict": "Baseline established. Critical-path discipline confirmed weak. Make-or-break path forward."
+      },
+      {
+        "date": "2026-05-10",
+        "discipline": "run",
+        "title": "5K Time Trial",
+        "actual": "5K \u00b7 23:34 \u00b7 7:34/mi \u00b7 HR 196 avg / 204 max",
+        "key_metric": "VDOT 41.0 (LacTrace)",
+        "score": 10,
+        "verdict": "Baseline locked. 11-pt VDOT gap to mile confirms speed-vs-endurance bias."
+      }
+    ]
+  }
+];
+
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function dayOfWeek(iso) {
+  const [y,m,d] = iso.split('-').map(Number);
+  return DOW[new Date(y, m-1, d).getDay()];
+}
+function monthDay(iso) {
+  const [y,m,d] = iso.split('-').map(Number);
+  return `${m}/${d}`;
+}
+
+function wsClass(score) {
+  if (score === null || score === undefined) return '';
+  if (score >= 80) return 'ws-high';
+  if (score >= 60) return 'ws-mid';
+  return 'ws-low';
+}
+
+function phaseClass(p) {
+  return 'phase-' + p.toLowerCase();
+}
+
+function renderStats() {
+  let totalSessions = 0;
+  let scoreSum = 0, scoreCount = 0;
+  let discCount = { swim:0, bike:0, run:0, lift:0 };
+  let weeklyScores = [];
+
+  WEEKS_DATA.forEach(w => {
+    if (w.score !== null && w.score !== undefined) weeklyScores.push(w.score);
+    w.sessions.forEach(s => {
+      totalSessions++;
+      if (s.score > 0) { scoreSum += s.score; scoreCount++; }
+      if (discCount[s.discipline] !== undefined) discCount[s.discipline]++;
+    });
+  });
+
+  const avgWeekly = weeklyScores.length
+    ? (weeklyScores.reduce((a,b) => a+b, 0) / weeklyScores.length).toFixed(0)
+    : '-';
+  const avgSession = scoreCount
+    ? (scoreSum / scoreCount).toFixed(1)
+    : '-';
+  const bestWeek = weeklyScores.length ? Math.max(...weeklyScores) : '-';
+
+  const stats = [
+    { v: WEEKS_DATA.length, l: 'Weeks logged' },
+    { v: totalSessions, l: 'Sessions' },
+    { v: avgSession, l: 'Avg session' },
+    { v: avgWeekly, l: 'Avg week' },
+    { v: bestWeek, l: 'Best week' },
+    { v: discCount.swim + 'S / ' + discCount.bike + 'B / ' + discCount.run + 'R / ' + discCount.lift + 'L',
+      l: 'By discipline' },
+  ];
+
+  const root = document.getElementById('stats');
+  stats.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'stat';
+    card.innerHTML = `<div class="stat-val">${s.v}</div><div class="stat-lbl">${s.l}</div>`;
+    root.appendChild(card);
+  });
+}
+
+function renderWeeks() {
+  const root = document.getElementById('weeks-container');
+
+  if (WEEKS_DATA.length === 0) {
+    root.innerHTML = '<div class="empty-state">No sessions logged yet. Run <code>python3 tools/build_training_log.py</code> after logging a session.</div>';
+    return;
+  }
+
+  WEEKS_DATA.forEach((week, idx) => {
+    const card = document.createElement('div');
+    card.className = 'week-card' + (idx === 0 ? ' open' : '');  // newest expanded
+    card.dataset.weekNum = week.num;
+
+    const scoreBadge = week.score !== null && week.score !== undefined
+      ? `<span class="week-score ${wsClass(week.score)}">${week.score}/100</span>`
+      : '';
+
+    card.innerHTML = `
+      <div class="week-head">
+        <span class="phase-badge ${phaseClass(week.phase)}">${week.phase}</span>
+        <span class="week-title">Week ${week.num}</span>
+        <span class="week-dates">${week.label}</span>
+        <span class="week-spacer"></span>
+        <span class="week-meta">${week.sessions.length} sessions</span>
+        ${scoreBadge}
+        <span class="caret">&#9656;</span>
+      </div>
+      <div class="week-body"></div>
+    `;
+
+    const body = card.querySelector('.week-body');
+    week.sessions.forEach(s => {
+      const row = document.createElement('div');
+      row.className = `session disc-${s.discipline}`;
+      row.dataset.disc = s.discipline;
+
+      const detail = [s.actual, s.key_metric].filter(Boolean).join(' · ');
+      const discLabel = s.discipline.charAt(0).toUpperCase() + s.discipline.slice(1);
+
+      row.innerHTML = `
+        <div>
+          <div class="sess-date">${monthDay(s.date)}</div>
+          <div class="sess-day">${dayOfWeek(s.date)}</div>
+        </div>
+        <div class="sess-main">
+          <div class="sess-title">${s.title}</div>
+          <div class="sess-detail">${detail || '-'}</div>
+        </div>
+        <span class="sess-tag tag-${s.discipline}">${discLabel}</span>
+        <div class="score sc-${s.score}">${s.score}</div>
+      `;
+
+      // Tooltip on hover
+      const logTooltip = document.getElementById('logTooltip');
+      row.addEventListener('mousemove', (e) => {
+        let html = `<strong>${s.title}</strong><br>`;
+        html += `${dayOfWeek(s.date)} ${s.date} &middot; Score ${s.score}/10<br>`;
+        if (s.actual) html += `<br><strong>Actual:</strong> ${s.actual}<br>`;
+        if (s.key_metric) html += `<strong>Key:</strong> ${s.key_metric}<br>`;
+        if (s.verdict) html += `<br>${s.verdict}`;
+        logTooltip.innerHTML = html;
+        logTooltip.style.display = 'block';
+        const x = Math.min(e.clientX + 14, window.innerWidth - 340);
+        const y = Math.min(e.clientY + 14, window.innerHeight - 200);
+        logTooltip.style.left = x + 'px';
+        logTooltip.style.top  = y + 'px';
+      });
+      row.addEventListener('mouseleave', () => {
+        logTooltip.style.display = 'none';
+      });
+
+      body.appendChild(row);
+    });
+
+    // Toggle on header click
+    card.querySelector('.week-head').addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+
+    root.appendChild(card);
+  });
+}
+
+function applyFilter(disc) {
+  document.querySelectorAll('.pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.disc === disc);
+  });
+
+  document.querySelectorAll('.week-card').forEach(card => {
+    let visible = 0;
+    card.querySelectorAll('.session').forEach(row => {
+      const show = (disc === 'all' || row.dataset.disc === disc);
+      row.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    card.classList.toggle('empty', visible === 0);
+    // Auto-expand cards when filtering to a discipline
+    if (disc !== 'all' && visible > 0) card.classList.add('open');
+  });
+}
+
+document.querySelectorAll('.pill').forEach(p => {
+  p.addEventListener('click', () => applyFilter(p.dataset.disc));
+});
+
+renderStats();
+renderWeeks();
+</script>
+</body>
+</html>
