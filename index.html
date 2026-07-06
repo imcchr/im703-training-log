@@ -41,6 +41,28 @@
   .view{display:none;}
   .view.active{display:block;}
 
+  /* Consistency heatmap (GitHub style) */
+  .heatmap-card{background:var(--card);border:1px solid var(--line);border-radius:11px;
+    padding:12px 12px 11px;margin-bottom:16px;}
+  .hm-title{font-size:.66rem;font-weight:800;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;}
+  .hm-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .hm-scroll::-webkit-scrollbar{display:none;}
+  .hm-grid{display:flex;gap:3px;min-width:min-content;}
+  .hm-col{display:flex;flex-direction:column;gap:3px;}
+  .hm-month{height:13px;line-height:13px;font-size:.58rem;color:var(--muted);
+    white-space:nowrap;overflow:visible;}
+  .hm-cell{width:13px;height:13px;border-radius:3px;background:#ebedf0;cursor:pointer;}
+  .hm-cell.l1{background:#9be9a8;}
+  .hm-cell.l2{background:#40c463;}
+  .hm-cell.l3{background:#30a14e;}
+  .hm-cell.l4{background:#216e39;}
+  .hm-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+    margin-top:10px;font-size:.62rem;color:var(--muted);gap:8px 12px;}
+  .hm-caption{font-weight:700;color:var(--ink);}
+  .hm-legend{display:flex;align-items:center;gap:3px;white-space:nowrap;}
+  .hm-legend .hm-cell{width:11px;height:11px;cursor:default;}
+
   /* Stats */
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:11px;
@@ -174,6 +196,21 @@
 <main class="page-wrap">
 
   <section id="view-log" class="view active">
+    <div class="heatmap-card" id="heatmap-card">
+      <div class="hm-title">Consistency &middot; workouts completed</div>
+      <div class="hm-scroll"><div class="hm-grid" id="hm-grid"></div></div>
+      <div class="hm-foot">
+        <span class="hm-caption" id="hm-caption"></span>
+        <span class="hm-legend">Less
+          <span class="hm-cell"></span>
+          <span class="hm-cell l1"></span>
+          <span class="hm-cell l2"></span>
+          <span class="hm-cell l3"></span>
+          <span class="hm-cell l4"></span>
+        More</span>
+      </div>
+    </div>
+
     <div class="stats" id="stats"></div>
     <div class="filter-bar">
       <button class="pill active" data-disc="all">All</button>
@@ -205,6 +242,7 @@ const WEEKS_DATA = [
         "date": "2026-06-29",
         "discipline": "lift",
         "title": "Push Day",
+        "prescribed": "",
         "actual": "13,548 lb",
         "key_metric": "13,548 lb | 1 PR | 36 min",
         "score": 7,
@@ -214,6 +252,7 @@ const WEEKS_DATA = [
         "date": "2026-06-30",
         "discipline": "bike",
         "title": "Bike Intervals (Zwift)",
+        "prescribed": "45 min \u2014 3x8 min @ 196-216W (Z4), 3 min rec",
         "actual": "30:22 \u00b7 10.16 mi \u00b7 2 of 3 intervals \u00b7 Int1: 8:00 @ 204W \u00b7 Int2: 8:00 @ 204W \u00b7 HR 157/176 \u00b7 79-83 rpm",
         "key_metric": "204W = 94% FTP on both intervals; HR drift +2 bpm between sets (167\u2192169)",
         "score": 6,
@@ -223,6 +262,7 @@ const WEEKS_DATA = [
         "date": "2026-07-01",
         "discipline": "bike",
         "title": "Run (Norwegian Threshold OR bike sub)",
+        "prescribed": "Wed 3x5 min @ T pace 6:47/mi IF ankle clear",
         "actual": "MISS \u2014 ankle still gated (no bike sub logged)",
         "key_metric": "",
         "score": 0,
@@ -232,6 +272,7 @@ const WEEKS_DATA = [
         "date": "2026-07-02",
         "discipline": "bike",
         "title": "Bike Z2 (Zwift)",
+        "prescribed": "30 min Z2 (130-163W)",
         "actual": "30:10 \u00b7 6.02 mi \u00b7 138W avg / 143W max \u00b7 HR 146 avg / 157 max \u00b7 87 rpm avg / 97 max",
         "key_metric": "138W = 64% FTP; max power 143W = 5W spread (exceptional Z2 ceiling discipline); cadence 87 rpm (\u2191 from historical 74-83 flag)",
         "score": 9,
@@ -241,6 +282,7 @@ const WEEKS_DATA = [
         "date": "2026-07-02",
         "discipline": "swim",
         "title": "Swim (Continuous PR)",
+        "prescribed": "Wed PM Equipment Swim ~1,300 yd pull buoy (drills + continuous sets) \u2014 pushed to Thu",
         "actual": "1,451 yd CONTINUOUS \u00b7 39:22 \u00b7 2:42/100yd avg \u00b7 HR 160 avg / 174 max \u00b7 27 spm \u00b7 DPS 1.24 \u00b7 TE 3.3 aero / 0.0 anaero \u00b7 last 100yd NO buoy",
         "key_metric": "**Continuous-distance breakthrough: 1,451 yd unbroken vs prior best 300m (~328yd) = 4.4x PR.** ~69% of full 70.3 swim leg in one go. No-buoy final 100yd: pace 3:10-3:18/100yd + HR 167-169 + DPS\u21921.06 (leg-sink signature)",
         "score": 10,
@@ -250,6 +292,7 @@ const WEEKS_DATA = [
         "date": "2026-07-03",
         "discipline": "run",
         "title": "Run (Foundation, modified)",
+        "prescribed": "Fri 3-4 mi @ E, ankle cleared only",
         "actual": "MISS \u2014 ankle still gated",
         "key_metric": "",
         "score": 0,
@@ -259,6 +302,7 @@ const WEEKS_DATA = [
         "date": "2026-07-03",
         "discipline": "swim",
         "title": "Swim (Continuity \u2014 improvised OW)",
+        "prescribed": "Fri PM Continuity ~1,000 yd pull buoy (100yd reps + longer sets)",
         "actual": "1,022 yd continuous \u00b7 33:12 \u00b7 3:14/100yd \u00b7 HR 151 avg / 173 max \u00b7 26 spm \u00b7 DPS 1.07 \u00b7 TE 3.0 aero / 0.4 anaero \u00b7 OW 86F \u00b7 NO goggles/cap/buoy + lifejacket (head-up)",
         "key_metric": "Distance hit (1,022 vs 1,000) aerobically under lifejacket drag; pace 3:14 + DPS 1.07 CONFOUNDED by head-up/lifejacket \u2014 NOT leg-sink trend data",
         "score": 6,
@@ -268,6 +312,7 @@ const WEEKS_DATA = [
         "date": "2026-07-04",
         "discipline": "bike",
         "title": "Bike (Foundation)",
+        "prescribed": "Sat 1:15 Z2 (130-163W)",
         "actual": "MISS \u2014 July 4th weekend, on boat",
         "key_metric": "",
         "score": 0,
@@ -277,6 +322,7 @@ const WEEKS_DATA = [
         "date": "2026-07-05",
         "discipline": "run",
         "title": "Run (Long)",
+        "prescribed": "Sun 5 mi easy IF ankle clear",
         "actual": "MISS \u2014 ankle still gated",
         "key_metric": "",
         "score": 0,
@@ -286,6 +332,7 @@ const WEEKS_DATA = [
         "date": "2026-07-05",
         "discipline": "swim",
         "title": "Swim (Long)",
+        "prescribed": "Sun 1,300 yd pull buoy continuous",
         "actual": "MISS \u2014 week closed out Sunday",
         "key_metric": "",
         "score": 0,
@@ -304,6 +351,7 @@ const WEEKS_DATA = [
         "date": "2026-06-22",
         "discipline": "lift",
         "title": "Push Day",
+        "prescribed": "",
         "actual": "~1,920 lb (est)",
         "key_metric": "~1,920 lb (est) | ~30 min (est)",
         "score": 6,
@@ -313,6 +361,7 @@ const WEEKS_DATA = [
         "date": "2026-06-23",
         "discipline": "run",
         "title": "Threshold Run",
+        "prescribed": "3x5 min @ T pace",
         "actual": "MISS \u2014 ankle",
         "key_metric": "",
         "score": 0,
@@ -322,6 +371,7 @@ const WEEKS_DATA = [
         "date": "2026-06-23",
         "discipline": "swim",
         "title": "Equipment Swim",
+        "prescribed": "~1300 yd, pull buoy",
         "actual": "MISS \u2014 ankle fatigue",
         "key_metric": "",
         "score": 0,
@@ -331,6 +381,7 @@ const WEEKS_DATA = [
         "date": "2026-06-24",
         "discipline": "bike",
         "title": "Bike (Zwift)",
+        "prescribed": "45 min Z2",
         "actual": "MISS \u2014 ankle fatigue",
         "key_metric": "",
         "score": 0,
@@ -340,6 +391,7 @@ const WEEKS_DATA = [
         "date": "2026-06-25",
         "discipline": "lift",
         "title": "Pull Day",
+        "prescribed": "",
         "actual": "0 lb",
         "key_metric": "0 lb | \u2014",
         "score": 0,
@@ -349,6 +401,7 @@ const WEEKS_DATA = [
         "date": "2026-06-25",
         "discipline": "run",
         "title": "Foundation Run",
+        "prescribed": "5 mi E pace",
         "actual": "MISS \u2014 ankle",
         "key_metric": "",
         "score": 0,
@@ -358,6 +411,7 @@ const WEEKS_DATA = [
         "date": "2026-06-26",
         "discipline": "swim",
         "title": "Continuity Swim",
+        "prescribed": "1000 yd reps",
         "actual": "~670 yd \u00b7 15:46 \u00b7 HR 157/190 \u00b7 2:21/100yd \u00b7 OW \u00b7 5 AM \u00b7 pull buoy",
         "key_metric": "2:21/100yd (vs 1:54 PR Wk5)",
         "score": 4,
@@ -367,6 +421,7 @@ const WEEKS_DATA = [
         "date": "2026-06-27",
         "discipline": "bike",
         "title": "Foundation Bike",
+        "prescribed": "1:15 Z2",
         "actual": "MISS \u2014 ankle fatigue",
         "key_metric": "",
         "score": 0,
@@ -376,6 +431,7 @@ const WEEKS_DATA = [
         "date": "2026-06-27",
         "discipline": "lift",
         "title": "Legs Day",
+        "prescribed": "",
         "actual": "0 lb",
         "key_metric": "0 lb | \u2014",
         "score": 0,
@@ -385,6 +441,7 @@ const WEEKS_DATA = [
         "date": "2026-06-28",
         "discipline": "run",
         "title": "Long Run",
+        "prescribed": "7 mi E pace",
         "actual": "MISS \u2014 ankle",
         "key_metric": "",
         "score": 0,
@@ -394,6 +451,7 @@ const WEEKS_DATA = [
         "date": "2026-06-28",
         "discipline": "swim",
         "title": "Long Swim",
+        "prescribed": "~1300 yd",
         "actual": "MISS \u2014 ankle fatigue",
         "key_metric": "",
         "score": 0,
@@ -412,6 +470,7 @@ const WEEKS_DATA = [
         "date": "2026-06-16",
         "discipline": "bike",
         "title": "Bike (Zwift FTP)",
+        "prescribed": "Recovery Intervals (replaced)",
         "actual": "Ramp Test \u00b7 26:11 \u00b7 Avg 131W / Max 304W \u00b7 HR 145/189 \u00b7 FTP: 216W",
         "key_metric": "FTP 216W = 2.37 W/kg; max HR 189 at failure",
         "score": 8,
@@ -421,6 +480,7 @@ const WEEKS_DATA = [
         "date": "2026-06-17",
         "discipline": "run",
         "title": "Norwegian Threshold",
+        "prescribed": "2x4 min @ LT (recovery week)",
         "actual": "3x4 min executed \u00b7 Int: 7:08/6:47/7:01 (avg 6:58) \u00b7 GAP: 7:03/6:51/6:55 \u00b7 HR: 186/184/189 / Max: 194/195/199",
         "key_metric": "Held Wk4 fitness; PC +7",
         "score": 7,
@@ -430,6 +490,7 @@ const WEEKS_DATA = [
         "date": "2026-06-17",
         "discipline": "swim",
         "title": "Equipment Swim",
+        "prescribed": "~1100 yd, pull buoy",
         "actual": "OW \u00b7 1,100 yd \u00b7 100yd sets \u00b7 HR 157/175 \u00b7 1:54/100yd \u00b7 29 spm \u00b7 5.12 ft/str \u00b7 Swolf 51",
         "key_metric": "PR: pace (1:54), DPS (5.12), Swolf (51)",
         "score": 10,
@@ -439,6 +500,7 @@ const WEEKS_DATA = [
         "date": "2026-06-18",
         "discipline": "bike",
         "title": "Base Bike (Zwift)",
+        "prescribed": "30 min, 120-150W (Z2)",
         "actual": "30:50 \u00b7 Avg 136W / NP 138W \u00b7 HR 144/157 \u00b7 74 rpm \u00b7 Load 25",
         "key_metric": "NP/AP 1.015 = flat effort; Recovery TE 1.8",
         "score": 9,
@@ -448,6 +510,7 @@ const WEEKS_DATA = [
         "date": "2026-06-19",
         "discipline": "run",
         "title": "Base Run",
+        "prescribed": "3.5 mi easy, Z2",
         "actual": "3.5 mi \u00b7 38:47 \u00b7 11:04/mi \u00b7 GAP 10:30 \u00b7 HR 165/181 \u00b7 512 ft \u00b7 post-swim",
         "key_metric": "Neg HR split 169\u2192159; GAP 10:30 (Wk4: 8:36)",
         "score": 8,
@@ -457,6 +520,7 @@ const WEEKS_DATA = [
         "date": "2026-06-19",
         "discipline": "swim",
         "title": "Swim (Pull Buoy)",
+        "prescribed": "~1300 yd, recovery",
         "actual": "OW \u00b7 1,200 yd \u00b7 100yd sets + 300m continuous finisher \u00b7 HR 164/186 \u00b7 2:00/100yd \u00b7 4.56 ft/str \u00b7 Swolf 56",
         "key_metric": "New continuous PR: 300m (up 64% from 200yd Wk4)",
         "score": 9,
@@ -466,6 +530,7 @@ const WEEKS_DATA = [
         "date": "2026-06-20",
         "discipline": "bike",
         "title": "Long Bike (Zwift)",
+        "prescribed": "45 min, 130-160W (Z2)",
         "actual": "45:32 \u00b7 Avg 142W / NP 144W / Max 149W \u00b7 HR 140/155 \u00b7 77 rpm \u00b7 391 kJ \u00b7 Load 39",
         "key_metric": "NP/AP 1.014 = textbook flat; \"grind\" final 10 min",
         "score": 9,
@@ -475,6 +540,7 @@ const WEEKS_DATA = [
         "date": "2026-06-21",
         "discipline": "run",
         "title": "Long Run",
+        "prescribed": "6 mi E pace (9:25-10:00)",
         "actual": "5.09 mi \u00b7 47:25 \u00b7 9:19/mi \u00b7 GAP 9:19 \u00b7 HR 162/178 \u00b7 155 spm \u00b7 80F overcast",
         "key_metric": "Mile splits: 9:28/9:22/8:57/9:08/9:42; mi 3 surge",
         "score": 7,
@@ -493,6 +559,7 @@ const WEEKS_DATA = [
         "date": "2026-06-09",
         "discipline": "bike",
         "title": "Bike (Lake Atlanta)",
+        "prescribed": "Hill Intervals ~43 min, 5 loops",
         "actual": "40:39 \u00b7 10.27 mi \u00b7 15.1 mph \u00b7 HR 160/200 \u00b7 Load 132 \u00b7 430 ft",
         "key_metric": "5/5 loops; avg 6:45/loop (Wk3: 6:52)",
         "score": 8,
@@ -502,6 +569,7 @@ const WEEKS_DATA = [
         "date": "2026-06-10",
         "discipline": "run",
         "title": "Norwegian Threshold",
+        "prescribed": "3x4 min @ LT, 3 min rec",
         "actual": "33:20 \u00b7 3.43 mi \u00b7 Int: 6:55/6:43/7:18 (avg 6:58) \u00b7 GAP: 6:53/6:50/7:00 \u00b7 Int HR: 184/183/186 / Max: 193/195/197",
         "key_metric": "HR-guided; peaks at LTHR; 32s/mi faster than Wk3",
         "score": 9,
@@ -511,6 +579,7 @@ const WEEKS_DATA = [
         "date": "2026-06-11",
         "discipline": "swim",
         "title": "Swim (Pull Buoy)",
+        "prescribed": "Technique swim (makeup Thu AM)",
         "actual": "OW \u00b7 ~950m \u00b7 100m sets \u00b7 HR 152/180 \u00b7 1:58/100yd \u00b7 30 spm \u00b7 4.82 ft/str",
         "key_metric": "Pull buoy confirmed kick = bottleneck; 40m\u2192100m",
         "score": 8,
@@ -520,6 +589,7 @@ const WEEKS_DATA = [
         "date": "2026-06-13",
         "discipline": "run",
         "title": "Foundation Run",
+        "prescribed": "5 mi easy, E pace 9:25-10:00",
         "actual": "4 mi \u00b7 36:10 \u00b7 9:02/mi \u00b7 GAP 8:36 \u00b7 HR 178/193 \u00b7 515 ft \u00b7 Load 173",
         "key_metric": "GAP 8:36 = SubT not E; HR 178 = above Z4 floor",
         "score": 5,
@@ -529,6 +599,7 @@ const WEEKS_DATA = [
         "date": "2026-06-13",
         "discipline": "swim",
         "title": "Swim (Pull Buoy)",
+        "prescribed": "Base swim",
         "actual": "OW \u00b7 1,205 yd \u00b7 100yd sets + 200yd continuous \u00b7 HR 161/174 \u00b7 2:03/100yd",
         "key_metric": "Volume PR; first 200yd continuous; max HR 174",
         "score": 8,
@@ -538,6 +609,7 @@ const WEEKS_DATA = [
         "date": "2026-06-14",
         "discipline": "bike",
         "title": "Foundation Bike",
+        "prescribed": "Foundation Bike (Sat)",
         "actual": "MISSED \u2014 wedding cascade",
         "key_metric": "",
         "score": 0,
@@ -547,6 +619,7 @@ const WEEKS_DATA = [
         "date": "2026-06-14",
         "discipline": "run",
         "title": "Long Run",
+        "prescribed": "Long Run (Sun)",
         "actual": "MISSED \u2014 Readiness 25 (Low), 44h recovery needed",
         "key_metric": "",
         "score": 0,
@@ -556,6 +629,7 @@ const WEEKS_DATA = [
         "date": "2026-06-14",
         "discipline": "swim",
         "title": "Long Swim",
+        "prescribed": "Long Swim (Sun)",
         "actual": "MISSED \u2014 same as above",
         "key_metric": "",
         "score": 0,
@@ -574,6 +648,7 @@ const WEEKS_DATA = [
         "date": "2026-06-02",
         "discipline": "bike",
         "title": "Bike (Lake Atlanta)",
+        "prescribed": "Hill Intervals ~43 min, 5 loops",
         "actual": "42:00 \u00b7 10.25 mi \u00b7 14.6 mph \u00b7 HR 159/192 \u00b7 Load 122 \u00b7 423 ft",
         "key_metric": "5/5 loops; 6:41-6:57 range; neg split",
         "score": 8,
@@ -583,6 +658,7 @@ const WEEKS_DATA = [
         "date": "2026-06-03",
         "discipline": "swim",
         "title": "Swim",
+        "prescribed": "Equipment Swim ~1400 yd",
         "actual": "MISSED \u2014 travel",
         "key_metric": "",
         "score": 0,
@@ -592,6 +668,7 @@ const WEEKS_DATA = [
         "date": "2026-06-05",
         "discipline": "run",
         "title": "Norwegian Threshold",
+        "prescribed": "3x4 min @ T, 3 min rec (rescheduled)",
         "actual": "36:00 \u00b7 3.50 mi \u00b7 Int: 7:51/7:41/7:23 \u00b7 HR 182-186/195",
         "key_metric": "All 3 faster than T pace; neg split",
         "score": 8,
@@ -601,6 +678,7 @@ const WEEKS_DATA = [
         "date": "2026-06-05",
         "discipline": "swim",
         "title": "Swim (Fins)",
+        "prescribed": "Equipment Swim ~1400 yd",
         "actual": "1,008 yd \u00b7 HR 157/192 \u00b7 2:08/100yd \u00b7 27 spm",
         "key_metric": "HR 192 with fins = efficiency bottleneck",
         "score": 5,
@@ -610,6 +688,7 @@ const WEEKS_DATA = [
         "date": "2026-06-06",
         "discipline": "bike",
         "title": "Foundation Bike",
+        "prescribed": "Foundation Bike 1:15, Z2",
         "actual": "1:11:57 \u00b7 12.8 mph \u00b7 HR 139/168 \u00b7 Load 43 \u00b7 427 ft \u00b7 downpour",
         "key_metric": "HR 139 = solid Z2; aerobic TE 0.0",
         "score": 9,
@@ -619,6 +698,7 @@ const WEEKS_DATA = [
         "date": "2026-06-06",
         "discipline": "run",
         "title": "Foundation Run",
+        "prescribed": "Foundation Run",
         "actual": "MISSED",
         "key_metric": "",
         "score": 0,
@@ -628,6 +708,7 @@ const WEEKS_DATA = [
         "date": "2026-06-07",
         "discipline": "run",
         "title": "Long Run",
+        "prescribed": "8 mi easy, E pace, Z2",
         "actual": "8 mi \u00b7 1:19:23 \u00b7 9:55/mi \u00b7 HR 171/189 \u00b7 88F avg \u00b7 Load 197",
         "key_metric": "HR 171 (Z3) on easy run = heat; bonked mi 5-6",
         "score": 5,
@@ -637,6 +718,7 @@ const WEEKS_DATA = [
         "date": "2026-06-07",
         "discipline": "swim",
         "title": "Long Swim",
+        "prescribed": "~1150 yd w/ tow buoy",
         "actual": "MISSED \u2014 legs toasted from long run",
         "key_metric": "",
         "score": 0,
@@ -655,6 +737,7 @@ const WEEKS_DATA = [
         "date": "2026-05-27",
         "discipline": "bike",
         "title": "Bike (Lake Atlanta)",
+        "prescribed": "Hill Intervals ~43 min, 5 loops",
         "actual": "~34 min \u00b7 8.5 mi \u00b7 15.0 mph \u00b7 HR 169/193 \u00b7 Load 145",
         "key_metric": "4 of 5 loops",
         "score": 7,
@@ -664,6 +747,7 @@ const WEEKS_DATA = [
         "date": "2026-05-27",
         "discipline": "run",
         "title": "Norwegian Threshold",
+        "prescribed": "3x4 min @ T pace w/ 3 min rec",
         "actual": "MISSED \u2014 Murph fatigue",
         "key_metric": "Stimulus lost",
         "score": 0,
@@ -673,6 +757,7 @@ const WEEKS_DATA = [
         "date": "2026-05-28",
         "discipline": "swim",
         "title": "Swim",
+        "prescribed": "1200m technique/continuity",
         "actual": "1000m \u00b7 47 min total / 25:10 active \u00b7 HR 162 \u00b7 50m reps",
         "key_metric": "Anaerobic TE 2.9 \u2014 spiked, not aerobic",
         "score": 5,
@@ -682,6 +767,7 @@ const WEEKS_DATA = [
         "date": "2026-05-29",
         "discipline": "swim",
         "title": "Swim",
+        "prescribed": "1200m mixed-pace",
         "actual": "~900m \u00b7 HR 152 \u00b7 ~3:00/100m \u00b7 1 min rest per 50m",
         "key_metric": "HR control better vs 05-28",
         "score": 6,
@@ -691,6 +777,7 @@ const WEEKS_DATA = [
         "date": "2026-05-30",
         "discipline": "run",
         "title": "Foundation Run",
+        "prescribed": "Foundation run",
         "actual": "MISSED",
         "key_metric": "",
         "score": 0,
@@ -700,6 +787,7 @@ const WEEKS_DATA = [
         "date": "2026-05-31",
         "discipline": "bike",
         "title": "Foundation Bike",
+        "prescribed": "Long Bike 1:15, Z2",
         "actual": "15.5 mi \u00b7 1:05:19 \u00b7 15.0 mph \u00b7 HR 170/186 \u00b7 Load 194",
         "key_metric": "Z3 not Z2 \u2014 intensity drift",
         "score": 5,
@@ -709,6 +797,7 @@ const WEEKS_DATA = [
         "date": "2026-05-31",
         "discipline": "run",
         "title": "Long Run",
+        "prescribed": "50 min easy Z2 (~9:25-10:00/mi)",
         "actual": "4.5 mi \u00b7 44:44 \u00b7 9:56/mi \u00b7 HR 179/197 \u00b7 90F",
         "key_metric": "HR 179 (93% LTHR) on easy run = heat blowout",
         "score": 5,
@@ -718,6 +807,7 @@ const WEEKS_DATA = [
         "date": "2026-05-31",
         "discipline": "swim",
         "title": "Long Swim",
+        "prescribed": "1000m continuous shoreline",
         "actual": "1000m \u00b7 22:00 active / 42:00 elapsed \u00b7 HR 160/193 \u00b7 snorkel",
         "key_metric": "Over-breathing diagnosed",
         "score": 6,
@@ -736,6 +826,7 @@ const WEEKS_DATA = [
         "date": "2026-05-05",
         "discipline": "bike",
         "title": "Bike FTP Test",
+        "prescribed": "FTP ramp test",
         "actual": "NOT PERFORMED \u2014 deferred to Wk5",
         "key_metric": "Deferred",
         "score": 0,
@@ -745,6 +836,7 @@ const WEEKS_DATA = [
         "date": "2026-05-05",
         "discipline": "run",
         "title": "Mile Time Trial",
+        "prescribed": "Mile TT (all-out) - baseline",
         "actual": "5:57 \u00b7 HR 195 avg / 203 max \u00b7 running power 615W avg",
         "key_metric": "VDOT 48.9 (LacTrace)",
         "score": 10,
@@ -754,6 +846,7 @@ const WEEKS_DATA = [
         "date": "2026-05-06",
         "discipline": "swim",
         "title": "Swim 1000m TT",
+        "prescribed": "1000m time trial - baseline",
         "actual": "1000m \u00b7 18:48 active / 41:50 total \u00b7 1:50/100m active",
         "key_metric": "Beginner baseline established",
         "score": 10,
@@ -763,6 +856,7 @@ const WEEKS_DATA = [
         "date": "2026-05-10",
         "discipline": "run",
         "title": "5K Time Trial",
+        "prescribed": "5K time trial - baseline",
         "actual": "5K \u00b7 23:34 \u00b7 7:34/mi \u00b7 HR 196 avg / 204 max",
         "key_metric": "VDOT 41.0 (LacTrace)",
         "score": 10,
@@ -779,28 +873,28 @@ const PLAN_DATA  = [
     "phase": "Benchmark",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "run",
-        "session": "Mile TT",
-        "target": ""
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Bike FTP Test",
+        "target": "FTP ramp test"
       },
       {
         "day": "Tue",
-        "disc": "bike",
-        "session": "FTP Test",
-        "target": ""
+        "disc": "run",
+        "session": "Mile Time Trial",
+        "target": "Mile TT (all-out) - baseline"
       },
       {
         "day": "Wed",
         "disc": "swim",
-        "session": "1000m TT",
-        "target": ""
+        "session": "Swim 1000m TT",
+        "target": "1000m time trial - baseline"
       },
       {
-        "day": "Sat",
-        "disc": "lift",
-        "session": "Strength Benchmarks",
-        "target": ""
+        "day": "Sun",
+        "disc": "run",
+        "session": "5K Time Trial",
+        "target": "5K time trial - baseline"
       }
     ],
     "notes": []
@@ -812,58 +906,52 @@ const PLAN_DATA  = [
     "phase": "Base",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "lift",
-        "session": "Push (off-plan Murph)",
-        "target": ""
-      },
-      {
-        "day": "Tue AM",
+        "day": "Wed",
         "disc": "bike",
-        "session": "Lake Atlanta Hills 5 loops",
-        "target": ""
+        "session": "Bike (Lake Atlanta)",
+        "target": "Hill Intervals ~43 min, 5 loops"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "run",
-        "session": "Norwegian Threshold 3x4 min",
-        "target": ""
+        "session": "Norwegian Threshold",
+        "target": "3x4 min @ T pace w/ 3 min rec"
       },
       {
-        "day": "Wed PM",
+        "day": "Thu",
         "disc": "swim",
-        "session": "Equipment 1200 yd",
-        "target": ""
+        "session": "Swim",
+        "target": "1200m technique/continuity"
       },
       {
-        "day": "Thu PM",
+        "day": "Fri",
         "disc": "swim",
-        "session": "Technique 1200 yd",
-        "target": ""
+        "session": "Swim",
+        "target": "1200m mixed-pace"
       },
       {
-        "day": "Fri AM",
+        "day": "Sat",
         "disc": "run",
         "session": "Foundation Run",
-        "target": ""
+        "target": "Foundation run"
       },
       {
-        "day": "Sat AM",
+        "day": "Sun",
         "disc": "bike",
-        "session": "Foundation Bike 1:15 Z2",
-        "target": ""
+        "session": "Foundation Bike",
+        "target": "Long Bike 1:15, Z2"
       },
       {
-        "day": "Sat PM",
-        "disc": "swim",
-        "session": "Long Swim 1000m",
-        "target": ""
-      },
-      {
-        "day": "Sat PM",
+        "day": "Sun",
         "disc": "run",
-        "session": "Long Run 50 min",
-        "target": ""
+        "session": "Long Run",
+        "target": "50 min easy Z2 (~9:25-10:00/mi)"
+      },
+      {
+        "day": "Sun",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "1000m continuous shoreline"
       }
     ],
     "notes": [
@@ -877,82 +965,52 @@ const PLAN_DATA  = [
     "phase": "Base",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "lift",
-        "session": "Push",
-        "target": ""
-      },
-      {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "bike",
-        "session": "Lake Atlanta Hills 5 loops",
-        "target": ""
+        "session": "Bike (Lake Atlanta)",
+        "target": "Hill Intervals ~43 min, 5 loops"
       },
       {
         "day": "Wed",
-        "disc": "unknown",
-        "session": "9-hr drive",
-        "target": ""
-      },
-      {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Norwegian Threshold 3x4 min",
-        "target": ""
-      },
-      {
-        "day": "Wed PM",
         "disc": "swim",
-        "session": "Equipment Swim 1400 yd",
-        "target": ""
+        "session": "Swim",
+        "target": "Equipment Swim ~1400 yd"
       },
       {
-        "day": "Thu AM",
-        "disc": "lift",
-        "session": "Pull",
-        "target": ""
-      },
-      {
-        "day": "Fri AM",
+        "day": "Fri",
         "disc": "run",
-        "session": "Norwegian Threshold 3x4 min",
-        "target": ""
+        "session": "Norwegian Threshold",
+        "target": "3x4 min @ T, 3 min rec (rescheduled)"
       },
       {
-        "day": "Fri PM",
+        "day": "Fri",
         "disc": "swim",
-        "session": "Equipment Swim (fins)",
-        "target": ""
+        "session": "Swim (Fins)",
+        "target": "Equipment Swim ~1400 yd"
       },
       {
-        "day": "Sat AM",
+        "day": "Sat",
         "disc": "bike",
-        "session": "Foundation Bike 1:15",
-        "target": ""
+        "session": "Foundation Bike",
+        "target": "Foundation Bike 1:15, Z2"
       },
       {
-        "day": "Sat PM",
-        "disc": "lift",
-        "session": "Legs",
-        "target": ""
-      },
-      {
-        "day": "Sat AM",
+        "day": "Sat",
         "disc": "run",
         "session": "Foundation Run",
-        "target": ""
+        "target": "Foundation Run"
       },
       {
-        "day": "Sun AM",
+        "day": "Sun",
         "disc": "run",
-        "session": "Long Run 8 mi",
-        "target": ""
+        "session": "Long Run",
+        "target": "8 mi easy, E pace, Z2"
       },
       {
-        "day": "Sun PM",
+        "day": "Sun",
         "disc": "swim",
-        "session": "Long Swim 1150 yd",
-        "target": ""
+        "session": "Long Swim",
+        "target": "~1150 yd w/ tow buoy"
       }
     ],
     "notes": []
@@ -964,64 +1022,52 @@ const PLAN_DATA  = [
     "phase": "Base",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "lift",
-        "session": "Push",
-        "target": ""
-      },
-      {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "bike",
-        "session": "Lake Atlanta Hills 5 loops",
-        "target": ""
+        "session": "Bike (Lake Atlanta)",
+        "target": "Hill Intervals ~43 min, 5 loops"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "run",
-        "session": "Norwegian Threshold 3x4 min",
-        "target": ""
+        "session": "Norwegian Threshold",
+        "target": "3x4 min @ LT, 3 min rec"
       },
       {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "swim",
-        "session": "Pull Buoy (makeup)",
-        "target": ""
+        "session": "Swim (Pull Buoy)",
+        "target": "Technique swim (makeup Thu AM)"
       },
       {
-        "day": "Thu AM",
-        "disc": "lift",
-        "session": "Pull",
-        "target": ""
-      },
-      {
-        "day": "Fri AM",
+        "day": "Sat",
         "disc": "run",
-        "session": "Foundation Run 5 mi",
-        "target": ""
+        "session": "Foundation Run",
+        "target": "5 mi easy, E pace 9:25-10:00"
       },
       {
-        "day": "Fri PM",
+        "day": "Sat",
         "disc": "swim",
-        "session": "Base Swim (Pull Buoy)",
-        "target": ""
+        "session": "Swim (Pull Buoy)",
+        "target": "Base swim"
       },
       {
-        "day": "Sat AM",
+        "day": "Sun",
         "disc": "bike",
         "session": "Foundation Bike",
-        "target": ""
+        "target": "Foundation Bike (Sat)"
       },
       {
-        "day": "Sun AM",
+        "day": "Sun",
         "disc": "run",
         "session": "Long Run",
-        "target": ""
+        "target": "Long Run (Sun)"
       },
       {
-        "day": "Sun PM",
+        "day": "Sun",
         "disc": "swim",
         "session": "Long Swim",
-        "target": ""
+        "target": "Long Swim (Sun)"
       }
     ],
     "notes": []
@@ -1033,70 +1079,52 @@ const PLAN_DATA  = [
     "phase": "Recovery",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "lift",
-        "session": "Push (deload)",
-        "target": ""
-      },
-      {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "bike",
-        "session": "Zwift FTP Ramp Test",
-        "target": ""
+        "session": "Bike (Zwift FTP)",
+        "target": "Recovery Intervals (replaced)"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "run",
-        "session": "Norwegian Threshold 2x4 min (rec)",
-        "target": ""
+        "session": "Norwegian Threshold",
+        "target": "2x4 min @ LT (recovery week)"
       },
       {
-        "day": "Wed PM",
+        "day": "Wed",
         "disc": "swim",
-        "session": "Equipment Swim 1100 yd",
-        "target": ""
+        "session": "Equipment Swim",
+        "target": "~1100 yd, pull buoy"
       },
       {
-        "day": "Thu AM",
-        "disc": "lift",
-        "session": "Pull (deload)",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "bike",
-        "session": "Zwift 30 min Z2",
-        "target": ""
+        "session": "Base Bike (Zwift)",
+        "target": "30 min, 120-150W (Z2)"
       },
       {
-        "day": "Fri AM",
+        "day": "Fri",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "3.5 mi easy, Z2"
+      },
+      {
+        "day": "Fri",
         "disc": "swim",
-        "session": "Base Swim 1300 yd",
-        "target": ""
+        "session": "Swim (Pull Buoy)",
+        "target": "~1300 yd, recovery"
       },
       {
-        "day": "Fri PM",
-        "disc": "run",
-        "session": "Base Run 3.5 mi",
-        "target": ""
-      },
-      {
-        "day": "Sat AM",
+        "day": "Sat",
         "disc": "bike",
-        "session": "Zwift Long 45 min Z2",
-        "target": ""
+        "session": "Long Bike (Zwift)",
+        "target": "45 min, 130-160W (Z2)"
       },
       {
-        "day": "Sat PM",
-        "disc": "lift",
-        "session": "Legs (deload)",
-        "target": ""
-      },
-      {
-        "day": "Sun AM",
+        "day": "Sun",
         "disc": "run",
-        "session": "Long Run 6 mi",
-        "target": ""
+        "session": "Long Run",
+        "target": "6 mi E pace (9:25-10:00)"
       }
     ],
     "notes": []
@@ -1110,68 +1138,68 @@ const PLAN_DATA  = [
       {
         "day": "Mon",
         "disc": "lift",
-        "session": "Push",
-        "target": "Update when completed"
+        "session": "Push Day",
+        "target": ""
       },
       {
-        "day": "Tue AM",
+        "day": "Tue",
+        "disc": "run",
+        "session": "Threshold Run",
+        "target": "3x5 min @ T pace"
+      },
+      {
+        "day": "Tue",
+        "disc": "swim",
+        "session": "Equipment Swim",
+        "target": "~1300 yd, pull buoy"
+      },
+      {
+        "day": "Wed",
         "disc": "bike",
-        "session": "Zwift Intervals",
-        "target": "Update when completed"
+        "session": "Bike (Zwift)",
+        "target": "45 min Z2"
       },
       {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Norwegian Threshold",
-        "target": ""
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Equipment Swim 1300 yd",
-        "target": "Update when completed"
-      },
-      {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "lift",
-        "session": "Pull",
-        "target": "Update when completed"
-      },
-      {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Foundation Run 5 mi",
+        "session": "Pull Day",
         "target": ""
       },
       {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Continuity Swim 1000 yd",
-        "target": "Update when completed"
+        "day": "Thu",
+        "disc": "run",
+        "session": "Foundation Run",
+        "target": "5 mi E pace"
       },
       {
-        "day": "Sat AM",
+        "day": "Fri",
+        "disc": "swim",
+        "session": "Continuity Swim",
+        "target": "1000 yd reps"
+      },
+      {
+        "day": "Sat",
         "disc": "bike",
-        "session": "Foundation Bike 1:15",
-        "target": "Update when completed"
+        "session": "Foundation Bike",
+        "target": "1:15 Z2"
       },
       {
-        "day": "Sat PM",
+        "day": "Sat",
         "disc": "lift",
-        "session": "Legs (modify \u2014 avoid ankle load)",
-        "target": "Update when completed"
-      },
-      {
-        "day": "Sun AM",
-        "disc": "run",
-        "session": "Long Run 7 mi",
+        "session": "Legs Day",
         "target": ""
       },
       {
-        "day": "Sun PM",
+        "day": "Sun",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "7 mi E pace"
+      },
+      {
+        "day": "Sun",
         "disc": "swim",
-        "session": "Long Swim 1300 yd",
-        "target": "Update when completed"
+        "session": "Long Swim",
+        "target": "~1300 yd"
       }
     ],
     "notes": [
@@ -1185,76 +1213,64 @@ const PLAN_DATA  = [
     "phase": "Base",
     "rows": [
       {
-        "day": "Mon AM",
+        "day": "Mon",
         "disc": "lift",
-        "session": "Push",
-        "target": "Bench Press 4x5 (max) / OHP 3x5 (max) / Cable Tricep Ext 3x10-12 / Ab Roller 3x10"
+        "session": "Push Day",
+        "target": ""
       },
       {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "bike",
-        "session": "Zwift Intervals",
+        "session": "Bike Intervals (Zwift)",
         "target": "45 min \u2014 3x8 min @ 196-216W (Z4), 3 min rec"
       },
       {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Norwegian Threshold OR bike sub",
-        "target": "3x5 min @ T pace 6:47/mi (IF ankle clear)"
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Equipment Swim",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
-        "disc": "lift",
-        "session": "Pull",
-        "target": "Lat Pulldown 4x6-8 / Barbell Row 3x5 (max) / Barbell Curl 3x8-10 / Ab Roller 3x10"
-      },
-      {
-        "day": "Thu AM",
+        "day": "Wed",
         "disc": "bike",
-        "session": "Zwift 30 min Z2",
-        "target": ""
+        "session": "Run (Norwegian Threshold OR bike sub)",
+        "target": "Wed 3x5 min @ T pace 6:47/mi IF ankle clear"
       },
       {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Foundation Run (modified)",
-        "target": "3-4 mi @ 9:25-10:00/mi (ankle cleared only)"
-      },
-      {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Continuity Swim",
-        "target": ""
-      },
-      {
-        "day": "Sat AM",
+        "day": "Thu",
         "disc": "bike",
-        "session": "Foundation Bike",
-        "target": "1:15 Zwift Z2 (130-163W)"
+        "session": "Bike Z2 (Zwift)",
+        "target": "30 min Z2 (130-163W)"
       },
       {
-        "day": "Sat PM",
-        "disc": "lift",
-        "session": "Legs",
-        "target": "Modified \u2014 no heavy ankle load until cleared"
-      },
-      {
-        "day": "Sun AM",
-        "disc": "run",
-        "session": "Long Run (shortened)",
-        "target": "5 mi easy IF ankle clear (defer if not)"
-      },
-      {
-        "day": "Sun PM",
+        "day": "Thu",
         "disc": "swim",
-        "session": "Long Swim",
-        "target": "1,300 yd pull buoy continuous"
+        "session": "Swim (Continuous PR)",
+        "target": "Wed PM Equipment Swim ~1,300 yd pull buoy (drills + continuous sets) \u2014 pushed to Thu"
+      },
+      {
+        "day": "Fri",
+        "disc": "run",
+        "session": "Run (Foundation, modified)",
+        "target": "Fri 3-4 mi @ E, ankle cleared only"
+      },
+      {
+        "day": "Fri",
+        "disc": "swim",
+        "session": "Swim (Continuity \u2014 improvised OW)",
+        "target": "Fri PM Continuity ~1,000 yd pull buoy (100yd reps + longer sets)"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Bike (Foundation)",
+        "target": "Sat 1:15 Z2 (130-163W)"
+      },
+      {
+        "day": "Sun",
+        "disc": "run",
+        "session": "Run (Long)",
+        "target": "Sun 5 mi easy IF ankle clear"
+      },
+      {
+        "day": "Sun",
+        "disc": "swim",
+        "session": "Swim (Long)",
+        "target": "Sun 1,300 yd pull buoy continuous"
       }
     ],
     "notes": [
@@ -1695,8 +1711,11 @@ const PLAN_DATA  = [
 ];
 
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-function dow(iso){const [y,m,d]=iso.split('-').map(Number);return DOW[new Date(y,m-1,d).getDay()];}
-function md(iso){const [y,m,d]=iso.split('-').map(Number);return m+'/'+d;}
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function dateParts(iso){return iso.split('-').map(Number);}
+function dow(iso){const [y,m,d]=dateParts(iso);return DOW[new Date(y,m-1,d).getDay()];}
+function md(iso){const [y,m,d]=dateParts(iso);return m+'/'+d;}
+function prettyDate(iso){const [y,m,d]=dateParts(iso);return MON[m-1]+' '+d;}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function wsClass(s){if(s==null)return '';if(s>=80)return 'ws-high';if(s>=60)return 'ws-mid';return 'ws-low';}
 function phaseClass(p){return 'phase-'+p.toLowerCase();}
@@ -1709,6 +1728,50 @@ function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
   const days=Math.round((race-now)/86400000);
   document.getElementById('countdown').textContent=days>0?days+'d to race':(days===0?'Race day!':'Race done');
 })();
+
+/* GitHub-style consistency heatmap - pulls straight from WEEKS_DATA */
+function hmLevel(c){if(!c)return 0;if(c===1)return 1;if(c===2)return 2;if(c===3)return 3;return 4;}
+function isoOf(dt){
+  return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+}
+function renderHeatmap(){
+  const grid=document.getElementById('hm-grid');
+  const counts={};let minD=null,maxD=null,total=0;
+  WEEKS_DATA.forEach(w=>w.sessions.forEach(s=>{
+    const [y,m,d]=dateParts(s.date);const dt=new Date(y,m-1,d);
+    if(s.score>0){counts[s.date]=(counts[s.date]||0)+1;total++;}
+    if(!minD||dt<minD)minD=dt;
+    if(!maxD||dt>maxD)maxD=dt;
+  }));
+  if(!minD){document.getElementById('heatmap-card').style.display='none';return;}
+  const start=new Date(minD);start.setDate(start.getDate()-start.getDay());  // back to Sunday
+  const end=new Date(maxD);end.setDate(end.getDate()+(6-end.getDay()));      // fwd to Saturday
+  let lastMonth=-1;
+  const cur=new Date(start);
+  while(cur<=end){
+    const col=document.createElement('div');col.className='hm-col';
+    const ml=document.createElement('div');ml.className='hm-month';
+    if(cur.getMonth()!==lastMonth){ml.textContent=MON[cur.getMonth()];lastMonth=cur.getMonth();}
+    col.appendChild(ml);
+    for(let i=0;i<7;i++){
+      const iso=isoOf(cur);
+      const c=counts[iso]||0;
+      const cell=document.createElement('div');
+      cell.className='hm-cell'+(hmLevel(c)?' l'+hmLevel(c):'');
+      cell.dataset.iso=iso;cell.dataset.count=c;
+      col.appendChild(cell);
+      cur.setDate(cur.getDate()+1);
+    }
+    grid.appendChild(col);
+  }
+  const cap=document.getElementById('hm-caption');
+  cap.textContent=total+' workouts completed';
+  grid.addEventListener('click',e=>{
+    const cell=e.target.closest('.hm-cell');if(!cell)return;
+    const c=+cell.dataset.count;
+    cap.textContent=prettyDate(cell.dataset.iso)+' \u00b7 '+c+' workout'+(c===1?'':'s');
+  });
+}
 
 function renderStats(){
   let totalSessions=0,scoreSum=0,scoreCount=0;
@@ -1769,6 +1832,7 @@ function renderLog(){
       wrap.dataset.disc=s.discipline;
       const detail=[s.actual,s.key_metric].filter(Boolean).join(' \u00b7 ');
       let exp='';
+      if(s.prescribed)exp+='<div class="block"><span class="lbl">Prescribed:</span> '+esc(s.prescribed)+'</div>';
       if(s.actual)exp+='<div class="block"><span class="lbl">Actual:</span> '+esc(s.actual)+'</div>';
       if(s.key_metric)exp+='<div class="block"><span class="lbl">Key:</span> '+esc(s.key_metric)+'</div>';
       if(s.verdict)exp+='<div class="block">'+esc(s.verdict)+'</div>';
@@ -1792,7 +1856,7 @@ function currentWeekNum(){
   const t=new Date();t.setHours(0,0,0,0);
   let cur=null;
   PLAN_DATA.forEach(w=>{
-    const [y,m,d]=w.start.split('-').map(Number);
+    const [y,m,d]=dateParts(w.start);
     if(t>=new Date(y,m-1,d))cur=w.num;
   });
   return cur;
@@ -1886,6 +1950,7 @@ function switchView(v){
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
 document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>applyFilter(p.dataset.disc)));
 
+renderHeatmap();
 renderStats();
 renderLog();
 renderPlan();
