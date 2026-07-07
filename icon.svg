@@ -1,70 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"    stop-color="#e0531f"/>
-      <stop offset="0.34" stop-color="#ef7f39"/>
-      <stop offset="0.52" stop-color="#f6b56b"/>
-      <stop offset="0.56" stop-color="#4f89ac"/>
-      <stop offset="1"    stop-color="#173a5a"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef2f6"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.5" cy="0.57" r="0.55">
-      <stop offset="0"   stop-color="#ffe08a" stop-opacity="0.9"/>
-      <stop offset="0.5" stop-color="#ffb24d" stop-opacity="0.25"/>
-      <stop offset="1"   stop-color="#ffb24d" stop-opacity="0"/>
+    <radialGradient id="glowB" cx="0.34" cy="0.26" r="0.6">
+      <stop offset="0" stop-color="#cfe0f0" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#cfe0f0" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffd451"/>
-      <stop offset="1" stop-color="#f0a828"/>
+    <radialGradient id="glowO" cx="0.72" cy="0.8" r="0.55">
+      <stop offset="0" stop-color="#ffd9b8" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#ffd9b8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e9eef4"/>
     </linearGradient>
+    <linearGradient id="navy" x1="0.2" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#3a78ad"/>
+      <stop offset="0.5" stop-color="#1d557f"/>
+      <stop offset="1" stop-color="#0e3350"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0.8" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#ffa24d"/>
+      <stop offset="0.5" stop-color="#ef7a2f"/>
+      <stop offset="1" stop-color="#d1451a"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#12314c" flood-opacity="0.22"/>
+    </filter>
+    <filter id="ish" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0e2c46" flood-opacity="0.30"/>
+    </filter>
   </defs>
 
-  <rect width="512" height="512" fill="url(#sky)"/>
-  <rect width="512" height="512" fill="url(#glow)"/>
+  <!-- background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect width="512" height="512" fill="url(#glowB)"/>
+  <rect width="512" height="512" fill="url(#glowO)"/>
 
-  <g opacity="0.92">
-  <polygon points="313.9,288.6 313.9,295.4 556.0,292.0" fill="url(#ray)"/>
-  <polygon points="313.2,301.5 311.7,308.2 548.5,358.8" fill="url(#ray)"/>
-  <polygon points="309.7,314.0 306.7,320.2 526.3,422.2" fill="url(#ray)"/>
-  <polygon points="303.4,325.4 299.1,330.8 490.5,479.0" fill="url(#ray)"/>
-  <polygon points="294.8,335.1 289.4,339.4 443.0,526.5" fill="url(#ray)"/>
-  <polygon points="284.2,342.7 278.0,345.7 386.2,562.3" fill="url(#ray)"/>
-  <polygon points="272.2,347.7 265.5,349.2 322.8,584.5" fill="url(#ray)"/>
-  <polygon points="259.4,349.9 252.6,349.9 256.0,592.0" fill="url(#ray)"/>
-  <polygon points="246.5,349.2 239.8,347.7 189.2,584.5" fill="url(#ray)"/>
-  <polygon points="234.0,345.7 227.8,342.7 125.8,562.3" fill="url(#ray)"/>
-  <polygon points="222.6,339.4 217.2,335.1 69.0,526.5" fill="url(#ray)"/>
-  <polygon points="212.9,330.8 208.6,325.4 21.5,479.0" fill="url(#ray)"/>
-  <polygon points="205.3,320.2 202.3,314.0 -14.3,422.2" fill="url(#ray)"/>
-  <polygon points="200.3,308.2 198.8,301.5 -36.5,358.8" fill="url(#ray)"/>
-  <polygon points="198.1,295.4 198.1,288.6 -44.0,292.0" fill="url(#ray)"/>
-  <polygon points="198.8,282.5 200.3,275.8 -36.5,225.2" fill="url(#ray)"/>
-  <polygon points="202.3,270.0 205.3,263.8 -14.3,161.8" fill="url(#ray)"/>
-  <polygon points="208.6,258.6 212.9,253.2 21.5,105.0" fill="url(#ray)"/>
-  <polygon points="217.2,248.9 222.6,244.6 69.0,57.5" fill="url(#ray)"/>
-  <polygon points="227.8,241.3 234.0,238.3 125.8,21.7" fill="url(#ray)"/>
-  <polygon points="239.8,236.3 246.5,234.8 189.2,-0.5" fill="url(#ray)"/>
-  <polygon points="252.6,234.1 259.4,234.1 256.0,-8.0" fill="url(#ray)"/>
-  <polygon points="265.5,234.8 272.2,236.3 322.8,-0.5" fill="url(#ray)"/>
-  <polygon points="278.0,238.3 284.2,241.3 386.2,21.7" fill="url(#ray)"/>
-  <polygon points="289.4,244.6 294.8,248.9 443.0,57.5" fill="url(#ray)"/>
-  <polygon points="299.1,253.2 303.4,258.6 490.5,105.0" fill="url(#ray)"/>
-  <polygon points="306.7,263.8 309.7,270.0 526.3,161.8" fill="url(#ray)"/>
-  <polygon points="311.7,275.8 313.2,282.5 548.5,225.2" fill="url(#ray)"/>
+  <!-- shield -->
+  <g filter="url(#sh)">
+    <path d="M 176,104 L 336,104 Q 384,104 384,152 L 384,296
+             Q 384,336 350,360 L 256,430 L 162,360
+             Q 128,336 128,296 L 128,152 Q 128,104 176,104 Z"
+          fill="url(#shield)" stroke="#dfe6ee" stroke-width="2"/>
   </g>
-  <circle cx="256" cy="292" r="58" fill="#ffd863"/>
-  <circle cx="256" cy="292" r="58" fill="url(#glow)"/>
 
-  <text x="256" y="322" text-anchor="middle"
-        font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif"
-        font-weight="bold" font-size="150" letter-spacing="-4"
-        fill="#ffffff" stroke="#0f2942" stroke-width="7" paint-order="stroke">70.3</text>
+  <!-- faceted chevron mark -->
+  <g filter="url(#ish)">
+    <polygon points="256,150 170,300 214,300 256,214" fill="url(#navy)"/>
+    <polygon points="256,150 342,300 298,300 256,214" fill="url(#orange)"/>
+    <!-- inner bevel shadows -->
+    <polygon points="256,150 256,214 214,300 232,300" fill="#0d2f4a" opacity="0.55"/>
+    <polygon points="256,150 256,214 298,300 280,300" fill="#b23c14" opacity="0.5"/>
+    <!-- centre crease highlight -->
+    <polygon points="256,150 260,157 256,214 252,157" fill="#ffd451"/>
+  </g>
 
-  <text x="256" y="404" text-anchor="middle"
+  <!-- wordmark -->
+  <text x="256" y="392" text-anchor="middle"
         font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif"
-        font-weight="bold" font-size="40" letter-spacing="5"
-        fill="#ffffff" stroke="#0f2942" stroke-width="4" paint-order="stroke">DALLAS</text>
-  <text x="256" y="446" text-anchor="middle"
-        font-family="Helvetica, Arial, 'DejaVu Sans', sans-serif"
-        font-weight="bold" font-size="27" letter-spacing="6"
-        fill="#ffe0b0" stroke="#0f2942" stroke-width="3" paint-order="stroke">LITTLE ELM</text>
+        font-weight="bold" font-size="40" letter-spacing="1" fill="#123a5a">70.3</text>
 </svg>
