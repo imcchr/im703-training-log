@@ -48,10 +48,10 @@
     text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;}
   .hm-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .hm-scroll::-webkit-scrollbar{display:none;}
-  .hm-grid{display:flex;gap:3px;min-width:min-content;}
+  .hm-grid{display:flex;gap:3px;min-width:min-content;position:relative;}
   .hm-col{display:flex;flex-direction:column;gap:3px;}
   .hm-month{height:13px;line-height:13px;font-size:.58rem;color:var(--muted);
-    white-space:nowrap;overflow:visible;}
+    white-space:nowrap;overflow:visible;width:13px;}
   .hm-cell{width:13px;height:13px;border-radius:3px;background:#ebedf0;cursor:pointer;}
   .hm-cell.l1{background:#9be9a8;}
   .hm-cell.l2{background:#40c463;}
@@ -62,6 +62,11 @@
   .hm-caption{font-weight:700;color:var(--ink);}
   .hm-legend{display:flex;align-items:center;gap:3px;white-space:nowrap;}
   .hm-legend .hm-cell{width:11px;height:11px;cursor:default;}
+  .hm-injury{position:absolute;top:0;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;
+    background:rgba(217,83,79,.06);pointer-events:none;box-sizing:border-box;}
+  .hm-injury-tag{position:absolute;left:50%;top:0;transform:translateX(-50%);
+    font-size:.5rem;font-weight:800;letter-spacing:.02em;color:#c0392b;background:var(--card);
+    padding:0 3px;border-radius:3px;line-height:13px;white-space:nowrap;}
 
   /* Stats */
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
@@ -2612,9 +2617,12 @@ function renderHeatmap(){
   if(!minD){document.getElementById('heatmap-card').style.display='none';return;}
   const start=new Date(minD);start.setDate(start.getDate()-start.getDay());
   const end=new Date(maxD);end.setDate(end.getDate()+(6-end.getDay()));
+  const INJ_START=new Date(2026,5,21), INJ_END=new Date(2026,6,12);
+  let injA=null, injB=null, colIdx=0;
   let lastMonth=-1;
   const cur=new Date(start);
   while(cur<=end){
+    const colStart=new Date(cur);
     const col=document.createElement('div');col.className='hm-col';
     const ml=document.createElement('div');ml.className='hm-month';
     if(cur.getMonth()!==lastMonth){ml.textContent=MON[cur.getMonth()];lastMonth=cur.getMonth();}
@@ -2629,6 +2637,20 @@ function renderHeatmap(){
       cur.setDate(cur.getDate()+1);
     }
     grid.appendChild(col);
+    const colEnd=new Date(colStart);colEnd.setDate(colEnd.getDate()+6);
+    if(colStart<=INJ_END&&colEnd>=INJ_START){if(injA===null)injA=colIdx;injB=colIdx;}
+    colIdx++;
+  }
+  if(injA!==null){
+    const band=document.createElement('div');
+    band.className='hm-injury';
+    band.style.left=(injA*16)+'px';
+    band.style.width=((injB-injA+1)*16-3)+'px';
+    const tag=document.createElement('span');
+    tag.className='hm-injury-tag';
+    tag.textContent='INJURY';
+    band.appendChild(tag);
+    grid.appendChild(band);
   }
   const cap=document.getElementById('hm-caption');
   cap.textContent=total+' workouts completed';
