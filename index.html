@@ -1423,42 +1423,82 @@ const PLAN_DATA  = [
     "num": 9,
     "start": "2026-07-13",
     "label": "Jul 13-19",
-    "phase": "Benchmark",
+    "phase": "Base",
     "rows": [
       {
         "day": "Mon AM",
-        "disc": "run",
-        "session": "Mile TT",
-        "target": "10 min WU + 4x20s strides, then all-out mile \u2014 beat 5:57"
+        "disc": "lift",
+        "session": "Push",
+        "target": ""
       },
       {
         "day": "Tue AM",
         "disc": "bike",
-        "session": "FTP Test",
-        "target": "15 min WU incl. 2x30s hard, then 20 min all-out \u2014 beat 216W"
+        "session": "Interval Bike",
+        "target": "4x8 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
         "disc": "run",
-        "session": "5K TT",
-        "target": "All-out 5K, 48h+ after mile \u2014 beat 23:35 (7:36/mi)"
+        "session": "Interval Run",
+        "target": "3x5 min @ T pace 6:47/mi \u2014 IF ankle clear, else 45 min Bike Z2"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "~1,400 yd (drills + pull buoy sets)"
       },
       {
         "day": "Thu AM",
+        "disc": "lift",
+        "session": "Pull",
+        "target": ""
+      },
+      {
+        "day": "Thu PM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "30 min Z2 (130-163W)"
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "5 mi @ 9:25-10:00/mi \u2014 IF ankle clear"
+      },
+      {
+        "day": "Fri PM",
         "disc": "swim",
-        "session": "Swim 1000m TT",
-        "target": "300m WU + 4x50 drills, then 1,100yd sustained \u2014 beat 18:48"
+        "session": "Base Swim",
+        "target": "1,200 yd \u2014 extend rep distance"
       },
       {
         "day": "Sat AM",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "1:30 Z2 (130-163W)"
+      },
+      {
+        "day": "Sat PM",
         "disc": "lift",
-        "session": "Full Lift Benchmarks",
+        "session": "Legs",
         "target": ""
+      },
+      {
+        "day": "Sun AM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "8 mi @ 9:25-10:00/mi (pre-sunrise) \u2014 IF ankle clear"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "1,400 yd pull buoy"
       }
     ],
-    "notes": [
-      "Testing week. Compare all numbers to Week 1. Body comp fasted AM (VeSync scale)."
-    ]
+    "notes": []
   },
   {
     "num": 10,
@@ -2040,28 +2080,22 @@ const PLAN_DATA  = [
     "phase": "Benchmark",
     "rows": [
       {
-        "day": "Mon AM",
-        "disc": "run",
-        "session": "Mile TT",
-        "target": "10 min WU + strides, then all-out mile \u2014 beat Wk9"
-      },
-      {
         "day": "Tue AM",
         "disc": "bike",
         "session": "FTP Test",
-        "target": "15 min WU, then 20 min all-out \u2014 beat Wk9 power"
+        "target": "15 min WU, then 20 min all-out \u2014 beat 216W"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "5K TT",
-        "target": "All-out 5K, 48h+ after mile \u2014 beat Wk9"
+        "target": "All-out 5K (well-rested) \u2014 beat 23:35 (7:36/mi, Wk1)"
       },
       {
         "day": "Thu AM",
         "disc": "swim",
         "session": "Swim 1000m TT",
-        "target": "300m WU + drills, then 1,000m sustained \u2014 beat Wk9"
+        "target": "300m WU + drills, then 1,000m sustained \u2014 beat 18:48 (Wk1)"
       },
       {
         "day": "Sat AM",
@@ -2071,7 +2105,7 @@ const PLAN_DATA  = [
       }
     ],
     "notes": [
-      "Testing week. Compare to Wk1 and Wk9. Body comp 3rd check-in (fasted AM)."
+      "Testing week. Compare to Wk1 baselines. Body comp 3rd check-in (fasted AM)."
     ]
   },
   {
@@ -2636,12 +2670,6 @@ const PLAN_DATA  = [
     "phase": "Benchmark",
     "rows": [
       {
-        "day": "Mon AM",
-        "disc": "run",
-        "session": "Mile TT",
-        "target": "10 min WU + strides, then all-out mile \u2014 beat Wk17"
-      },
-      {
         "day": "Tue AM",
         "disc": "bike",
         "session": "FTP Test",
@@ -2651,7 +2679,7 @@ const PLAN_DATA  = [
         "day": "Wed AM",
         "disc": "run",
         "session": "5K TT",
-        "target": "All-out 5K, 48h+ after mile \u2014 beat Wk17"
+        "target": "All-out 5K (well-rested) \u2014 beat Wk17"
       },
       {
         "day": "Thu AM",
@@ -2667,7 +2695,7 @@ const PLAN_DATA  = [
       }
     ],
     "notes": [
-      "Testing week. Compare Wk1 - Wk9 - Wk17 - Wk25. Body comp 4th check-in (fasted AM)."
+      "Testing week. Compare Wk1 - Wk17 - Wk25. Body comp 4th check-in (fasted AM)."
     ]
   },
   {
