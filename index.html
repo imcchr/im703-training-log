@@ -228,17 +228,17 @@
 
   <section id="view-log" class="view active">
     <div class="heatmap-card" id="heatmap-card">
-      <div class="hm-title">Consistency &middot; workouts completed</div>
+      <div class="hm-title">Performance &middot; avg session score</div>
       <div class="hm-scroll"><div class="hm-grid" id="hm-grid"></div></div>
       <div class="hm-foot">
         <span class="hm-caption" id="hm-caption"></span>
-        <span class="hm-legend">Less
+        <span class="hm-legend">Low
           <span class="hm-cell"></span>
           <span class="hm-cell l1"></span>
           <span class="hm-cell l2"></span>
           <span class="hm-cell l3"></span>
           <span class="hm-cell l4"></span>
-        More</span>
+        High</span>
       </div>
     </div>
 
@@ -262,6 +262,35 @@
 
 <script>
 const WEEKS_DATA = [
+  {
+    "num": 8,
+    "start": "2026-07-06",
+    "label": "Jul 6-12",
+    "phase": "Base",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-07-06",
+        "discipline": "lift",
+        "title": "Push",
+        "prescribed": "",
+        "actual": "9,100 lb",
+        "key_metric": "9,100 lb | 1 PR | 28 min",
+        "score": 8,
+        "verdict": "Showed up on low motivation/energy and still set a **block-best bench: est. 1RM 279** (+18 vs Jun 29's 261, and +4 OVER the May baseline of 275 \u2014 first time above pre-block). Added two reps at 225 (6\u21928) = pure rep-driven 1RM progress, exactly what the hypertrophy goal rewards (\"1RM going UP each session = progress\"). OHP completed all 3\u00d76 at 115 (Jun 29 was 2\u00d76+1\u00d75) \u2014 cleaner execution, but est 1RM flat at 134 for the 3rd straight session (plateau \u2014 time to nudge). App flashed 0 PRs because it compares its all-time rep log, not estimated 1RM. Motivation-over-mood win."
+      },
+      {
+        "date": "2026-07-07",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "45 min \u2014 3x8 min @ 196-216W (Z4), 3 min rec",
+        "actual": "20:06 \u00b7 5.78 mi \u00b7 **1 full + 1 partial interval** \u00b7 WU 5:00 @ 139W \u00b7 Int1: 8:00 @ **204W** (cad 86\u219273, HR 145\u2192168) \u00b7 rec 3:00 @ 110W \u00b7 Int2: held 204W ~3 min then **cadence collapse 68\u219250, power 204\u2192137\u21920** by 3:30 \u00b7 HR 150/171 \u00b7 77 rpm avg",
+        "key_metric": "Int1 = exact prescribed power, dead flat 8 min. Int2 = **muscular/torque failure, cadence-led** \u2014 HR peaked only 169 (nowhere near max), so NOT aerobic. No Int3 attempted.",
+        "score": 4,
+        "verdict": "**Power was perfect when riding** (204W = exact prescription both times he was on it). The miss is volume/durability: only ~50% of prescribed work completed. The cadence signature is the whole story \u2014 in Int1 he defended watts by grinding cadence 86\u219273 (rising torque); entering Int2 he never recovered cadence (started at 79) and the legs walled at ~3:30, cadence crashing to 50 with HR still calm. That's a **muscular/torque ceiling, not an aerobic one.** ROOT CAUSE: FTP 216W was a Zwift ramp **5 days before the Jun 21 ankle sprain**, then ~2 weeks essentially off the bike \u2014 the number is stale and (per existing trend note) likely inflated by sprint background. 204W = ~94% of a *stale* 216W FTP, but realistically **at/above true current threshold** \u2192 explains \"one 8-min rep yes, three no.\" This is a **prescription-calibration miss, NOT regression** \u2014 Ian has never validated 8-min interval durability at this level; the original Rx was a pre-injury guess. 2nd straight week the full interval set wasn't completed *because the set was mis-anchored.* Docked to 4: 50% volume completion; power quality fully credited."
+      }
+    ]
+  },
   {
     "num": 7,
     "start": "2026-06-29",
@@ -1325,7 +1354,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "3x10 min @ Z4 (196-216W), 3 min rec"
+        "target": "3x8 min @ Sweet Spot 170-185W (Z3), 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1447,7 +1476,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "4x8 min @ Z4 (196-216W)"
+        "target": "4x8 min @ Sweet Spot (Z3) \u2014 watts set from Wk9 FTP retest"
       },
       {
         "day": "Wed AM",
@@ -1528,7 +1557,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "4x8 min @ Z4 (196-216W), 3 min rec"
+        "target": "4x8 min @ Sweet Spot (Z3), 3 min rec \u2014 watts from Wk9 retest"
       },
       {
         "day": "Wed AM",
@@ -2692,17 +2721,18 @@ function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
   document.getElementById('countdown').textContent=days>0?days+'d to race':(days===0?'Race day!':'Race done');
 })();
 
-/* GitHub-style consistency heatmap - pulls straight from WEEKS_DATA */
-function hmLevel(c){if(!c)return 0;if(c===1)return 1;if(c===2)return 2;if(c===3)return 3;return 4;}
+/* GitHub-style consistency heatmap - colored by PERFORMANCE (avg session score), not quantity */
+function hmLevel(sc){if(!sc)return 0;if(sc<5)return 1;if(sc<7)return 2;if(sc<9)return 3;return 4;}
 function isoOf(dt){
   return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
 }
 function renderHeatmap(){
   const grid=document.getElementById('hm-grid');
-  const counts={};let minD=null,maxD=null,total=0;
+  // agg[date] = {sum, n} over completed sessions (score>0); cell color = avg score
+  const agg={};let minD=null,maxD=null,total=0;
   WEEKS_DATA.forEach(w=>w.sessions.forEach(s=>{
     const [y,m,d]=dateParts(s.date);const dt=new Date(y,m-1,d);
-    if(s.score>0){counts[s.date]=(counts[s.date]||0)+1;total++;}
+    if(s.score>0){(agg[s.date]=agg[s.date]||{sum:0,n:0});agg[s.date].sum+=s.score;agg[s.date].n++;total++;}
     if(!minD||dt<minD)minD=dt;
     if(!maxD||dt>maxD)maxD=dt;
   }));
@@ -2721,10 +2751,10 @@ function renderHeatmap(){
     col.appendChild(ml);
     for(let i=0;i<7;i++){
       const iso=isoOf(cur);
-      const c=counts[iso]||0;
+      const a=agg[iso];const avg=a?a.sum/a.n:0;
       const cell=document.createElement('div');
-      cell.className='hm-cell'+(hmLevel(c)?' l'+hmLevel(c):'');
-      cell.dataset.iso=iso;cell.dataset.count=c;
+      cell.className='hm-cell'+(hmLevel(avg)?' l'+hmLevel(avg):'');
+      cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.avg=avg?avg.toFixed(1):'';
       col.appendChild(cell);
       cur.setDate(cur.getDate()+1);
     }
@@ -2745,11 +2775,12 @@ function renderHeatmap(){
     grid.appendChild(band);
   }
   const cap=document.getElementById('hm-caption');
-  cap.textContent=total+' workouts completed';
+  cap.textContent=total+' workouts \u00b7 colored by avg score';
   grid.addEventListener('click',e=>{
     const cell=e.target.closest('.hm-cell');if(!cell)return;
-    const c=+cell.dataset.count;
-    cap.textContent=prettyDate(cell.dataset.iso)+' \u00b7 '+c+' workout'+(c===1?'':'s');
+    const c=+cell.dataset.count;const avg=cell.dataset.avg;
+    cap.textContent = c ? prettyDate(cell.dataset.iso)+' \u00b7 '+(c===1?'score ':'avg ')+avg+'/10'+(c>1?' ('+c+' sessions)':'')
+                        : prettyDate(cell.dataset.iso)+' \u00b7 rest day';
   });
 }
 
