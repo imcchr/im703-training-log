@@ -61,6 +61,32 @@
   .hm-cell.l4{background:#8f1d10;}
   .hm-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
     margin-top:10px;font-size:.62rem;color:var(--muted);gap:8px 12px;}
+  /* Trends / Race / Recovery tabs */
+  .section-card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px;margin-bottom:14px;}
+  .section-card h3{margin:0 0 2px;font-size:.9rem;color:var(--ink);overflow:hidden;}
+  .card-sub{font-size:.66rem;color:var(--muted);margin-bottom:9px;}
+  .chart-val{float:right;font-weight:800;font-size:.9rem;color:#c0392b;}
+  .spark{width:100%;height:72px;display:block;}
+  .spark polyline{fill:none;stroke:#ea7317;stroke-width:2;vector-effect:non-scaling-stroke;}
+  .spark .area{fill:rgba(234,115,23,.13);stroke:none;}
+  .spark circle{fill:#c0392b;}
+  .race-row{margin-bottom:16px;}
+  .race-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+  .race-disc{font-weight:700;font-size:.85rem;color:var(--ink);}
+  .race-nums{font-size:.7rem;color:var(--muted);}
+  .race-pct{font-weight:800;font-size:.85rem;}
+  .race-track{height:13px;border-radius:7px;background:#ece1d2;overflow:hidden;}
+  .race-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#f7b12e,#ea7317,#c0392b);}
+  .race-note{font-size:.6rem;color:var(--muted);}
+  .rec-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:9px;}
+  .rec-stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center;}
+  .rec-stat .v{font-size:.95rem;font-weight:800;color:var(--ink);line-height:1.15;}
+  .rec-stat .l{font-size:.54rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-top:3px;}
+  .rec-tbl{width:100%;border-collapse:collapse;font-size:.66rem;}
+  .rec-tbl th,.rec-tbl td{padding:5px 4px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .rec-tbl th{color:var(--muted);font-size:.56rem;text-transform:uppercase;}
+  .rec-tbl td:first-child,.rec-tbl th:first-child{text-align:left;font-weight:700;color:var(--ink);}
+  .rec-flags{font-size:.64rem;color:var(--muted);line-height:1.45;}
   .hm-caption{font-weight:700;color:var(--ink);}
   .hm-legend{display:flex;align-items:center;gap:3px;white-space:nowrap;}
   .hm-legend .hm-cell{width:11px;height:11px;cursor:default;}
@@ -220,6 +246,9 @@
     <nav class="tabbar">
       <button class="tab active" data-view="log">Log</button>
       <button class="tab" data-view="plan">Plan</button>
+      <button class="tab" data-view="trends">Trends</button>
+      <button class="tab" data-view="race">Race</button>
+      <button class="tab" data-view="recovery">Recovery</button>
     </nav>
   </div>
 </header>
@@ -256,6 +285,21 @@
   <section id="view-plan" class="view">
     <p class="plan-intro">Prescribed plan &middot; updated July 07, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
+  </section>
+
+  <section id="view-trends" class="view">
+    <p class="plan-intro">Progression &middot; is the line going up? Each metric charts your fitness over time.</p>
+    <div id="trends-container"></div>
+  </section>
+
+  <section id="view-race" class="view">
+    <p class="plan-intro">Race readiness &middot; current best vs the 70.3 Dallas Little Elm demand.</p>
+    <div id="race-container"></div>
+  </section>
+
+  <section id="view-recovery" class="view">
+    <p class="plan-intro">Recovery &middot; the Garmin story behind the training.</p>
+    <div id="recovery-container"></div>
   </section>
 
 </main>
@@ -2728,6 +2772,203 @@ const PLAN_DATA  = [
     ]
   }
 ];
+const RECOVERY_DATA = [
+  {
+    "week": "Wk2",
+    "dates": "May 25-31",
+    "hrv": "Improving",
+    "rhr": "49",
+    "sleep": "~7h / 8h",
+    "bb_low": "--",
+    "bb_hi": "--",
+    "stress": "--",
+    "atl": "--",
+    "vo2": "--",
+    "status": "Strained\u2192Productive",
+    "flags": "Murph cascade, 55 min/night deficit"
+  },
+  {
+    "week": "Wk3",
+    "dates": "Jun 1-7",
+    "hrv": "Balanced",
+    "rhr": "48",
+    "sleep": "7h 38m / 8h",
+    "bb_low": "--",
+    "bb_hi": "--",
+    "stress": "--",
+    "atl": "--",
+    "vo2": "--",
+    "status": "Productive",
+    "flags": "Travel disruption, 3/8 sessions missed"
+  },
+  {
+    "week": "Wk4",
+    "dates": "Jun 8-14",
+    "hrv": "Balanced",
+    "rhr": "~48",
+    "sleep": "~7h / 8h",
+    "bb_low": "--",
+    "bb_hi": "--",
+    "stress": "--",
+    "atl": "--",
+    "vo2": "--",
+    "status": "Productive",
+    "flags": "Readiness 25 Sun, wedding cascade"
+  },
+  {
+    "week": "Wk5",
+    "dates": "Jun 15-21",
+    "hrv": "Balanced",
+    "rhr": "~47",
+    "sleep": "~7h / 8h",
+    "bb_low": "--",
+    "bb_hi": "--",
+    "stress": "--",
+    "atl": "--",
+    "vo2": "--",
+    "status": "Productive",
+    "flags": "Best week (84/100). Ankle sprain Sun Jun 21"
+  },
+  {
+    "week": "Wk6",
+    "dates": "Jun 23-29",
+    "hrv": "Balanced ALL",
+    "rhr": "46",
+    "sleep": "7h 6m / 8h 13m",
+    "bb_low": "7",
+    "bb_hi": "98",
+    "stress": "28",
+    "atl": "218",
+    "vo2": "46",
+    "status": "Recovery",
+    "flags": "BB crashed 7-9 Thu-Sat. 3x forced 5AM wakeups. Ankle injury recovery."
+  },
+  {
+    "week": "Wk7",
+    "dates": "Jun 29-Jul 5",
+    "hrv": "Balanced (78ms)",
+    "rhr": "49",
+    "sleep": "7h 42m / 7h 57m",
+    "bb_low": "2",
+    "bb_hi": "98",
+    "stress": "--",
+    "atl": "282",
+    "vo2": "42",
+    "status": "Unproductive",
+    "flags": "BEST sleep week of block (~15min deficit). BB floor 2 Thu (swim PR + Z2 bike double). VO2 42 (cyc down; run stale 46). Unproductive = High Aerobic Shortage (no running + bailed intervals). RHR 46->49 (holiday)."
+  }
+];
+const TRENDS_DATA   = [
+  {
+    "name": "Bench 1RM",
+    "unit": "lb",
+    "points": [
+      {
+        "date": "2026-05-04",
+        "value": 275.0
+      },
+      {
+        "date": "2026-06-29",
+        "value": 261.0
+      },
+      {
+        "date": "2026-07-06",
+        "value": 279.0
+      }
+    ]
+  },
+  {
+    "name": "OHP 1RM",
+    "unit": "lb",
+    "points": [
+      {
+        "date": "2026-05-04",
+        "value": 151.0
+      },
+      {
+        "date": "2026-06-29",
+        "value": 134.0
+      },
+      {
+        "date": "2026-07-06",
+        "value": 134.0
+      }
+    ]
+  },
+  {
+    "name": "FTP",
+    "unit": "W",
+    "points": [
+      {
+        "date": "2026-06-16",
+        "value": 216.0
+      }
+    ]
+  },
+  {
+    "name": "Swim Continuous",
+    "unit": "yd",
+    "points": [
+      {
+        "date": "2026-05-04",
+        "value": 40.0
+      },
+      {
+        "date": "2026-06-11",
+        "value": 200.0
+      },
+      {
+        "date": "2026-06-19",
+        "value": 328.0
+      },
+      {
+        "date": "2026-07-02",
+        "value": 1451.0
+      }
+    ]
+  },
+  {
+    "name": "Threshold Mile",
+    "unit": "sec",
+    "points": [
+      {
+        "date": "2026-06-05",
+        "value": 443.0
+      },
+      {
+        "date": "2026-06-10",
+        "value": 415.0
+      },
+      {
+        "date": "2026-06-17",
+        "value": 407.0
+      }
+    ]
+  }
+];
+const RACE_DATA     = [
+  {
+    "disc": "Swim",
+    "current": 1451.0,
+    "demand": 2114.0,
+    "unit": "yd",
+    "note": "longest continuous (Jul 2)"
+  },
+  {
+    "disc": "Bike",
+    "current": 15.5,
+    "demand": 56.0,
+    "unit": "mi",
+    "note": "longest ride (Wk2)"
+  },
+  {
+    "disc": "Run",
+    "current": 8.0,
+    "demand": 13.1,
+    "unit": "mi",
+    "note": "longest run (Wk3)"
+  }
+];
 
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -3053,6 +3294,94 @@ renderHeatmap();
 renderStats();
 renderLog();
 renderPlan();
+
+/* ---------- Trends tab ---------- */
+function sparkSVG(points){
+  if(!points||points.length<2)return '';
+  const W=300,H=72,pad=9,vals=points.map(p=>p.value);
+  let mn=Math.min(...vals),mx=Math.max(...vals);
+  if(mn===mx){mn-=1;mx+=1;}
+  const x=i=>pad+(W-2*pad)*(i/(points.length-1));
+  const y=v=>pad+(H-2*pad)*(1-(v-mn)/(mx-mn));
+  const line=points.map((p,i)=>x(i).toFixed(1)+','+y(p.value).toFixed(1)).join(' ');
+  const area=line+' '+x(points.length-1).toFixed(1)+','+(H-pad)+' '+x(0).toFixed(1)+','+(H-pad);
+  const dots=points.map((p,i)=>'<circle cx="'+x(i).toFixed(1)+'" cy="'+y(p.value).toFixed(1)+'" r="2.4"/>').join('');
+  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+
+    '<polygon class="area" points="'+area+'"/><polyline points="'+line+'"/>'+dots+'</svg>';
+}
+function trendDelta(points,invert){
+  if(!points||points.length<2)return 'baseline';
+  const d=Math.round((points[points.length-1].value-points[0].value)*10)/10;
+  const good=invert?d<0:d>0;
+  const arrow=d>0?'\u25b2':(d<0?'\u25bc':'\u25a0');
+  const col=d===0?'#7c6f61':(good?'#2e7d32':'#c0392b');
+  return points.length+' points \u00b7 <span style="color:'+col+';font-weight:700">'+arrow+' '+(d>0?'+':'')+d+'</span> overall';
+}
+function renderTrends(){
+  const root=document.getElementById('trends-container');
+  const scored=WEEKS_DATA.filter(w=>w.score!=null).map(w=>({date:'Wk'+w.num,value:w.score})).reverse();
+  const series=[{name:'Weekly Score',unit:'/100',points:scored,invert:false}].concat(
+    TRENDS_DATA.map(s=>({name:s.name,unit:s.unit,points:s.points,invert:/mile|pace|sec/i.test(s.name+' '+s.unit)})));
+  let html='';
+  series.forEach(s=>{
+    const has=s.points&&s.points.length, last=has?s.points[s.points.length-1].value:'\u2014';
+    html+='<div class="section-card"><h3>'+esc(s.name)+
+      '<span class="chart-val">'+last+(s.unit?' '+esc(s.unit):'')+'</span></h3>'+
+      '<div class="card-sub">'+trendDelta(s.points,s.invert)+(s.invert?' (lower = better)':'')+'</div>'+
+      (s.points&&s.points.length>1?sparkSVG(s.points):'<div class="card-sub">One data point so far \u2014 the line appears at the next entry.</div>')+
+      '</div>';
+  });
+  root.innerHTML=html||'<div class="empty-state">No trend data yet.</div>';
+}
+
+/* ---------- Race tab ---------- */
+function renderRace(){
+  const root=document.getElementById('race-container');
+  if(!RACE_DATA.length){root.innerHTML='<div class="empty-state">No race data yet.</div>';return;}
+  const colors={Swim:'#2f78c0',Bike:'#e0531f',Run:'#2e9e5b'};
+  let html='<div class="section-card">';
+  RACE_DATA.forEach(r=>{
+    const pct=Math.min(100,Math.round(r.current/r.demand*100));
+    html+='<div class="race-row">'+
+      '<div class="race-head"><span class="race-disc">'+esc(r.disc)+'</span>'+
+        '<span class="race-nums">'+r.current+' / '+r.demand+' '+esc(r.unit)+'</span></div>'+
+      '<div class="race-track"><div class="race-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="race-head" style="margin-top:4px"><span class="race-note">'+esc(r.note||'')+'</span>'+
+        '<span class="race-pct" style="color:'+(colors[r.disc]||'#c0392b')+'">'+pct+'%</span></div></div>';
+  });
+  html+='</div>';
+  const overall=Math.round(RACE_DATA.reduce((a,r)=>a+Math.min(1,r.current/r.demand),0)/RACE_DATA.length*100);
+  html+='<div class="section-card" style="text-align:center"><div class="card-sub">Combined distance readiness</div>'+
+    '<div style="font-size:2.1rem;font-weight:800;color:#e0531f;line-height:1.1">'+overall+'%</div>'+
+    '<div class="card-sub" style="margin:0">Base phase \u2014 bike & run volume ramp in Build/Peak. Swim is leading.</div></div>';
+  root.innerHTML=html;
+}
+
+/* ---------- Recovery tab ---------- */
+function recStat(v,l){return '<div class="rec-stat"><div class="v">'+esc(v||'\u2014')+'</div><div class="l">'+l+'</div></div>';}
+function shortHrv(h){return (h||'').replace(/\s*\([^)]*\)/,'');}
+function shortSleep(s){return (s||'').split('/')[0].trim();}
+function renderRecovery(){
+  const root=document.getElementById('recovery-container');
+  if(!RECOVERY_DATA.length){root.innerHTML='<div class="empty-state">No recovery data yet.</div>';return;}
+  const L=RECOVERY_DATA[RECOVERY_DATA.length-1];
+  let html='<div class="section-card"><h3>'+esc(L.week)+' \u00b7 Recovery</h3>'+
+    '<div class="card-sub">'+esc(L.dates)+' \u00b7 latest snapshot</div>'+
+    '<div class="rec-hero">'+recStat(shortHrv(L.hrv),'HRV')+recStat(L.rhr,'RHR bpm')+recStat(L.vo2,'VO2 Max')+'</div>'+
+    '<div class="rec-hero">'+recStat(shortSleep(L.sleep),'Sleep')+recStat(L.bb_low,'BB Floor')+recStat(L.atl,'Load (ATL)')+'</div>'+
+    '<div class="card-sub" style="margin:8px 0 0">Status: <b>'+esc(L.status)+'</b></div>'+
+    (L.flags?'<div class="rec-flags" style="margin-top:6px">'+esc(L.flags)+'</div>':'')+'</div>';
+  html+='<div class="section-card"><h3>Weekly Trend</h3><div style="overflow-x:auto"><table class="rec-tbl">'+
+    '<thead><tr><th>Wk</th><th>HRV</th><th>RHR</th><th>Sleep</th><th>BB\u2193</th><th>ATL</th><th>VO2</th></tr></thead><tbody>';
+  RECOVERY_DATA.forEach(r=>{html+='<tr><td>'+esc(r.week)+'</td><td>'+esc(shortHrv(r.hrv))+'</td><td>'+esc(r.rhr)+
+    '</td><td>'+esc(shortSleep(r.sleep))+'</td><td>'+esc(r.bb_low)+'</td><td>'+esc(r.atl)+'</td><td>'+esc(r.vo2)+'</td></tr>';});
+  html+='</tbody></table></div></div>';
+  root.innerHTML=html;
+}
+
+renderTrends();
+renderRace();
+renderRecovery();
 </script>
 </body>
 </html>
