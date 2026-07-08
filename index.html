@@ -78,6 +78,7 @@
   .race-track{height:13px;border-radius:7px;background:#ece1d2;overflow:hidden;}
   .race-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#f7b12e,#ea7317,#c0392b);}
   .race-note{font-size:.6rem;color:var(--muted);}
+  .race-sub2{font-size:.68rem;color:var(--muted);margin-bottom:4px;}
   .rec-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:9px;}
   .rec-stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center;}
   .rec-stat .v{font-size:.95rem;font-weight:800;color:var(--ink);line-height:1.15;}
@@ -2928,20 +2929,24 @@ const TRENDS_DATA   = [
     ]
   },
   {
-    "name": "Threshold Mile",
-    "unit": "sec",
+    "name": "Run Fitness",
+    "unit": "index",
     "points": [
       {
-        "date": "2026-06-05",
-        "value": 443.0
+        "date": "2026-05-31",
+        "value": 95.0
       },
       {
-        "date": "2026-06-10",
-        "value": 415.0
+        "date": "2026-06-07",
+        "value": 106.0
       },
       {
-        "date": "2026-06-17",
-        "value": 407.0
+        "date": "2026-06-14",
+        "value": 107.0
+      },
+      {
+        "date": "2026-06-21",
+        "value": 115.0
       }
     ]
   }
@@ -2949,24 +2954,90 @@ const TRENDS_DATA   = [
 const RACE_DATA     = [
   {
     "disc": "Swim",
-    "current": 1451.0,
-    "demand": 2114.0,
+    "current": "2:42/100yd",
+    "target": "1:53/100yd",
+    "curdist": 1451.0,
+    "racedist": 2114.0,
     "unit": "yd",
-    "note": "longest continuous (Jul 2)"
+    "pacepct": 70.0,
+    "distpct": 69.0,
+    "splitmin": 40.0
   },
   {
     "disc": "Bike",
-    "current": 15.5,
-    "demand": 56.0,
+    "current": "15.0 mph",
+    "target": "18.7 mph",
+    "curdist": 15.5,
+    "racedist": 56.0,
     "unit": "mi",
-    "note": "longest ride (Wk2)"
+    "pacepct": 80.0,
+    "distpct": 28.0,
+    "splitmin": 180.0
   },
   {
     "disc": "Run",
-    "current": 8.0,
-    "demand": 13.1,
+    "current": "9:19/mi",
+    "target": "10:13/mi",
+    "curdist": 8.0,
+    "racedist": 13.1,
     "unit": "mi",
-    "note": "longest run (Wk3)"
+    "pacepct": 100.0,
+    "distpct": 61.0,
+    "splitmin": 134.0
+  }
+];
+const TARGET_DATA   = [
+  {
+    "leg": "Swim",
+    "split": "40:00",
+    "pace": "1:53/100yd"
+  },
+  {
+    "leg": "T1",
+    "split": "3:00",
+    "pace": "\u2014"
+  },
+  {
+    "leg": "Bike",
+    "split": "3:00:00",
+    "pace": "18.7 mph"
+  },
+  {
+    "leg": "T2",
+    "split": "3:00",
+    "pace": "\u2014"
+  },
+  {
+    "leg": "Run",
+    "split": "2:14:00",
+    "pace": "10:13/mi"
+  },
+  {
+    "leg": "Total",
+    "split": "6:00:00",
+    "pace": "\u2014"
+  }
+];
+const RECOVERY_IDX  = [
+  {
+    "week": "Wk2",
+    "value": 24.0
+  },
+  {
+    "week": "Wk3",
+    "value": 33.0
+  },
+  {
+    "week": "Wk4",
+    "value": 52.0
+  },
+  {
+    "week": "Wk5",
+    "value": 52.0
+  },
+  {
+    "week": "Wk6",
+    "value": 75.0
   }
 ];
 
@@ -3335,25 +3406,36 @@ function renderTrends(){
 }
 
 /* ---------- Race tab ---------- */
+function bar(pct){pct=Math.max(0,Math.min(100,Math.round(pct)));return '<div class="race-track"><div class="race-fill" style="width:'+pct+'%"></div></div>';}
+function legReadiness(r){return 0.5*r.pacepct+0.5*r.distpct;}
 function renderRace(){
   const root=document.getElementById('race-container');
   if(!RACE_DATA.length){root.innerHTML='<div class="empty-state">No race data yet.</div>';return;}
   const colors={Swim:'#2f78c0',Bike:'#e0531f',Run:'#2e9e5b'};
-  let html='<div class="section-card">';
+  let html='';
+  // target splits
+  if(TARGET_DATA.length){
+    html+='<div class="section-card"><h3>Sub-6:00 Target Splits</h3><table class="rec-tbl"><tbody>';
+    TARGET_DATA.forEach(t=>{const bold=/total/i.test(t.leg);
+      html+='<tr'+(bold?' style="font-weight:800"':'')+'><td>'+esc(t.leg)+'</td><td style="text-align:center">'+esc(t.split)+
+        '</td><td style="text-align:right;color:#7c6f61">'+esc(t.pace||'')+'</td></tr>';});
+    html+='</tbody></table></div>';
+  }
+  // per-leg pace x distance readiness
   RACE_DATA.forEach(r=>{
-    const pct=Math.min(100,Math.round(r.current/r.demand*100));
-    html+='<div class="race-row">'+
-      '<div class="race-head"><span class="race-disc">'+esc(r.disc)+'</span>'+
-        '<span class="race-nums">'+r.current+' / '+r.demand+' '+esc(r.unit)+'</span></div>'+
-      '<div class="race-track"><div class="race-fill" style="width:'+pct+'%"></div></div>'+
-      '<div class="race-head" style="margin-top:4px"><span class="race-note">'+esc(r.note||'')+'</span>'+
-        '<span class="race-pct" style="color:'+(colors[r.disc]||'#c0392b')+'">'+pct+'%</span></div></div>';
+    const rd=Math.round(legReadiness(r)), col=colors[r.disc]||'#c0392b';
+    html+='<div class="section-card"><h3>'+esc(r.disc)+
+      '<span class="chart-val" style="color:'+col+'">'+rd+'%</span></h3>'+
+      '<div class="race-sub2">Pace <b>'+esc(r.current)+'</b> vs target '+esc(r.target)+' &middot; <b>'+Math.round(r.pacepct)+'%</b></div>'+bar(r.pacepct)+
+      '<div class="race-sub2" style="margin-top:9px">Distance <b>'+r.curdist+'</b> / '+r.racedist+' '+esc(r.unit)+' &middot; <b>'+Math.round(r.distpct)+'%</b></div>'+bar(r.distpct)+
+      '</div>';
   });
-  html+='</div>';
-  const overall=Math.round(RACE_DATA.reduce((a,r)=>a+Math.min(1,r.current/r.demand),0)/RACE_DATA.length*100);
-  html+='<div class="section-card" style="text-align:center"><div class="card-sub">Combined distance readiness</div>'+
+  // overall, time-weighted by target leg minutes
+  const tot=RACE_DATA.reduce((a,r)=>a+(r.splitmin||0),0)||1;
+  const overall=Math.round(RACE_DATA.reduce((a,r)=>a+(r.splitmin||0)*legReadiness(r),0)/tot);
+  html+='<div class="section-card" style="text-align:center"><div class="card-sub">Overall readiness for sub-6:00</div>'+
     '<div style="font-size:2.1rem;font-weight:800;color:#e0531f;line-height:1.1">'+overall+'%</div>'+
-    '<div class="card-sub" style="margin:0">Base phase \u2014 bike & run volume ramp in Build/Peak. Swim is leading.</div></div>';
+    '<div class="card-sub" style="margin:0">Pace &times; distance vs target splits, weighted by leg time. Bike volume is the big gap.</div></div>';
   root.innerHTML=html;
 }
 
@@ -3365,7 +3447,14 @@ function renderRecovery(){
   const root=document.getElementById('recovery-container');
   if(!RECOVERY_DATA.length){root.innerHTML='<div class="empty-state">No recovery data yet.</div>';return;}
   const L=RECOVERY_DATA[RECOVERY_DATA.length-1];
-  let html='<div class="section-card"><h3>'+esc(L.week)+' \u00b7 Recovery</h3>'+
+  let html='';
+  if(RECOVERY_IDX.length>1){
+    const pts=RECOVERY_IDX.map(r=>({value:r.value})), lastR=RECOVERY_IDX[RECOVERY_IDX.length-1];
+    html+='<div class="section-card"><h3>Body Recovery<span class="chart-val">'+lastR.value+'/100</span></h3>'+
+      '<div class="card-sub">Garmin Training Readiness \u2014 HRV + sleep + recovery time + stress + load, weekly avg \u00b7 '+esc(RECOVERY_IDX[0].week)+'\u2013'+esc(lastR.week)+'</div>'+
+      sparkSVG(pts)+'</div>';
+  }
+  html+='<div class="section-card"><h3>'+esc(L.week)+' \u00b7 Recovery</h3>'+
     '<div class="card-sub">'+esc(L.dates)+' \u00b7 latest snapshot</div>'+
     '<div class="rec-hero">'+recStat(shortHrv(L.hrv),'HRV')+recStat(L.rhr,'RHR bpm')+recStat(L.vo2,'VO2 Max')+'</div>'+
     '<div class="rec-hero">'+recStat(shortSleep(L.sleep),'Sleep')+recStat(L.bb_low,'BB Floor')+recStat(L.atl,'Load (ATL)')+'</div>'+
