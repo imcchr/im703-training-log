@@ -1354,7 +1354,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "3x8 min @ Sweet Spot 170-185W (Z3), 3 min rec"
+        "target": "3x8 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1476,7 +1476,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "4x8 min @ Sweet Spot (Z3) \u2014 watts set from Wk9 FTP retest"
+        "target": "4x8 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1557,7 +1557,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "4x8 min @ Sweet Spot (Z3), 3 min rec \u2014 watts from Wk9 retest"
+        "target": "4x8 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1638,7 +1638,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x8 min @ Z4, 3 min rec"
+        "target": "5x8 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1719,7 +1719,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "3x6 min @ Z4, 3 min rec"
+        "target": "3x6 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1802,7 +1802,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "4x10 min @ Z4, 3 min rec"
+        "target": "4x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1885,7 +1885,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x8 min @ Z4, 3 min rec"
+        "target": "5x8 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -1966,7 +1966,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "4x10 min @ Z4, 3 min rec"
+        "target": "4x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2090,7 +2090,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x10 min @ Z4, 3 min rec"
+        "target": "5x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2171,7 +2171,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x10 min @ Z4, 3 min rec"
+        "target": "5x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2252,7 +2252,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x10 min @ Z4, 3 min rec"
+        "target": "5x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2333,7 +2333,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "3x8 min @ Z3, 3 min rec"
+        "target": "3x8 min @ 160-175W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2416,7 +2416,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x10 min @ Z4, 3 min rec"
+        "target": "5x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2499,7 +2499,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "5x10 min @ Z4, 3 min rec"
+        "target": "5x10 min @ 175-190W, 3 min rec"
       },
       {
         "day": "Wed AM",
@@ -2708,7 +2708,7 @@ function dateParts(iso){return iso.split('-').map(Number);}
 function dow(iso){const [y,m,d]=dateParts(iso);return DOW[new Date(y,m-1,d).getDay()];}
 function md(iso){const [y,m,d]=dateParts(iso);return m+'/'+d;}
 function prettyDate(iso){const [y,m,d]=dateParts(iso);return MON[m-1]+' '+d;}
-function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*/g,'');}
 function wsClass(s){if(s==null)return '';if(s>=80)return 'ws-high';if(s>=60)return 'ws-mid';return 'ws-low';}
 function phaseClass(p){return 'phase-'+p.toLowerCase();}
 function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
