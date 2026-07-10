@@ -127,6 +127,7 @@
   .phase-base{background:#0969da;}.phase-recovery{background:#2da44e;}
   .phase-build{background:#e36209;}.phase-peak{background:#cf222e;}
   .phase-benchmark{background:#6f42c1;}.phase-transition{background:#586069;}
+  .phase-taper{background:#bf8700;}.phase-race{background:#8250df;}
   .week-title{font-weight:700;font-size:.9rem;white-space:nowrap;}
   .week-dates{color:var(--muted);font-size:.74rem;white-space:nowrap;
     overflow:hidden;text-overflow:ellipsis;}
@@ -189,6 +190,15 @@
     border-bottom:1px solid #f1f3f5;}
   .plan-note:last-child{border-bottom:none;}
   .plan-intro{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.4;}
+  .plan-summary{padding:10px 14px 11px;background:#fafbfc;border-top:1px solid #f1f3f5;}
+  .sum-head{font-size:.62rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
+  .sum-row{display:grid;grid-template-columns:48px 1fr auto;gap:8px;align-items:center;font-size:.76rem;line-height:1.35;margin-top:4px;}
+  .sum-lbl{font-weight:800;color:var(--ink);}
+  .sum-val{color:#33414f;}
+  .sum-delta{font-weight:800;font-size:.72rem;}
+  .sum-up{color:#1a7f37;}
+  .sum-down{color:#cf222e;}
+  .sum-flat,.sum-na{color:var(--muted);}
 
   /* Plan weekly grid (day rows x AM/PM columns) */
   .plan-grid{border-top:1px solid #f1f3f5;}
@@ -311,7 +321,7 @@ const WEEKS_DATA = [
     "num": 8,
     "start": "2026-07-06",
     "label": "Jul 6-12",
-    "phase": "Base",
+    "phase": "Recovery",
     "score": null,
     "sessions": [
       {
@@ -1032,7 +1042,15 @@ const PLAN_DATA  = [
         "target": "5K time trial - baseline"
       }
     ],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 2,
@@ -1089,9 +1107,15 @@ const PLAN_DATA  = [
         "target": "1000m continuous shoreline"
       }
     ],
-    "notes": [
-      "(Vacation May 11-24 preceded this week.)"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 3,
@@ -1148,7 +1172,15 @@ const PLAN_DATA  = [
         "target": "~1150 yd w/ tow buoy"
       }
     ],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 4,
@@ -1205,7 +1237,15 @@ const PLAN_DATA  = [
         "target": "Long Swim (Sun)"
       }
     ],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 5,
@@ -1262,7 +1302,15 @@ const PLAN_DATA  = [
         "target": "6 mi E pace (9:25-10:00)"
       }
     ],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 6,
@@ -1337,9 +1385,15 @@ const PLAN_DATA  = [
         "target": "~1300 yd"
       }
     ],
-    "notes": [
-      "FLAG: Grade II ankle sprain (basketball, Jun 21). No running this week. All run sessions = 0."
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 7,
@@ -1408,16 +1462,21 @@ const PLAN_DATA  = [
         "target": "Sun 1,300 yd pull buoy continuous"
       }
     ],
-    "notes": [
-      "Ankle clearance: Return to run only when pain-free walking fully restored. Start with 2-3 mi easy if cleared.",
-      "Bike and swim: proceed as planned. Legs lift: avoid direct ankle-load exercises."
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "1,300yd",
+      "bike": "2hr",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 8,
     "start": "2026-07-06",
     "label": "Jul 6-12",
-    "phase": "Base",
+    "phase": "Recovery",
     "rows": [
       {
         "day": "Mon AM",
@@ -1486,15 +1545,21 @@ const PLAN_DATA  = [
         "target": "1hr \u00b7 Bike: 45min Z3 (140-162W) \u00b7 Run: 15min Z3 (8-9/mi)"
       }
     ],
-    "notes": [
-      "*Recovery week \u2014 volume reduced. Ankle modifications in effect for all run days.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "4,450yd",
+      "bike": "3:25",
+      "run": "1:29",
+      "swim_delta": 242,
+      "bike_delta": 71,
+      "run_delta": null
+    }
   },
   {
     "num": 9,
     "start": "2026-07-13",
     "label": "Jul 13-19",
-    "phase": "Base",
+    "phase": "Build",
     "rows": [
       {
         "day": "Mon AM",
@@ -1563,9 +1628,15 @@ const PLAN_DATA  = [
         "target": "1hr \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 40min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Build Phase Week 1. Ankle clears for full running. Interval bike shifts to VO2max hill format. Speed runs on Wednesday.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "5,650yd",
+      "bike": "4:15",
+      "run": "2:24",
+      "swim_delta": 27,
+      "bike_delta": 24,
+      "run_delta": 62
+    }
   },
   {
     "num": 10,
@@ -1640,9 +1711,15 @@ const PLAN_DATA  = [
         "target": "30min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 10min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Bike intervals shift to flat VO2max blocks (2x3min). Brick on Saturday. Thu Base Bike grows to 1:30.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,025yd",
+      "bike": "3:30",
+      "run": "2:15",
+      "swim_delta": 7,
+      "bike_delta": -18,
+      "run_delta": -6
+    }
   },
   {
     "num": 11,
@@ -1717,15 +1794,21 @@ const PLAN_DATA  = [
         "target": "1:05 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 45min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Bike intervals grow to 3x5min hills. Long bike 2:15. Swim TT on Sunday (1,650 yd max effort).*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,050yd",
+      "bike": "4:50",
+      "run": "2:34",
+      "swim_delta": 0,
+      "bike_delta": 38,
+      "run_delta": 14
+    }
   },
   {
     "num": 12,
     "start": "2026-08-03",
     "label": "Aug 3-9",
-    "phase": "Build",
+    "phase": "Recovery",
     "rows": [
       {
         "day": "Mon AM",
@@ -1788,15 +1871,21 @@ const PLAN_DATA  = [
         "target": "800 yd swim + 12 mi Z3 bike (Zwift) + 3 mi Z3 run"
       }
     ],
-    "notes": [
-      "*Recovery week. Volume reduced ~35%. Sprint Triathlon on Sunday.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "3,000yd",
+      "bike": "2:35",
+      "run": "1:23",
+      "swim_delta": -50,
+      "bike_delta": -47,
+      "run_delta": -46
+    }
   },
   {
     "num": 13,
     "start": "2026-08-10",
     "label": "Aug 10-16",
-    "phase": "Recovery",
+    "phase": "Build",
     "rows": [
       {
         "day": "Mon AM",
@@ -1865,9 +1954,15 @@ const PLAN_DATA  = [
         "target": "1:10 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 50min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Back from recovery. Bike intervals grow (4x5min hills). Swim volumes return. Long Bike 2:30.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,300yd",
+      "bike": "5:10",
+      "run": "2:34",
+      "swim_delta": 110,
+      "bike_delta": 100,
+      "run_delta": 86
+    }
   },
   {
     "num": 14,
@@ -1942,15 +2037,21 @@ const PLAN_DATA  = [
         "target": "1:45 \u00b7 Bike: 1:15 Z3 (140-162W) \u00b7 Run: 30min Z3 (8-9/mi)"
       }
     ],
-    "notes": [
-      "*Bike intervals shift to 4x3min flat VO2max. Brick returns Sunday (1:45 total). Long swim 2,400 yd.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,500yd",
+      "bike": "5:45",
+      "run": "2:08",
+      "swim_delta": 3,
+      "bike_delta": 11,
+      "run_delta": -17
+    }
   },
   {
     "num": 15,
     "start": "2026-08-24",
     "label": "Aug 24-30",
-    "phase": "Build",
+    "phase": "Peak",
     "rows": [
       {
         "day": "Mon AM",
@@ -2019,15 +2120,21 @@ const PLAN_DATA  = [
         "target": "1:20 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 1hr Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Peak Phase begins. Bike shifts to Threshold format (2x12min Z4). Runs shift to Sustained Tempo (continuous Z4). Thu Base Bike and long weekends continue.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,700yd",
+      "bike": "5:15",
+      "run": "3:03",
+      "swim_delta": 3,
+      "bike_delta": -9,
+      "run_delta": 43
+    }
   },
   {
     "num": 16,
     "start": "2026-08-31",
     "label": "Aug 31 - Sep 6",
-    "phase": "Peak",
+    "phase": "Recovery",
     "rows": [
       {
         "day": "Mon AM",
@@ -2090,15 +2197,21 @@ const PLAN_DATA  = [
         "target": "~1,650 yd swim + ~25 mi Z3 bike (Zwift) + 6.2 mi Z3 run"
       }
     ],
-    "notes": [
-      "*Recovery week. Volume reduced. Olympic Triathlon on Sunday.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "3,000yd",
+      "bike": "2:15",
+      "run": "1:20",
+      "swim_delta": -55,
+      "bike_delta": -57,
+      "run_delta": -56
+    }
   },
   {
     "num": 17,
     "start": "2026-09-07",
     "label": "Sep 7-13",
-    "phase": "Benchmark",
+    "phase": "Peak",
     "rows": [
       {
         "day": "Mon AM",
@@ -2167,9 +2280,15 @@ const PLAN_DATA  = [
         "target": "1:30 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 1:10 Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Sustained Tempo grows. Long bike 3hrs. Long run 1:30. Threshold Swim shifts to 2x400.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,700yd",
+      "bike": "5:35",
+      "run": "3:07",
+      "swim_delta": 123,
+      "bike_delta": 148,
+      "run_delta": 134
+    }
   },
   {
     "num": 18,
@@ -2244,15 +2363,21 @@ const PLAN_DATA  = [
         "target": "30min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 10min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Thu Base Bike grows to 1:45. Brick on Saturday (1:45 bike + 45min run). Sunday = Race-Distance Swim TT (2,112 yd max effort = 1.2 mi).*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,712yd",
+      "bike": "4:40",
+      "run": "2:59",
+      "swim_delta": 0,
+      "bike_delta": -16,
+      "run_delta": -4
+    }
   },
   {
     "num": 19,
     "start": "2026-09-21",
     "label": "Sep 21-27",
-    "phase": "Peak",
+    "phase": "Taper",
     "rows": [
       {
         "day": "Mon AM",
@@ -2321,15 +2446,21 @@ const PLAN_DATA  = [
         "target": "1:05 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 45min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
-    "notes": [
-      "*Taper begins. Volume pulls back. Threshold Bike shifts to 2x14min split set. Swim volume holds but rest intervals tighten.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "6,200yd",
+      "bike": "5hr",
+      "run": "2:46",
+      "swim_delta": -8,
+      "bike_delta": 7,
+      "run_delta": -7
+    }
   },
   {
     "num": 20,
     "start": "2026-09-28",
     "label": "Sep 28 - Oct 4",
-    "phase": "Peak",
+    "phase": "Race",
     "rows": [
       {
         "day": "Mon",
@@ -2380,9 +2511,15 @@ const PLAN_DATA  = [
         "target": "Swim 1.2 mi + Bike 56 mi + Run 13.1 mi \u2014 Block 1 target race"
       }
     ],
-    "notes": [
-      "*Short race-prep sessions only. Arrive fresh. Sunday = RACE DAY.*"
-    ]
+    "notes": [],
+    "summary": {
+      "swim": "3,900yd",
+      "bike": "1:45",
+      "run": "40min",
+      "swim_delta": -37,
+      "bike_delta": -65,
+      "run_delta": -76
+    }
   },
   {
     "num": 21,
@@ -2390,7 +2527,15 @@ const PLAN_DATA  = [
     "label": "Oct 5-11",
     "phase": "Recovery",
     "rows": [],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": -100,
+      "bike_delta": -100,
+      "run_delta": -100
+    }
   },
   {
     "num": 22,
@@ -2398,7 +2543,15 @@ const PLAN_DATA  = [
     "label": "Oct 12-18",
     "phase": "Peak",
     "rows": [],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 23,
@@ -2406,7 +2559,15 @@ const PLAN_DATA  = [
     "label": "Oct 19-25",
     "phase": "Peak",
     "rows": [],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 24,
@@ -2414,7 +2575,15 @@ const PLAN_DATA  = [
     "label": "Oct 26 - Nov 1",
     "phase": "Recovery",
     "rows": [],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 25,
@@ -2422,7 +2591,15 @@ const PLAN_DATA  = [
     "label": "Nov 2-8",
     "phase": "Benchmark",
     "rows": [],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   },
   {
     "num": 26,
@@ -2430,7 +2607,15 @@ const PLAN_DATA  = [
     "label": "Nov 9-15",
     "phase": "Transition",
     "rows": [],
-    "notes": []
+    "notes": [],
+    "summary": {
+      "swim": "0yd",
+      "bike": "0min",
+      "run": "0min",
+      "swim_delta": null,
+      "bike_delta": null,
+      "run_delta": null
+    }
   }
 ];
 const RECOVERY_DATA = [
@@ -2933,6 +3118,24 @@ function planRowEl(r){
   return row;
 }
 
+function deltaHTML(n){
+  if(n==null)return '<span class="sum-delta sum-na">—</span>';
+  if(n>0)return '<span class="sum-delta sum-up">+'+n+'%</span>';
+  if(n<0)return '<span class="sum-delta sum-down">'+n+'%</span>';
+  return '<span class="sum-delta sum-flat">0%</span>';
+}
+function planSummaryEl(s){
+  if(!s)return null;
+  const box=document.createElement('div');
+  box.className='plan-summary';
+  box.innerHTML=
+    '<div class="sum-head">Projected totals</div>' +
+    '<div class="sum-row"><div class="sum-lbl">Swim</div><div class="sum-val">'+esc(s.swim)+'</div>'+deltaHTML(s.swim_delta)+'</div>' +
+    '<div class="sum-row"><div class="sum-lbl">Bike</div><div class="sum-val">'+esc(s.bike)+'</div>'+deltaHTML(s.bike_delta)+'</div>' +
+    '<div class="sum-row"><div class="sum-lbl">Run</div><div class="sum-val">'+esc(s.run)+'</div>'+deltaHTML(s.run_delta)+'</div>';
+  return box;
+}
+
 function makePlanCard(w,cur){
   const card=document.createElement('div');
   const isCur=w.num===cur;
@@ -2960,13 +3163,9 @@ function makePlanCard(w,cur){
   }else{
     rows.forEach(function(r){body.appendChild(planRowEl(r));});
   }
-  (w.notes||[]).forEach(function(txt){
-    const n=document.createElement('div');
-    n.className='plan-note';
-    n.textContent=txt;
-    body.appendChild(n);
-  });
-  if(!rows.length&&!(w.notes&&w.notes.length)){
+  const summary=planSummaryEl(w.summary);
+  if(summary) body.appendChild(summary);
+  if(!rows.length&&!summary){
     const n=document.createElement('div');
     n.className='plan-note';
     n.textContent='See training calendar.';
