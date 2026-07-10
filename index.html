@@ -2896,7 +2896,7 @@ function parseDay(dayStr){
 function planItemHTML(r){
   return '<div class="pg-item disc-'+discClass(r.disc)+'">'+
     '<div class="pg-sess">'+esc(r.session)+'</div>'+
-    (r.target?'<div class="pg-tgt">'+esc(r.target).replace(/·/g,'<br>&nbsp;&nbsp;')+'</div>':'')+'</div>';
+    (r.target?'<div class="pg-tgt">'+esc(r.target).replace(/·/g,'<br>')+'</div>':'')+'</div>';
 }
 function slotEl(items){
   const cell=document.createElement('div');
@@ -2935,7 +2935,7 @@ function planRowEl(r){
   row.innerHTML=
     '<div class="plan-day">'+esc(r.day)+'</div>'+
     '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
-      (r.target?'<div class="plan-target">'+esc(r.target).replace(/·/g,'<br>&nbsp;&nbsp;')+'</div>':'')+'</div>';
+      (r.target?'<div class="plan-target">'+esc(r.target).replace(/·/g,'<br>')+'</div>':'')+'</div>';
   return row;
 }
 
