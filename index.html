@@ -71,27 +71,28 @@
   .spark .area{fill:rgba(234,115,23,.13);stroke:none;}
   .spark circle{fill:#c0392b;}
   .trends-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:14px;}
-  .tr-hero-main{background:linear-gradient(135deg,#0f172a,#172554 55%,#0f766e);color:#eff6ff;border:none;overflow:hidden;position:relative;}
-  .tr-hero-main:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(56,189,248,.18),transparent 35%),radial-gradient(circle at bottom left,rgba(34,197,94,.14),transparent 30%);}
-  .tr-hero-main>*{position:relative;}
-  .tr-kicker{font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#93c5fd;margin-bottom:6px;}
-  .tr-headline{font-size:1.05rem;font-weight:800;line-height:1.15;margin:0 0 6px;}
-  .tr-sub{font-size:.72rem;color:#cbd5e1;line-height:1.45;}
+  .tr-hero-main{background:var(--card);border:1px solid var(--line);overflow:hidden;position:relative;}
+  .tr-kicker{font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .tr-headline{font-size:1.05rem;font-weight:800;line-height:1.15;margin:0 0 6px;color:var(--ink);}
+  .tr-sub{font-size:.72rem;color:var(--muted);line-height:1.45;}
   .tr-hero-side{display:grid;gap:12px;}
-  .tr-mini{background:linear-gradient(135deg,#111827,#1f2937);color:#f8fafc;border:none;}
-  .tr-mini .chart-val{color:#f8fafc;}
+  .tr-mini{background:var(--card);border:1px solid var(--line);}
+  .tr-mini .chart-val{color:#7c3aed;}
   .tr-statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
-  .tr-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 6px;text-align:center;}
-  .tr-stat .v{font-size:.88rem;font-weight:800;} .tr-stat .l{font-size:.52rem;text-transform:uppercase;letter-spacing:.04em;color:#bfdbfe;margin-top:3px;}
+  .tr-stat{background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:8px 6px;text-align:center;}
+  .tr-stat .v{font-size:.88rem;font-weight:800;color:var(--ink);} .tr-stat .l{font-size:.52rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:3px;}
   .trend-grid{display:grid;gap:12px;}
-  .load-lanes{display:grid;gap:9px;margin-top:10px;}
-  .load-row{display:grid;grid-template-columns:42px 1fr auto;gap:8px;align-items:center;}
-  .load-week{font-size:.63rem;font-weight:800;color:var(--muted);}
-  .load-tracks{display:grid;gap:5px;}
+  .load-lanes{display:grid;gap:10px;margin-top:10px;}
+  .load-row{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:start;}
+  .load-week{font-size:.63rem;font-weight:800;color:var(--muted);padding-top:2px;}
+  .load-tracks{display:grid;gap:7px;}
+  .load-line{display:grid;grid-template-columns:54px 1fr auto;gap:8px;align-items:center;}
+  .load-lbl{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
   .load-track{height:8px;border-radius:999px;background:#edf2f7;overflow:hidden;position:relative;}
   .load-fill{height:100%;border-radius:999px;}
   .fill-swim{background:linear-gradient(90deg,#60a5fa,#2563eb);} .fill-bike{background:linear-gradient(90deg,#fb923c,#ea580c);} .fill-run{background:linear-gradient(90deg,#4ade80,#16a34a);} .fill-load{background:linear-gradient(90deg,#a78bfa,#7c3aed);}
-  .load-meta{font-size:.62rem;color:var(--muted);text-align:right;}
+  .load-val{font-size:.63rem;font-weight:700;color:#475569;white-space:nowrap;}
+  .load-delta{margin-top:2px;padding-left:62px;font-size:.62rem;}
   .delta-pos{color:#15803d;font-weight:800;} .delta-neg{color:#c2410c;font-weight:800;} .delta-flat{color:var(--muted);font-weight:800;}
   .section-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .dur-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
@@ -3823,21 +3824,21 @@ function renderTrends(){
   const maxReady=Math.max(1,...overlay.map(r=>Number(r.readiness)||0));
   let html='';
   html+='<div class="trends-hero">';
-  html+='<div class="section-card tr-hero-main"><div class="tr-kicker">Section 1 · Training Load</div><div class="tr-headline">'+esc(latest.week)+' load profile is live.</div><div class="tr-sub">Weekly swim, bike, run, and total load normalized into one cockpit. This is the “what did we actually do?” layer.</div><div class="tr-statgrid">'+
+  html+='<div class="section-card tr-hero-main"><div class="tr-kicker">Section 1 · Training Load</div><div class="tr-headline">Latest logged week: '+esc(latest.week)+' · '+esc(latest.label)+'</div><div class="tr-sub">This section auto-updates from the most recent logged training week. No manual week swapping nonsense required when Wk9, Wk10, and beyond roll in.</div><div class="tr-statgrid">'+
     statCell(fmtYd(latest.swim_yd),'Swim volume')+statCell(fmtMin(latest.bike_min),'Bike volume')+statCell(fmtMi(latest.run_mi),'Run volume')+statCell(fmtMin(latest.total_min),'Total tri time')+
     '</div></div>';
   html+='<div class="tr-hero-side">';
-  html+='<div class="section-card tr-mini"><h3>Ramp Radar<span class="chart-val">'+deltaTag(latest.load_delta)+'</span></h3><div class="card-sub">Week-over-week total load change. Useful for spotting dumb spikes before your ankle files a complaint.</div>'+sparkSVG(load.map(r=>({value:r.total_min})))+'</div>';
-  html+='<div class="section-card tr-mini"><h3>Recovery Link<span class="chart-val">'+esc((overlay[overlay.length-1]&&overlay[overlay.length-1].readiness)!=null?Math.round(overlay[overlay.length-1].readiness)+'/100':'—')+'</span></h3><div class="card-sub">Readiness beside load lets you see stress-response instead of worshipping isolated body metrics.</div>'+(overlay.length?statusChip(overlay[overlay.length-1].status):'')+'</div>';
+  html+='<div class="section-card tr-mini"><h3>Ramp Radar<span class="chart-val">'+deltaTag(latest.load_delta)+'</span></h3><div class="card-sub">Auto-tracks total-load change from the previous logged week to the current one. This card follows the data forward by itself.</div>'+sparkSVG(load.map(r=>({value:r.total_min})))+'</div>';
+  html+='<div class="section-card tr-mini"><h3>Recovery Link<span class="chart-val">'+esc((overlay[overlay.length-1]&&overlay[overlay.length-1].readiness)!=null?Math.round(overlay[overlay.length-1].readiness)+'/100':'—')+'</span></h3><div class="card-sub">Also auto-follows the latest logged week, pairing current load with the newest recovery/readiness context available.</div>'+(overlay.length?statusChip(overlay[overlay.length-1].status):'')+'</div>';
   html+='</div></div>';
 
-  html+='<div class="section-card"><h3>Weekly Load Matrix</h3><div class="card-sub">Each week gets four lanes: swim yards, bike time, run miles, then total load. Tiny, dense, actually useful. Wild concept.</div><div class="load-lanes">';
-  load.forEach(r=>{html+='<div class="load-row"><div class="load-week">'+esc(r.week)+'</div><div class="load-tracks">'+
-    '<div class="load-track"><div class="load-fill fill-swim" style="width:'+pct(r.swim_yd,maxSwim)+'%"></div></div>'+
-    '<div class="load-track"><div class="load-fill fill-bike" style="width:'+pct(r.bike_min,maxBike)+'%"></div></div>'+
-    '<div class="load-track"><div class="load-fill fill-run" style="width:'+pct(r.run_mi,maxRun)+'%"></div></div>'+
-    '<div class="load-track"><div class="load-fill fill-load" style="width:'+pct(r.total_min,maxLoad)+'%"></div></div>'+
-    '</div><div class="load-meta">'+esc(fmtYd(r.swim_yd))+' · '+esc(fmtMin(r.bike_min))+' · '+esc(fmtMi(r.run_mi))+'<br>'+deltaTag(r.load_delta)+'</div></div>';});
+  html+='<div class="section-card"><h3>Weekly Load Matrix</h3><div class="card-sub">Each week shows labeled swim, bike, run, and total-load bars with the value printed inline, so you don\'t need to decode a mystery number stack off to the side like a cave goblin.</div><div class="load-lanes">';
+  load.forEach(r=>{html+='<div class="load-row"><div class="load-week">'+esc(r.week)+'</div><div><div class="load-tracks">'+
+    '<div class="load-line"><div class="load-lbl">Swim</div><div class="load-track"><div class="load-fill fill-swim" style="width:'+pct(r.swim_yd,maxSwim)+'%"></div></div><div class="load-val">'+esc(fmtYd(r.swim_yd))+'</div></div>'+
+    '<div class="load-line"><div class="load-lbl">Bike</div><div class="load-track"><div class="load-fill fill-bike" style="width:'+pct(r.bike_min,maxBike)+'%"></div></div><div class="load-val">'+esc(fmtMin(r.bike_min))+'</div></div>'+
+    '<div class="load-line"><div class="load-lbl">Run</div><div class="load-track"><div class="load-fill fill-run" style="width:'+pct(r.run_mi,maxRun)+'%"></div></div><div class="load-val">'+esc(fmtMi(r.run_mi))+'</div></div>'+
+    '<div class="load-line"><div class="load-lbl">Load</div><div class="load-track"><div class="load-fill fill-load" style="width:'+pct(r.total_min,maxLoad)+'%"></div></div><div class="load-val">'+esc(fmtMin(r.total_min))+'</div></div>'+
+    '</div><div class="load-delta">Week-over-week: '+deltaTag(r.load_delta)+'</div></div></div>';});
   html+='</div></div>';
 
   html+='<div class="section-split">';
