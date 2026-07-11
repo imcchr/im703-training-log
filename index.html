@@ -123,15 +123,29 @@
   .tl-title{font-size:.78rem;font-weight:800;color:var(--ink);margin-top:1px;}
   .tl-detail{font-size:.67rem;color:#475569;line-height:1.4;margin-top:3px;}
   @media (max-width:720px){.trends-hero,.section-split,.dur-grid,.marker-grid{grid-template-columns:1fr;}.tr-statgrid{grid-template-columns:repeat(2,1fr);}}
-  .race-row{margin-bottom:16px;}
-  .race-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
-  .race-disc{font-weight:700;font-size:.85rem;color:var(--ink);}
-  .race-nums{font-size:.7rem;color:var(--muted);}
-  .race-pct{font-weight:800;font-size:.85rem;}
-  .race-track{height:13px;border-radius:7px;background:#ece1d2;overflow:hidden;}
-  .race-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#f7b12e,#ea7317,#c0392b);}
-  .race-note{font-size:.6rem;color:var(--muted);}
-  .race-sub2{font-size:.68rem;color:var(--muted);margin-bottom:4px;}
+  .race-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:14px;}
+  .race-hero-main{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .race-kicker{font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .race-big{font-size:1.45rem;font-weight:900;color:var(--ink);line-height:1.05;margin:0 0 4px;}
+  .race-range{font-size:.82rem;font-weight:800;color:#7c3aed;}
+  .race-sub2{font-size:.68rem;color:var(--muted);margin-bottom:4px;line-height:1.45;}
+  .race-side{display:grid;gap:12px;}
+  .race-chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .race-chip{display:inline-flex;align-items:center;gap:6px;background:#fafbfc;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:.62rem;font-weight:800;color:#475569;}
+  .race-track{height:12px;border-radius:999px;background:#eceff3;overflow:hidden;margin:8px 0 10px;}
+  .race-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#f7b12e,#ea7317,#c0392b);}
+  .race-leggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .race-leg{background:linear-gradient(180deg,#ffffff,#fafbfc);border:1px solid var(--line);border-radius:12px;padding:12px;}
+  .race-leghead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .race-legtitle{font-size:.84rem;font-weight:900;color:var(--ink);}
+  .race-legpct{font-size:1rem;font-weight:900;}
+  .race-split{font-size:.9rem;font-weight:900;color:#111827;margin-top:6px;}
+  .race-range2{font-size:.65rem;color:#7c3aed;font-weight:800;margin-top:2px;}
+  .race-evidence{margin-top:10px;display:grid;gap:6px;}
+  .race-ev{font-size:.66rem;color:#475569;line-height:1.35;padding-left:11px;position:relative;}
+  .race-ev:before{content:'';position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:#cbd5e1;}
+  .race-note{font-size:.62rem;color:var(--muted);margin-top:8px;line-height:1.4;}
+  @media (max-width:720px){.race-hero,.race-leggrid{grid-template-columns:1fr;}}
   .rec-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:9px;}
   .rec-stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center;}
   .rec-stat .v{font-size:.95rem;font-weight:800;color:var(--ink);line-height:1.15;}
@@ -3345,41 +3359,57 @@ const TRENDS_DATA   = {
     }
   ]
 };
-const RACE_DATA     = [
-  {
-    "disc": "Swim",
-    "current": "2:42/100yd",
-    "target": "1:53/100yd",
-    "curdist": 1451.0,
-    "racedist": 2114.0,
-    "unit": "yd",
-    "pacepct": 70.0,
-    "distpct": 69.0,
-    "splitmin": 40.0
+const RACE_DATA     = {
+  "overall": {
+    "projected_finish": "6:55:25",
+    "projected_range": "6:20:29\u20137:53:38",
+    "strongest_leg": "Swim",
+    "limiter_leg": "Run",
+    "confidence_label": "Low",
+    "method_note": "Conservative model using demonstrated speed, longest distance, durability, and confidence penalties from live logs."
   },
-  {
-    "disc": "Bike",
-    "current": "15.0 mph",
-    "target": "18.7 mph",
-    "curdist": 15.5,
-    "racedist": 56.0,
-    "unit": "mi",
-    "pacepct": 80.0,
-    "distpct": 28.0,
-    "splitmin": 180.0
-  },
-  {
-    "disc": "Run",
-    "current": "9:19/mi",
-    "target": "10:13/mi",
-    "curdist": 8.0,
-    "racedist": 13.1,
-    "unit": "mi",
-    "pacepct": 100.0,
-    "distpct": 61.0,
-    "splitmin": 134.0
-  }
-];
+  "legs": [
+    {
+      "disc": "Swim",
+      "readiness": 83,
+      "confidence": 0.95,
+      "confidence_label": "High",
+      "predicted_split": "44:04",
+      "predicted_range": "42:19\u201346:59",
+      "evidence_1": "Longest continuous swim: 1,506yd",
+      "evidence_2": "Best sustained pace: 1:50/100yd",
+      "evidence_3": "Support penalty: pull buoy dependence still present",
+      "limiter": "Durability / support",
+      "summary": "Predicted from longest continuous distance, sustained pace, and support/form penalty \u2014 conservative by design."
+    },
+    {
+      "disc": "Bike",
+      "readiness": 75,
+      "confidence": 0.9,
+      "confidence_label": "High",
+      "predicted_split": "3:08:48",
+      "predicted_range": "2:54:45\u20133:32:13",
+      "evidence_1": "Best logged bike speed: 20.1 mph",
+      "evidence_2": "Longest logged ride: 1:11:57",
+      "evidence_3": "Latest FTP anchor: 216W",
+      "limiter": "Endurance gap vs 56mi demand",
+      "summary": "Predicted from real logged speed, longest ride durability, and FTP support \u2014 not stale manual mph cells."
+    },
+    {
+      "disc": "Run",
+      "readiness": 58,
+      "confidence": 0.5309656488549618,
+      "confidence_label": "Low",
+      "predicted_split": "2:56:32",
+      "predicted_range": "2:37:24\u20133:28:26",
+      "evidence_1": "Longest logged run: 8.0mi",
+      "evidence_2": "Best sustainable pace evidence: 9:02/mi",
+      "evidence_3": "Recent run frequency signal: 0 completed sessions across latest 2 weeks",
+      "limiter": "Run durability / injury recency",
+      "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
+    }
+  ]
+};
 const TARGET_DATA   = [
   {
     "leg": "Swim",
@@ -3873,35 +3903,28 @@ function renderTrends(){
 
 /* ---------- Race tab ---------- */
 function bar(pct){pct=Math.max(0,Math.min(100,Math.round(pct)));return '<div class="race-track"><div class="race-fill" style="width:'+pct+'%"></div></div>';}
-function legReadiness(r){return 0.5*r.pacepct+0.5*r.distpct;}
 function renderRace(){
   const root=document.getElementById('race-container');
-  if(!RACE_DATA.length){root.innerHTML='<div class="empty-state">No race data yet.</div>';return;}
+  if(!RACE_DATA || !RACE_DATA.legs || !RACE_DATA.legs.length){root.innerHTML='<div class="empty-state">No race data yet.</div>';return;}
   const colors={Swim:'#2f78c0',Bike:'#e0531f',Run:'#2e9e5b'};
+  const o=RACE_DATA.overall||{};
   let html='';
-  // target splits
   if(TARGET_DATA.length){
     html+='<div class="section-card"><h3>Sub-6:00 Target Splits</h3><table class="rec-tbl"><tbody>';
     TARGET_DATA.forEach(t=>{const bold=/total/i.test(t.leg);
-      html+='<tr'+(bold?' style="font-weight:800"':'')+'><td>'+esc(t.leg)+'</td><td style="text-align:center">'+esc(t.split)+
-        '</td><td style="text-align:right;color:#7c6f61">'+esc(t.pace||'')+'</td></tr>';});
+      html+='<tr'+(bold?' style="font-weight:800"':'')+'><td>'+esc(t.leg)+'</td><td style="text-align:center">'+esc(t.split)+'</td><td style="text-align:right;color:#7c6f61">'+esc(t.pace||'')+'</td></tr>';});
     html+='</tbody></table></div>';
   }
-  // per-leg pace x distance readiness
-  RACE_DATA.forEach(r=>{
-    const rd=Math.round(legReadiness(r)), col=colors[r.disc]||'#c0392b';
-    html+='<div class="section-card"><h3>'+esc(r.disc)+
-      '<span class="chart-val" style="color:'+col+'">'+rd+'%</span></h3>'+
-      '<div class="race-sub2">Pace <b>'+esc(r.current)+'</b> vs target '+esc(r.target)+' &middot; <b>'+Math.round(r.pacepct)+'%</b></div>'+bar(r.pacepct)+
-      '<div class="race-sub2" style="margin-top:9px">Distance <b>'+r.curdist+'</b> / '+r.racedist+' '+esc(r.unit)+' &middot; <b>'+Math.round(r.distpct)+'%</b></div>'+bar(r.distpct)+
-      '</div>';
+  html+='<div class="race-hero">';
+  html+='<div class="race-hero-main"><div class="race-kicker">Projected Race Capability</div><div class="race-big">'+esc(o.projected_finish||'—')+'</div><div class="race-range">Likely range: '+esc(o.projected_range||'—')+'</div><div class="race-sub2" style="margin-top:8px">This is a conservative projection built from live training evidence: demonstrated speed, longest distance, durability support, and confidence penalties. No more stale manual mph raccoons.</div><div class="race-chiprow"><span class="race-chip">Confidence: '+esc(o.confidence_label||'—')+'</span><span class="race-chip">Strongest leg: '+esc(o.strongest_leg||'—')+'</span><span class="race-chip">Primary limiter: '+esc(o.limiter_leg||'—')+'</span></div></div>';
+  html+='<div class="race-side"><div class="section-card"><h3>How this works</h3><div class="race-sub2">Each leg now gets one smart readiness bar that blends speed, distance durability, and evidence confidence instead of pretending separate pace/distance bars equal race preparedness.</div></div><div class="section-card"><h3>Model note</h3><div class="race-sub2">'+esc(o.method_note||'')+'</div></div></div>';
+  html+='</div>';
+  html+='<div class="race-leggrid">';
+  RACE_DATA.legs.forEach(r=>{
+    const col=colors[r.disc]||'#c0392b';
+    html+='<div class="race-leg"><div class="race-leghead"><div><div class="race-legtitle">'+esc(r.disc)+'</div><div class="race-split">'+esc(r.predicted_split)+'</div><div class="race-range2">Range: '+esc(r.predicted_range)+'</div></div><div class="race-legpct" style="color:'+col+'">'+Math.round(r.readiness)+'%</div></div>'+bar(r.readiness)+'<div class="race-chiprow"><span class="race-chip">Confidence: '+esc(r.confidence_label)+'</span><span class="race-chip">Limiter: '+esc(r.limiter)+'</span></div><div class="race-evidence"><div class="race-ev">'+esc(r.evidence_1)+'</div><div class="race-ev">'+esc(r.evidence_2)+'</div><div class="race-ev">'+esc(r.evidence_3)+'</div></div><div class="race-note">'+esc(r.summary)+'</div></div>';
   });
-  // overall, time-weighted by target leg minutes
-  const tot=RACE_DATA.reduce((a,r)=>a+(r.splitmin||0),0)||1;
-  const overall=Math.round(RACE_DATA.reduce((a,r)=>a+(r.splitmin||0)*legReadiness(r),0)/tot);
-  html+='<div class="section-card" style="text-align:center"><div class="card-sub">Overall readiness for sub-6:00</div>'+
-    '<div style="font-size:2.1rem;font-weight:800;color:#e0531f;line-height:1.1">'+overall+'%</div>'+
-    '<div class="card-sub" style="margin:0">Pace &times; distance vs target splits, weighted by leg time. Bike volume is the big gap.</div></div>';
+  html+='</div>';
   root.innerHTML=html;
 }
 
