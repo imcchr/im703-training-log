@@ -190,12 +190,18 @@
     border-bottom:1px solid #f1f3f5;}
   .plan-note:last-child{border-bottom:none;}
   .plan-intro{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.4;}
-  .plan-summary{padding:10px 14px 11px;background:#fafbfc;border-top:1px solid #f1f3f5;}
-  .sum-head{font-size:.62rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
-  .sum-row{display:grid;grid-template-columns:48px 1fr auto;gap:8px;align-items:center;font-size:.76rem;line-height:1.35;margin-top:4px;}
-  .sum-lbl{font-weight:800;color:var(--ink);}
-  .sum-val{color:#33414f;}
-  .sum-delta{font-weight:800;font-size:.72rem;}
+  .plan-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 12px 11px;
+    background:#fafbfc;border-top:1px solid #f1f3f5;align-items:end;}
+  .pillar{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;}
+  .pillar-label{font-size:.6rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+  .pillar-stage{width:18px;height:40px;border-radius:999px;background:#eaeef2;overflow:hidden;
+    display:flex;align-items:flex-end;box-shadow:inset 0 0 0 1px rgba(27,31,36,.06);}
+  .pillar-bar{width:100%;border-radius:999px;min-height:6px;}
+  .pillar-swim .pillar-bar{background:var(--swim);}
+  .pillar-bike .pillar-bar{background:var(--bike);}
+  .pillar-run .pillar-bar{background:var(--run);}
+  .pillar-val{font-size:.74rem;font-weight:800;color:var(--ink);line-height:1;white-space:nowrap;}
+  .sum-delta{font-weight:800;font-size:.68rem;line-height:1;}
   .sum-up{color:#1a7f37;}
   .sum-down{color:#cf222e;}
   .sum-flat,.sum-na{color:var(--muted);}
@@ -1046,7 +1052,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1111,7 +1120,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1176,7 +1188,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1241,7 +1256,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1306,7 +1324,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1389,7 +1410,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1466,7 +1490,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "1,300yd",
       "bike": "2hr",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 1300,
+      "bike_min": 120,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -1549,7 +1576,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "4,450yd",
       "bike": "3:25",
-      "run": "1:29",
+      "run": "9.4mi",
+      "swim_yd": 4450,
+      "bike_min": 205,
+      "run_mi": 9.39,
       "swim_delta": 242,
       "bike_delta": 71,
       "run_delta": null
@@ -1632,10 +1662,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "5,650yd",
       "bike": "4:15",
-      "run": "2:24",
+      "run": "14.8mi",
+      "swim_yd": 5650,
+      "bike_min": 255,
+      "run_mi": 14.83,
       "swim_delta": 27,
       "bike_delta": 24,
-      "run_delta": 62
+      "run_delta": 58
     }
   },
   {
@@ -1715,10 +1748,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,025yd",
       "bike": "3:30",
-      "run": "2:15",
+      "run": "14.2mi",
+      "swim_yd": 6025,
+      "bike_min": 210,
+      "run_mi": 14.2,
       "swim_delta": 7,
       "bike_delta": -18,
-      "run_delta": -6
+      "run_delta": -4
     }
   },
   {
@@ -1798,10 +1834,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,050yd",
       "bike": "4:50",
-      "run": "2:34",
+      "run": "15.9mi",
+      "swim_yd": 6050,
+      "bike_min": 290,
+      "run_mi": 15.86,
       "swim_delta": 0,
       "bike_delta": 38,
-      "run_delta": 14
+      "run_delta": 12
     }
   },
   {
@@ -1873,12 +1912,15 @@ const PLAN_DATA  = [
     ],
     "notes": [],
     "summary": {
-      "swim": "3,000yd",
+      "swim": "3,800yd",
       "bike": "2:35",
-      "run": "1:23",
-      "swim_delta": -50,
+      "run": "11.5mi",
+      "swim_yd": 3800,
+      "bike_min": 155,
+      "run_mi": 11.55,
+      "swim_delta": -37,
       "bike_delta": -47,
-      "run_delta": -46
+      "run_delta": -27
     }
   },
   {
@@ -1958,10 +2000,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,300yd",
       "bike": "5:10",
-      "run": "2:34",
-      "swim_delta": 110,
+      "run": "15.9mi",
+      "swim_yd": 6300,
+      "bike_min": 310,
+      "run_mi": 15.86,
+      "swim_delta": 66,
       "bike_delta": 100,
-      "run_delta": 86
+      "run_delta": 37
     }
   },
   {
@@ -2041,10 +2086,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,500yd",
       "bike": "5:45",
-      "run": "2:08",
+      "run": "13.6mi",
+      "swim_yd": 6500,
+      "bike_min": 345,
+      "run_mi": 13.62,
       "swim_delta": 3,
       "bike_delta": 11,
-      "run_delta": -17
+      "run_delta": -14
     }
   },
   {
@@ -2124,10 +2172,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,700yd",
       "bike": "5:15",
-      "run": "3:03",
+      "run": "18.8mi",
+      "swim_yd": 6700,
+      "bike_min": 315,
+      "run_mi": 18.85,
       "swim_delta": 3,
       "bike_delta": -9,
-      "run_delta": 43
+      "run_delta": 38
     }
   },
   {
@@ -2199,12 +2250,15 @@ const PLAN_DATA  = [
     ],
     "notes": [],
     "summary": {
-      "swim": "3,000yd",
+      "swim": "4,650yd",
       "bike": "2:15",
-      "run": "1:20",
-      "swim_delta": -55,
+      "run": "14.4mi",
+      "swim_yd": 4650,
+      "bike_min": 135,
+      "run_mi": 14.44,
+      "swim_delta": -31,
       "bike_delta": -57,
-      "run_delta": -56
+      "run_delta": -23
     }
   },
   {
@@ -2284,10 +2338,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,700yd",
       "bike": "5:35",
-      "run": "3:07",
-      "swim_delta": 123,
+      "run": "19.3mi",
+      "swim_yd": 6700,
+      "bike_min": 335,
+      "run_mi": 19.26,
+      "swim_delta": 44,
       "bike_delta": 148,
-      "run_delta": 134
+      "run_delta": 33
     }
   },
   {
@@ -2367,10 +2424,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,712yd",
       "bike": "4:40",
-      "run": "2:59",
+      "run": "19.1mi",
+      "swim_yd": 6712,
+      "bike_min": 280,
+      "run_mi": 19.1,
       "swim_delta": 0,
       "bike_delta": -16,
-      "run_delta": -4
+      "run_delta": -1
     }
   },
   {
@@ -2450,10 +2510,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "6,200yd",
       "bike": "5hr",
-      "run": "2:46",
+      "run": "17.1mi",
+      "swim_yd": 6200,
+      "bike_min": 300,
+      "run_mi": 17.1,
       "swim_delta": -8,
       "bike_delta": 7,
-      "run_delta": -7
+      "run_delta": -10
     }
   },
   {
@@ -2515,7 +2578,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "3,900yd",
       "bike": "1:45",
-      "run": "40min",
+      "run": "4.1mi",
+      "swim_yd": 3900,
+      "bike_min": 105,
+      "run_mi": 4.12,
       "swim_delta": -37,
       "bike_delta": -65,
       "run_delta": -76
@@ -2531,7 +2597,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": -100,
       "bike_delta": -100,
       "run_delta": -100
@@ -2547,7 +2616,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -2563,7 +2635,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -2579,7 +2654,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -2595,7 +2673,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -2611,7 +2692,10 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "0yd",
       "bike": "0min",
-      "run": "0min",
+      "run": "0.0mi",
+      "swim_yd": 0,
+      "bike_min": 0,
+      "run_mi": 0.0,
       "swim_delta": null,
       "bike_delta": null,
       "run_delta": null
@@ -3124,15 +3208,27 @@ function deltaHTML(n){
   if(n<0)return '<span class="sum-delta sum-down">'+n+'%</span>';
   return '<span class="sum-delta sum-flat">0%</span>';
 }
+function pillarPct(val,key){
+  const max=Math.max(1,...PLAN_DATA.map(w=>((w.summary&&w.summary[key])||0)));
+  return Math.max(12,Math.round((val/max)*100));
+}
 function planSummaryEl(s){
   if(!s)return null;
+  const items=[
+    {cls:'swim',label:'Swim',value:s.swim,delta:s.swim_delta,raw:s.swim_yd,key:'swim_yd'},
+    {cls:'bike',label:'Bike',value:s.bike,delta:s.bike_delta,raw:s.bike_min,key:'bike_min'},
+    {cls:'run',label:'Run',value:s.run,delta:s.run_delta,raw:s.run_mi,key:'run_mi'}
+  ];
   const box=document.createElement('div');
   box.className='plan-summary';
-  box.innerHTML=
-    '<div class="sum-head">Projected totals</div>' +
-    '<div class="sum-row"><div class="sum-lbl">Swim</div><div class="sum-val">'+esc(s.swim)+'</div>'+deltaHTML(s.swim_delta)+'</div>' +
-    '<div class="sum-row"><div class="sum-lbl">Bike</div><div class="sum-val">'+esc(s.bike)+'</div>'+deltaHTML(s.bike_delta)+'</div>' +
-    '<div class="sum-row"><div class="sum-lbl">Run</div><div class="sum-val">'+esc(s.run)+'</div>'+deltaHTML(s.run_delta)+'</div>';
+  box.innerHTML=items.map(function(it){
+    return '<div class="pillar pillar-'+it.cls+'">'+
+      '<div class="pillar-label">'+it.label+'</div>'+
+      '<div class="pillar-stage"><div class="pillar-bar" style="height:'+pillarPct(it.raw,it.key)+'%"></div></div>'+
+      '<div class="pillar-val">'+esc(it.value)+'</div>'+
+      deltaHTML(it.delta)+
+    '</div>';
+  }).join('');
   return box;
 }
 
