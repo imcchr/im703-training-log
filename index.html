@@ -367,12 +367,12 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated July 10, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 11, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
   <section id="view-trends" class="view">
-    <p class="plan-intro">Trends mission control &middot; load, durability, markers, recovery, and milestones in one place.</p>
+    <p class="plan-intro">Trends mission control &middot; load, durability, race metrics, recovery, and milestones in one place.</p>
     <div id="trends-container"></div>
   </section>
 
@@ -3174,6 +3174,64 @@ const TRENDS_DATA   = {
       ]
     }
   ],
+  "race_metrics": [
+    {
+      "week": "Wk1",
+      "overall_min": 491.8,
+      "swim_min": 46.5,
+      "bike_min": 305.45,
+      "run_min": 133.83333333333334
+    },
+    {
+      "week": "Wk2",
+      "overall_min": 479.8333333333333,
+      "swim_min": 45.85,
+      "bike_min": 269.85,
+      "run_min": 158.13333333333333
+    },
+    {
+      "week": "Wk3",
+      "overall_min": 457.21666666666664,
+      "swim_min": 45.63333333333333,
+      "bike_min": 258.93333333333334,
+      "run_min": 146.63333333333333
+    },
+    {
+      "week": "Wk4",
+      "overall_min": 434.6166666666667,
+      "swim_min": 44.75,
+      "bike_min": 250.03333333333333,
+      "run_min": 133.83333333333334
+    },
+    {
+      "week": "Wk5",
+      "overall_min": 434.6166666666667,
+      "swim_min": 44.75,
+      "bike_min": 250.03333333333333,
+      "run_min": 133.83333333333334
+    },
+    {
+      "week": "Wk6",
+      "overall_min": 434.6166666666667,
+      "swim_min": 44.75,
+      "bike_min": 250.03333333333333,
+      "run_min": 133.83333333333334
+    },
+    {
+      "week": "Wk7",
+      "overall_min": 414.5,
+      "swim_min": 43.166666666666664,
+      "bike_min": 188.8,
+      "run_min": 176.53333333333333
+    },
+    {
+      "week": "Wk8",
+      "overall_min": 415.4166666666667,
+      "swim_min": 44.06666666666667,
+      "bike_min": 188.8,
+      "run_min": 176.53333333333333
+    }
+  ],
   "overlay": [
     {
       "week_num": 1,
@@ -3848,8 +3906,7 @@ function renderTrends(){
   const maxRun=Math.max(1,...load.map(r=>r.run_mi||0));
   const maxLoad=Math.max(1,...load.map(r=>r.total_min||0));
   const durability=data.durability||[];
-  const markers=(data.markers||[]).filter(m=>m.points&&m.points.length);
-  const featured=markers.filter(m=>['Weekly Score','FTP','Swim Continuous','Run Fitness'].includes(m.name)).concat(markers.filter(m=>!['Weekly Score','FTP','Swim Continuous','Run Fitness'].includes(m.name))).slice(0,6);
+  const raceMetrics=data.race_metrics||[];
   const overlay=data.overlay||[];
   const maxReady=Math.max(1,...overlay.map(r=>Number(r.readiness)||0));
   let html='';
@@ -3889,8 +3946,14 @@ function renderTrends(){
   html+='</div>';
 
   html+='<div class="section-split">';
-  html+='<div class="section-card"><h3>Section 3 · Performance Markers</h3><div class="card-sub">Outcome metrics. Not just work done — evidence that the engine is actually changing.</div><div class="marker-grid">';
-  featured.forEach(m=>{const last=m.points[m.points.length-1];html+='<div class="marker-card"><div class="marker-head"><div class="marker-name">'+esc(m.name)+'</div><div class="marker-val">'+esc(last.value+(m.unit?' '+m.unit:''))+'</div></div><div class="card-sub">'+m.points.length+' points tracked</div>'+(m.points.length>1?sparkSVG(m.points):'<div class="card-sub">Need one more data point for a proper line.</div>')+'</div>';});
+  html+='<div class="section-card"><h3>Section 3 · Race Metrics</h3><div class="card-sub">Projected split history from the same conservative model used in the Race tab. If the prediction shifts, this shows when and where it moved.</div><div class="marker-grid">';
+  const raceCards=[
+    ['Overall Projected Finish','',raceMetrics.map(r=>({value:r.overall_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].overall_min):'—'],
+    ['Projected Swim Split','',raceMetrics.map(r=>({value:r.swim_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].swim_min):'—'],
+    ['Projected Bike Split','',raceMetrics.map(r=>({value:r.bike_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].bike_min):'—'],
+    ['Projected Run Split','',raceMetrics.map(r=>({value:r.run_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].run_min):'—']
+  ];
+  raceCards.forEach(([name,unit,pts,last])=>{html+='<div class="marker-card"><div class="marker-head"><div class="marker-name">'+esc(name)+'</div><div class="marker-val">'+esc(last)+'</div></div><div class="card-sub">'+pts.length+' weekly projection points</div>'+(pts.length>1?sparkSVG(pts):'<div class="card-sub">Need one more logged week for a proper line.</div>')+'</div>';});
   html+='</div></div>';
 
   html+='<div class="section-card"><h3>Section 5 · Milestones</h3><div class="card-sub">Benchmarks, breakthroughs, race sims, and PR-ish moments — the narrative layer, not just the spreadsheet layer.</div><div class="timeline">';
