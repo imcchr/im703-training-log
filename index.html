@@ -374,7 +374,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated July 11, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 16, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -402,18 +402,8 @@ const WEEKS_DATA = [
     "start": "2026-07-06",
     "label": "Jul 6-12",
     "phase": "Recovery",
-    "score": null,
+    "score": 34,
     "sessions": [
-      {
-        "date": "2026-07-06",
-        "discipline": "lift",
-        "title": "Push",
-        "prescribed": "",
-        "actual": "9,100 lb",
-        "key_metric": "9,100 lb | 1 PR | 28 min",
-        "score": 8,
-        "verdict": "Showed up on low motivation/energy and still set a **block-best bench: est. 1RM 279** (+18 vs Jun 29's 261, and +4 OVER the May baseline of 275 \u2014 first time above pre-block). Added two reps at 225 (6\u21928) = pure rep-driven 1RM progress, exactly what the hypertrophy goal rewards (\"1RM going UP each session = progress\"). OHP completed all 3\u00d76 at 115 (Jun 29 was 2\u00d76+1\u00d75) \u2014 cleaner execution, but est 1RM flat at 134 for the 3rd straight session (plateau \u2014 time to nudge). App flashed 0 PRs because it compares its all-time rep log, not estimated 1RM. Motivation-over-mood win."
-      },
       {
         "date": "2026-07-07",
         "discipline": "bike",
@@ -423,6 +413,16 @@ const WEEKS_DATA = [
         "key_metric": "Int1 = exact prescribed power, dead flat 8 min. Int2 = **muscular/torque failure, cadence-led** \u2014 HR peaked only 169 (nowhere near max), so NOT aerobic. No Int3 attempted.",
         "score": 4,
         "verdict": "**Power was perfect when riding** (204W = exact prescription both times he was on it). The miss is volume/durability: only ~50% of prescribed work completed. The cadence signature is the whole story \u2014 in Int1 he defended watts by grinding cadence 86\u219273 (rising torque); entering Int2 he never recovered cadence (started at 79) and the legs walled at ~3:30, cadence crashing to 50 with HR still calm. That's a **muscular/torque ceiling, not an aerobic one.** ROOT CAUSE: FTP 216W was a Zwift ramp **5 days before the Jun 21 ankle sprain**, then ~2 weeks essentially off the bike \u2014 the number is stale and (per existing trend note) likely inflated by sprint background. 204W = ~94% of a *stale* 216W FTP, but realistically **at/above true current threshold** \u2192 explains \"one 8-min rep yes, three no.\" This is a **prescription-calibration miss, NOT regression** \u2014 Ian has never validated 8-min interval durability at this level; the original Rx was a pre-injury guess. 2nd straight week the full interval set wasn't completed *because the set was mis-anchored.* Docked to 4: 50% volume completion; power quality fully credited."
+      },
+      {
+        "date": "2026-07-08",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Wed AM light easy test only if ankle allowed it",
+        "actual": "NO RUN \u2014 ankle still not ready",
+        "key_metric": "No return-to-run attempt in Wk8",
+        "score": 0,
+        "verdict": "Correct restraint. No run sessions happened in Wk8. The ankle still was not ready for even a light easy test, so the interval prescription stayed fully shelved."
       },
       {
         "date": "2026-07-08",
@@ -446,6 +446,16 @@ const WEEKS_DATA = [
       },
       {
         "date": "2026-07-10",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Fri AM light easy test only if ankle allowed it",
+        "actual": "NO RUN \u2014 ankle still not ready",
+        "key_metric": "No return-to-run attempt in Wk8",
+        "score": 0,
+        "verdict": "Same story as Wednesday: no run happened. No point pretending there was a modified aerobic run when there wasn't."
+      },
+      {
+        "date": "2026-07-10",
         "discipline": "swim",
         "title": "Base Swim",
         "prescribed": "Fri PM Continuity Swim \u00b7 1,100 yd (begin extending rep distance)",
@@ -453,6 +463,36 @@ const WEEKS_DATA = [
         "key_metric": "91% of distance (1,003/1,100 yd). Buoy-on DPS 1.12-1.24, buoy-off DPS collapses to **0.93-0.97** \u2014 leg-sink confirmed again",
         "score": 7,
         "verdict": "Showed up, put in solid work within current limits, got the 2 buoy-off reps in. Distance was close (91% of prescription). The flag is the 4:06 of rest embedded \u2014 prescribed was a continuity effort; Friday was a set-based session with breaks. Buoy-on quality solid: DPS 1.12-1.24 across laps 3-5, 9, 11-12, 14-15, 18 = consistent, no decay. **Buoy-off diagnosis:** laps 6-7 (0.97/0.93 DPS, pace fades to 209-212s/100yd) and lap 20 (0.93 DPS, 204s/100yd) \u2014 identical collapse pattern to the Wed Jul 8 data; leg-sink is reproducible and consistent, DPS drops ~20-25% off buoy-on baseline every time. HR during buoy-off was less dramatic today than Wednesday (156-166 vs 174-181) \u2014 likely because the reps were shorter (50-100yd vs ~100yd each) and not at the end of a longer haul. **Anomaly note:** laps 16-17 show DPS 1.76/1.99 and MaxHR 217 (impossible, Ian's confirmed max is ~206) \u2014 open-water current assist + optical HR artifact; excluded from quality assessment. Ian's honest self-assessment: not yet ready for full continuous without the buoy; leg-sink is the blocking issue. 0.2 anaerobic TE = faint trace from the buoy-off reps where effort spiked. **NEXT: need a deliberate fix for the leg-sink \u2014 body position, hip-driven flutter, core engagement; progress buoy-off rep length from 50\u2192100\u2192150yd as form holds.**"
+      },
+      {
+        "date": "2026-07-11",
+        "discipline": "bike",
+        "title": "Long Bike",
+        "prescribed": "Sat AM Base Bike \u00b7 1 hr Z3-oriented aerobic",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "0:00 / 0.0 mi",
+        "score": 0,
+        "verdict": "Session did not happen. No partial to salvage."
+      },
+      {
+        "date": "2026-07-12",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sun AM Long Swim \u00b7 1,600 yd",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "0 yd",
+        "score": 0,
+        "verdict": "Long swim did not happen."
+      },
+      {
+        "date": "2026-07-12",
+        "discipline": "unknown",
+        "title": "Brick",
+        "prescribed": "Sun PM Brick \u00b7 45 min bike + 15 min run",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "No bike, no run",
+        "score": 0,
+        "verdict": "Brick did not happen. Since no bike happened, there was no off-the-bike run exposure either."
       }
     ]
   },
@@ -463,16 +503,6 @@ const WEEKS_DATA = [
     "phase": "Base",
     "score": 34,
     "sessions": [
-      {
-        "date": "2026-06-29",
-        "discipline": "lift",
-        "title": "Push",
-        "prescribed": "",
-        "actual": "13,548 lb",
-        "key_metric": "13,548 lb | 1 PR | 36 min",
-        "score": 7,
-        "verdict": "Strong return after ~6-week gap. Max effort delivered on both compounds. Bench at 94% and OHP at 89% of May baseline \u2014 expected given the layoff. Short 1 set on bench (3x6 vs prescribed 4x5). Ab roller underdone (2x6 vs 3x10). Did not know updated prescription. These 1RM numbers are the new working baseline to beat."
-      },
       {
         "date": "2026-06-30",
         "discipline": "bike",
@@ -573,16 +603,6 @@ const WEEKS_DATA = [
     "score": 5,
     "sessions": [
       {
-        "date": "2026-06-22",
-        "discipline": "lift",
-        "title": "Push",
-        "prescribed": "",
-        "actual": "~1,920 lb (est)",
-        "key_metric": "~1,920 lb (est) | ~30 min (est)",
-        "score": 6,
-        "verdict": "Modified push session, Day 1 of Wk6 immediately after Jun 21 ankle sprain. 80s for 3x8 (volume-focused, lighter than typical max sets), upper body only \u2014 deliberately avoided any compound lifts that load the ankle (no standing OHP, no anything that requires bracing). Reduced volume + intensity by design. Pre-Strong-app session, exact data not captured."
-      },
-      {
         "date": "2026-06-23",
         "discipline": "run",
         "title": "Interval Run",
@@ -614,16 +634,6 @@ const WEEKS_DATA = [
       },
       {
         "date": "2026-06-25",
-        "discipline": "lift",
-        "title": "Pull",
-        "prescribed": "",
-        "actual": "0 lb",
-        "key_metric": "0 lb | \u2014",
-        "score": 0,
-        "verdict": "MISSED. Thu pull session not completed \u2014 full-body fatigue from ankle injury response. Upper-body pull was technically available (rows, curls, lat pulldown all neutral to ankle) but session did not happen. Should have been salvageable."
-      },
-      {
-        "date": "2026-06-25",
         "discipline": "run",
         "title": "Base Run",
         "prescribed": "5 mi E pace",
@@ -651,16 +661,6 @@ const WEEKS_DATA = [
         "key_metric": "",
         "score": 0,
         "verdict": "Not completed."
-      },
-      {
-        "date": "2026-06-27",
-        "discipline": "lift",
-        "title": "Legs",
-        "prescribed": "",
-        "actual": "0 lb",
-        "key_metric": "0 lb | \u2014",
-        "score": 0,
-        "verdict": "MISSED. Sat legs session not completed \u2014 ankle sprain Day 7 prevented any squat/RDL/lunge loading. Correct call (ankle could not tolerate compressive load). No data."
       },
       {
         "date": "2026-06-28",
@@ -1414,12 +1414,6 @@ const PLAN_DATA  = [
     "phase": "Base",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "lift",
-        "session": "Push",
-        "target": ""
-      },
-      {
         "day": "Tue",
         "disc": "run",
         "session": "Interval Run",
@@ -1439,12 +1433,6 @@ const PLAN_DATA  = [
       },
       {
         "day": "Thu",
-        "disc": "lift",
-        "session": "Pull",
-        "target": ""
-      },
-      {
-        "day": "Thu",
         "disc": "run",
         "session": "Base Run",
         "target": "5 mi E pace"
@@ -1460,12 +1448,6 @@ const PLAN_DATA  = [
         "disc": "bike",
         "session": "Long Bike",
         "target": "1:15 Z2"
-      },
-      {
-        "day": "Sat",
-        "disc": "lift",
-        "session": "Legs",
-        "target": ""
       },
       {
         "day": "Sun",
@@ -1499,12 +1481,6 @@ const PLAN_DATA  = [
     "label": "Jun 29 - Jul 5",
     "phase": "Base",
     "rows": [
-      {
-        "day": "Mon",
-        "disc": "lift",
-        "session": "Push",
-        "target": ""
-      },
       {
         "day": "Tue",
         "disc": "bike",
@@ -2988,7 +2964,7 @@ const TRENDS_DATA   = {
       "week": "Wk8",
       "label": "Jul 6-12",
       "phase": "Recovery",
-      "score": null,
+      "score": 34,
       "swim_yd": 2509,
       "bike_min": 50.1,
       "run_mi": 0.0,
@@ -2997,7 +2973,7 @@ const TRENDS_DATA   = {
       "long_bike_min": 30.0,
       "long_run_mi": 0.0,
       "run_sessions": 0,
-      "completed": 4,
+      "completed": 6,
       "load_delta": -8
     }
   ],
@@ -3086,6 +3062,10 @@ const TRENDS_DATA   = {
         },
         {
           "date": "Wk7",
+          "value": 34
+        },
+        {
+          "date": "Wk8",
           "value": 34
         }
       ]
@@ -3233,10 +3213,10 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk8",
-      "overall_min": 463.05,
+      "overall_min": 415.01666666666665,
       "swim_min": 44.06666666666667,
       "bike_min": 215.25,
-      "run_min": 197.73333333333332
+      "run_min": 149.7
     }
   ],
   "overlay": [
@@ -3340,9 +3320,23 @@ const TRENDS_DATA   = {
   "milestones": [
     {
       "date": "2026-07-10",
+      "title": "Base Run",
+      "detail": "No return-to-run attempt in Wk8",
+      "discipline": "run",
+      "week": "Wk8"
+    },
+    {
+      "date": "2026-07-10",
       "title": "Base Swim",
       "detail": "91% of distance (1,003/1,100 yd). Buoy-on DPS 1.12-1.24, buoy-off DPS collapses to **0.93-0.97** \u2014 leg-sink confirmed again",
       "discipline": "swim",
+      "week": "Wk8"
+    },
+    {
+      "date": "2026-07-08",
+      "title": "Interval Run",
+      "detail": "No return-to-run attempt in Wk8",
+      "discipline": "run",
       "week": "Wk8"
     },
     {
@@ -3357,13 +3351,6 @@ const TRENDS_DATA   = {
       "title": "Interval Bike",
       "detail": "Int1 = exact prescribed power, dead flat 8 min. Int2 = **muscular/torque failure, cadence-led** \u2014 HR peaked only 169 (nowhere near max), so NOT aerobic. No Int3 attempted.",
       "discipline": "bike",
-      "week": "Wk8"
-    },
-    {
-      "date": "2026-07-06",
-      "title": "Push",
-      "detail": "9,100 lb | 1 PR | 28 min",
-      "discipline": "lift",
       "week": "Wk8"
     },
     {
@@ -3395,20 +3382,6 @@ const TRENDS_DATA   = {
       "week": "Wk7"
     },
     {
-      "date": "2026-06-29",
-      "title": "Push",
-      "detail": "13,548 lb | 1 PR | 36 min",
-      "discipline": "lift",
-      "week": "Wk7"
-    },
-    {
-      "date": "2026-06-27",
-      "title": "Legs",
-      "detail": "0 lb | \u2014",
-      "discipline": "lift",
-      "week": "Wk6"
-    },
-    {
       "date": "2026-06-26",
       "title": "Base Swim",
       "detail": "2:21/100yd (vs 1:54 PR Wk5)",
@@ -3416,21 +3389,28 @@ const TRENDS_DATA   = {
       "week": "Wk6"
     },
     {
-      "date": "2026-06-22",
-      "title": "Push",
-      "detail": "~1,920 lb (est) | ~30 min (est)",
-      "discipline": "lift",
-      "week": "Wk6"
+      "date": "2026-06-19",
+      "title": "Base Run",
+      "detail": "Neg HR split 169\u2192159; GAP 10:30 (Wk4: 8:36)",
+      "discipline": "run",
+      "week": "Wk5"
+    },
+    {
+      "date": "2026-06-19",
+      "title": "Base Swim",
+      "detail": "New continuous PR: 300m (up 64% from 200yd Wk4)",
+      "discipline": "swim",
+      "week": "Wk5"
     }
   ]
 };
 const RACE_DATA     = {
   "overall": {
-    "projected_finish": "7:43:03",
-    "projected_range": "6:46:07\u20139:17:56",
+    "projected_finish": "6:55:01",
+    "projected_range": "6:17:39\u20137:57:17",
     "strongest_leg": "Swim",
-    "limiter_leg": "Run",
-    "confidence_label": "Low",
+    "limiter_leg": "Bike",
+    "confidence_label": "Moderate",
     "method_note": "Conservative model using demonstrated speed, longest distance, durability, and confidence penalties from live logs."
   },
   "legs": [
@@ -3462,14 +3442,14 @@ const RACE_DATA     = {
     },
     {
       "disc": "Run",
-      "readiness": 55,
-      "confidence": 0.5309656488549618,
-      "confidence_label": "Low",
-      "predicted_split": "3:17:44",
-      "predicted_range": "2:44:30\u20134:13:07",
+      "readiness": 81,
+      "confidence": 0.85,
+      "confidence_label": "High",
+      "predicted_split": "2:29:42",
+      "predicted_range": "2:16:03\u20132:52:27",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 0 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 2 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
