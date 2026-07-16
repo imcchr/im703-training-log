@@ -398,6 +398,25 @@
 <script>
 const WEEKS_DATA = [
   {
+    "num": 9,
+    "start": "2026-07-13",
+    "label": "Jul 13-19",
+    "phase": "Build",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-07-14",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Tue Interval Bike \u00b7 1hr \u00b7 WU: 15min Z2 (120-140W) \u00b7 MS: 2\u00d75min Z5 (176-200W), 15min Z2 rec \u00b7 CD: 20min Z2 (120-140W)",
+        "actual": "**Completed Jul 16** \u00b7 1:00:52 \u00b7 16.87 mi \u00b7 137W avg / 270W max \u00b7 HR 149 avg / 170 max \u00b7 88 rpm avg \u00b7 478 kcal \u00b7 **2x ~5:00 @ 184.6W**",
+        "key_metric": "Work reps landed cleanly inside Z5 target. ERG session success = duration + cadence + interval completion, not watt \"precision.\"",
+        "score": 9,
+        "verdict": "Good makeup and the key thing is the session got DONE. The file is a clean Zwift ERG interval bike: two distinct ~5-minute work blocks at **184.6W** (inside the prescribed **176-200W** band), avg cadence **88 rpm** (right in the target band), and full session duration hit at **60:52**. The only reason this is not a 10 is that the surrounding structure does not map perfectly onto the exact calendar timing \u2014 the work blocks are right, but the recovery/cooldown shape is a little messier than the paper prescription. Still, this is a clear step forward from the Wk8 interval failure pattern: the muscular ceiling that killed the old 204W work did **not** show up here once the interval target was re-anchored lower."
+      }
+    ]
+  },
+  {
     "num": 8,
     "start": "2026-07-06",
     "label": "Jul 6-12",
@@ -1758,70 +1777,64 @@ const PLAN_DATA  = [
     "phase": "Recovery",
     "rows": [
       {
-        "day": "Mon AM",
+        "day": "Mon",
         "disc": "lift",
         "session": "Push",
         "target": ""
       },
       {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "55min \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 6\u00d71min Z5 (176-200W), 5min Z2 rec \u00b7 CD: 14min Z2 (120-140W)"
+        "target": "45 min \u2014 3x8 min @ 196-216W (Z4), 3 min rec"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "run",
         "session": "Interval Run",
-        "target": "39min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (6:47/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "Wed AM light easy test only if ankle allowed it"
       },
       {
-        "day": "Wed PM",
+        "day": "Wed",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,250yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 650yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Wed PM Equipment Swim ~1,400 yd (drills + pull buoy sets)"
       },
       {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Pull",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "45min \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 25min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)"
+        "target": "Thu PM Zwift Z2 easy \u00b7 30 min (130-163W at old FTP; ~120-150W at new 200W FTP)"
       },
       {
-        "day": "Fri AM",
+        "day": "Fri",
         "disc": "run",
         "session": "Base Run",
-        "target": "35min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 15min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 4x20s"
+        "target": "Fri AM light easy test only if ankle allowed it"
       },
       {
-        "day": "Fri PM",
+        "day": "Fri",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Fri PM Continuity Swim \u00b7 1,100 yd (begin extending rep distance)"
       },
       {
-        "day": "Sat AM",
+        "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "1hr \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 40min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)"
+        "target": "Sat AM Base Bike \u00b7 1 hr Z3-oriented aerobic"
       },
       {
-        "day": "Sun AM",
+        "day": "Sun",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z3 w/ pull buoy \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Sun AM Long Swim \u00b7 1,600 yd"
       },
       {
-        "day": "Sun PM",
+        "day": "Sun",
         "disc": "unknown",
         "session": "Brick",
-        "target": "1hr \u00b7 Bike: 45min Z3 (140-162W) \u00b7 Run: 15min Z3 (8-9/mi)"
+        "target": "Sun PM Brick \u00b7 45 min bike + 15 min run"
       }
     ],
     "notes": [],
@@ -3177,6 +3190,23 @@ const TRENDS_DATA   = {
       "run_sessions": 0,
       "completed": 6,
       "load_delta": -8
+    },
+    {
+      "week_num": 9,
+      "week": "Wk9",
+      "label": "Jul 13-19",
+      "phase": "Build",
+      "score": null,
+      "swim_yd": 0,
+      "bike_min": 60.9,
+      "run_mi": 0.0,
+      "total_min": 60.9,
+      "long_swim_yd": 0,
+      "long_bike_min": 60.9,
+      "long_run_mi": 0.0,
+      "run_sessions": 0,
+      "completed": 1,
+      "load_delta": -50
     }
   ],
   "durability": [
@@ -3233,6 +3263,13 @@ const TRENDS_DATA   = {
       "week": "Wk8",
       "long_swim_yd": 1506,
       "long_bike_min": 30.0,
+      "long_run_mi": 0.0,
+      "run_sessions": 0
+    },
+    {
+      "week": "Wk9",
+      "long_swim_yd": 0,
+      "long_bike_min": 60.9,
       "long_run_mi": 0.0,
       "run_sessions": 0
     }
@@ -3419,6 +3456,13 @@ const TRENDS_DATA   = {
       "swim_min": 44.06666666666667,
       "bike_min": 215.25,
       "run_min": 149.7
+    },
+    {
+      "week": "Wk9",
+      "overall_min": 415.01666666666665,
+      "swim_min": 44.06666666666667,
+      "bike_min": 215.25,
+      "run_min": 149.7
     }
   ],
   "overlay": [
@@ -3517,9 +3561,28 @@ const TRENDS_DATA   = {
       "atl": "",
       "vo2": "",
       "status": ""
+    },
+    {
+      "week_num": 9,
+      "week": "Wk9",
+      "load_min": 60.9,
+      "readiness": 72,
+      "hrv": "",
+      "rhr": "",
+      "sleep": "",
+      "atl": "",
+      "vo2": "",
+      "status": ""
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-14",
+      "title": "Interval Bike",
+      "detail": "Work reps landed cleanly inside Z5 target. ERG session success = duration + cadence + interval completion, not watt \"precision.\"",
+      "discipline": "bike",
+      "week": "Wk9"
+    },
     {
       "date": "2026-07-10",
       "title": "Base Run",
@@ -3596,13 +3659,6 @@ const TRENDS_DATA   = {
       "detail": "2:21/100yd (vs 1:54 PR Wk5)",
       "discipline": "swim",
       "week": "Wk6"
-    },
-    {
-      "date": "2026-06-19",
-      "title": "Base Run",
-      "detail": "Neg HR split 169\u2192159; GAP 10:30 (Wk4: 8:36)",
-      "discipline": "run",
-      "week": "Wk5"
     }
   ]
 };
