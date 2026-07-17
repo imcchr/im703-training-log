@@ -94,7 +94,7 @@
   .load-val{font-size:.63rem;font-weight:700;color:#475569;white-space:nowrap;}
   .load-delta{margin-top:2px;padding-left:62px;font-size:.62rem;}
   .delta-pos{color:#15803d;font-weight:800;} .delta-neg{color:#c2410c;font-weight:800;} .delta-flat{color:var(--muted);font-weight:800;}
-  .section-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .section-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;}
   .dur-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
   .dur-card{background:#fbfdff;border:1px solid var(--line);border-radius:11px;padding:11px;}
   .dur-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px;}
@@ -413,6 +413,16 @@ const WEEKS_DATA = [
         "key_metric": "Work reps landed cleanly inside Z5 target. ERG session success = duration + cadence + interval completion, not watt \"precision.\"",
         "score": 9,
         "verdict": "Good makeup and the key thing is the session got DONE. The file is a clean Zwift ERG interval bike: two distinct ~5-minute work blocks at **184.6W** (inside the prescribed **176-200W** band), avg cadence **88 rpm** (right in the target band), and full session duration hit at **60:52**. The only reason this is not a 10 is that the surrounding structure does not map perfectly onto the exact calendar timing \u2014 the work blocks are right, but the recovery/cooldown shape is a little messier than the paper prescription. Still, this is a clear step forward from the Wk8 interval failure pattern: the muscular ceiling that killed the old 204W work did **not** show up here once the interval target was re-anchored lower."
+      },
+      {
+        "date": "2026-07-15",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Wed PM Aerobic Swim \u00b7 1,750yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,150yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy",
+        "actual": "**Completed Jul 16** \u00b7 1,014 yd \u00b7 25:32 active / 27:06 elapsed \u00b7 2:31/100yd avg \u00b7 HR 162 avg / 186 max \u00b7 27 spm \u00b7 DPS 1.31 \u00b7 TE 3.3 aerobic / 0.3 anaerobic \u00b7 OW 88F",
+        "key_metric": "**58% of prescribed distance** but at clearly higher intent than the recent continuity swims; shortened by time + fatigue, not by complete breakdown",
+        "score": 6,
+        "verdict": "Logged on the **assigned Wednesday slot** even though the FIT landed on Jul 16. This was a shorter, harder swim: pace came down to **2:31/100yd** with HR up at **162 avg / 186 max**, so the session absolutely had more bite than the recent steady pull-buoy continuity work. The deduction is simple math, not drama \u2014 prescribed was **1,750yd** and actual was **1,014yd**, so a big chunk of the aerobic-swim volume is still missing. Ian's note matters here: short on time and zapped from the previous workout, so this reads as a constrained partial, not a quit. Credit for showing up and pushing the effort; dock for only getting about **58%** of the planned distance. The coaching cue stays the same: keep building harder swim tolerance **without** hiding behind endless buoy-only comfort, but progress the distance gradually so the form doesn't turn into soup."
       }
     ]
   },
@@ -3197,16 +3207,16 @@ const TRENDS_DATA   = {
       "label": "Jul 13-19",
       "phase": "Build",
       "score": null,
-      "swim_yd": 0,
+      "swim_yd": 1014,
       "bike_min": 60.9,
       "run_mi": 0.0,
-      "total_min": 60.9,
-      "long_swim_yd": 0,
+      "total_min": 86.4,
+      "long_swim_yd": 1014,
       "long_bike_min": 60.9,
       "long_run_mi": 0.0,
       "run_sessions": 0,
-      "completed": 1,
-      "load_delta": -50
+      "completed": 2,
+      "load_delta": -29
     }
   ],
   "durability": [
@@ -3268,7 +3278,7 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk9",
-      "long_swim_yd": 0,
+      "long_swim_yd": 1014,
       "long_bike_min": 60.9,
       "long_run_mi": 0.0,
       "run_sessions": 0
@@ -3565,7 +3575,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 9,
       "week": "Wk9",
-      "load_min": 60.9,
+      "load_min": 86.4,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -3576,6 +3586,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-15",
+      "title": "Base Swim",
+      "detail": "**58% of prescribed distance** but at clearly higher intent than the recent continuity swims; shortened by time + fatigue, not by complete breakdown",
+      "discipline": "swim",
+      "week": "Wk9"
+    },
     {
       "date": "2026-07-14",
       "title": "Interval Bike",
@@ -3652,13 +3669,6 @@ const TRENDS_DATA   = {
       "detail": "204W = 94% FTP on both intervals; HR drift +2 bpm between sets (167\u2192169)",
       "discipline": "bike",
       "week": "Wk7"
-    },
-    {
-      "date": "2026-06-26",
-      "title": "Base Swim",
-      "detail": "2:21/100yd (vs 1:54 PR Wk5)",
-      "discipline": "swim",
-      "week": "Wk6"
     }
   ]
 };
