@@ -374,7 +374,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated July 18, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 20, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -402,7 +402,7 @@ const WEEKS_DATA = [
     "start": "2026-07-13",
     "label": "Jul 13-19",
     "phase": "Build",
-    "score": null,
+    "score": 29,
     "sessions": [
       {
         "date": "2026-07-14",
@@ -425,6 +425,36 @@ const WEEKS_DATA = [
         "verdict": "Logged on the **assigned Wednesday slot** even though the FIT landed on Jul 16. This was a shorter, harder swim: pace came down to **2:31/100yd** with HR up at **162 avg / 186 max**, so the session absolutely had more bite than the recent steady pull-buoy continuity work. The deduction is simple math, not drama \u2014 prescribed was **1,750yd** and actual was **1,014yd**, so a big chunk of the aerobic-swim volume is still missing. Ian's note matters here: short on time and zapped from the previous workout, so this reads as a constrained partial, not a quit. Credit for showing up and pushing the effort; dock for only getting about **58%** of the planned distance. The coaching cue stays the same: keep building harder swim tolerance **without** hiding behind endless buoy-only comfort, but progress the distance gradually so the form doesn't turn into soup."
       },
       {
+        "date": "2026-07-16",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Thu AM Base Bike \u00b7 1:15 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 55min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "0:00 / 0.0 mi",
+        "score": 0,
+        "verdict": "Session did not happen. In context, current bike durability is still rebuilding, but the slot remains a missed prescribed session."
+      },
+      {
+        "date": "2026-07-16",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Wed AM Interval Run \u00b7 39min \u00b7 WU: 10min Z2 \u00b7 MS: 3x5min Z4, 2min Z2 rec \u00b7 CD: 10min Z2",
+        "actual": "NO RUN \u2014 ankle return still not ready for quality work",
+        "key_metric": "No return-to-run quality session in Wk9",
+        "score": 0,
+        "verdict": "Correct restraint beats fake hero running. The ankle may be nearing jog readiness, but it was not ready for a structured interval run this week."
+      },
+      {
+        "date": "2026-07-17",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Fri AM Base Run \u00b7 45min \u00b7 WU: 10min Z2 \u00b7 MS: 25min Z3 \u00b7 CD: 10min Z2 \u00b7 Strides 6x20s",
+        "actual": "NO RUN \u2014 ankle return still not ready for base run volume",
+        "key_metric": "No return-to-run base session in Wk9",
+        "score": 0,
+        "verdict": "Same story as Wednesday: no run logged. This week still functioned as the tail end of re-entry, not a clean full-volume return."
+      },
+      {
         "date": "2026-07-17",
         "discipline": "swim",
         "title": "Base Swim",
@@ -443,6 +473,26 @@ const WEEKS_DATA = [
         "key_metric": "**Main work landed inside Z3 (149W)**, but duration was only **42% of prescribed 2:00** and cooldown never happened",
         "score": 5,
         "verdict": "This was basically a **half-built long ride**: the opening 10 minutes were right where they should be for Z2 warmup (**129W**), then the main block settled at **149W**, which is cleanly inside the prescribed **140-162W Z3** band. So the issue was **not intensity discipline**. The issue was durability/completion: the ride stopped at **50:28** against a **2:00** prescription, so over half the long-bike volume got left on the table, and there was no closing cooldown block. Ian's note lines up with the file: energy was low and butt comfort became the limiter. That's real context, but it still matters because long bikes are where saddle tolerance and race-bike durability get built. Credit for riding the correct kind of effort instead of turning it into random junk watts; dock for only getting **~42%** of the planned duration. Action items are boring but real: fuel earlier, keep pressure on saddle-fit/comfort tweaks, and protect enough freshness to stop these long rides from getting cut in half."
+      },
+      {
+        "date": "2026-07-19",
+        "discipline": "run",
+        "title": "Long Run",
+        "prescribed": "Sun PM Long Run \u00b7 1hr \u00b7 WU: 10min Z2 \u00b7 MS: 40min Z3 \u00b7 CD: 10min Z2",
+        "actual": "NO RUN \u2014 ankle still not ready for long-run load",
+        "key_metric": "No long run happened in Wk9",
+        "score": 0,
+        "verdict": "No point pretending a long run existed when the ankle still had not earned that load."
+      },
+      {
+        "date": "2026-07-19",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sun AM Long Swim \u00b7 2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3 w/ pull buoy \u00b7 CD: 300yd w/ pull buoy",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "0 yd",
+        "score": 0,
+        "verdict": "Long swim did not happen."
       }
     ]
   },
@@ -3226,7 +3276,7 @@ const TRENDS_DATA   = {
       "week": "Wk9",
       "label": "Jul 13-19",
       "phase": "Build",
-      "score": null,
+      "score": 29,
       "swim_yd": 2033,
       "bike_min": 111.3,
       "run_mi": 0.0,
@@ -3235,7 +3285,7 @@ const TRENDS_DATA   = {
       "long_bike_min": 60.9,
       "long_run_mi": 0.0,
       "run_sessions": 0,
-      "completed": 4,
+      "completed": 7,
       "load_delta": 33
     }
   ],
@@ -3336,6 +3386,10 @@ const TRENDS_DATA   = {
         {
           "date": "Wk8",
           "value": 34
+        },
+        {
+          "date": "Wk9",
+          "value": 29
         }
       ]
     },
@@ -3607,6 +3661,13 @@ const TRENDS_DATA   = {
   ],
   "milestones": [
     {
+      "date": "2026-07-19",
+      "title": "Long Run",
+      "detail": "No long run happened in Wk9",
+      "discipline": "run",
+      "week": "Wk9"
+    },
+    {
       "date": "2026-07-18",
       "title": "Long Bike",
       "detail": "**Main work landed inside Z3 (149W)**, but duration was only **42% of prescribed 2:00** and cooldown never happened",
@@ -3618,6 +3679,13 @@ const TRENDS_DATA   = {
       "title": "Base Swim",
       "detail": "**~120 yd without pull buoy** showed up as the HR spike block, but this time it stayed controlled instead of blowing up; session was only **57% of prescribed distance** and read more like strong aerobic/base-form work than full threshold volume",
       "discipline": "swim",
+      "week": "Wk9"
+    },
+    {
+      "date": "2026-07-16",
+      "title": "Interval Run",
+      "detail": "No return-to-run quality session in Wk9",
+      "discipline": "run",
       "week": "Wk9"
     },
     {
@@ -3675,20 +3743,6 @@ const TRENDS_DATA   = {
       "detail": "bench est-1RM PR 279",
       "discipline": "lift",
       "week": "Wk8"
-    },
-    {
-      "date": "2026-07-03",
-      "title": "Long Swim",
-      "detail": "Distance hit (1,022 vs 1,000) aerobically under lifejacket drag; pace 3:14 + DPS 1.07 CONFOUNDED by head-up/lifejacket \u2014 NOT leg-sink trend data",
-      "discipline": "swim",
-      "week": "Wk7"
-    },
-    {
-      "date": "2026-07-02",
-      "title": "Base Bike",
-      "detail": "138W = 64% FTP; max power 143W = 5W spread (exceptional Z2 ceiling discipline); cadence 87 rpm (\u2191 from historical 74-83 flag)",
-      "discipline": "bike",
-      "week": "Wk7"
     }
   ]
 };
@@ -3737,7 +3791,7 @@ const RACE_DATA     = {
       "predicted_range": "2:16:03\u20132:52:27",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 2 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 5 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
