@@ -402,7 +402,7 @@ const WEEKS_DATA = [
     "start": "2026-07-20",
     "label": "Jul 20-26",
     "phase": "Build",
-    "score": 29,
+    "score": 39,
     "sessions": [
       {
         "date": "2026-07-21",
@@ -433,6 +433,16 @@ const WEEKS_DATA = [
         "key_metric": "**Textbook zone-for-zone match** \u2014 WU 129W (in 120-140W), MS 149W (in 140-162W), CD 129W (in 120-140W), duration 60:32 vs 60:00 prescribed",
         "score": 10,
         "verdict": "Logged on the **assigned Thursday slot** (Jul 23) even though the file landed Jul 24 \u2014 per the standing makeup rule, sessions get credited to the slot they fulfill, not the completion timestamp. And this one earned the slot: every segment landed inside its target band with almost no drift. Warmup held **129W** dead in the middle of the **120-140W** Z2 window for the full **10:01**. Main set held **149W** for the full **40:00**, comfortably inside **140-162W** Z3 \u2014 no fade, no spike, just a flat clean block. Cooldown dropped right back to **129W** for another **10:00**. Cadence sat at **88-90 rpm** across all three segments \u2014 no drift toward the end, no mechanical floor issue. Total duration **60:32** against a **60:00** prescription is as close to exact as these things get. HR climbed sensibly with the power steps (132 \u2192 153 \u2192 150 avg per lap) and topped out at **164**, nothing alarming. There is nothing to dock here \u2014 this is what a correctly executed Base Bike looks like, and it's a good marker for what \"durability rebuilding\" should look like going forward."
+      },
+      {
+        "date": "2026-07-24",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Fri AM Base Run \u00b7 25min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s only if ankle calm",
+        "actual": "**First completed run since the Jun 21 ankle sprain** \u00b7 24:04 \u00b7 2.35 mi \u00b7 10:14/mi raw avg, **GAP ~10:19/mi overall** (uphill-out/downhill-back route nets out close to raw, but segment GAP tells the real story \u2014 see verdict) \u00b7 HR 175 avg / 198 max \u00b7 91F ambient \u00b7 3 of 4 strides completed (ended at driveway before the 4th) \u00b7 run performed directly off the Thu makeup bike",
+        "key_metric": "**Effort-controlled return-to-run under real heat + real hills** \u2014 raw pace looks noisy (7:37-11:48/mi across segments) but GAP evens it out to a tight 9:45-10:54/mi band, meaning the pacing judgment (walk the steep pitches, don't force it) was correct",
+        "score": 9,
+        "verdict": "This is the milestone session Wk10 has been building toward: **first completed run since the ankle sprain**, and it came back clean. No pain flagged, no bailout, no hero pace chasing. On the GAP question specifically \u2014 the grade-adjusted numbers back up exactly what you felt: the **first ~10 min (net uphill, walked the steep pitches)** raw-paced at **11:48/mi** but GAP-computed to **9:45/mi** \u2014 meaning that \"slow\" walking segment was actually working at something close to tempo effort once the climb is priced in, which is exactly why walking those pitches was the right call instead of forcing a run-pace number that would've spiked HR further. The **return leg (net downhill)** raw-paced faster at **9:59/mi** but GAP came back out to **10:54/mi** \u2014 the downhill was giving you free speed that didn't cost real effort, so it shouldn't be read as \"you got fitter for 10 minutes.\" Net effect: this run was **far more evenly-dosed as true effort than the raw split times suggest**, and that's the right way to read a hilly out-and-back. Context on the elevated HR (175 avg / 198 max, nominally high for what's programmed as Z2): three real inputs stacked here \u2014 **91F heat**, **serious hills** (100+ ft of climb in 2.35 mi), and this run landing **directly off the makeup bike session**, functioning as an unplanned mini-brick. All three inflate HR independent of aerobic fitness, so this is not a red flag. Strides: got **3 of the prescribed 4** in, cut short only because the out-and-back ran out of road at your driveway \u2014 not a fitness or ankle limiter, just a route-length ceiling. Docking 1 point for the HR sitting meaningfully hot for a nominal Z2 day (even with full context, it's worth a marker to watch) and the incomplete 4th stride. Everything else about this session was exactly the right way to reintroduce running."
       }
     ]
   },
@@ -3452,17 +3462,17 @@ const TRENDS_DATA   = {
       "week": "Wk10",
       "label": "Jul 20-26",
       "phase": "Build",
-      "score": 29,
+      "score": 39,
       "swim_yd": 1451,
       "bike_min": 100.7,
-      "run_mi": 0.0,
-      "total_min": 133.6,
+      "run_mi": 2.4,
+      "total_min": 157.6,
       "long_swim_yd": 1451,
       "long_bike_min": 60.5,
-      "long_run_mi": 0.0,
-      "run_sessions": 0,
-      "completed": 3,
-      "load_delta": -18
+      "long_run_mi": 2.4,
+      "run_sessions": 1,
+      "completed": 4,
+      "load_delta": -3
     }
   ],
   "durability": [
@@ -3533,8 +3543,8 @@ const TRENDS_DATA   = {
       "week": "Wk10",
       "long_swim_yd": 1451,
       "long_bike_min": 60.5,
-      "long_run_mi": 0.0,
-      "run_sessions": 0
+      "long_run_mi": 2.4,
+      "run_sessions": 1
     }
   ],
   "markers": [
@@ -3576,7 +3586,7 @@ const TRENDS_DATA   = {
         },
         {
           "date": "Wk10",
-          "value": 29
+          "value": 39
         }
       ]
     },
@@ -3855,7 +3865,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 10,
       "week": "Wk10",
-      "load_min": 133.6,
+      "load_min": 157.6,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -3866,6 +3876,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-24",
+      "title": "Base Run",
+      "detail": "**Effort-controlled return-to-run under real heat + real hills** \u2014 raw pace looks noisy (7:37-11:48/mi across segments) but GAP evens it out to a tight 9:45-10:54/mi band, meaning the pacing judgment (walk the steep pitches, don't force it) was correct",
+      "discipline": "run",
+      "week": "Wk10"
+    },
     {
       "date": "2026-07-23",
       "title": "Base Bike",
@@ -3942,13 +3959,6 @@ const TRENDS_DATA   = {
       "detail": "91% of distance (1,003/1,100 yd). Buoy-on DPS 1.12-1.24, buoy-off DPS collapses to **0.93-0.97** \u2014 leg-sink confirmed again",
       "discipline": "swim",
       "week": "Wk8"
-    },
-    {
-      "date": "2026-07-08",
-      "title": "Interval Run",
-      "detail": "No return-to-run attempt in Wk8",
-      "discipline": "run",
-      "week": "Wk8"
     }
   ]
 };
@@ -3997,7 +4007,7 @@ const RACE_DATA     = {
       "predicted_range": "2:16:03\u20132:52:27",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 3 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 4 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
