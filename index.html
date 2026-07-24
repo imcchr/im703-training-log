@@ -55,6 +55,7 @@
   .hm-month{height:13px;line-height:13px;font-size:.58rem;color:var(--muted);
     white-space:nowrap;overflow:visible;width:13px;}
   .hm-cell{width:13px;height:13px;border-radius:3px;background:#ece1d2;cursor:pointer;}
+  .hm-cell.l0miss{background:#a8988866;border:1px solid #8a7a6a;}
   .hm-cell.l1{background:#f7b12e;}
   .hm-cell.l2{background:#ea7317;}
   .hm-cell.l3{background:#c0392b;}
@@ -3064,6 +3065,138 @@ const PLAN_DATA  = [
     }
   }
 ];
+const EXPECTED_COUNTS = {
+  "2026-05-04": 1,
+  "2026-05-05": 1,
+  "2026-05-06": 1,
+  "2026-05-09": 1,
+  "2026-05-25": 1,
+  "2026-05-26": 1,
+  "2026-05-27": 2,
+  "2026-05-28": 1,
+  "2026-05-29": 1,
+  "2026-05-30": 3,
+  "2026-06-01": 1,
+  "2026-06-02": 1,
+  "2026-06-03": 2,
+  "2026-06-04": 1,
+  "2026-06-05": 2,
+  "2026-06-06": 3,
+  "2026-06-07": 2,
+  "2026-06-08": 1,
+  "2026-06-09": 1,
+  "2026-06-10": 1,
+  "2026-06-11": 2,
+  "2026-06-12": 2,
+  "2026-06-13": 1,
+  "2026-06-14": 2,
+  "2026-06-15": 1,
+  "2026-06-16": 1,
+  "2026-06-17": 2,
+  "2026-06-18": 2,
+  "2026-06-19": 2,
+  "2026-06-20": 2,
+  "2026-06-21": 1,
+  "2026-06-22": 1,
+  "2026-06-23": 1,
+  "2026-06-24": 2,
+  "2026-06-25": 1,
+  "2026-06-26": 2,
+  "2026-06-27": 2,
+  "2026-06-28": 2,
+  "2026-06-29": 1,
+  "2026-06-30": 1,
+  "2026-07-01": 2,
+  "2026-07-02": 2,
+  "2026-07-03": 2,
+  "2026-07-04": 2,
+  "2026-07-05": 2,
+  "2026-07-06": 1,
+  "2026-07-07": 1,
+  "2026-07-08": 2,
+  "2026-07-09": 2,
+  "2026-07-10": 2,
+  "2026-07-11": 1,
+  "2026-07-12": 1,
+  "2026-07-13": 1,
+  "2026-07-14": 1,
+  "2026-07-15": 2,
+  "2026-07-16": 2,
+  "2026-07-17": 2,
+  "2026-07-18": 1,
+  "2026-07-19": 2,
+  "2026-07-20": 1,
+  "2026-07-21": 1,
+  "2026-07-22": 2,
+  "2026-07-23": 2,
+  "2026-07-24": 2,
+  "2026-07-26": 2,
+  "2026-07-27": 1,
+  "2026-07-28": 1,
+  "2026-07-29": 2,
+  "2026-07-30": 2,
+  "2026-07-31": 2,
+  "2026-08-01": 1,
+  "2026-08-02": 2,
+  "2026-08-03": 1,
+  "2026-08-04": 1,
+  "2026-08-05": 2,
+  "2026-08-06": 2,
+  "2026-08-07": 2,
+  "2026-08-08": 1,
+  "2026-08-10": 1,
+  "2026-08-11": 1,
+  "2026-08-12": 2,
+  "2026-08-13": 2,
+  "2026-08-14": 2,
+  "2026-08-15": 1,
+  "2026-08-16": 2,
+  "2026-08-17": 1,
+  "2026-08-18": 1,
+  "2026-08-19": 2,
+  "2026-08-20": 2,
+  "2026-08-21": 2,
+  "2026-08-22": 1,
+  "2026-08-23": 1,
+  "2026-08-24": 1,
+  "2026-08-25": 1,
+  "2026-08-26": 2,
+  "2026-08-27": 2,
+  "2026-08-28": 2,
+  "2026-08-29": 1,
+  "2026-08-30": 2,
+  "2026-08-31": 1,
+  "2026-09-01": 1,
+  "2026-09-02": 2,
+  "2026-09-03": 2,
+  "2026-09-04": 2,
+  "2026-09-05": 1,
+  "2026-09-07": 1,
+  "2026-09-08": 1,
+  "2026-09-09": 2,
+  "2026-09-10": 2,
+  "2026-09-11": 2,
+  "2026-09-12": 1,
+  "2026-09-13": 2,
+  "2026-09-14": 1,
+  "2026-09-15": 1,
+  "2026-09-16": 2,
+  "2026-09-17": 2,
+  "2026-09-18": 2,
+  "2026-09-20": 2,
+  "2026-09-21": 1,
+  "2026-09-22": 1,
+  "2026-09-23": 2,
+  "2026-09-24": 2,
+  "2026-09-25": 2,
+  "2026-09-26": 1,
+  "2026-09-27": 2,
+  "2026-09-29": 1,
+  "2026-09-30": 2,
+  "2026-10-01": 1,
+  "2026-10-02": 1,
+  "2026-10-03": 1
+};  // ISO date -> # workouts prescribed that day (heatmap multi-workout-day averaging)
 const RECOVERY_DATA = [
   {
     "week": "Wk2",
@@ -3948,14 +4081,31 @@ function isoOf(dt){
 function mondayIndex(dt){return (dt.getDay()+6)%7;}
 function renderHeatmap(){
   const grid=document.getElementById('hm-grid');
-  // agg[date] = {sum, n} over completed sessions (score>0); cell color = avg score
+  // agg[date] = {sum, n, logged} -- cell color = avg score across ALL workouts
+  // PRESCRIBED that day, not just the ones uploaded so far. A day with 2
+  // workouts assigned (e.g. Wed AM Interval Run + Wed PM Aerobic Swim) must
+  // average against 2, even if only 1 has been logged -- unlogged sessions
+  // count as 0 in that average once ANY session for that date has been
+  // entered. This prevents a single logged 9 from painting the whole day
+  // 'hot' while a second required session is still sitting un-uploaded.
   const agg={};let minD=null,maxD=null,total=0;
   WEEKS_DATA.forEach(w=>w.sessions.forEach(s=>{
     const [y,m,d]=dateParts(s.date);const dt=new Date(y,m-1,d);
-    if(s.score>0){(agg[s.date]=agg[s.date]||{sum:0,n:0});agg[s.date].sum+=s.score;agg[s.date].n++;total++;}
+    (agg[s.date]=agg[s.date]||{sum:0,n:0,logged:0});
+    agg[s.date].sum+=(s.score||0);
+    agg[s.date].n++;
+    agg[s.date].logged++;
+    if(s.score>0)total++;
     if(!minD||dt<minD)minD=dt;
     if(!maxD||dt>maxD)maxD=dt;
   }));
+  // Pad denominator with still-unlogged prescribed sessions for any date
+  // that already has at least one real entry -- never invent activity on a
+  // date that has zero logged sessions (that's just a rest/future day).
+  Object.keys(agg).forEach(iso=>{
+    const expected=EXPECTED_COUNTS[iso]||0;
+    if(expected>agg[iso].n)agg[iso].n=expected; // sum unchanged: missing = 0
+  });
   if(!minD){document.getElementById('heatmap-card').style.display='none';return;}
   const start=new Date(minD);start.setDate(start.getDate()-mondayIndex(start));
   const end=new Date(maxD);end.setDate(end.getDate()+(6-mondayIndex(end)));
@@ -3972,9 +4122,13 @@ function renderHeatmap(){
     for(let i=0;i<7;i++){
       const iso=isoOf(cur);
       const a=agg[iso];const avg=a?a.sum/a.n:0;
+      const level=a?hmLevel(avg):0;
       const cell=document.createElement('div');
-      cell.className='hm-cell'+(hmLevel(avg)?' l'+hmLevel(avg):'');
-      cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.avg=avg?avg.toFixed(1):'';
+      // a==truthy but level 0 = real workout day(s) that averaged to a full
+      // miss (either an explicit 0 or an unlogged prescribed session) --
+      // must look different from a true blank/rest day with no data at all.
+      cell.className='hm-cell'+(level?' l'+level:(a?' l0miss':''));
+      cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.logged=a?a.logged:0;cell.dataset.avg=a?avg.toFixed(1):'';
       col.appendChild(cell);
       cur.setDate(cur.getDate()+1);
     }
@@ -3998,9 +4152,18 @@ function renderHeatmap(){
   cap.textContent=total+' workouts \u00b7 colored by avg score';
   grid.addEventListener('click',e=>{
     const cell=e.target.closest('.hm-cell');if(!cell)return;
-    const c=+cell.dataset.count;const avg=cell.dataset.avg;
-    cap.textContent = c ? prettyDate(cell.dataset.iso)+' \u00b7 '+(c===1?'score ':'avg ')+avg+'/10'+(c>1?' ('+c+' sessions)':'')
-                        : prettyDate(cell.dataset.iso)+' \u00b7 rest day';
+    const c=+cell.dataset.count;const logged=+cell.dataset.logged;const avg=cell.dataset.avg;
+    let detail;
+    if(!c){
+      detail=prettyDate(cell.dataset.iso)+' \u00b7 rest day';
+    }else if(c===1){
+      detail=prettyDate(cell.dataset.iso)+' \u00b7 score '+avg+'/10';
+    }else if(logged<c){
+      detail=prettyDate(cell.dataset.iso)+' \u00b7 avg '+avg+'/10 ('+logged+' of '+c+' logged, '+(c-logged)+' pending = counted as 0)';
+    }else{
+      detail=prettyDate(cell.dataset.iso)+' \u00b7 avg '+avg+'/10 ('+c+' sessions)';
+    }
+    cap.textContent=detail;
   });
 }
 
