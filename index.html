@@ -402,7 +402,7 @@ const WEEKS_DATA = [
     "start": "2026-07-20",
     "label": "Jul 20-26",
     "phase": "Build",
-    "score": 18,
+    "score": 29,
     "sessions": [
       {
         "date": "2026-07-21",
@@ -423,6 +423,16 @@ const WEEKS_DATA = [
         "key_metric": "**Distance nailed almost exactly (1,451 / 1,450 yd = 100%)** \u2014 first fully complete swim distance since the injury re-entry bridge started; milestone session: first truly nonstop continuous open-water swim, buoy on throughout",
         "score": 9,
         "verdict": "This is the swim Wk10 needed, and it's a milestone on top of that. Full prescribed distance for the first time in three weeks \u2014 no shortfall, no bailing on time \u2014 and per Ian this was the **first-ever fully continuous open-water swim**: straight lake swimming, no stopping, no wall to push off. Pull buoy was confirmed on the **entire** session, which resolves the earlier open question about the buoy status and explains why DPS stayed tight in a **1.29-1.52** band the whole way with no sharp collapse \u2014 this was not a leg-sink-limiter test, it was a buoy-on continuity swim, so it should **not** be read as evidence the kick/leg-sink limiter has improved. Pacing shape: fast opening (**1:50-1:55/100yd** for the first ~200yd), settling into a **2:10-2:27/100yd** working band for the bulk of the set, then a HR spike to **180-190** on the second-to-last rep before a slightly slower closing 50yd \u2014 a real push before the finish, not a flat cruise. Only docking 1 point: the final 50yd rep came in as the slowest split (**2:29/100yd**) with the lowest DPS of the set (**1.29**), a normal end-of-session fade. Overall: distance discipline is back, and this is now the new continuous-swim benchmark to build from."
+      },
+      {
+        "date": "2026-07-23",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Thu AM Base Bike \u00b7 1:00 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 40min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)",
+        "actual": "**Completed Jul 24** \u00b7 1:00:32 \u00b7 18.65 mi \u00b7 141W avg / 152W max \u00b7 HR 149 avg / 164 max \u00b7 88 rpm avg \u00b7 491 kcal \u00b7 **Lap 1:** 10:01 @ 129W \u00b7 **Lap 2:** 40:00 @ 149W \u00b7 **Lap 3:** 10:00 @ 129W",
+        "key_metric": "**Textbook zone-for-zone match** \u2014 WU 129W (in 120-140W), MS 149W (in 140-162W), CD 129W (in 120-140W), duration 60:32 vs 60:00 prescribed",
+        "score": 10,
+        "verdict": "Logged on the **assigned Thursday slot** (Jul 23) even though the file landed Jul 24 \u2014 per the standing makeup rule, sessions get credited to the slot they fulfill, not the completion timestamp. And this one earned the slot: every segment landed inside its target band with almost no drift. Warmup held **129W** dead in the middle of the **120-140W** Z2 window for the full **10:01**. Main set held **149W** for the full **40:00**, comfortably inside **140-162W** Z3 \u2014 no fade, no spike, just a flat clean block. Cooldown dropped right back to **129W** for another **10:00**. Cadence sat at **88-90 rpm** across all three segments \u2014 no drift toward the end, no mechanical floor issue. Total duration **60:32** against a **60:00** prescription is as close to exact as these things get. HR climbed sensibly with the power steps (132 \u2192 153 \u2192 150 avg per lap) and topped out at **164**, nothing alarming. There is nothing to dock here \u2014 this is what a correctly executed Base Bike looks like, and it's a good marker for what \"durability rebuilding\" should look like going forward."
       }
     ]
   },
@@ -3442,17 +3452,17 @@ const TRENDS_DATA   = {
       "week": "Wk10",
       "label": "Jul 20-26",
       "phase": "Build",
-      "score": 18,
+      "score": 29,
       "swim_yd": 1451,
-      "bike_min": 40.2,
+      "bike_min": 100.7,
       "run_mi": 0.0,
-      "total_min": 73.0,
+      "total_min": 133.6,
       "long_swim_yd": 1451,
-      "long_bike_min": 40.2,
+      "long_bike_min": 60.5,
       "long_run_mi": 0.0,
       "run_sessions": 0,
-      "completed": 2,
-      "load_delta": -55
+      "completed": 3,
+      "load_delta": -18
     }
   ],
   "durability": [
@@ -3522,7 +3532,7 @@ const TRENDS_DATA   = {
     {
       "week": "Wk10",
       "long_swim_yd": 1451,
-      "long_bike_min": 40.2,
+      "long_bike_min": 60.5,
       "long_run_mi": 0.0,
       "run_sessions": 0
     }
@@ -3566,7 +3576,7 @@ const TRENDS_DATA   = {
         },
         {
           "date": "Wk10",
-          "value": 18
+          "value": 29
         }
       ]
     },
@@ -3845,7 +3855,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 10,
       "week": "Wk10",
-      "load_min": 73.0,
+      "load_min": 133.6,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -3856,6 +3866,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-23",
+      "title": "Base Bike",
+      "detail": "**Textbook zone-for-zone match** \u2014 WU 129W (in 120-140W), MS 149W (in 140-162W), CD 129W (in 120-140W), duration 60:32 vs 60:00 prescribed",
+      "discipline": "bike",
+      "week": "Wk10"
+    },
     {
       "date": "2026-07-22",
       "title": "Base Swim",
@@ -3931,13 +3948,6 @@ const TRENDS_DATA   = {
       "title": "Interval Run",
       "detail": "No return-to-run attempt in Wk8",
       "discipline": "run",
-      "week": "Wk8"
-    },
-    {
-      "date": "2026-07-08",
-      "title": "Base Swim",
-      "detail": "**NEW continuous-distance PR: 1,506 yd unbroken \u2014 beats Jul 2's 1,451 yd; ~72% of race leg; race gap ~1.40\u00d7.** Buoy-OFF intervals expose persistent leg-sink (DPS \u2192 0.95-1.09 + HR spike to 174-181)",
-      "discipline": "swim",
       "week": "Wk8"
     }
   ]
