@@ -374,7 +374,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated July 21, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 24, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -402,7 +402,7 @@ const WEEKS_DATA = [
     "start": "2026-07-20",
     "label": "Jul 20-26",
     "phase": "Build",
-    "score": 8,
+    "score": 18,
     "sessions": [
       {
         "date": "2026-07-21",
@@ -413,6 +413,16 @@ const WEEKS_DATA = [
         "key_metric": "Both work reps landed cleanly inside the prescribed **176-200W** band, but total session time was only **67%** of plan after ~10 min of warmup and ~10 min of cooldown were cut",
         "score": 7,
         "verdict": "This was a **good partial execution**, not a full interval-session nail. The main set itself was clean: both 3-minute work reps averaged **184W**, recovery sat around upper-Z3, and cadence at **88 rpm** was right where it should be. So the bike did the *specific* work it was asked to do. But Ian's perception matters here, because the file supports it: max HR only reached **165**, average HR stayed at **144**, and the total workout came in at just **40:11** instead of **1:00**. That means this session kept the intended high-power touches but cut a lot of the surrounding load that would normally make it feel more complete. Coaching verdict: the current Wk10 Tuesday setup is functioning more like a **hybrid VO2 + aerobic support ride** than a short, brutal interval day. That's not automatically wrong for 70.3 build work, but the observation is valid \u2014 if the goal is a truly hard, compact \"cook me\" session, this format is probably underdosing that feeling."
+      },
+      {
+        "date": "2026-07-22",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Wed PM Aerobic Swim \u00b7 1,450yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 850yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy",
+        "actual": "1,451 yd \u00b7 32:51 active / 35:35 elapsed \u00b7 2:15/100yd avg \u00b7 HR 168 avg / 190 max \u00b7 28 spm \u00b7 DPS 1.45 \u00b7 TE 3.8 aerobic / 1.8 anaerobic \u00b7 OW 88F",
+        "key_metric": "**Distance nailed almost exactly (1,451 / 1,450 yd = 100%)** \u2014 first fully complete swim distance since the injury re-entry bridge started; DPS stayed tight in a 1.29-1.52 band through the main set with no sharp collapse, unlike the clear buoy-off signature (0.9-1.1 DPS) seen in recent sessions",
+        "score": 9,
+        "verdict": "This is the swim Wk10 needed. Full prescribed distance for the first time in three weeks \u2014 no shortfall, no bailing on time. Pacing tells the real story: the file shows a fast opening (**1:50-1:55/100yd** for the first ~200yd), settling into a **2:10-2:27/100yd** working band for the bulk of the main set, then a HR spike to **180-190** on the second-to-last rep before a slightly slower closing 50yd. That shape matches a Z3-Z5 aerobic-swim prescription reasonably well \u2014 steady work with a harder push before the finish, not a flat cruise. DPS held in the **1.29-1.52** range essentially the whole way, well above the **0.9-1.1** buoy-off floor from the last few sessions' hard segments, so either the pull buoy stayed on longer than typical or the leg-sink issue is continuing to improve \u2014 worth confirming with Ian which it was. Only docking 1 point: the final 50yd rep came in as the slowest split (**2:29/100yd**) with the lowest DPS of the set (**1.29**), a normal end-of-session fade but still a fade. Overall: distance discipline is back, and this is the session to point to when the \"are these workouts actually working\" question comes up again."
       }
     ]
   },
@@ -3300,17 +3310,17 @@ const TRENDS_DATA   = {
       "week": "Wk10",
       "label": "Jul 20-26",
       "phase": "Build",
-      "score": 8,
-      "swim_yd": 0,
+      "score": 18,
+      "swim_yd": 1451,
       "bike_min": 40.2,
       "run_mi": 0.0,
-      "total_min": 40.2,
-      "long_swim_yd": 0,
+      "total_min": 73.0,
+      "long_swim_yd": 1451,
       "long_bike_min": 40.2,
       "long_run_mi": 0.0,
       "run_sessions": 0,
-      "completed": 1,
-      "load_delta": -75
+      "completed": 2,
+      "load_delta": -55
     }
   ],
   "durability": [
@@ -3379,7 +3389,7 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk10",
-      "long_swim_yd": 0,
+      "long_swim_yd": 1451,
       "long_bike_min": 40.2,
       "long_run_mi": 0.0,
       "run_sessions": 0
@@ -3424,7 +3434,7 @@ const TRENDS_DATA   = {
         },
         {
           "date": "Wk10",
-          "value": 8
+          "value": 18
         }
       ]
     },
@@ -3703,7 +3713,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 10,
       "week": "Wk10",
-      "load_min": 40.2,
+      "load_min": 73.0,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -3714,6 +3724,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-22",
+      "title": "Base Swim",
+      "detail": "**Distance nailed almost exactly (1,451 / 1,450 yd = 100%)** \u2014 first fully complete swim distance since the injury re-entry bridge started; DPS stayed tight in a 1.29-1.52 band through the main set with no sharp collapse, unlike the clear buoy-off signature (0.9-1.1 DPS) seen in recent sessions",
+      "discipline": "swim",
+      "week": "Wk10"
+    },
     {
       "date": "2026-07-21",
       "title": "Interval Bike",
@@ -3789,13 +3806,6 @@ const TRENDS_DATA   = {
       "title": "Base Swim",
       "detail": "**NEW continuous-distance PR: 1,506 yd unbroken \u2014 beats Jul 2's 1,451 yd; ~72% of race leg; race gap ~1.40\u00d7.** Buoy-OFF intervals expose persistent leg-sink (DPS \u2192 0.95-1.09 + HR spike to 174-181)",
       "discipline": "swim",
-      "week": "Wk8"
-    },
-    {
-      "date": "2026-07-07",
-      "title": "Interval Bike",
-      "detail": "Int1 = exact prescribed power, dead flat 8 min. Int2 = **muscular/torque failure, cadence-led** \u2014 HR peaked only 169 (nowhere near max), so NOT aerobic. No Int3 attempted.",
-      "discipline": "bike",
       "week": "Wk8"
     }
   ]
