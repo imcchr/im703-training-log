@@ -55,7 +55,6 @@
   .hm-month{height:13px;line-height:13px;font-size:.58rem;color:var(--muted);
     white-space:nowrap;overflow:visible;width:13px;}
   .hm-cell{width:13px;height:13px;border-radius:3px;background:#ece1d2;cursor:pointer;}
-  .hm-cell.l0miss{background:#a8988866;border:1px solid #8a7a6a;}
   .hm-cell.l1{background:#f7b12e;}
   .hm-cell.l2{background:#ea7317;}
   .hm-cell.l3{background:#c0392b;}
@@ -4124,10 +4123,12 @@ function renderHeatmap(){
       const a=agg[iso];const avg=a?a.sum/a.n:0;
       const level=a?hmLevel(avg):0;
       const cell=document.createElement('div');
-      // a==truthy but level 0 = real workout day(s) that averaged to a full
-      // miss (either an explicit 0 or an unlogged prescribed session) --
-      // must look different from a true blank/rest day with no data at all.
-      cell.className='hm-cell'+(level?' l'+level:(a?' l0miss':''));
+      // Cells with a 0 average (full miss, or an unlogged prescribed session
+      // padded down) stay visually IDENTICAL to a true blank rest day -- no
+      // special color/outline. The dataset below still carries the real
+      // numbers so the tap popup shows accurate '0/2 logged' info instead of
+      // falling back to a generic 'rest day' message.
+      cell.className='hm-cell'+(level?' l'+level:'');
       cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.logged=a?a.logged:0;cell.dataset.avg=a?avg.toFixed(1):'';
       col.appendChild(cell);
       cur.setDate(cur.getDate()+1);
