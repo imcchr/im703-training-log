@@ -374,7 +374,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated July 25, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 27, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -402,7 +402,7 @@ const WEEKS_DATA = [
     "start": "2026-07-20",
     "label": "Jul 20-26",
     "phase": "Build",
-    "score": 56,
+    "score": 64,
     "sessions": [
       {
         "date": "2026-07-21",
@@ -413,6 +413,16 @@ const WEEKS_DATA = [
         "key_metric": "Both work reps landed cleanly inside the prescribed **176-200W** band, but total session time was only **67%** of plan after ~10 min of warmup and ~10 min of cooldown were cut",
         "score": 7,
         "verdict": "This was a **good partial execution**, not a full interval-session nail. The main set itself was clean: both 3-minute work reps averaged **184W**, recovery sat around upper-Z3, and cadence at **88 rpm** was right where it should be. So the bike did the *specific* work it was asked to do. But Ian's perception matters here, because the file supports it: max HR only reached **165**, average HR stayed at **144**, and the total workout came in at just **40:11** instead of **1:00**. That means this session kept the intended high-power touches but cut a lot of the surrounding load that would normally make it feel more complete. Coaching verdict: the current Wk10 Tuesday setup is functioning more like a **hybrid VO2 + aerobic support ride** than a short, brutal interval day. That's not automatically wrong for 70.3 build work, but the observation is valid \u2014 if the goal is a truly hard, compact \"cook me\" session, this format is probably underdosing that feeling."
+      },
+      {
+        "date": "2026-07-22",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Wed AM Interval Run \u00b7 28min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d73min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 5min Z2",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "No file, no log. Same-day swim happened; the run slot did not."
       },
       {
         "date": "2026-07-22",
@@ -445,6 +455,16 @@ const WEEKS_DATA = [
         "verdict": "This is the milestone session Wk10 has been building toward: **first completed run since the ankle sprain**, and it came back clean. No pain flagged, no bailout, no hero pace chasing. On the GAP question specifically \u2014 the grade-adjusted numbers back up exactly what you felt: the **first ~10 min (net uphill, walked the steep pitches)** raw-paced at **11:48/mi** but GAP-computed to **9:45/mi** \u2014 meaning that \"slow\" walking segment was actually working at something close to tempo effort once the climb is priced in, which is exactly why walking those pitches was the right call instead of forcing a run-pace number that would've spiked HR further. The **return leg (net downhill)** raw-paced faster at **9:59/mi** but GAP came back out to **10:54/mi** \u2014 the downhill was giving you free speed that didn't cost real effort, so it shouldn't be read as \"you got fitter for 10 minutes.\" Net effect: this run was **far more evenly-dosed as true effort than the raw split times suggest**, and that's the right way to read a hilly out-and-back. HR (175 avg / 198 max) is logged for the record but is **not a scoring input** \u2014 HR is a backup/anomaly metric only, never a governor, and Ian runs structurally hot regardless of session (91F heat, hills, and this run landing directly off the makeup bike all fully explain it independent of aerobic fitness). Scoring here is pace/GAP/completion-based only: strides got **3 of the prescribed 4** in, cut short only because the out-and-back ran out of road at the driveway \u2014 not a fitness or ankle limiter, just a route-length ceiling. **Re-evaluated the score itself, not just the reasoning**: is 56 seconds short of a 25min target and 1 missed rep of an explicitly conditional \"4x20s only if ankle calm\" stride set actually grounds to dock a point? No. 24:04 against a 25:00 target is 96% of prescribed duration \u2014 noise, not a shortfall. And the strides were never a hard requirement in the first place; the prescription itself gated them on ankle status, so getting 3 clean reps in before running out of road is meeting the intent of that line, not falling short of it. There is nothing left in the actual prescription \u2014 pace, GAP-effort control, duration, structure \u2014 that this session missed. Full marks."
       },
       {
+        "date": "2026-07-24",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Fri PM Threshold Swim \u00b7 1,550yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 950yd Z4 \u00b7 CD: 300yd w/ pull buoy",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "No file, no log. Same-day run happened; the swim slot did not."
+      },
+      {
         "date": "2026-07-25",
         "discipline": "bike",
         "title": "Long Bike",
@@ -463,6 +483,26 @@ const WEEKS_DATA = [
         "key_metric": "Duration/distance/structure completed exactly as prescribed (15:00, off the bike, full T2) at reported easy perceived effort",
         "score": 10,
         "verdict": "Re-scored per the effort-governed exception (see rubric): this is a Z2-Z3 **easy-effort** brick leg, not a quality/pace-anchored session, so pace/GAP is context here, not the governor. Two things make that the right call specifically for this run: first, the terrain \u2014 these hills are long and steep enough to force walking, and GAP on that kind of profile is a modeled approximation off barometric/GPS elevation, not a precise number; it's genuinely too noisy on this route to be the sole basis for a deduction (this same run's two lap-segments alone GAP'd to 10:29 and 10:53, a 24s/mi swing on the *same* route). Second, and more importantly: Ian ran this at what he judged to be his easy perceived effort, directly off a bike leg and coming off the ankle layoff, and that self-governed effort call is exactly what an easy/brick pace prescription is supposed to produce \u2014 the point was never to hit a specific number, it was to run controlled and easy. Prescribed time, distance, and structure were all hit exactly, off-the-bike, no pain flagged. Full marks."
+      },
+      {
+        "date": "2026-07-26",
+        "discipline": "run",
+        "title": "Long Run",
+        "prescribed": "Sun PM Base Run \u00b7 20min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 5min Z2 steady \u00b7 CD: 5min Z2",
+        "actual": "22:00 \u00b7 2.47 mi \u00b7 8:54/mi avg (mile splits 8:57 / 8:59 / 8:40 pace for the closing partial) \u00b7 HR 173 avg / 189 max, climbing lap to lap (159\u2192180\u2192185 avg) \u00b7 86-88F \u00b7 only 29ft climb / 33ft descent \u2014 comparatively flat route",
+        "key_metric": "Full duration+distance completed, but pace ran **meaningfully faster than the 9:25-10:00/mi easy target** and got progressively quicker each split rather than staying easy",
+        "score": 8,
+        "verdict": "This is the one spot this week where pace genuinely earns some weight, unlike Thu/Fri/Sat. The effort-governed exception exists for hilly/brick/heat-confounded runs \u2014 this route was comparatively flat (29ft/33ft vs. 80-100+ft on the other routes this week) and stood alone with no bike stacked underneath it, so the usual excuses (steep forced-walk grades, brick fatigue, extreme heat) are weaker here. What the data actually shows: **8:54/mi average against a 9:25-10:00/mi easy target**, and splits that got faster as the run went (8:57 \u2192 8:59 \u2192 8:40 pace, with per-lap HR climbing 159 \u2192 180 \u2192 185) \u2014 the opposite shape of an easy WU/steady/CD run, more like a negative-split moderate effort. Not a fitness problem, and not being punished for running well on the last day of a big week \u2014 but this is real, useful signal: the last easy day of a demanding return-to-run week ran faster and harder than prescribed, worth watching on the next easy-day prescription. Full duration (22:00 vs 20:00) and distance were there, no pain flagged, so docking 2, not more."
+      },
+      {
+        "date": "2026-07-26",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sun AM Long Swim \u00b7 1,800yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,300yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "No file, no log. Week closes with this slot unfilled."
       }
     ]
   },
@@ -3482,17 +3522,17 @@ const TRENDS_DATA   = {
       "week": "Wk10",
       "label": "Jul 20-26",
       "phase": "Build",
-      "score": 56,
+      "score": 64,
       "swim_yd": 1451,
       "bike_min": 147.7,
-      "run_mi": 3.8,
-      "total_min": 219.6,
+      "run_mi": 6.2,
+      "total_min": 241.6,
       "long_swim_yd": 1451,
       "long_bike_min": 60.5,
-      "long_run_mi": 2.4,
-      "run_sessions": 2,
-      "completed": 6,
-      "load_delta": 35
+      "long_run_mi": 2.5,
+      "run_sessions": 3,
+      "completed": 7,
+      "load_delta": 49
     }
   ],
   "durability": [
@@ -3563,8 +3603,8 @@ const TRENDS_DATA   = {
       "week": "Wk10",
       "long_swim_yd": 1451,
       "long_bike_min": 60.5,
-      "long_run_mi": 2.4,
-      "run_sessions": 2
+      "long_run_mi": 2.5,
+      "run_sessions": 3
     }
   ],
   "markers": [
@@ -3606,7 +3646,7 @@ const TRENDS_DATA   = {
         },
         {
           "date": "Wk10",
-          "value": 56
+          "value": 64
         }
       ]
     },
@@ -3885,7 +3925,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 10,
       "week": "Wk10",
-      "load_min": 219.6,
+      "load_min": 241.6,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -3896,6 +3936,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-26",
+      "title": "Long Run",
+      "detail": "Full duration+distance completed, but pace ran **meaningfully faster than the 9:25-10:00/mi easy target** and got progressively quicker each split rather than staying easy",
+      "discipline": "run",
+      "week": "Wk10"
+    },
     {
       "date": "2026-07-25",
       "title": "Long Bike",
@@ -3972,13 +4019,6 @@ const TRENDS_DATA   = {
       "detail": "**58% of prescribed distance** but at clearly higher intent than the recent continuity swims; shortened by time + fatigue, not by complete breakdown",
       "discipline": "swim",
       "week": "Wk9"
-    },
-    {
-      "date": "2026-07-14",
-      "title": "Interval Bike",
-      "detail": "Work reps landed cleanly inside Z5 target. ERG session success = duration + cadence + interval completion, not watt \"precision.\"",
-      "discipline": "bike",
-      "week": "Wk9"
     }
   ]
 };
@@ -4027,7 +4067,7 @@ const RACE_DATA     = {
       "predicted_range": "2:16:03\u20132:52:27",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 5 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 6 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
