@@ -374,7 +374,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated July 27, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated July 28, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -397,6 +397,35 @@
 
 <script>
 const WEEKS_DATA = [
+  {
+    "num": 11,
+    "start": "2026-07-27",
+    "label": "Jul 27 - Aug 2",
+    "phase": "Build",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-07-27",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "Completed \u2014 \u00b7 45min, 19,932 lb volume, 1 PR (bench est-1RM 292, up from 279 Wk8) \u00b7 Bench 235x8/6/3, OHP 115x6x3, Weighted Pull-Up +45x7/5/4, DB Curl 60x10x3, Tricep Pushdown 90x10/8/8, Ab Wheel 8/7/5 \u2014 first session under the new Full Body split, hits push/pull/core in one day",
+        "key_metric": "\u00b7 45min, 19,932 lb volume, 1 PR (bench est-1RM 292, up from 279 Wk8) \u00b7 Bench 235x8/6/3, OHP 115x6x3, Weighted Pull-Up +45x7/5/4, DB Curl 60x10x3, Tricep Pushdown 90x10/8/8, Ab Wheel 8/7/5 \u2014 first session under the new Full Body split, hits push/pull/core in one day",
+        "score": 9,
+        "verdict": "Completed as logged in the calendar. \u00b7 45min, 19,932 lb volume, 1 PR (bench est-1RM 292, up from 279 Wk8) \u00b7 Bench 235x8/6/3, OHP 115x6x3, Weighted Pull-Up +45x7/5/4, DB Curl 60x10x3, Tricep Pushdown 90x10/8/8, Ab Wheel 8/7/5 \u2014 first session under the new Full Body split, hits push/pull/core in one day"
+      },
+      {
+        "date": "2026-07-28",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Tue Interval Bike \u00b7 51min \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (176-200W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (120-140W)",
+        "actual": "51:17 active \u00b7 11.99 mi \u00b7 136W avg / 192W max \u00b7 HR 143 avg / 163 max \u00b7 86 rpm avg \u00b7 401 kcal \u00b7 **WU 10:01 @ 129W \u00b7 Rep 1: 5:00 @ 189W \u00b7 Rec 1: 8:00 @ 98W \u00b7 Rep 2: 5:00 @ 189W \u00b7 Rec 2: 8:07 @ 95W \u00b7 Rep 3: 5:00 @ 189W \u00b7 CD 10:00 @ 129W**",
+        "key_metric": "**Every segment landed inside its target band, and all three work reps came in at the exact same 189W** \u2014 the tightest rep-to-rep power consistency logged this block",
+        "score": 10,
+        "verdict": "This is the first fully clean execution of the new compact VO2max format, and it's about as textbook as these get. Warmup held **129W** dead-center in the **120-140W** Z2 window for a full **10:01**. All three **5:00 Z5 work reps averaged 189W**, comfortably inside the **176-200W** target band, and \u2014 more importantly \u2014 identical to each other within 0-1W. No fade from rep 1 to rep 3, no early-rep overshoot followed by late-rep collapse; this is what real repeatable interval fitness looks like, a step up from the Wk10 version of this session where reps were harder to compare cleanly. Both free-ride recovery blocks matched the prescribed **8 minutes** almost exactly (8:00 and 8:07). Cooldown dropped right back to **129W** for the full **10:00**. Cadence sat in an **85-89 rpm** band across every segment, right in the target zone with no drift. Total session time **51:17** against a **51:00** prescription is essentially exact \u2014 no cut corners, no truncated warmup/cooldown like Wk10's version of this session. HR climbed to **155/153/154 avg** across the three reps \u2014 stable, not decoupling \u2014 which lines up with the power consistency. Nothing to dock here."
+      }
+    ]
+  },
   {
     "num": 10,
     "start": "2026-07-20",
@@ -2120,70 +2149,64 @@ const PLAN_DATA  = [
     "phase": "Build",
     "rows": [
       {
-        "day": "Mon AM",
-        "disc": "lift",
-        "session": "Push",
-        "target": ""
-      },
-      {
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "1hr \u00b7 WU: 15min Z2 (120-140W) \u00b7 MS: 2\u00d73min Z5 (176-200W), 12min Z3 rec \u00b7 CD: 27min Z2 (120-140W)"
+        "target": "Tue Interval Bike \u00b7 1hr \u00b7 WU: 15min Z2 (120-140W) \u00b7 MS: 2\u00d73min Z5 (176-200W), 12min Z3 rec \u00b7 CD: 27min Z2 (120-140W)"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "run",
         "session": "Interval Run",
-        "target": "28min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d73min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 5min Z2"
+        "target": "Wed AM Interval Run \u00b7 28min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d73min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 5min Z2"
       },
       {
-        "day": "Wed PM",
+        "day": "Wed",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,450yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 850yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Wed PM Aerobic Swim \u00b7 1,450yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 850yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Pull",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 40min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)"
+        "target": "Thu AM Base Bike \u00b7 1:00 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 40min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)"
       },
       {
-        "day": "Fri AM",
+        "day": "Fri",
         "disc": "run",
         "session": "Base Run",
-        "target": "25min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s only if ankle calm"
+        "target": "Fri AM Base Run \u00b7 25min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s only if ankle calm"
       },
       {
-        "day": "Fri PM",
+        "day": "Fri",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,550yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 950yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Fri PM Threshold Swim \u00b7 1,550yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 950yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
-        "disc": "unknown",
-        "session": "Brick",
-        "target": "1:00 \u00b7 Bike: 45min Z3 (140-162W) \u00b7 Run: 15min Z2-Z3 (9:25-8:00/mi)"
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "Sat Brick \u00b7 Bike: 45min Z3 (140-162W)"
       },
       {
-        "day": "Sun AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "1,800yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,300yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
+        "day": "Sat",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "Sat Brick \u00b7 Run: 15min Z2-Z3 (9:25-8:00/mi), off the bike"
       },
       {
-        "day": "Sun PM",
+        "day": "Sun",
         "disc": "run",
         "session": "Long Run",
-        "target": "20min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 5min Z2 steady \u00b7 CD: 5min Z2"
+        "target": "Sun PM Base Run \u00b7 20min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 5min Z2 steady \u00b7 CD: 5min Z2"
+      },
+      {
+        "day": "Sun",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "Sun AM Long Swim \u00b7 1,800yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,300yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
       }
     ],
     "notes": [],
@@ -3533,6 +3556,23 @@ const TRENDS_DATA   = {
       "run_sessions": 3,
       "completed": 7,
       "load_delta": 49
+    },
+    {
+      "week_num": 11,
+      "week": "Wk11",
+      "label": "Jul 27 - Aug 2",
+      "phase": "Build",
+      "score": null,
+      "swim_yd": 0,
+      "bike_min": 51.3,
+      "run_mi": 0.0,
+      "total_min": 51.3,
+      "long_swim_yd": 0,
+      "long_bike_min": 51.3,
+      "long_run_mi": 0.0,
+      "run_sessions": 0,
+      "completed": 1,
+      "load_delta": -79
     }
   ],
   "durability": [
@@ -3605,6 +3645,13 @@ const TRENDS_DATA   = {
       "long_bike_min": 60.5,
       "long_run_mi": 2.5,
       "run_sessions": 3
+    },
+    {
+      "week": "Wk11",
+      "long_swim_yd": 0,
+      "long_bike_min": 51.3,
+      "long_run_mi": 0.0,
+      "run_sessions": 0
     }
   ],
   "markers": [
@@ -3811,6 +3858,13 @@ const TRENDS_DATA   = {
       "swim_min": 44.06666666666667,
       "bike_min": 215.25,
       "run_min": 149.7
+    },
+    {
+      "week": "Wk11",
+      "overall_min": 415.01666666666665,
+      "swim_min": 44.06666666666667,
+      "bike_min": 215.25,
+      "run_min": 149.7
     }
   ],
   "overlay": [
@@ -3933,9 +3987,35 @@ const TRENDS_DATA   = {
       "atl": "",
       "vo2": "",
       "status": ""
+    },
+    {
+      "week_num": 11,
+      "week": "Wk11",
+      "load_min": 51.3,
+      "readiness": 72,
+      "hrv": "",
+      "rhr": "",
+      "sleep": "",
+      "atl": "",
+      "vo2": "",
+      "status": ""
     }
   ],
   "milestones": [
+    {
+      "date": "2026-07-28",
+      "title": "Interval Bike",
+      "detail": "**Every segment landed inside its target band, and all three work reps came in at the exact same 189W** \u2014 the tightest rep-to-rep power consistency logged this block",
+      "discipline": "bike",
+      "week": "Wk11"
+    },
+    {
+      "date": "2026-07-27",
+      "title": "Full Body",
+      "detail": "\u00b7 45min, 19,932 lb volume, 1 PR (bench est-1RM 292, up from 279 Wk8) \u00b7 Bench 235x8/6/3, OHP 115x6x3, Weighted Pull-Up +45x7/5/4, DB Curl 60x10x3, Tricep Pushdown 90x10/8/8, Ab Wheel 8/7/5 \u2014 first session under the new Full Body split, hits push/pull/core in one day",
+      "discipline": "lift",
+      "week": "Wk11"
+    },
     {
       "date": "2026-07-26",
       "title": "Long Run",
@@ -4005,20 +4085,6 @@ const TRENDS_DATA   = {
       "detail": "**~120 yd without pull buoy** showed up as the HR spike block, but this time it stayed controlled instead of blowing up; session was only **57% of prescribed distance** and read more like strong aerobic/base-form work than full threshold volume",
       "discipline": "swim",
       "week": "Wk9"
-    },
-    {
-      "date": "2026-07-16",
-      "title": "Interval Run",
-      "detail": "No return-to-run quality session in Wk9",
-      "discipline": "run",
-      "week": "Wk9"
-    },
-    {
-      "date": "2026-07-15",
-      "title": "Base Swim",
-      "detail": "**58% of prescribed distance** but at clearly higher intent than the recent continuity swims; shortened by time + fatigue, not by complete breakdown",
-      "discipline": "swim",
-      "week": "Wk9"
     }
   ]
 };
@@ -4067,7 +4133,7 @@ const RACE_DATA     = {
       "predicted_range": "2:16:03\u20132:52:27",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 6 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 3 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
