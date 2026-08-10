@@ -374,7 +374,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated August 09, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated August 10, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="plan-container"></div>
   </section>
 
@@ -397,6 +397,25 @@
 
 <script>
 const WEEKS_DATA = [
+  {
+    "num": 13,
+    "start": "2026-08-10",
+    "label": "Aug 10-16",
+    "phase": "Build",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-08-10",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Tue Interval Bike \u00b7 51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)",
+        "actual": "51:42 active \u00b7 14.40 mi \u00b7 140W avg / 228W max \u00b7 HR 150 avg / 182 max \u00b7 79 rpm avg \u00b7 416 kcal \u00b7 **WU 10:01 @ 129W \u00b7 Rep 1: 5:00 @ 224W \u00b7 Rec 1: 8:00 @ 82W \u00b7 Rep 2: 5:00 @ 223W \u00b7 Rec 2: 8:00 @ 84W \u00b7 Rep 3: 5:00 @ 223W \u00b7 CD 10:10 @ 125W**",
+        "key_metric": "**All three work reps landed inside the true Z5 band (211-240W) at 223-224W \u2014 essentially identical to each other** \u2014 the first session run against the corrected zones, and it landed exactly where it should",
+        "score": 10,
+        "verdict": "This is a genuinely strong comeback session, first one back after a full zero week. Warmup held **129W**, dead-center in the **111-150W** Z2 band, for the full **10:01**. All three **5:00 work reps averaged 223-224W** \u2014 inside the **corrected 211-240W Z5 band**, and tight to each other (1W spread rep-to-rep), which is real repeatable output, not a lucky single effort. Both free-ride recovery blocks matched the prescribed **8:00** exactly. Cooldown held **125W** for **10:10**, right back in Z2. Total time **51:42** against **51:00** prescribed \u2014 essentially exact. HR climbed sensibly across the three reps (166 \u2192 169 \u2192 172 avg, topping at 182 max) \u2014 a normal, controlled pattern, nothing alarming, and well short of LTHR (192). Cadence sat a touch lower than usual (78-84 rpm vs the typical 85-90 band) \u2014 worth a passing note, not a deduction, since it didn't cost any power-zone accuracy. Coming off a full week of zero training and immediately hitting the harder, corrected VO2max wattage on the nose is a genuinely good sign \u2014 nothing to dock here."
+      }
+    ]
+  },
   {
     "num": 12,
     "start": "2026-08-03",
@@ -2534,7 +2553,7 @@ const PLAN_DATA  = [
     "phase": "Race",
     "rows": [
       {
-        "day": "Mon AM",
+        "day": "Mon",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
@@ -2543,55 +2562,67 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "Tue Interval Bike \u00b7 51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "run",
         "session": "Interval Run",
-        "target": "32min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d73min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 7min Z2"
+        "target": "Wed AM Interval Run \u00b7 32min \u00b7 WU: 10min Z2 jog/walk \u00b7 MS: 3\u00d73min Z3-Z4, 2min Z2 rec \u00b7 CD: 7min Z2"
       },
       {
-        "day": "Wed PM",
+        "day": "Wed",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 800yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Wed PM Aerobic Swim \u00b7 1,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 800yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
-        "day": "Thu PM",
+        "day": "Thu",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "Thu AM Base Bike \u00b7 1:00 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 40min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)"
+      },
+      {
+        "day": "Thu",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 40min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)"
-      },
-      {
-        "day": "Fri AM",
+        "day": "Fri",
         "disc": "run",
         "session": "Base Run",
-        "target": "25min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s only if ankle calm"
+        "target": "Fri AM Base Run \u00b7 25min \u00b7 WU: 10min Z2 jog/walk \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2"
       },
       {
-        "day": "Fri PM",
+        "day": "Fri",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "Fri PM Threshold Swim \u00b7 1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "20 min easy \u2014 recovery pace only, no effort"
+        "target": "Sat Recovery Bike \u00b7 20 min easy"
       },
       {
         "day": "Sun",
-        "disc": "unknown",
-        "session": "Sprint Tri",
-        "target": "800 yd swim + 12 mi Z3 bike (Zwift) + 3 mi controlled run \u2014 race by feel, protect ankle if it argues"
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "12 mi Z3 bike leg"
+      },
+      {
+        "day": "Sun",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "3 mi controlled run leg"
+      },
+      {
+        "day": "Sun",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "800 yd swim leg"
       }
     ],
     "notes": [],
@@ -3809,6 +3840,23 @@ const TRENDS_DATA   = {
       "run_sessions": 0,
       "completed": 0,
       "load_delta": -100
+    },
+    {
+      "week_num": 13,
+      "week": "Wk13",
+      "label": "Aug 10-16",
+      "phase": "Build",
+      "score": null,
+      "swim_yd": 0,
+      "bike_min": 51.7,
+      "run_mi": 0.0,
+      "total_min": 51.7,
+      "long_swim_yd": 0,
+      "long_bike_min": 51.7,
+      "long_run_mi": 0.0,
+      "run_sessions": 0,
+      "completed": 1,
+      "load_delta": null
     }
   ],
   "durability": [
@@ -3893,6 +3941,13 @@ const TRENDS_DATA   = {
       "week": "Wk12",
       "long_swim_yd": 0,
       "long_bike_min": 0.0,
+      "long_run_mi": 0.0,
+      "run_sessions": 0
+    },
+    {
+      "week": "Wk13",
+      "long_swim_yd": 0,
+      "long_bike_min": 51.7,
       "long_run_mi": 0.0,
       "run_sessions": 0
     }
@@ -4123,6 +4178,13 @@ const TRENDS_DATA   = {
       "swim_min": 44.06666666666667,
       "bike_min": 215.25,
       "run_min": 171.0
+    },
+    {
+      "week": "Wk13",
+      "overall_min": 461.35,
+      "swim_min": 44.06666666666667,
+      "bike_min": 215.25,
+      "run_min": 196.03333333333333
     }
   ],
   "overlay": [
@@ -4269,9 +4331,28 @@ const TRENDS_DATA   = {
       "atl": "",
       "vo2": "",
       "status": ""
+    },
+    {
+      "week_num": 13,
+      "week": "Wk13",
+      "load_min": 51.7,
+      "readiness": 72,
+      "hrv": "",
+      "rhr": "",
+      "sleep": "",
+      "atl": "",
+      "vo2": "",
+      "status": ""
     }
   ],
   "milestones": [
+    {
+      "date": "2026-08-10",
+      "title": "Interval Bike",
+      "detail": "**All three work reps landed inside the true Z5 band (211-240W) at 223-224W \u2014 essentially identical to each other** \u2014 the first session run against the corrected zones, and it landed exactly where it should",
+      "discipline": "bike",
+      "week": "Wk13"
+    },
     {
       "date": "2026-07-29",
       "title": "Interval Run",
@@ -4348,20 +4429,13 @@ const TRENDS_DATA   = {
       "detail": "No long run happened in Wk9",
       "discipline": "run",
       "week": "Wk9"
-    },
-    {
-      "date": "2026-07-18",
-      "title": "Long Bike",
-      "detail": "**Main work landed inside Z3 (149W)**, but duration was only **42% of prescribed 2:00** and cooldown never happened",
-      "discipline": "bike",
-      "week": "Wk9"
     }
   ]
 };
 const RACE_DATA     = {
   "overall": {
-    "projected_finish": "7:16:19",
-    "projected_range": "6:33:25\u20138:27:48",
+    "projected_finish": "7:41:21",
+    "projected_range": "6:47:24\u20139:11:14",
     "strongest_leg": "Swim",
     "limiter_leg": "Run",
     "confidence_label": "Moderate",
@@ -4396,14 +4470,14 @@ const RACE_DATA     = {
     },
     {
       "disc": "Run",
-      "readiness": 69,
-      "confidence": 0.85,
-      "confidence_label": "High",
-      "predicted_split": "2:51:00",
-      "predicted_range": "2:31:49\u20133:22:59",
+      "readiness": 55,
+      "confidence": 0.6749656488549619,
+      "confidence_label": "Moderate",
+      "predicted_split": "3:16:02",
+      "predicted_range": "2:45:48\u20134:06:25",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 1 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 0 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
