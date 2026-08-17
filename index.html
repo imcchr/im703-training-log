@@ -53,6 +53,7 @@
 .reentry-preview{display:none;margin-top:10px;border-top:1px solid #fed7aa;padding-top:9px;font-size:.7rem;line-height:1.45;color:#7c2d12;}
 .reentry-card.previewing .reentry-preview{display:block;}
 .reentry-chip{display:inline-block;font-size:.54rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;background:#ffedd5;color:#c2410c;border:1px solid #fdba74;border-radius:999px;padding:2px 5px;margin:0 0 4px;}
+.reentry-ramp-badge{font-size:.58rem;font-weight:900;letter-spacing:.04em;color:#fff;background:linear-gradient(135deg,#d97706,#ea580c);padding:3px 7px;border-radius:999px;white-space:nowrap;}
 .reentry-original{font-size:.62rem;color:#a8a29e;text-decoration:line-through;margin-top:4px;line-height:1.35;}
 
   .view{display:none;}
@@ -5040,9 +5041,10 @@ function makePlanCard(w,cur){
   card.innerHTML=
     '<div class="week-head">'+
       '<span class="phase-badge '+phaseClass(w.phase)+'">'+w.phase+'</span>'+
+      rampHeaderHTML(w)+
       '<span class="week-title">Wk '+w.num+'</span>'+
       '<span class="week-dates">'+w.label+'</span>'+
-      '<span class="week-spacer"></span>'+
+      '<span class="week-spacer"></span>'+ 
       badge+
       '<span class="caret">&#9656;</span>'+
     '</div><div class="week-body"></div>';
@@ -5125,6 +5127,13 @@ function overlayTarget(w, r){
   const ramp = activeRampWeek(w);
   if(!ramp || planView !== 'active') return null;
   return ramp.rows[r.day + '|' + r.session] || null;
+}
+
+function rampHeaderHTML(w){
+  const ramp=activeRampWeek(w);
+  if(!ramp) return '';
+  const match=(ramp.label||'').match(/(\d+)%/);
+  return '<span class="reentry-ramp-badge">RAMP '+(match?match[1]+'%':'ACTIVE')+'</span>';
 }
 
 function renderReentryControl(){
