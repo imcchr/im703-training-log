@@ -40,6 +40,21 @@
   .tab.active{color:#fff;border-bottom-color:var(--gold);}
 
   .page-wrap{max-width:820px;margin:0 auto;padding:16px 14px;}
+/* Re-entry Overlay: source-of-truth status is build-time config, not browser-local state. */
+.reentry-card{background:#fff7ed;border:1px solid #fdba74;border-radius:12px;padding:12px 13px;margin:0 0 14px;}
+.reentry-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.reentry-kicker{font-size:.6rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:#c2410c;}
+.reentry-title{font-size:.96rem;font-weight:850;color:#9a3412;margin-top:2px;}
+.reentry-copy{font-size:.72rem;line-height:1.42;color:#7c2d12;margin-top:6px;}
+.reentry-badge{font-size:.58rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;background:#ea580c;color:#fff;border-radius:999px;padding:5px 8px;white-space:nowrap;}
+.reentry-controls{display:flex;gap:7px;margin-top:10px;}
+.reentry-btn{border:1px solid #fdba74;background:#fff;color:#9a3412;border-radius:8px;padding:7px 9px;font-size:.68rem;font-weight:800;cursor:pointer;}
+.reentry-btn.active{background:#ea580c;border-color:#ea580c;color:#fff;}
+.reentry-preview{display:none;margin-top:10px;border-top:1px solid #fed7aa;padding-top:9px;font-size:.7rem;line-height:1.45;color:#7c2d12;}
+.reentry-card.previewing .reentry-preview{display:block;}
+.reentry-chip{display:inline-block;font-size:.54rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;background:#ffedd5;color:#c2410c;border:1px solid #fdba74;border-radius:999px;padding:2px 5px;margin:0 0 4px;}
+.reentry-original{font-size:.62rem;color:#a8a29e;text-decoration:line-through;margin-top:4px;line-height:1.35;}
+
   .view{display:none;}
   .view.active{display:block;}
 
@@ -374,7 +389,8 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated August 11, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated August 17, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
 
@@ -402,7 +418,7 @@ const WEEKS_DATA = [
     "start": "2026-08-10",
     "label": "Aug 10-16",
     "phase": "Build",
-    "score": null,
+    "score": 30,
     "sessions": [
       {
         "date": "2026-08-10",
@@ -443,6 +459,76 @@ const WEEKS_DATA = [
         "key_metric": "1,203 of 1,750yd prescribed (69% of target volume), but this is the first swim back in about 2 weeks, right after a full interval run in about 100F heat",
         "score": 7,
         "verdict": "Solid comeback effort in context: 1,203yd continuous with HR averaging 154 (real aerobic work, peaking 190), done immediately after a hard interval run in extreme heat, first swim in about two weeks. Still short of the 1,750yd prescription and the file shows no clear WU/MS/CD structure, so it is not a full pass, but judged against what it actually was (a first-swim-back tacked onto an already-demanding day), 1,200yd is a good result, not a shortfall to penalize heavily."
+      },
+      {
+        "date": "2026-08-13",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Thu AM Base Bike \u00b7 1:15 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 55min Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
+      },
+      {
+        "date": "2026-08-13",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 not completed",
+        "key_metric": "not completed",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. not completed"
+      },
+      {
+        "date": "2026-08-14",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Fri AM Base Run \u00b7 35min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 20min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s only if ankle calm",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
+      },
+      {
+        "date": "2026-08-14",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Fri PM Threshold Swim \u00b7 1,850yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,250yd Z4 \u00b7 CD: 300yd w/ pull buoy",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
+      },
+      {
+        "date": "2026-08-15",
+        "discipline": "bike",
+        "title": "Long Bike",
+        "prescribed": "Sat Long Bike \u00b7 1:50 \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 1:30 Z3 (140-162W) \u00b7 CD: 10min Z2 (120-140W)",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
+      },
+      {
+        "date": "2026-08-16",
+        "discipline": "run",
+        "title": "Long Run",
+        "prescribed": "Sun PM Long Run \u00b7 50min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 30min Z2 steady \u00b7 CD: 10min Z2",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
+      },
+      {
+        "date": "2026-08-16",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sun AM Long Swim \u00b7 2,000yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,500yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy",
+        "actual": "MISS \u2014 not completed",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Confirmed missed."
       }
     ]
   },
@@ -3447,6 +3533,70 @@ const PLAN_DATA  = [
     }
   }
 ];
+const REENTRY_DATA = {
+  "id": "reentry-2026-08-17",
+  "status": "active",
+  "starts_week": 14,
+  "ends_week": 16,
+  "ramp_percentages": [
+    60,
+    75,
+    90
+  ],
+  "title": "3-Week Re-entry Ramp",
+  "reason": "Wk12 zero training week and Wk13 partial completion. Preserve the original plan, but rebuild training volume before resuming peak-phase demand.",
+  "scoring_rule": "While active, score sessions against this overlay's prescription. Original-plan differences are context only, never a score deduction.",
+  "race_policy": "Wk16 Olympic Tri remains unchanged; the ramp adjusts training volume around the event only.",
+  "weeks": {
+    "14": {
+      "label": "Ramp 1 of 3 \u00b7 60% volume",
+      "rows": {
+        "Mon AM|Full Body": "Reduced-volume Full Body \u00b7 about 60% of usual working-set volume; keep movement coverage, no maxing",
+        "Tue|Interval Bike": "38min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2\u00d73min Z5 (211-240W), 6min Z1 recovery \u00b7 CD: 10min Z2 (111-150W)",
+        "Wed AM|Interval Run": "31min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi) \u00b7 MS: 3\u00d73min controlled Z3-Z4 (8:00-6:55/mi), 2min easy recovery \u00b7 CD: 8min Z2",
+        "Wed PM|Base Swim": "1,200yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 800yd Z3 controlled \u00b7 CD: 200yd w/ pull buoy",
+        "Thu AM|Base Bike": "55min \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 35min Z3 (140-162W) \u00b7 CD: 10min Z2",
+        "Thu PM|Full Body": "Reduced-volume Full Body \u00b7 about 60% of usual working-set volume; keep movement coverage, no maxing",
+        "Fri AM|Base Run": "30min \u00b7 WU: 10min Z2 jog/walk \u00b7 MS: 15min Z2 steady \u00b7 CD: 5min Z2 \u00b7 no strides",
+        "Fri PM|Base Swim": "1,300yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 900yd controlled Z3-Z4 \u00b7 CD: 200yd w/ pull buoy",
+        "Sat|Long Bike": "1:05 \u00b7 WU: 10min Z2 \u00b7 MS: 45min Z3 \u00b7 CD: 10min Z2",
+        "Sun AM|Long Swim": "1,450yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 1,050yd Z3 w/ pull buoy \u00b7 CD: 200yd w/ pull buoy",
+        "Sun PM|Brick": "1:05 \u00b7 Bike: 45min controlled Z3 (140-162W) \u00b7 Run: 20min controlled Z2-Z3 (8-9/mi)"
+      }
+    },
+    "15": {
+      "label": "Ramp 2 of 3 \u00b7 75% volume",
+      "rows": {
+        "Mon AM|Full Body": "Moderate Full Body \u00b7 about 75% of usual working-set volume; progression only if Ramp 1 felt normal",
+        "Tue|Interval Bike": "45min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d73min Z5 (211-240W), 6min Z1 recovery \u00b7 CD: 10min Z2 (111-150W)",
+        "Wed AM|Interval Run": "42min \u00b7 WU: 10min Z2 \u00b7 MS: 4\u00d75min Z3-Z4 (8:00-6:55/mi), 2min easy recovery \u00b7 CD: 6min Z2",
+        "Wed PM|Base Swim": "1,600yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,100yd Z3-Z5 \u00b7 CD: 250yd w/ pull buoy",
+        "Thu AM|Base Bike": "1:10 \u00b7 WU: 10min Z2 \u00b7 MS: 50min Z3 \u00b7 CD: 10min Z2",
+        "Thu PM|Full Body": "Moderate Full Body \u00b7 about 75% of usual working-set volume; progression only if Ramp 1 felt normal",
+        "Fri AM|Base Run": "40min \u00b7 WU: 10min Z2 \u00b7 MS: 25min Z2-Z3 steady \u00b7 CD: 5min Z2 \u00b7 4\u00d720s strides only if desired",
+        "Fri PM|Base Swim": "1,600yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,100yd Z4 controlled \u00b7 CD: 250yd w/ pull buoy",
+        "Sat|Long Bike": "2:00 \u00b7 WU: 10min Z2 \u00b7 MS: 1:40 Z3 \u00b7 CD: 10min Z2",
+        "Sun AM|Long Swim": "1,900yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,400yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy",
+        "Sun PM|Long Run": "1:00 \u00b7 WU: 10min Z2 \u00b7 MS: 40min controlled Z2-Z3 \u00b7 CD: 10min Z2"
+      }
+    },
+    "16": {
+      "label": "Ramp 3 of 3 \u00b7 90% volume \u00b7 Olympic Tri unchanged",
+      "rows": {
+        "Mon AM|Full Body": "Deload Full Body \u00b7 retain original race-week intent; no added volume",
+        "Tue|Interval Bike": "46min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d74min Z5 (211-240W), 7min Z1 recovery \u00b7 CD: 10min Z2 (111-150W)",
+        "Wed AM|Interval Run": "36min \u00b7 WU: 10min Z2 \u00b7 MS: 16min controlled Z4 (6:47-7:08/mi) \u00b7 CD: 10min Z2",
+        "Wed PM|Base Swim": "1,450yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 950yd Z3-Z5 \u00b7 CD: 250yd w/ pull buoy",
+        "Thu AM|Base Bike": "55min \u00b7 WU: 10min Z2 \u00b7 MS: 35min Z3 \u00b7 CD: 10min Z2",
+        "Thu PM|Full Body": "Deload Full Body \u00b7 retain original race-week intent; no added volume",
+        "Fri AM|Base Run": "36min \u00b7 WU: 10min Z2 \u00b7 MS: 18min Z3 \u00b7 CD: 8min Z2 \u00b7 4\u00d720s strides only if desired",
+        "Fri PM|Base Swim": "1,300yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 800yd Z4 controlled \u00b7 CD: 250yd w/ pull buoy",
+        "Sat|Long Bike": "20min easy \u2014 unchanged race-week recovery ride",
+        "Sun|Olympic Tri": "UNCHANGED \u00b7 ~1,650 yd swim + ~25 mi Z3 bike (Zwift) + 6.2 mi Z3 run"
+      }
+    }
+  }
+};
 const EXPECTED_COUNTS = {
   "2026-05-04": 1,
   "2026-05-05": 1,
@@ -3876,7 +4026,7 @@ const TRENDS_DATA   = {
       "week": "Wk13",
       "label": "Aug 10-16",
       "phase": "Build",
-      "score": null,
+      "score": 30,
       "swim_yd": 1203,
       "bike_min": 51.7,
       "run_mi": 3.7,
@@ -4030,6 +4180,10 @@ const TRENDS_DATA   = {
         {
           "date": "Wk12",
           "value": 0
+        },
+        {
+          "date": "Wk13",
+          "value": 30
         }
       ]
     },
@@ -4791,18 +4945,22 @@ function parseDay(dayStr){
   return {idx:idx,slot:slot};
 }
 
-function planItemHTML(r){
+function planItemHTML(w,r){
+  const adjusted=overlayTarget(w,r);
+  const target=adjusted||r.target;
   return '<div class="pg-item disc-'+discClass(r.disc)+'">'+
     '<div class="pg-sess">'+esc(r.session)+'</div>'+
-    (r.target?'<div class="pg-tgt">'+esc(r.target).replace(/·/g,'<br>')+'</div>':'')+'</div>';
+    (adjusted?'<span class="reentry-chip">Ramp adjusted</span>':'')+
+    (target?'<div class="pg-tgt">'+esc(target).replace(/·/g,'<br>')+'</div>':'')+
+    (adjusted?'<div class="reentry-original">Original: '+esc(r.target)+'</div>':'')+'</div>';
 }
-function slotEl(items){
+function slotEl(w,items){
   const cell=document.createElement('div');
   cell.className='pg-slot';
-  cell.innerHTML=items.length?items.map(planItemHTML).join(''):'<span class="pg-empty">&middot;</span>';
+  cell.innerHTML=items.length?items.map(r=>planItemHTML(w,r)).join(''):'<span class="pg-empty">&middot;</span>';
   return cell;
 }
-function planGridEl(rows){
+function planGridEl(w,rows){
   const byDay=DAYS.map(function(){return {am:[],pm:[]};});
   rows.forEach(function(r){
     const p=parseDay(r.day);if(!p)return;
@@ -4821,19 +4979,23 @@ function planGridEl(rows){
     const row=document.createElement('div');row.className='pg-row';
     const dl=document.createElement('div');dl.className='pg-daylabel';dl.textContent=d;
     row.appendChild(dl);
-    row.appendChild(slotEl(byDay[i].am));
-    row.appendChild(slotEl(byDay[i].pm));
+    row.appendChild(slotEl(w,byDay[i].am));
+    row.appendChild(slotEl(w,byDay[i].pm));
     grid.appendChild(row);
   });
   return grid;
 }
-function planRowEl(r){
+function planRowEl(w,r){
+  const adjusted=overlayTarget(w,r);
+  const target=adjusted||r.target;
   const row=document.createElement('div');
   row.className='plan-row disc-'+discClass(r.disc);
   row.innerHTML=
     '<div class="plan-day">'+esc(r.day)+'</div>'+
     '<div><div class="plan-sess">'+esc(r.session)+'</div>'+
-      (r.target?'<div class="plan-target">'+esc(r.target).replace(/·/g,'<br>')+'</div>':'')+'</div>';
+      (adjusted?'<span class="reentry-chip">Ramp adjusted</span>':'')+
+      (target?'<div class="plan-target">'+esc(target).replace(/·/g,'<br>')+'</div>':'')+
+      (adjusted?'<div class="reentry-original">Original: '+esc(r.target)+'</div>':'')+'</div>';
   return row;
 }
 
@@ -4889,10 +5051,10 @@ function makePlanCard(w,cur){
   const dayRows=rows.filter(function(r){return parseDay(r.day);});
   const otherRows=rows.filter(function(r){return !parseDay(r.day);});
   if(dayRows.length){
-    body.appendChild(planGridEl(dayRows));
-    otherRows.forEach(function(r){body.appendChild(planRowEl(r));});
+    body.appendChild(planGridEl(w,dayRows));
+    otherRows.forEach(function(r){body.appendChild(planRowEl(w,r));});
   }else{
-    rows.forEach(function(r){body.appendChild(planRowEl(r));});
+    rows.forEach(function(r){body.appendChild(planRowEl(w,r));});
   }
   const summary=planSummaryEl(w.summary);
   if(summary) body.appendChild(summary);
@@ -4951,10 +5113,59 @@ function switchView(v){
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
 document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>applyFilter(p.dataset.disc)));
 
+/* Re-entry Overlay UI. Original PLAN_DATA is never mutated. */
+let planView = 'active';
+
+function activeRampWeek(w){
+  if(!REENTRY_DATA || REENTRY_DATA.status !== 'active') return null;
+  return REENTRY_DATA.weeks[String(w.num)] || null;
+}
+
+function overlayTarget(w, r){
+  const ramp = activeRampWeek(w);
+  if(!ramp || planView !== 'active') return null;
+  return ramp.rows[r.day + '|' + r.session] || null;
+}
+
+function renderReentryControl(){
+  const root = document.getElementById('reentry-control');
+  if(!REENTRY_DATA || REENTRY_DATA.status !== 'active') return;
+  const week = activeRampWeek({num: currentWeekNum()});
+  const label = week ? week.label : 'Configured';
+  root.innerHTML =
+    '<div class="reentry-card">' +
+      '<div class="reentry-top"><div><div class="reentry-kicker">Active plan overlay</div>' +
+      '<div class="reentry-title">'+esc(REENTRY_DATA.title)+' · '+esc(label)+'</div></div>' +
+      '<span class="reentry-badge">Active</span></div>' +
+      '<div class="reentry-copy">'+esc(REENTRY_DATA.scoring_rule)+'</div>' +
+      '<div class="reentry-controls">' +
+        '<button class="reentry-btn active" data-plan-view="active">Active Plan</button>' +
+        '<button class="reentry-btn" data-plan-view="original">Original Plan</button>' +
+        '<button class="reentry-btn" data-preview>Preview ramp</button>' +
+      '</div>' +
+      '<div class="reentry-preview"><strong>How it works:</strong> '+esc(REENTRY_DATA.reason)+'<br>' +
+      '<strong>Race policy:</strong> '+esc(REENTRY_DATA.race_policy)+'<br>' +
+      '<strong>Source of truth:</strong> this checked-in overlay config controls scoring. The buttons only change what you are viewing, so the site never pretends a browser-local click changed the plan.</div>' +
+    '</div>';
+  root.querySelectorAll('[data-plan-view]').forEach(btn=>btn.addEventListener('click',()=>{
+    planView=btn.dataset.planView;
+    root.querySelectorAll('[data-plan-view]').forEach(b=>b.classList.toggle('active',b.dataset.planView===planView));
+    rerenderPlan();
+  }));
+  root.querySelector('[data-preview]').addEventListener('click',()=>root.firstElementChild.classList.toggle('previewing'));
+}
+
+function rerenderPlan(){
+  const root=document.getElementById('plan-container');
+  root.innerHTML='';
+  renderPlan();
+}
+
 renderHeatmap();
 renderStats();
 renderLog();
 renderPlan();
+renderReentryControl();
 
 /* ---------- Trends tab ---------- */
 function sparkSVG(points){
