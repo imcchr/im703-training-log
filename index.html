@@ -5117,23 +5117,9 @@ document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>app
 
 /* Re-entry Overlay UI. Original PLAN_DATA is never mutated. */
 let planView = 'active';
-const RAMP_STATE_KEY = 'im703-reentry-ramp-status';
-
-function rampIsActive(){
-  if(!REENTRY_DATA) return false;
-  const stored=localStorage.getItem(RAMP_STATE_KEY);
-  return stored ? stored === 'active' : REENTRY_DATA.status === 'active';
-}
-
-function setRampActive(active){
-  localStorage.setItem(RAMP_STATE_KEY, active ? 'active' : 'inactive');
-  planView='active';
-  rerenderPlan();
-  renderReentryControl();
-}
 
 function activeRampWeek(w){
-  if(!rampIsActive()) return null;
+  if(!REENTRY_DATA || REENTRY_DATA.status !== 'active') return null;
   return REENTRY_DATA.weeks[String(w.num)] || null;
 }
 
@@ -5153,26 +5139,23 @@ function rampHeaderHTML(w){
 function renderReentryControl(){
   const root = document.getElementById('reentry-control');
   if(!REENTRY_DATA) return;
-  const active=rampIsActive();
   const week = activeRampWeek({num: currentWeekNum()});
-  const label = week ? week.label : 'Ready to activate';
+  const label = week ? week.label : 'Configured re-entry window';
   root.innerHTML =
     '<div class="reentry-card">' +
       '<div class="reentry-top"><div><div class="reentry-kicker">Re-entry control</div>' +
       '<div class="reentry-title">'+esc(REENTRY_DATA.title)+' · '+esc(label)+'</div></div>' +
-      '<span class="reentry-badge">'+(active?'Active':'Off')+'</span></div>' +
-      '<div class="reentry-copy">'+esc(active ? REENTRY_DATA.scoring_rule : 'Original plan is active. Turn on the ramp to apply the 60 / 75 / 90% re-entry prescriptions.')+'</div>' +
+      '<span class="reentry-badge">Active</span></div>' +
+      '<div class="reentry-copy">'+esc(REENTRY_DATA.scoring_rule)+'</div>' +
       '<div class="reentry-controls">' +
-        '<button class="reentry-btn '+(active?'active':'')+'" data-ramp-toggle>'+ (active?'Ramp ON · turn off':'Ramp OFF · activate') +'</button>' +
-        '<button class="reentry-btn '+(planView==='active'?'active':'')+'" data-plan-view="active">Active Plan</button>' +
+        '<button class="reentry-btn '+(planView==='active'?'active':'')+'" data-plan-view="active">Ramp Plan</button>' +
         '<button class="reentry-btn '+(planView==='original'?'active':'')+'" data-plan-view="original">Original Plan</button>' +
         '<button class="reentry-btn" data-preview>Preview ramp</button>' +
       '</div>' +
       '<div class="reentry-preview"><strong>How it works:</strong> '+esc(REENTRY_DATA.reason)+'<br>' +
       '<strong>Race policy:</strong> '+esc(REENTRY_DATA.race_policy)+'<br>' +
-      '<strong>Persistence:</strong> your ON/OFF choice is saved in this browser and immediately changes the effective plan display and ramp badges.</div>' +
+      '<strong>Schedule:</strong> Wk14, Wk15, and Wk16 are the configured ramp window; Wk17 automatically returns to the original plan.</div>' +
     '</div>';
-  root.querySelector('[data-ramp-toggle]').addEventListener('click',()=>setRampActive(!active));
   root.querySelectorAll('[data-plan-view]').forEach(btn=>btn.addEventListener('click',()=>{
     planView=btn.dataset.planView;
     rerenderPlan();
