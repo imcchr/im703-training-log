@@ -450,6 +450,16 @@ const WEEKS_DATA = [
         "key_metric": "Structure matched the ramp prescription almost to the second (31:47 vs 31:00); 2 of 3 work reps landed inside the 8:00-6:55/mi target, progressively faster each rep",
         "score": 9,
         "verdict": "Took the ramp-adjusted version this time (unlike Tuesday's bike override) \u2014 sensible mix of pushing where it's working (bike) and respecting the re-entry plan where it has not been tested yet (run). Execution was clean: WU GAP 9:47/mi (dead in the 9:25-10:00 Z2 band), all three 3:00 work reps ran exact duration with exact 2:00 recovery between them, CD landed at 8:47 vs 8:00 prescribed. Pacing came in progressively harder rep to rep -- 8:10, 7:40, 6:43 GAP -- with Rep 2 and Rep 3 clean inside the 8:00-6:55/mi target and Rep 1 landing just outside the slow end by about 10 seconds, which is well within normal GAP noise on this rolling terrain (133ft of climb across a 3.18mi route). Docked 1 point specifically for that Rep 1 miss -- real but minor. HR climbed appropriately with effort (190 to 194 to 198 max across the three reps) in warm but not extreme conditions (about 86-88F); not a scoring factor, just context."
+      },
+      {
+        "date": "2026-08-19",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Wed PM Aerobic Swim (ramp overlay: 1,600yd) \u00b7 Ian self-structured this one \u2014 200yd WU w/ pull buoy, 800yd continuous MS with NO pull buoy, 200yd CD w/ pull buoy",
+        "actual": "27:07 active \u00b7 1,212 yd \u00b7 HR 163 avg / 193 max \u00b7 356 kcal \u00b7 DPS 1.56 m/stroke avg \u00b7 **WU (200yd, 2 laps w/ buoy): 2:26/100yd avg, HR 153\u2192142 \u00b7 MS (800yd, 8 laps, NO BUOY): 17:34 continuous, ~2:12/100yd avg, HR climbing steadily 160\u2192172 as it went, DPS 1.45-1.79 \u00b7 CD (200yd, 2 laps w/ buoy): ~2:14/100yd avg, HR settling 162\u2192157**",
+        "key_metric": "**800 CONTINUOUS YARDS WITHOUT THE PULL BUOY \u2014 by a wide margin the longest unassisted continuous swim ever logged in this block.** DPS held steady (1.45-1.79) through the whole no-buoy set instead of collapsing, and HR rose gradually rather than spiking/redlining",
+        "score": 10,
+        "verdict": "**This is the single biggest swim breakthrough of the entire block.** Swim leg-sink / buoy-off collapse has been flagged as the #1 unsolved swim limiter since Wk7-8 \u2014 the last hard data point on record was buoy-off intervals of roughly 100yd before DPS collapsed to ~0.95-1.09 and HR spiked to 174-181. Today: **800 yards, continuous, zero buoy**, with stroke distance holding in the 1.45-1.79 range throughout \u2014 not degrading late in the set \u2014 and HR climbing gradually and predictably (160 to 172) instead of spiking and redlining the way it did on every prior buoy-off attempt. That is a body-position and kick-mechanics breakthrough, not just a fitness one. Total volume (1,212yd) came in under the 1,600yd ramp target, but that is completely beside the point this session \u2014 scoring this on yardage-shortfall math would badly miss what actually happened here. This gets a 10 and a flag to update the standing swim-limiter note, because the thing that note has been waiting on for 6+ weeks just happened."
       }
     ]
   },
@@ -4084,16 +4094,16 @@ const TRENDS_DATA   = {
       "label": "Aug 17-23",
       "phase": "Build",
       "score": null,
-      "swim_yd": 0,
+      "swim_yd": 1212,
       "bike_min": 51.2,
       "run_mi": 3.2,
-      "total_min": 83.0,
-      "long_swim_yd": 0,
+      "total_min": 110.1,
+      "long_swim_yd": 1212,
       "long_bike_min": 51.2,
       "long_run_mi": 3.2,
       "run_sessions": 1,
-      "completed": 2,
-      "load_delta": -27
+      "completed": 3,
+      "load_delta": -3
     }
   ],
   "durability": [
@@ -4190,7 +4200,7 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk14",
-      "long_swim_yd": 0,
+      "long_swim_yd": 1212,
       "long_bike_min": 51.2,
       "long_run_mi": 3.2,
       "run_sessions": 1
@@ -4602,7 +4612,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 14,
       "week": "Wk14",
-      "load_min": 83.0,
+      "load_min": 110.1,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -4618,6 +4628,13 @@ const TRENDS_DATA   = {
       "title": "Interval Run",
       "detail": "Structure matched the ramp prescription almost to the second (31:47 vs 31:00); 2 of 3 work reps landed inside the 8:00-6:55/mi target, progressively faster each rep",
       "discipline": "run",
+      "week": "Wk14"
+    },
+    {
+      "date": "2026-08-19",
+      "title": "Base Swim",
+      "detail": "**800 CONTINUOUS YARDS WITHOUT THE PULL BUOY \u2014 by a wide margin the longest unassisted continuous swim ever logged in this block.** DPS held steady (1.45-1.79) through the whole no-buoy set instead of collapsing, and HR rose gradually rather than spiking/redlining",
+      "discipline": "swim",
       "week": "Wk14"
     },
     {
@@ -4688,13 +4705,6 @@ const TRENDS_DATA   = {
       "title": "Long Run",
       "detail": "Full duration+distance completed, but pace ran **meaningfully faster than the 9:25-10:00/mi easy target** and got progressively quicker each split rather than staying easy",
       "discipline": "run",
-      "week": "Wk10"
-    },
-    {
-      "date": "2026-07-25",
-      "title": "Long Bike",
-      "detail": "Once the Zwift glitch was resolved, power was **dead-center Z3, essentially locked at 150W** for the rest of the ride \u2014 mechanically flatter than most sessions logged this block",
-      "discipline": "bike",
       "week": "Wk10"
     }
   ]
