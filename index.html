@@ -390,7 +390,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated August 18, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated August 19, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -440,6 +440,16 @@ const WEEKS_DATA = [
         "key_metric": "**All three work reps landed inside the true Z5 band (211-240W) at 224W \u2014 essentially identical across all three reps**, full structure matched almost to the second (51:14 vs 51:00 prescribed)",
         "score": 10,
         "verdict": "Ian made the call to skip the ramp-reduced Wk14 version and do the full original prescription, based on bike being his most consistent discipline lately \u2014 and it paid off. WU held **129W**, dead-center Z2. All three **5:00 work reps averaged 224W**, inside the **211-240W Z5 band**, essentially identical to each other (0-1W spread) \u2014 real repeatable output, matching last week's Tuesday bike almost exactly. Both 8:00 recovery blocks matched the full prescription exactly. Cooldown held 129W for 10:00. HR across the three reps was flatter and more controlled this time (174 \u2192 171 \u2192 171 avg, topping 184 max) vs the climbing pattern seen in prior weeks at similar wattage \u2014 a genuinely good sign of aerobic adaptation at this intensity. Total time 51:14 against 51:00 \u2014 essentially exact. Nothing to dock."
+      },
+      {
+        "date": "2026-08-19",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Wed AM Interval Run \u00b7 Ramp overlay applied (60%) \u00b7 31min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi) \u00b7 MS: 3x3min controlled Z3-Z4 (8:00-6:55/mi), 2min easy recovery \u00b7 CD: 8min Z2",
+        "actual": "31:47 active \u00b7 3.18 mi \u00b7 HR 170 avg / 198 max \u00b7 71 rpm avg cadence \u00b7 133ft ascent/136ft descent (rolling) \u00b7 ambient about 86-88F \u00b7 WU 10:00 at 9:47/mi GAP, Rep 1 3:00 at 8:10/mi GAP (HR 181/190), Rec 1 2:00 walk, Rep 2 3:00 at 7:40/mi GAP (HR 183/194), Rec 2 2:00 walk, Rep 3 3:00 at 6:43/mi GAP (HR 182/198), CD 8:47 at 11:48/mi GAP",
+        "key_metric": "Structure matched the ramp prescription almost to the second (31:47 vs 31:00); 2 of 3 work reps landed inside the 8:00-6:55/mi target, progressively faster each rep",
+        "score": 9,
+        "verdict": "Took the ramp-adjusted version this time (unlike Tuesday's bike override) \u2014 sensible mix of pushing where it's working (bike) and respecting the re-entry plan where it has not been tested yet (run). Execution was clean: WU GAP 9:47/mi (dead in the 9:25-10:00 Z2 band), all three 3:00 work reps ran exact duration with exact 2:00 recovery between them, CD landed at 8:47 vs 8:00 prescribed. Pacing came in progressively harder rep to rep -- 8:10, 7:40, 6:43 GAP -- with Rep 2 and Rep 3 clean inside the 8:00-6:55/mi target and Rep 1 landing just outside the slow end by about 10 seconds, which is well within normal GAP noise on this rolling terrain (133ft of climb across a 3.18mi route). Docked 1 point specifically for that Rep 1 miss -- real but minor. HR climbed appropriately with effort (190 to 194 to 198 max across the three reps) in warm but not extreme conditions (about 86-88F); not a scoring factor, just context."
       }
     ]
   },
@@ -4076,14 +4086,14 @@ const TRENDS_DATA   = {
       "score": null,
       "swim_yd": 0,
       "bike_min": 51.2,
-      "run_mi": 0.0,
-      "total_min": 51.2,
+      "run_mi": 3.2,
+      "total_min": 83.0,
       "long_swim_yd": 0,
       "long_bike_min": 51.2,
-      "long_run_mi": 0.0,
-      "run_sessions": 0,
-      "completed": 1,
-      "load_delta": -55
+      "long_run_mi": 3.2,
+      "run_sessions": 1,
+      "completed": 2,
+      "load_delta": -27
     }
   ],
   "durability": [
@@ -4182,8 +4192,8 @@ const TRENDS_DATA   = {
       "week": "Wk14",
       "long_swim_yd": 0,
       "long_bike_min": 51.2,
-      "long_run_mi": 0.0,
-      "run_sessions": 0
+      "long_run_mi": 3.2,
+      "run_sessions": 1
     }
   ],
   "markers": [
@@ -4426,10 +4436,10 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk14",
-      "overall_min": 436.31666666666666,
+      "overall_min": 415.01666666666665,
       "swim_min": 44.06666666666667,
       "bike_min": 215.25,
-      "run_min": 171.0
+      "run_min": 149.7
     }
   ],
   "overlay": [
@@ -4592,7 +4602,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 14,
       "week": "Wk14",
-      "load_min": 51.2,
+      "load_min": 83.0,
       "readiness": 72,
       "hrv": "",
       "rhr": "",
@@ -4603,6 +4613,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-08-19",
+      "title": "Interval Run",
+      "detail": "Structure matched the ramp prescription almost to the second (31:47 vs 31:00); 2 of 3 work reps landed inside the 8:00-6:55/mi target, progressively faster each rep",
+      "discipline": "run",
+      "week": "Wk14"
+    },
     {
       "date": "2026-08-18",
       "title": "Interval Bike",
@@ -4679,22 +4696,15 @@ const TRENDS_DATA   = {
       "detail": "Once the Zwift glitch was resolved, power was **dead-center Z3, essentially locked at 150W** for the rest of the ride \u2014 mechanically flatter than most sessions logged this block",
       "discipline": "bike",
       "week": "Wk10"
-    },
-    {
-      "date": "2026-07-25",
-      "title": "Base Run",
-      "detail": "Duration/distance/structure completed exactly as prescribed (15:00, off the bike, full T2) at reported easy perceived effort",
-      "discipline": "run",
-      "week": "Wk10"
     }
   ]
 };
 const RACE_DATA     = {
   "overall": {
-    "projected_finish": "7:16:19",
-    "projected_range": "6:33:25\u20138:27:48",
+    "projected_finish": "6:55:01",
+    "projected_range": "6:17:39\u20137:57:17",
     "strongest_leg": "Swim",
-    "limiter_leg": "Run",
+    "limiter_leg": "Bike",
     "confidence_label": "Moderate",
     "method_note": "Conservative model using demonstrated speed, longest distance, durability, and confidence penalties from live logs."
   },
@@ -4727,14 +4737,14 @@ const RACE_DATA     = {
     },
     {
       "disc": "Run",
-      "readiness": 69,
+      "readiness": 81,
       "confidence": 0.85,
       "confidence_label": "High",
-      "predicted_split": "2:51:00",
-      "predicted_range": "2:31:49\u20133:22:59",
+      "predicted_split": "2:29:42",
+      "predicted_range": "2:16:03\u20132:52:27",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 9:02/mi",
-      "evidence_3": "Recent run frequency signal: 1 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 2 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
