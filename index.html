@@ -66,7 +66,7 @@
     text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;}
   .hm-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .hm-scroll::-webkit-scrollbar{display:none;}
-  .hm-grid{display:flex;gap:3px;min-width:min-content;position:relative;}
+  .hm-grid{display:flex;gap:3px;min-width:min-content;position:relative;padding-top:18px;}
   .hm-col{display:flex;flex-direction:column;gap:3px;}
   .hm-month{height:13px;line-height:13px;font-size:.58rem;color:var(--muted);
     white-space:nowrap;overflow:visible;width:13px;}
@@ -181,11 +181,31 @@
   .hm-caption{font-weight:700;color:var(--ink);}
   .hm-legend{display:flex;align-items:center;gap:3px;white-space:nowrap;}
   .hm-legend .hm-cell{width:11px;height:11px;cursor:default;}
-  .hm-injury{position:absolute;top:0;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;
+  .hm-injury{position:absolute;top:18px;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;
     background:rgba(217,83,79,.06);pointer-events:none;box-sizing:border-box;}
   .hm-injury-tag{position:absolute;left:50%;top:0;transform:translateX(-50%);
     font-size:.5rem;font-weight:800;letter-spacing:.02em;color:#c0392b;background:var(--card);
     padding:0 3px;border-radius:3px;line-height:13px;white-space:nowrap;}
+  /* Missed / fully-skipped days (prescribed + logged but scored 0) */
+  .hm-cell.miss{background:#8ea2b4;box-shadow:inset 0 0 0 1.5px #5f7488;}
+  /* Training-block grouping brackets across the top of the heatmap */
+  .hm-block{position:absolute;height:11px;border:1.5px solid var(--muted);border-bottom:none;
+    border-radius:6px 6px 0 0;box-sizing:border-box;pointer-events:none;}
+  .hm-block.b0{border-color:#c98a2b;}
+  .hm-block.b1{border-color:#2b7a9e;}
+  .hm-block-tag{position:absolute;top:-4px;left:50%;transform:translateX(-50%);
+    font-size:.5rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;
+    background:var(--card);padding:0 4px;white-space:nowrap;line-height:9px;}
+  .hm-block.b0 .hm-block-tag{color:#c98a2b;}
+  .hm-block.b1 .hm-block-tag{color:#2b7a9e;}
+  /* Plan tab training-block divider banner */
+  .block-banner{display:flex;align-items:center;gap:8px;margin:6px 0 12px;padding:7px 13px;
+    border-radius:9px;background:linear-gradient(135deg,#2b7a9e,#1f5f7d);color:#fff;
+    font-weight:900;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;
+    box-shadow:0 1px 4px rgba(0,0,0,.12);}
+  .block-banner.summer{background:linear-gradient(135deg,#d9902b,#c2761a);}
+  .block-banner.fall{background:linear-gradient(135deg,#c0522b,#9e3d1f);}
+  .block-banner-label{flex:1;}
 
   /* Stats */
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
@@ -463,13 +483,73 @@ const WEEKS_DATA = [
       },
       {
         "date": "2026-08-20",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Thu AM Base Bike \u00b7 1:30 Z2/Z3",
+        "actual": "MISS \u2014 not attempted (plan restart / end of summer block)",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not attempted; week wound down early ahead of the Fall block restart."
+      },
+      {
+        "date": "2026-08-20",
         "discipline": "lift",
         "title": "Full Body",
         "prescribed": "",
-        "actual": "MISSED \u2014 not attempted \u2014 plan restarted at Wk1",
-        "key_metric": "not attempted \u2014 plan restarted at Wk1",
+        "actual": "MISSED \u2014 not attempted \u2014 end of Summer Block",
+        "key_metric": "not attempted \u2014 end of Summer Block",
         "score": 0,
-        "verdict": "Missed session recorded in the calendar. not attempted \u2014 plan restarted at Wk1"
+        "verdict": "Missed session recorded in the calendar. not attempted \u2014 end of Summer Block"
+      },
+      {
+        "date": "2026-08-21",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Fri AM Base Run \u00b7 50min",
+        "actual": "MISS \u2014 not attempted",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not attempted; week wound down early ahead of the Fall block restart."
+      },
+      {
+        "date": "2026-08-21",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Fri PM Threshold Swim \u00b7 2,100yd",
+        "actual": "MISS \u2014 not attempted",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not attempted; week wound down early ahead of the Fall block restart."
+      },
+      {
+        "date": "2026-08-22",
+        "discipline": "bike",
+        "title": "Long Bike",
+        "prescribed": "Sat Base Bike \u00b7 1:45",
+        "actual": "MISS \u2014 not attempted",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not attempted; week wound down early ahead of the Fall block restart."
+      },
+      {
+        "date": "2026-08-23",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sun AM Long Swim \u00b7 2,400yd",
+        "actual": "MISS \u2014 not attempted",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not attempted; week wound down early ahead of the Fall block restart."
+      },
+      {
+        "date": "2026-08-23",
+        "discipline": "unknown",
+        "title": "Brick",
+        "prescribed": "Sun PM Brick \u00b7 1:45",
+        "actual": "MISS \u2014 not attempted",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Not attempted; week wound down early ahead of the Fall block restart."
       }
     ]
   },
@@ -1871,12 +1951,25 @@ const WEEKS_DATA = [
     ]
   }
 ];
+const BLOCKS_DATA = [
+  {
+    "label": "Summer Block",
+    "start": "2026-05-04",
+    "end": "2026-08-23"
+  },
+  {
+    "label": "Fall Block",
+    "start": "2026-08-24",
+    "end": "2026-12-13"
+  }
+];  // [{label,start,end}] training-block ranges for heatmap brackets
 const PLAN_DATA  = [
   {
     "num": 1,
     "start": "2026-05-04",
     "label": "May 4-10",
     "phase": "Benchmark",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Tue",
@@ -1927,6 +2020,7 @@ const PLAN_DATA  = [
     "start": "2026-05-25",
     "label": "May 25-31",
     "phase": "Base",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2001,6 +2095,7 @@ const PLAN_DATA  = [
     "start": "2026-06-01",
     "label": "Jun 1-7",
     "phase": "Base",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2087,6 +2182,7 @@ const PLAN_DATA  = [
     "start": "2026-06-08",
     "label": "Jun 8-14",
     "phase": "Base",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2167,6 +2263,7 @@ const PLAN_DATA  = [
     "start": "2026-06-15",
     "label": "Jun 15-21",
     "phase": "Recovery",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2253,6 +2350,7 @@ const PLAN_DATA  = [
     "start": "2026-06-22",
     "label": "Jun 22-28",
     "phase": "Base",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Tue",
@@ -2321,6 +2419,7 @@ const PLAN_DATA  = [
     "start": "2026-06-29",
     "label": "Jun 29 - Jul 5",
     "phase": "Base",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Tue",
@@ -2407,6 +2506,7 @@ const PLAN_DATA  = [
     "start": "2026-07-06",
     "label": "Jul 6-12",
     "phase": "Recovery",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2487,6 +2587,7 @@ const PLAN_DATA  = [
     "start": "2026-07-13",
     "label": "Jul 13-19",
     "phase": "Build",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Tue",
@@ -2561,6 +2662,7 @@ const PLAN_DATA  = [
     "start": "2026-07-20",
     "label": "Jul 20-26",
     "phase": "Build",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Tue",
@@ -2641,6 +2743,7 @@ const PLAN_DATA  = [
     "start": "2026-07-27",
     "label": "Jul 27 - Aug 2",
     "phase": "Build",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2727,6 +2830,7 @@ const PLAN_DATA  = [
     "start": "2026-08-03",
     "label": "Aug 3-9",
     "phase": "Race",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2819,6 +2923,7 @@ const PLAN_DATA  = [
     "start": "2026-08-10",
     "label": "Aug 10-16",
     "phase": "Build",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon",
@@ -2905,6 +3010,7 @@ const PLAN_DATA  = [
     "start": "2026-08-17",
     "label": "Aug 17-23",
     "phase": "Build",
+    "block": "Summer Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -2991,6 +3097,7 @@ const PLAN_DATA  = [
     "start": "2026-08-24",
     "label": "Aug 24-30",
     "phase": "Build",
+    "block": "Fall Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -3002,431 +3109,7 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Interval Run",
-        "target": "39min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (6:47/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,750yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,150yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 55min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Base Run",
-        "target": "45min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 25min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
-      },
-      {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,800yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,200yd Z4 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Sat",
-        "disc": "bike",
-        "session": "Long Bike",
-        "target": "2hrs \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:40 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Sun AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3 w/ pull buoy \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Sun PM",
-        "disc": "run",
-        "session": "Long Run",
-        "target": "1hr \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 40min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
-      }
-    ],
-    "notes": [],
-    "summary": {
-      "swim": "5,650yd",
-      "bike": "4:06",
-      "run": "14.8mi",
-      "swim_yd": 5650,
-      "bike_min": 246,
-      "run_mi": 14.83,
-      "swim_delta": -13,
-      "bike_delta": -23,
-      "run_delta": 9
-    }
-  },
-  {
-    "num": 16,
-    "start": "2026-08-31",
-    "label": "Aug 31 - Sep 6",
-    "phase": "Build",
-    "rows": [
-      {
-        "day": "Mon AM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Tue",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Interval Run",
-        "target": "28min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d73min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 5min Z2"
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,450yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 850yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 40min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Base Run",
-        "target": "25min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s"
-      },
-      {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,550yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 950yd Z4 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Sat",
-        "disc": "unknown",
-        "session": "Brick",
-        "target": "1:00 \u00b7 Bike: 45min Z3 (151-180W) \u00b7 Run: 15min Z2-Z3 (9:25-8:00/mi)"
-      },
-      {
-        "day": "Sun AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "1,800yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,300yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
-      },
-      {
-        "day": "Sun PM",
-        "disc": "run",
-        "session": "Long Run",
-        "target": "20min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 5min Z2 steady \u00b7 CD: 5min Z2"
-      }
-    ],
-    "notes": [],
-    "summary": {
-      "swim": "4,800yd",
-      "bike": "2:36",
-      "run": "9.2mi",
-      "swim_yd": 4800,
-      "bike_min": 156,
-      "run_mi": 9.24,
-      "swim_delta": -15,
-      "bike_delta": -37,
-      "run_delta": -38
-    }
-  },
-  {
-    "num": 17,
-    "start": "2026-09-07",
-    "label": "Sep 7-13",
-    "phase": "Build",
-    "rows": [
-      {
-        "day": "Mon AM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Tue",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Interval Run",
-        "target": "34min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d74min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 6min Z2"
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:10 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 50min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Base Run",
-        "target": "30min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 15min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s"
-      },
-      {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,700yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,100yd Z4 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Sat",
-        "disc": "bike",
-        "session": "Long Bike",
-        "target": "1:25 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:05 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Sun AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "1,850yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,350yd steady w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
-      },
-      {
-        "day": "Sun PM",
-        "disc": "run",
-        "session": "Long Run",
-        "target": "40min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 20min Z2 steady \u00b7 CD: 10min Z2"
-      }
-    ],
-    "notes": [],
-    "summary": {
-      "swim": "5,150yd",
-      "bike": "3:26",
-      "run": "10.7mi",
-      "swim_yd": 5150,
-      "bike_min": 206,
-      "run_mi": 10.71,
-      "swim_delta": 7,
-      "bike_delta": 32,
-      "run_delta": 16
-    }
-  },
-  {
-    "num": 18,
-    "start": "2026-09-14",
-    "label": "Sep 14-20",
-    "phase": "Race",
-    "rows": [
-      {
-        "day": "Mon AM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Tue",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Interval Run",
-        "target": "32min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d73min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 7min Z2"
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 800yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 40min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Base Run",
-        "target": "25min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 10min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s"
-      },
-      {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z4 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Sat",
-        "disc": "bike",
-        "session": "Long Bike",
-        "target": "20 min easy \u2014 recovery pace only, no effort"
-      },
-      {
-        "day": "Sun",
-        "disc": "unknown",
-        "session": "Sprint Tri",
-        "target": "800 yd swim + 12 mi Z3 bike (Zwift) + 3 mi controlled run \u2014 race by feel"
-      }
-    ],
-    "notes": [],
-    "summary": {
-      "swim": "3,700yd",
-      "bike": "2:11",
-      "run": "5.9mi",
-      "swim_yd": 3700,
-      "bike_min": 131,
-      "run_mi": 5.87,
-      "swim_delta": -28,
-      "bike_delta": -36,
-      "run_delta": -45
-    }
-  },
-  {
-    "num": 19,
-    "start": "2026-09-21",
-    "label": "Sep 21-27",
-    "phase": "Build",
-    "rows": [
-      {
-        "day": "Mon AM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Tue",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Wed AM",
-        "disc": "run",
-        "session": "Interval Run",
-        "target": "35min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 3\u00d74min Z3-Z4 (8:00-6:55/mi feel), 2min Z2 rec \u00b7 CD: 9min Z2"
-      },
-      {
-        "day": "Wed PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,750yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,150yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Thu PM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 55min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Fri AM",
-        "disc": "run",
-        "session": "Base Run",
-        "target": "35min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 20min Z2 steady \u00b7 CD: 5min Z2 \u00b7 Strides: 4x20s"
-      },
-      {
-        "day": "Fri PM",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,850yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,250yd Z4 \u00b7 CD: 300yd w/ pull buoy"
-      },
-      {
-        "day": "Sat",
-        "disc": "bike",
-        "session": "Long Bike",
-        "target": "1:50 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:30 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
-        "day": "Sun AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "2,000yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,500yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
-      },
-      {
-        "day": "Sun PM",
-        "disc": "run",
-        "session": "Long Run",
-        "target": "50min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi effort) \u00b7 MS: 30min Z2 steady \u00b7 CD: 10min Z2"
-      }
-    ],
-    "notes": [],
-    "summary": {
-      "swim": "5,600yd",
-      "bike": "3:56",
-      "run": "12.4mi",
-      "swim_yd": 5600,
-      "bike_min": 236,
-      "run_mi": 12.36,
-      "swim_delta": 51,
-      "bike_delta": 80,
-      "run_delta": 111
-    }
-  },
-  {
-    "num": 20,
-    "start": "2026-09-28",
-    "label": "Sep 28 - Oct 4",
-    "phase": "Build",
-    "rows": [
-      {
-        "day": "Mon AM",
-        "disc": "lift",
-        "session": "Full Body",
-        "target": ""
-      },
-      {
-        "day": "Tue",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
@@ -3438,7 +3121,13 @@ const PLAN_DATA  = [
         "day": "Wed PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,000yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,400yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy \u2014 Wk14 ramp overlay (60%) target: 1,200yd (200/800/200)"
+        "target": "2,000yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,400yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Thu PM",
@@ -3447,16 +3136,10 @@ const PLAN_DATA  = [
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:10 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
         "day": "Fri AM",
         "disc": "run",
         "session": "Base Run",
-        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 30min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
       },
       {
         "day": "Fri PM",
@@ -3468,39 +3151,40 @@ const PLAN_DATA  = [
         "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:25 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Sun AM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z3 w/ pull buoy \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z3 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sun PM",
-        "disc": "unknown",
-        "session": "Brick",
-        "target": "1:45 \u00b7 Bike: 1:15 Z3 (151-180W) \u00b7 Run: 30min Z3 (8-9/mi)"
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:00 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
       "swim": "6,500yd",
-      "bike": "5:21",
-      "run": "13.6mi",
+      "bike": "4:21",
+      "run": "16.3mi",
       "swim_yd": 6500,
-      "bike_min": 321,
-      "run_mi": 13.62,
-      "swim_delta": 16,
-      "bike_delta": 36,
-      "run_delta": 10
+      "bike_min": 261,
+      "run_mi": 16.27,
+      "swim_delta": 0,
+      "bike_delta": -19,
+      "run_delta": 19
     }
   },
   {
-    "num": 21,
-    "start": "2026-10-05",
-    "label": "Oct 5-11",
-    "phase": "Peak",
+    "num": 16,
+    "start": "2026-08-31",
+    "label": "Aug 31 - Sep 6",
+    "phase": "Build",
+    "block": "Fall Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -3512,13 +3196,13 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "53min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x7min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x7min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Wed PM",
@@ -3527,22 +3211,22 @@ const PLAN_DATA  = [
         "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
         "day": "Thu PM",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:10 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
         "day": "Fri AM",
         "disc": "run",
         "session": "Base Run",
-        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 30min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
       },
       {
         "day": "Fri PM",
@@ -3554,39 +3238,40 @@ const PLAN_DATA  = [
         "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "2:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2:25 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "2:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Sun AM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "2,500yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 2,000yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
+        "target": "2,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,900yd Z3 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sun PM",
         "disc": "run",
         "session": "Long Run",
-        "target": "1:20 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 1hr Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "1:10 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
       "swim": "6,700yd",
-      "bike": "5:06",
-      "run": "18.8mi",
+      "bike": "4:36",
+      "run": "17.5mi",
       "swim_yd": 6700,
-      "bike_min": 306,
-      "run_mi": 18.85,
+      "bike_min": 276,
+      "run_mi": 17.51,
       "swim_delta": 3,
-      "bike_delta": -5,
-      "run_delta": 38
+      "bike_delta": 6,
+      "run_delta": 8
     }
   },
   {
-    "num": 22,
-    "start": "2026-10-12",
-    "label": "Oct 12-18",
-    "phase": "Race",
+    "num": 17,
+    "start": "2026-09-07",
+    "label": "Sep 7-13",
+    "phase": "Build",
+    "block": "Fall Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -3598,13 +3283,796 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "40min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 20min Z4 (6:47-7:08/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "53min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x8min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "55min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "2:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,000yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "6,900yd",
+      "bike": "5:06",
+      "run": "18.8mi",
+      "swim_yd": 6900,
+      "bike_min": 306,
+      "run_mi": 18.85,
+      "swim_delta": 3,
+      "bike_delta": 11,
+      "run_delta": 8
+    }
+  },
+  {
+    "num": 18,
+    "start": "2026-09-14",
+    "label": "Sep 14-20",
+    "phase": "Recovery",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "41min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2\u00d75min Z5 VO2max (211-240W), 8min free ride recovery \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "32min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (6:47-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "35min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "1,800yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,200yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "0:45 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "4,800yd",
+      "bike": "3:11",
+      "run": "11.5mi",
+      "swim_yd": 4800,
+      "bike_min": 191,
+      "run_mi": 11.54,
+      "swim_delta": -30,
+      "bike_delta": -38,
+      "run_delta": -39
+    }
+  },
+  {
+    "num": 19,
+    "start": "2026-09-21",
+    "label": "Sep 21-27",
+    "phase": "Build",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "53min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x8min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "55min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "2:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,000yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "6,900yd",
+      "bike": "5:06",
+      "run": "18.8mi",
+      "swim_yd": 6900,
+      "bike_min": 306,
+      "run_mi": 18.85,
+      "swim_delta": 44,
+      "bike_delta": 60,
+      "run_delta": 63
+    }
+  },
+  {
+    "num": 20,
+    "start": "2026-09-28",
+    "label": "Sep 28 - Oct 4",
+    "phase": "Build",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "55min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x10min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "1:00 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "2:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,700yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,100yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:25 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "7,100yd",
+      "bike": "5:21",
+      "run": "20.6mi",
+      "swim_yd": 7100,
+      "bike_min": 321,
+      "run_mi": 20.6,
+      "swim_delta": 3,
+      "bike_delta": 5,
+      "run_delta": 9
+    }
+  },
+  {
+    "num": 21,
+    "start": "2026-10-05",
+    "label": "Oct 5-11",
+    "phase": "Build",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "56min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x10min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "1:00 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,300yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,700yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "3:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,800yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,200yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:30 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "7,300yd",
+      "bike": "5:51",
+      "run": "21.2mi",
+      "swim_yd": 7300,
+      "bike_min": 351,
+      "run_mi": 21.22,
+      "swim_delta": 3,
+      "bike_delta": 9,
+      "run_delta": 3
+    }
+  },
+  {
+    "num": 22,
+    "start": "2026-10-12",
+    "label": "Oct 12-18",
+    "phase": "Recovery",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "41min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2\u00d75min Z5 VO2max (211-240W), 8min free ride recovery \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "32min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (6:47-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "35min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "1,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 900yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,000yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,400yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "0:50 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "5,000yd",
+      "bike": "3:26",
+      "run": "12.1mi",
+      "swim_yd": 5000,
+      "bike_min": 206,
+      "run_mi": 12.05,
+      "swim_delta": -32,
+      "bike_delta": -41,
+      "run_delta": -43
+    }
+  },
+  {
+    "num": 23,
+    "start": "2026-10-19",
+    "label": "Oct 19-25",
+    "phase": "Build",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "56min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x10min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "1:00 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,300yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,700yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "3:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,800yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,200yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:35 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "7,300yd",
+      "bike": "5:51",
+      "run": "21.7mi",
+      "swim_yd": 7300,
+      "bike_min": 351,
+      "run_mi": 21.73,
+      "swim_delta": 46,
+      "bike_delta": 70,
+      "run_delta": 80
+    }
+  },
+  {
+    "num": 24,
+    "start": "2026-10-26",
+    "label": "Oct 26 - Nov 1",
+    "phase": "Build",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "58min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x9min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,300yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,700yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "1:05 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,300yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,700yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "3:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,900yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,300yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:40 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "7,500yd",
+      "bike": "6:06",
+      "run": "23.0mi",
+      "swim_yd": 7500,
+      "bike_min": 366,
+      "run_mi": 22.97,
+      "swim_delta": 3,
+      "bike_delta": 4,
+      "run_delta": 6
+    }
+  },
+  {
+    "num": 25,
+    "start": "2026-11-02",
+    "label": "Nov 2-8",
+    "phase": "Build",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "60min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 6x8min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Wed PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,300yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,700yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "1:05 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
+      },
+      {
+        "day": "Fri PM",
+        "disc": "swim",
+        "session": "Base Swim",
+        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sat",
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "3:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "3,000yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,400yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:45 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      }
+    ],
+    "notes": [],
+    "summary": {
+      "swim": "7,700yd",
+      "bike": "6:06",
+      "run": "23.7mi",
+      "swim_yd": 7700,
+      "bike_min": 366,
+      "run_mi": 23.69,
+      "swim_delta": 3,
+      "bike_delta": 0,
+      "run_delta": 3
+    }
+  },
+  {
+    "num": 26,
+    "start": "2026-11-09",
+    "label": "Nov 9-15",
+    "phase": "Recovery",
+    "block": "Fall Block",
+    "rows": [
+      {
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Tue",
+        "disc": "bike",
+        "session": "Interval Bike",
+        "target": "41min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2\u00d75min Z5 VO2max (211-240W), 8min free ride recovery \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
+        "day": "Wed AM",
+        "disc": "run",
+        "session": "Interval Run",
+        "target": "35min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (6:47-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Wed PM",
@@ -3613,60 +4081,67 @@ const PLAN_DATA  = [
         "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+      },
+      {
         "day": "Thu PM",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1hr \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 40min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
         "day": "Fri AM",
         "disc": "run",
         "session": "Base Run",
-        "target": "40min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 20min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 4x20s"
+        "target": "40min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 800yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "20 min easy \u2014 recovery pace only, no effort"
+        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
-        "day": "Sun",
-        "disc": "unknown",
-        "session": "Olympic Tri",
-        "target": "~1,650 yd swim + ~25 mi Z3 bike (Zwift) + 6.2 mi Z3 run"
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,000yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,400yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "0:55 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
-      "swim": "4,650yd",
-      "bike": "2:11",
-      "run": "14.4mi",
-      "swim_yd": 4650,
-      "bike_min": 131,
-      "run_mi": 14.44,
-      "swim_delta": -31,
-      "bike_delta": -57,
-      "run_delta": -23
+      "swim": "5,200yd",
+      "bike": "3:26",
+      "run": "13.4mi",
+      "swim_yd": 5200,
+      "bike_min": 206,
+      "run_mi": 13.39,
+      "swim_delta": -32,
+      "bike_delta": -44,
+      "run_delta": -43
     }
   },
   {
-    "num": 23,
-    "start": "2026-10-19",
-    "label": "Oct 19-25",
-    "phase": "Peak",
+    "num": 27,
+    "start": "2026-11-16",
+    "label": "Nov 16-22",
+    "phase": "Build",
+    "block": "Fall Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -3678,19 +4153,25 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "42min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 22min Z4 (6:47-7:08/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "60min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 6x8min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,300yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,700yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Thu PM",
@@ -3699,60 +4180,55 @@ const PLAN_DATA  = [
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:10 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
         "day": "Fri AM",
         "disc": "run",
         "session": "Base Run",
-        "target": "55min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 35min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 4x20s"
+        "target": "1:05 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "3hrs \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2:40 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "3:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Sun AM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "2,500yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 2,000yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
+        "target": "3,000yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,400yd Z3 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sun PM",
         "disc": "run",
         "session": "Long Run",
-        "target": "1:30 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 1:10 Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "1:45 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
-      "swim": "6,700yd",
-      "bike": "5:21",
-      "run": "19.3mi",
-      "swim_yd": 6700,
-      "bike_min": 321,
-      "run_mi": 19.26,
-      "swim_delta": 44,
-      "bike_delta": 145,
-      "run_delta": 33
+      "swim": "7,700yd",
+      "bike": "6:06",
+      "run": "23.7mi",
+      "swim_yd": 7700,
+      "bike_min": 366,
+      "run_mi": 23.69,
+      "swim_delta": 48,
+      "bike_delta": 78,
+      "run_delta": 77
     }
   },
   {
-    "num": 24,
-    "start": "2026-10-26",
-    "label": "Oct 26 - Nov 1",
-    "phase": "Peak",
+    "num": 28,
+    "start": "2026-11-23",
+    "label": "Nov 23-29",
+    "phase": "Build",
+    "block": "Fall Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -3764,19 +4240,25 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "44min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 24min Z4 (6:47-7:08/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "62min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x10min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Thu PM",
@@ -3785,60 +4267,55 @@ const PLAN_DATA  = [
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:45 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:25 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
         "day": "Fri AM",
         "disc": "run",
-        "session": "Long Run",
-        "target": "1hr \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 40min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 4x20s"
+        "session": "Base Run",
+        "target": "1:10 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
-        "disc": "unknown",
-        "session": "Brick",
-        "target": "2:30 \u00b7 Bike: 1:45 Z3 (151-180W) \u00b7 Run: 45min Z3 (8-9/mi)"
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "3:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Sun AM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "2,512yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 2,112yd max sustained w/ pull buoy \u00b7 CD: 200yd w/ pull buoy"
+        "target": "3,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,500yd Z3 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sun PM",
         "disc": "run",
         "session": "Long Run",
-        "target": "30min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 10min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "1:50 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
-      "swim": "6,712yd",
-      "bike": "4:21",
-      "run": "19.1mi",
-      "swim_yd": 6712,
-      "bike_min": 261,
-      "run_mi": 19.1,
-      "swim_delta": 0,
-      "bike_delta": -19,
-      "run_delta": -1
+      "swim": "7,900yd",
+      "bike": "6:21",
+      "run": "24.9mi",
+      "swim_yd": 7900,
+      "bike_min": 381,
+      "run_mi": 24.93,
+      "swim_delta": 3,
+      "bike_delta": 4,
+      "run_delta": 5
     }
   },
   {
-    "num": 25,
-    "start": "2026-11-02",
-    "label": "Nov 2-8",
-    "phase": "Taper",
+    "num": 29,
+    "start": "2026-11-30",
+    "label": "Nov 30 - Dec 6",
+    "phase": "Build",
+    "block": "Fall Block",
     "rows": [
       {
         "day": "Mon AM",
@@ -3850,19 +4327,25 @@ const PLAN_DATA  = [
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "46min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 26min Z4 (6:47-7:08/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "62min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 5x10min Z4 (6:55-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,400yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,800yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Thu AM",
+        "disc": "bike",
+        "session": "Base Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Thu PM",
@@ -3871,155 +4354,138 @@ const PLAN_DATA  = [
         "target": ""
       },
       {
-        "day": "Thu AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:10 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
-      },
-      {
         "day": "Fri AM",
         "disc": "run",
         "session": "Base Run",
-        "target": "55min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 35min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 4x20s"
+        "target": "1:10 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u00b7 Strides: 6x20s"
       },
       {
         "day": "Fri PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "2,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,500yd Z4 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "2,500yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,900yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "2:15 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 1:55 Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "3:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Sun AM",
         "disc": "swim",
         "session": "Long Swim",
-        "target": "2,000yd \u00b7 WU: 250yd w/ pull buoy \u00b7 MS: 1,500yd Z3 w/ pull buoy \u00b7 CD: 250yd w/ pull buoy"
+        "target": "3,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 2,500yd Z3 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sun PM",
         "disc": "run",
         "session": "Long Run",
-        "target": "1:05 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 45min Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "1:50 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
-      "swim": "6,200yd",
-      "bike": "4:36",
-      "run": "17.1mi",
-      "swim_yd": 6200,
-      "bike_min": 276,
-      "run_mi": 17.1,
-      "swim_delta": -8,
-      "bike_delta": 6,
-      "run_delta": -10
+      "swim": "8,000yd",
+      "bike": "6:21",
+      "run": "24.9mi",
+      "swim_yd": 8000,
+      "bike_min": 381,
+      "run_mi": 24.93,
+      "swim_delta": 1,
+      "bike_delta": 0,
+      "run_delta": 0
     }
   },
   {
-    "num": 26,
-    "start": "2026-11-09",
-    "label": "Nov 9-15",
-    "phase": "Race",
+    "num": 30,
+    "start": "2026-12-07",
+    "label": "Dec 7-13",
+    "phase": "Recovery",
+    "block": "Fall Block",
     "rows": [
       {
-        "day": "Mon",
-        "disc": "unknown",
-        "session": "",
-        "target": "Full rest"
+        "day": "Mon AM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
       },
       {
         "day": "Tue",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max effort (211-240W), 8min free ride recovery between reps (Z1 <110W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "41min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2\u00d75min Z5 VO2max (211-240W), 8min free ride recovery \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
         "day": "Wed AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "40min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 20min Z4 (6:47-7:08/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "35min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (6:47-7:08/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       },
       {
         "day": "Wed PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,700yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,150yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z3-Z5 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
-        "day": "Thu",
+        "day": "Thu AM",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "45min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 25min Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
-        "day": "Fri",
+        "day": "Thu PM",
+        "disc": "lift",
+        "session": "Full Body",
+        "target": ""
+      },
+      {
+        "day": "Fri AM",
+        "disc": "run",
+        "session": "Base Run",
+        "target": "40min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+      },
+      {
+        "day": "Fri PM",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 500yd Z4-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "target": "1,600yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,000yd Z4 \u00b7 CD: 300yd w/ pull buoy"
       },
       {
         "day": "Sat",
-        "disc": "swim",
-        "session": "Base Swim",
-        "target": "1,100yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 500yd Z4-Z5 \u00b7 CD: 300yd w/ pull buoy"
+        "disc": "bike",
+        "session": "Long Bike",
+        "target": "2:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
-        "day": "Sun",
-        "disc": "unknown",
-        "session": "Olympic Tri",
-        "target": "~1,650 yd swim + ~25 mi Z3 bike (Zwift) + 6.2 mi Z3 run"
+        "day": "Sun AM",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "2,200yd \u00b7 WU: 300yd w/ pull buoy \u00b7 MS: 1,600yd Z3 \u00b7 CD: 300yd w/ pull buoy"
+      },
+      {
+        "day": "Sun PM",
+        "disc": "run",
+        "session": "Long Run",
+        "target": "1:00 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
       }
     ],
     "notes": [],
     "summary": {
-      "swim": "5,550yd",
-      "bike": "1:36",
-      "run": "10.3mi",
-      "swim_yd": 5550,
-      "bike_min": 96,
-      "run_mi": 10.32,
-      "swim_delta": -10,
-      "bike_delta": -65,
-      "run_delta": -40
+      "swim": "5,400yd",
+      "bike": "3:41",
+      "run": "13.9mi",
+      "swim_yd": 5400,
+      "bike_min": 221,
+      "run_mi": 13.91,
+      "swim_delta": -32,
+      "bike_delta": -42,
+      "run_delta": -44
     }
   }
 ];
-const REENTRY_DATA = {
-  "id": "reentry-2026-08-17",
-  "status": "closed",
-  "starts_week": 14,
-  "ends_week": 14,
-  "ramp_percentages": [
-    60
-  ],
-  "title": "3-Week Re-entry Ramp (superseded by full restart at Wk15)",
-  "reason": "Wk12 zero training week and Wk13 partial completion. Preserve the original plan, but rebuild training volume before resuming peak-phase demand.",
-  "scoring_rule": "While active, score sessions against this overlay's prescription. Original-plan differences are context only, never a score deduction.",
-  "race_policy": "Superseded \u2014 the original Wk16 Olympic Tri this ramp was built around no longer exists at that week number after the Aug 19, 2026 full plan restart. Only Ramp 1 of 3 (Wk14, 60%) was ever executed; Ramp 2/3 (originally targeting old Wk15/16) are retired, not carried into the restart.",
-  "weeks": {
-    "14": {
-      "label": "Ramp 1 of 3 \u00b7 60% volume (only ramp week actually used)",
-      "rows": {
-        "Mon AM|Full Body": "Reduced-volume Full Body \u00b7 about 60% of usual working-set volume; keep movement coverage, no maxing",
-        "Tue|Interval Bike": "38min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 2\u00d73min Z5 (211-240W), 6min Z1 recovery \u00b7 CD: 10min Z2 (111-150W)",
-        "Wed AM|Interval Run": "31min \u00b7 WU: 10min Z2 jog/walk (9:25-10:00/mi) \u00b7 MS: 3\u00d73min controlled Z3-Z4 (8:00-6:55/mi), 2min easy recovery \u00b7 CD: 8min Z2",
-        "Wed PM|Base Swim": "1,200yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 800yd Z3 controlled \u00b7 CD: 200yd w/ pull buoy",
-        "Thu AM|Base Bike": "55min \u00b7 WU: 10min Z2 (120-140W) \u00b7 MS: 35min Z3 (140-162W) \u00b7 CD: 10min Z2",
-        "Thu PM|Full Body": "Reduced-volume Full Body \u00b7 about 60% of usual working-set volume; keep movement coverage, no maxing",
-        "Fri AM|Base Run": "30min \u00b7 WU: 10min Z2 jog/walk \u00b7 MS: 15min Z2 steady \u00b7 CD: 5min Z2 \u00b7 no strides",
-        "Fri PM|Base Swim": "1,300yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 900yd controlled Z3-Z4 \u00b7 CD: 200yd w/ pull buoy",
-        "Sat|Long Bike": "1:05 \u00b7 WU: 10min Z2 \u00b7 MS: 45min Z3 \u00b7 CD: 10min Z2",
-        "Sun AM|Long Swim": "1,450yd \u00b7 WU: 200yd w/ pull buoy \u00b7 MS: 1,050yd Z3 w/ pull buoy \u00b7 CD: 200yd w/ pull buoy",
-        "Sun PM|Brick": "1:05 \u00b7 Bike: 45min controlled Z3 (140-162W) \u00b7 Run: 20min controlled Z2-Z3 (8-9/mi)"
-      }
-    }
-  }
-};
+const REENTRY_DATA = null;
 const EXPECTED_COUNTS = {
   "2026-05-04": 1,
   "2026-05-05": 1,
@@ -4125,6 +4591,7 @@ const EXPECTED_COUNTS = {
   "2026-09-02": 2,
   "2026-09-03": 2,
   "2026-09-04": 2,
+  "2026-09-05": 1,
   "2026-09-06": 2,
   "2026-09-07": 1,
   "2026-09-08": 1,
@@ -4139,6 +4606,7 @@ const EXPECTED_COUNTS = {
   "2026-09-17": 2,
   "2026-09-18": 2,
   "2026-09-19": 1,
+  "2026-09-20": 2,
   "2026-09-21": 1,
   "2026-09-22": 1,
   "2026-09-23": 2,
@@ -4152,7 +4620,7 @@ const EXPECTED_COUNTS = {
   "2026-10-01": 2,
   "2026-10-02": 2,
   "2026-10-03": 1,
-  "2026-10-04": 1,
+  "2026-10-04": 2,
   "2026-10-05": 1,
   "2026-10-06": 1,
   "2026-10-07": 2,
@@ -4166,6 +4634,7 @@ const EXPECTED_COUNTS = {
   "2026-10-15": 2,
   "2026-10-16": 2,
   "2026-10-17": 1,
+  "2026-10-18": 2,
   "2026-10-19": 1,
   "2026-10-20": 1,
   "2026-10-21": 2,
@@ -4178,6 +4647,7 @@ const EXPECTED_COUNTS = {
   "2026-10-28": 2,
   "2026-10-29": 2,
   "2026-10-30": 2,
+  "2026-10-31": 1,
   "2026-11-01": 2,
   "2026-11-02": 1,
   "2026-11-03": 1,
@@ -4186,11 +4656,41 @@ const EXPECTED_COUNTS = {
   "2026-11-06": 2,
   "2026-11-07": 1,
   "2026-11-08": 2,
+  "2026-11-09": 1,
   "2026-11-10": 1,
   "2026-11-11": 2,
-  "2026-11-12": 1,
-  "2026-11-13": 1,
-  "2026-11-14": 1
+  "2026-11-12": 2,
+  "2026-11-13": 2,
+  "2026-11-14": 1,
+  "2026-11-15": 2,
+  "2026-11-16": 1,
+  "2026-11-17": 1,
+  "2026-11-18": 2,
+  "2026-11-19": 2,
+  "2026-11-20": 2,
+  "2026-11-21": 1,
+  "2026-11-22": 2,
+  "2026-11-23": 1,
+  "2026-11-24": 1,
+  "2026-11-25": 2,
+  "2026-11-26": 2,
+  "2026-11-27": 2,
+  "2026-11-28": 1,
+  "2026-11-29": 2,
+  "2026-11-30": 1,
+  "2026-12-01": 1,
+  "2026-12-02": 2,
+  "2026-12-03": 2,
+  "2026-12-04": 2,
+  "2026-12-05": 1,
+  "2026-12-06": 2,
+  "2026-12-07": 1,
+  "2026-12-08": 1,
+  "2026-12-09": 2,
+  "2026-12-10": 2,
+  "2026-12-11": 2,
+  "2026-12-12": 1,
+  "2026-12-13": 2
 };  // ISO date -> # workouts prescribed that day (heatmap multi-workout-day averaging)
 const RECOVERY_DATA = [
   {
@@ -5290,6 +5790,7 @@ function renderHeatmap(){
   const end=new Date(maxD);end.setDate(end.getDate()+(6-mondayIndex(end)));
   const INJ_START=new Date(2026,5,22), INJ_END=new Date(2026,6,19);
   let injA=null, injB=null, colIdx=0;
+  const cols=[];
   let lastMonth=-1;
   const cur=new Date(start);
   while(cur<=end){
@@ -5302,22 +5803,41 @@ function renderHeatmap(){
       const iso=isoOf(cur);
       const a=agg[iso];const avg=a?a.sum/a.n:0;
       const level=a?hmLevel(avg):0;
+      const isMiss=!!(a&&a.logged>0&&a.sum===0);  // logged sessions that all scored 0 = a real miss, show it
       const cell=document.createElement('div');
       // Cells with a 0 average (full miss, or an unlogged prescribed session
       // padded down) stay visually IDENTICAL to a true blank rest day -- no
       // special color/outline. The dataset below still carries the real
       // numbers so the tap popup shows accurate '0/2 logged' info instead of
       // falling back to a generic 'rest day' message.
-      cell.className='hm-cell'+(level?' l'+level:'');
-      cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.logged=a?a.logged:0;cell.dataset.avg=a?avg.toFixed(1):'';
+      cell.className='hm-cell'+(level?' l'+level:'')+(isMiss?' miss':'');
+      cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.logged=a?a.logged:0;cell.dataset.avg=a?avg.toFixed(1):'';cell.dataset.miss=isMiss?'1':'';
       col.appendChild(cell);
       cur.setDate(cur.getDate()+1);
     }
     grid.appendChild(col);
     const colEnd=new Date(colStart);colEnd.setDate(colEnd.getDate()+6);
+    cols.push({start:colStart,end:colEnd});
     if(colStart<=INJ_END&&colEnd>=INJ_START){if(injA===null)injA=colIdx;injB=colIdx;}
     colIdx++;
   }
+  // Training-block grouping brackets across the top
+  (BLOCKS_DATA||[]).forEach((blk,bi)=>{
+    const bs=new Date(blk.start+'T00:00:00'), be=new Date(blk.end+'T00:00:00');
+    let a=null,b=null;
+    cols.forEach((c,ci)=>{ if(c.start<=be&&c.end>=bs){ if(a===null)a=ci; b=ci; } });
+    if(a===null)return;
+    const bracket=document.createElement('div');
+    bracket.className='hm-block b'+(bi%2);
+    bracket.style.left=(a*16)+'px';
+    bracket.style.top='4px';
+    bracket.style.width=((b-a+1)*16-3)+'px';
+    const tag=document.createElement('span');
+    tag.className='hm-block-tag';
+    tag.textContent=blk.label;
+    bracket.appendChild(tag);
+    grid.appendChild(bracket);
+  });
   if(injA!==null){
     const band=document.createElement('div');
     band.className='hm-injury';
@@ -5333,10 +5853,12 @@ function renderHeatmap(){
   cap.textContent=total+' workouts \u00b7 colored by avg score';
   grid.addEventListener('click',e=>{
     const cell=e.target.closest('.hm-cell');if(!cell)return;
-    const c=+cell.dataset.count;const logged=+cell.dataset.logged;const avg=cell.dataset.avg;
+    const c=+cell.dataset.count;const logged=+cell.dataset.logged;const avg=cell.dataset.avg;const miss=cell.dataset.miss==='1';
     let detail;
     if(!c){
       detail=prettyDate(cell.dataset.iso)+' \u00b7 rest day';
+    }else if(miss){
+      detail=prettyDate(cell.dataset.iso)+' \u00b7 MISSED ('+c+' prescribed, none completed)';
     }else if(c===1){
       detail=prettyDate(cell.dataset.iso)+' \u00b7 score '+avg+'/10';
     }else if(logged<c){
@@ -5575,12 +6097,22 @@ function makePlanCard(w,cur){
   return card;
 }
 
+function makeBlockBanner(label){
+  const d=document.createElement('div');
+  d.className='block-banner'+(label.toLowerCase().indexOf('fall')>=0?' fall':label.toLowerCase().indexOf('summer')>=0?' summer':'');
+  d.innerHTML='<span class="block-banner-label">'+label+'</span>';
+  return d;
+}
 function renderPlan(){
   const root=document.getElementById('plan-container');
   const cur=currentWeekNum();
   const upcoming=PLAN_DATA.filter(w=>cur==null||w.num>=cur);
   const done=PLAN_DATA.filter(w=>cur!=null&&w.num<cur);
-  upcoming.forEach(w=>root.appendChild(makePlanCard(w,cur)));
+  let lastBlock=null;
+  upcoming.forEach(w=>{
+    if(w.block&&w.block!==lastBlock){root.appendChild(makeBlockBanner(w.block));lastBlock=w.block;}
+    root.appendChild(makePlanCard(w,cur));
+  });
   if(done.length){
     const sec=document.createElement('div');
     sec.className='archive';
