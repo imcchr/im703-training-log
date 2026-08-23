@@ -5810,7 +5810,7 @@ function renderHeatmap(){
       // special color/outline. The dataset below still carries the real
       // numbers so the tap popup shows accurate '0/2 logged' info instead of
       // falling back to a generic 'rest day' message.
-      cell.className='hm-cell'+(level?' l'+level:'')+(isMiss?' miss':'');
+      cell.className='hm-cell'+(level?' l'+level:'');  // missed days render identical to rest days (no special color)
       cell.dataset.iso=iso;cell.dataset.count=a?a.n:0;cell.dataset.logged=a?a.logged:0;cell.dataset.avg=a?avg.toFixed(1):'';cell.dataset.miss=isMiss?'1':'';
       col.appendChild(cell);
       cur.setDate(cur.getDate()+1);
