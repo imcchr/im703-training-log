@@ -66,7 +66,7 @@
     text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px;}
   .hm-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .hm-scroll::-webkit-scrollbar{display:none;}
-  .hm-grid{display:flex;gap:3px;min-width:min-content;position:relative;padding-top:18px;}
+  .hm-grid{display:flex;gap:3px;min-width:min-content;position:relative;padding-top:18px;padding-right:34px;}
   .hm-col{display:flex;flex-direction:column;gap:3px;}
   .hm-month{height:13px;line-height:13px;font-size:.58rem;color:var(--muted);
     white-space:nowrap;overflow:visible;width:13px;}
@@ -5873,14 +5873,22 @@ function renderHeatmap(){
     let a=null,b=null;
     cols.forEach((c,ci)=>{ if(c.start<=be&&c.end>=bs){ if(a===null)a=ci; b=ci; } });
     if(a===null)return;
+    const ncols=b-a+1;
     const bracket=document.createElement('div');
     bracket.className='hm-block b'+(bi%2);
     bracket.style.left=(a*16)+'px';
     bracket.style.top='4px';
-    bracket.style.width=((b-a+1)*16-3)+'px';
+    bracket.style.width=(ncols*16-3)+'px';
     const tag=document.createElement('span');
     tag.className='hm-block-tag';
     tag.textContent=blk.label;
+    // A block that has only just begun (1-2 logged weeks) is too narrow to fit
+    // a centered label -- centering would spill it LEFT over the previous
+    // block's bracket/label (the Summer-vs-Fall collision). Left-anchor the
+    // label so it reads rightward into the empty header space instead, never
+    // colliding with the neighbour. Once the block spans 3+ columns it has room
+    // to center normally.
+    if(ncols<3){ tag.style.left='0'; tag.style.transform='none'; }
     bracket.appendChild(tag);
     grid.appendChild(bracket);
   });
