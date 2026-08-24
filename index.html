@@ -5888,7 +5888,18 @@ function renderHeatmap(){
     // label so it reads rightward into the empty header space instead, never
     // colliding with the neighbour. Once the block spans 3+ columns it has room
     // to center normally.
-    if(ncols<3){ tag.style.left='0'; tag.style.transform='none'; }
+    if(ncols<3){
+      // Just-started block: a full bracket collapses into a tiny box whose right
+      // leg looks like a stray vertical 'trying to close' under the label. Drop
+      // the right leg (and its corner radius) so it renders as an OPEN left
+      // bracket -- a start tick + short top bar -- with the label reading
+      // rightward from the block's start. Re-centers into a full closed bracket
+      // once the block spans 3+ logged columns.
+      bracket.style.borderRight='none';
+      bracket.style.borderTopRightRadius='0';
+      tag.style.left='0';
+      tag.style.transform='none';
+    }
     bracket.appendChild(tag);
     grid.appendChild(bracket);
   });
