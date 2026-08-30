@@ -82,10 +82,14 @@
   .section-card h3{margin:0 0 2px;font-size:.9rem;color:var(--ink);overflow:hidden;}
   .card-sub{font-size:.66rem;color:var(--muted);margin-bottom:9px;}
   .chart-val{float:right;font-weight:800;font-size:.9rem;color:#c0392b;}
-  .spark{width:100%;height:72px;display:block;}
+  .spark{width:100%;height:72px;display:block;overflow:visible;}
   .spark polyline{fill:none;stroke:#ea7317;stroke-width:2;vector-effect:non-scaling-stroke;}
   .spark .area{fill:rgba(234,115,23,.13);stroke:none;}
   .spark circle{fill:#c0392b;}
+  .spark .spark-hit{fill:transparent;}
+  .spark-pt{cursor:pointer;}
+  .spark-pt:hover circle.spark-dot,.spark-pt:focus circle.spark-dot{r:4.6;fill:#fff;stroke:#c0392b;stroke-width:1.6;outline:none;}
+  .chart-tip{position:fixed;z-index:9999;background:#17181c;color:#f4f4f4;padding:6px 10px;border-radius:7px;font-size:12.5px;font-weight:700;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.32);border:1px solid #ea7317;white-space:nowrap;display:none;}
   .trends-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:14px;}
   .tr-hero-main{background:var(--card);border:1px solid var(--line);overflow:hidden;position:relative;}
   .tr-kicker{font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
@@ -5629,6 +5633,7 @@ const TRENDS_DATA   = {
       "week": "Wk1",
       "load_min": 48.3,
       "readiness": 44.0,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5640,7 +5645,8 @@ const TRENDS_DATA   = {
       "week_num": 2,
       "week": "Wk2",
       "load_min": 160.2,
-      "readiness": 23.6,
+      "readiness": 24.0,
+      "calories": null,
       "hrv": "Improving",
       "rhr": "49",
       "sleep": "~7h / 8h",
@@ -5652,7 +5658,8 @@ const TRENDS_DATA   = {
       "week_num": 3,
       "week": "Wk3",
       "load_min": 231.5,
-      "readiness": 32.6,
+      "readiness": 33.0,
+      "calories": null,
       "hrv": "Balanced",
       "rhr": "48",
       "sleep": "7h 38m / 8h",
@@ -5664,7 +5671,8 @@ const TRENDS_DATA   = {
       "week_num": 4,
       "week": "Wk4",
       "load_min": 114.2,
-      "readiness": 51.9,
+      "readiness": 52.0,
+      "calories": null,
       "hrv": "Balanced",
       "rhr": "~48",
       "sleep": "~7h / 8h",
@@ -5676,7 +5684,8 @@ const TRENDS_DATA   = {
       "week_num": 5,
       "week": "Wk5",
       "load_min": 199.8,
-      "readiness": 52.1,
+      "readiness": 52.0,
+      "calories": null,
       "hrv": "Balanced",
       "rhr": "~47",
       "sleep": "~7h / 8h",
@@ -5688,7 +5697,8 @@ const TRENDS_DATA   = {
       "week_num": 6,
       "week": "Wk6",
       "load_min": 15.8,
-      "readiness": 75.1,
+      "readiness": 75.0,
+      "calories": null,
       "hrv": "Balanced ALL",
       "rhr": "46",
       "sleep": "7h 6m / 8h 13m",
@@ -5700,7 +5710,8 @@ const TRENDS_DATA   = {
       "week_num": 7,
       "week": "Wk7",
       "load_min": 133.1,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "Balanced (78ms)",
       "rhr": "49",
       "sleep": "7h 42m / 7h 57m",
@@ -5712,7 +5723,8 @@ const TRENDS_DATA   = {
       "week_num": 8,
       "week": "Wk8",
       "load_min": 122.0,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5724,7 +5736,8 @@ const TRENDS_DATA   = {
       "week_num": 9,
       "week": "Wk9",
       "load_min": 162.5,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5736,7 +5749,8 @@ const TRENDS_DATA   = {
       "week_num": 10,
       "week": "Wk10",
       "load_min": 241.6,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5748,7 +5762,8 @@ const TRENDS_DATA   = {
       "week_num": 11,
       "week": "Wk11",
       "load_min": 92.0,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5760,7 +5775,8 @@ const TRENDS_DATA   = {
       "week_num": 12,
       "week": "Wk12",
       "load_min": 0.0,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5772,7 +5788,8 @@ const TRENDS_DATA   = {
       "week_num": 13,
       "week": "Wk13",
       "load_min": 113.7,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5784,7 +5801,8 @@ const TRENDS_DATA   = {
       "week_num": 14,
       "week": "Wk14",
       "load_min": 110.1,
-      "readiness": 72,
+      "readiness": null,
+      "calories": null,
       "hrv": "",
       "rhr": "",
       "sleep": "",
@@ -5796,7 +5814,8 @@ const TRENDS_DATA   = {
       "week_num": 15,
       "week": "Wk15",
       "load_min": 436.7,
-      "readiness": 72,
+      "readiness": 25.0,
+      "calories": 24080.0,
       "hrv": "Balanced (78-81ms)",
       "rhr": "49",
       "sleep": "7h 10m / 8h 33m",
@@ -5982,23 +6001,27 @@ const RECOVERY_IDX  = [
   },
   {
     "week": "Wk2",
-    "value": 23.6
+    "value": 24.0
   },
   {
     "week": "Wk3",
-    "value": 32.6
+    "value": 33.0
   },
   {
     "week": "Wk4",
-    "value": 51.9
+    "value": 52.0
   },
   {
     "week": "Wk5",
-    "value": 52.1
+    "value": 52.0
   },
   {
     "week": "Wk6",
-    "value": 75.1
+    "value": 75.0
+  },
+  {
+    "week": "Wk15",
+    "value": 25.0
   }
 ];
 
@@ -6512,10 +6535,37 @@ function sparkSVG(points){
   const y=v=>pad+(H-2*pad)*(1-(v-mn)/(mx-mn));
   const line=points.map((p,i)=>x(i).toFixed(1)+','+y(Number(p.value)||0).toFixed(1)).join(' ');
   const area=line+' '+x(points.length-1).toFixed(1)+','+(H-pad)+' '+x(0).toFixed(1)+','+(H-pad);
-  const dots=points.map((p,i)=>'<circle cx="'+x(i).toFixed(1)+'" cy="'+y(Number(p.value)||0).toFixed(1)+'" r="2.4"/>').join('');
+  const dots=points.map((p,i)=>{
+    const cx=x(i).toFixed(1), cy=y(Number(p.value)||0).toFixed(1);
+    const tip=esc(p.tip!=null?String(p.tip):String(p.value));
+    return '<g class="spark-pt" tabindex="0" data-tip="'+tip+'"><circle class="spark-hit" cx="'+cx+'" cy="'+cy+'" r="9"/><circle class="spark-dot" cx="'+cx+'" cy="'+cy+'" r="2.6"/></g>';
+  }).join('');
   return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+
     '<polygon class="area" points="'+area+'"/><polyline points="'+line+'"/>'+dots+'</svg>';
 }
+(function initChartTooltip(){
+  const tip=document.createElement('div');
+  tip.className='chart-tip';
+  document.body.appendChild(tip);
+  function place(e){
+    const pad=14;
+    let px=e.clientX+pad, py=e.clientY+pad;
+    const r=tip.getBoundingClientRect();
+    if(px+r.width>window.innerWidth-8) px=e.clientX-r.width-pad;
+    if(py+r.height>window.innerHeight-8) py=e.clientY-r.height-pad;
+    tip.style.left=px+'px'; tip.style.top=py+'px';
+  }
+  function show(e,el){
+    const t=el.getAttribute('data-tip');
+    if(!t)return;
+    tip.textContent=t; tip.style.display='block'; place(e);
+  }
+  document.addEventListener('pointerover',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el)show(e,el);});
+  document.addEventListener('pointermove',e=>{if(tip.style.display==='block'){const el=e.target.closest&&e.target.closest('.spark-pt');if(el)place(e);else tip.style.display='none';}});
+  document.addEventListener('pointerout',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el)tip.style.display='none';});
+  document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el){const r=el.getBoundingClientRect();show({clientX:r.left+r.width/2,clientY:r.top},el);}});
+  document.addEventListener('focusout',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el)tip.style.display='none';});
+})();
 function fmtMin(v){v=Math.round(Number(v)||0);const h=Math.floor(v/60),m=v%60;return h?(m?`${h}:${String(m).padStart(2,'0')}`:`${h}hr`):`${m}min`;}
 function fmtMi(v){return (Number(v)||0).toFixed(1)+'mi';}
 function fmtYd(v){return (Number(v)||0).toLocaleString()+'yd';}
@@ -6543,7 +6593,7 @@ function renderTrends(){
     statCell(fmtYd(latest.swim_yd),'Swim volume')+statCell(fmtMin(latest.bike_min),'Bike volume')+statCell(fmtMi(latest.run_mi),'Run volume')+statCell(fmtMin(latest.total_min),'Total tri time')+
     '</div></div>';
   html+='<div class="tr-hero-side">';
-  html+='<div class="section-card tr-mini"><h3>Ramp Radar<span class="chart-val">'+deltaTag(latest.load_delta)+'</span></h3><div class="card-sub">Auto-tracks total-load change from the previous logged week to the current one. This card follows the data forward by itself.</div>'+sparkSVG(load.map(r=>({value:r.total_min})))+'</div>';
+  html+='<div class="section-card tr-mini"><h3>Ramp Radar<span class="chart-val">'+deltaTag(latest.load_delta)+'</span></h3><div class="card-sub">Auto-tracks total-load change from the previous logged week to the current one. This card follows the data forward by itself.</div>'+sparkSVG(load.map(r=>({value:r.total_min, tip:r.week+' ('+esc(r.label)+'): '+fmtMin(r.total_min)+' total load'})))+'</div>';
   html+='<div class="section-card tr-mini"><h3>Recovery Link<span class="chart-val">'+esc((overlay[overlay.length-1]&&overlay[overlay.length-1].readiness)!=null?Math.round(overlay[overlay.length-1].readiness)+'/100':'—')+'</span></h3><div class="card-sub">Also auto-follows the latest logged week, pairing current load with the newest recovery/readiness context available.</div>'+(overlay.length?statusChip(overlay[overlay.length-1].status):'')+'</div>';
   html+='</div></div>';
 
@@ -6558,29 +6608,35 @@ function renderTrends(){
 
   html+='<div class="section-split">';
   html+='<div class="section-card"><h3>Section 2 · Durability & Long Sessions</h3><div class="card-sub">The longest single swim, ride, and run each week — because race confidence is built on durable ceiling work, not just weekly mush.</div><div class="dur-grid">';
+  const fmtByUnit={yd:fmtYd, min:fmtMin, mi:fmtMi, sessions:v=>v+' runs'};
   const durCards=[
-    ['Longest Swim','yd',durability.map(r=>({value:r.long_swim_yd})), fmtYd(latest.long_swim_yd)],
-    ['Longest Ride','min',durability.map(r=>({value:r.long_bike_min})), fmtMin(latest.long_bike_min)],
-    ['Longest Run','mi',durability.map(r=>({value:r.long_run_mi})), fmtMi(latest.long_run_mi)],
-    ['Run Frequency','sessions',durability.map(r=>({value:r.run_sessions})), String(latest.run_sessions)]
+    ['Longest Swim','yd',durability.map(r=>({value:r.long_swim_yd, week:r.week})), fmtYd(latest.long_swim_yd)],
+    ['Longest Ride','min',durability.map(r=>({value:r.long_bike_min, week:r.week})), fmtMin(latest.long_bike_min)],
+    ['Longest Run','mi',durability.map(r=>({value:r.long_run_mi, week:r.week})), fmtMi(latest.long_run_mi)],
+    ['Run Frequency','sessions',durability.map(r=>({value:r.run_sessions, week:r.week})), String(latest.run_sessions)]
   ];
-  durCards.forEach(([lbl,unit,pts,val])=>{html+='<div class="dur-card"><div class="dur-top"><div class="dur-lbl">'+lbl+'</div><div class="dur-val">'+esc(val)+'</div></div>'+sparkSVG(pts)+'</div>';});
+  durCards.forEach(([lbl,unit,pts,val])=>{
+    const fmt=fmtByUnit[unit]||(v=>String(v));
+    pts=pts.map(p=>({value:p.value, tip:p.week+': '+fmt(p.value)}));
+    html+='<div class="dur-card"><div class="dur-top"><div class="dur-lbl">'+lbl+'</div><div class="dur-val">'+esc(val)+'</div></div>'+sparkSVG(pts)+'</div>';});
   html+='</div></div>';
 
   html+='<div class="section-card"><h3>Section 3 · Race Metrics</h3><div class="card-sub">Projected split history from the same conservative model used in the Race tab. If the prediction shifts, this shows when and where it moved.</div><div class="marker-grid">';
   const raceCards=[
-    ['Overall Projected Finish','',raceMetrics.map(r=>({value:r.overall_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].overall_min):'—'],
-    ['Projected Swim Split','',raceMetrics.map(r=>({value:r.swim_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].swim_min):'—'],
-    ['Projected Bike Split','',raceMetrics.map(r=>({value:r.bike_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].bike_min):'—'],
-    ['Projected Run Split','',raceMetrics.map(r=>({value:r.run_min})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].run_min):'—']
+    ['Overall Projected Finish','',raceMetrics.map(r=>({value:r.overall_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].overall_min):'—'],
+    ['Projected Swim Split','',raceMetrics.map(r=>({value:r.swim_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].swim_min):'—'],
+    ['Projected Bike Split','',raceMetrics.map(r=>({value:r.bike_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].bike_min):'—'],
+    ['Projected Run Split','',raceMetrics.map(r=>({value:r.run_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].run_min):'—']
   ];
-  raceCards.forEach(([name,unit,pts,last])=>{html+='<div class="marker-card"><div class="marker-head"><div class="marker-name">'+esc(name)+'</div><div class="marker-val">'+esc(last)+'</div></div><div class="card-sub">'+pts.length+' weekly projection points</div>'+(pts.length>1?sparkSVG(pts):'<div class="card-sub">Need one more logged week for a proper line.</div>')+'</div>';});
+  raceCards.forEach(([name,unit,pts,last])=>{
+    pts=pts.map(p=>({value:p.value, tip:p.week+': '+fmtMin(p.value)}));
+    html+='<div class="marker-card"><div class="marker-head"><div class="marker-name">'+esc(name)+'</div><div class="marker-val">'+esc(last)+'</div></div><div class="card-sub">'+pts.length+' weekly projection points</div>'+(pts.length>1?sparkSVG(pts):'<div class="card-sub">Need one more logged week for a proper line.</div>')+'</div>';});
   html+='</div></div>';
   html+='</div>';
 
   html+='<div class="section-split">';
-  html+='<div class="section-card"><h3>Section 4 · Recovery Overlay</h3><div class="card-sub">Purple = weekly load. Green = Garmin readiness. If one rises while the other faceplants, your body is filing a ticket.</div><div class="overlay-wrap">';
-  overlay.forEach(r=>{html+='<div class="ov-row"><div class="load-week">'+esc(r.week)+'</div><div class="ov-bars"><div class="ov-bar"><div class="ov-fill-load" style="width:'+pct(r.load_min,maxLoad)+'%"></div></div><div class="ov-bar"><div class="ov-fill-rec" style="width:'+pct(r.readiness,maxReady)+'%"></div></div></div><div class="ov-meta">'+esc(fmtMin(r.load_min))+'<br>'+((r.readiness!=null)?Math.round(r.readiness)+'/100':'—')+'</div></div>';});
+  html+='<div class="section-card"><h3>Section 4 · Recovery Overlay</h3><div class="card-sub">Purple = weekly load. Green = Garmin readiness (real data only; blank means we genuinely do not have a number for that week, never a guess). Calories burned shown when logged.</div><div class="overlay-wrap">';
+  overlay.forEach(r=>{html+='<div class="ov-row"><div class="load-week">'+esc(r.week)+'</div><div class="ov-bars"><div class="ov-bar"><div class="ov-fill-load" style="width:'+pct(r.load_min,maxLoad)+'%"></div></div><div class="ov-bar"><div class="ov-fill-rec" style="width:'+pct(r.readiness,maxReady)+'%"></div></div></div><div class="ov-meta">'+esc(fmtMin(r.load_min))+'<br>'+((r.readiness!=null)?Math.round(r.readiness)+'/100':'—')+(r.calories!=null?'<br>'+Math.round(r.calories).toLocaleString()+' kcal':'')+'</div></div>';});
   if(overlay.length){const last=overlay[overlay.length-1];html+='<div style="margin-top:8px">'+statusChip(last.status)+' <span class="card-sub" style="margin-left:6px">HRV '+esc((last.hrv||'').split('/')[0].trim()||'—')+' · RHR '+esc(last.rhr||'—')+' · ATL '+esc(last.atl||'—')+' · VO2 '+esc(last.vo2||'—')+'</span></div>';}
   html+='</div></div>';
 
@@ -6676,7 +6732,7 @@ function renderRecovery(){
   const L=RECOVERY_DATA[RECOVERY_DATA.length-1];
   let html='';
   if(RECOVERY_IDX.length>1){
-    const pts=RECOVERY_IDX.map(r=>({value:r.value})), lastR=RECOVERY_IDX[RECOVERY_IDX.length-1];
+    const pts=RECOVERY_IDX.map(r=>({value:r.value, tip:r.week+': '+Math.round(r.value)+'/100'})), lastR=RECOVERY_IDX[RECOVERY_IDX.length-1];
     html+='<div class="section-card"><h3>Body Recovery<span class="chart-val">'+lastR.value+'/100</span></h3>'+
       '<div class="card-sub">Garmin Training Readiness \u2014 HRV + sleep + recovery time + stress + load, weekly avg \u00b7 '+esc(RECOVERY_IDX[0].week)+'\u2013'+esc(lastR.week)+'</div>'+
       sparkSVG(pts)+'</div>';
