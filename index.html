@@ -410,7 +410,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated August 28, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated August 30, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -439,7 +439,7 @@ const WEEKS_DATA = [
     "start": "2026-08-24",
     "label": "Aug 24-30",
     "phase": "Build",
-    "score": null,
+    "score": 82,
     "sessions": [
       {
         "date": "2026-08-24",
@@ -530,6 +530,36 @@ const WEEKS_DATA = [
         "key_metric": "**Distance PR 22.20mi (>20.19 Wed)** \u00b7 **first long bike >1hr ever completed** \u00b7 held target watts start-to-finish while cooked",
         "score": 10,
         "verdict": "First-ever completed long bike over an hour \u2014 exactly the recalibrated 1:15. Held 159W mid-Z3 the full 55min main set with zero power fade AND a proper cooldown, while tired and not wanting to ride. The \"last 25min sucked\" was mental/fatigue \u2014 the power line is flat as a table. Validates the bike recalibration on the first rep. Grit + PR + textbook execution. 10/10."
+      },
+      {
+        "date": "2026-08-28",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 \u00b7 not completed",
+        "key_metric": "\u00b7 not completed",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. \u00b7 not completed"
+      },
+      {
+        "date": "2026-08-29",
+        "discipline": "run",
+        "title": "Long Run",
+        "prescribed": "Sat PM Long Run \u00b7 prescribed 1:00 (WU10 Z2/MS Z3 8-9mi/CD10 Z2)",
+        "actual": "Ridden/run Sat night (FIT UTC-stamped Aug 30) \u00b7 59:16 \u00b7 6.26mi \u00b7 splits 9:38/9:20/9:28/9:35/9:22/9:31 \u2014 **flat ~9:25/mi the entire way** \u00b7 HR 148\u2192195 climbing while pace held flat",
+        "key_metric": "Never reached the prescribed Z3 middle (8-9/mi); HR climbing at constant pace is the fatigue signature, confirmed independently by Training Readiness cratering to 2/100 the next morning",
+        "score": 8,
+        "verdict": "Full duration/distance banked almost exactly. Forcing 8-9/mi with HR already in the high 180s-190s would have been reckless, not virtuous \u2014 holding a controlled, sustainable pace instead of blowing up (or bailing) was the correct call given the accumulated load. Grind, not a discipline miss. 8/10."
+      },
+      {
+        "date": "2026-08-29",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sat AM Long Swim \u00b7 prescribed 1,500yd (WU200/MS1200 Z2/CD100)",
+        "actual": "1,500yd \u00b7 38:38 \u00b7 1:52/100yd avg \u00b7 HR 161 avg \u00b7 TE 3.4 aerobic/3.4 anaerobic \u00b7 **WU ~200yd w/buoy \u2192 2\u00d7400yd CONTINUOUS no-buoy @~1:55/100 (HR 164-181) \u2192 3\u00d7100yd ALL-OUT @1:23/1:33/1:29 (HR to 193) \u2192 CD ~200yd w/buoy**",
+        "key_metric": "Distance nailed exactly \u00b7 real continuous endurance (800yd @ steady ~1:55) PLUS genuine finishing speed (1:23/100) still available after the week's heaviest load",
+        "score": 9,
+        "verdict": "Creative, well-executed long swim \u2014 swapped pure Z2 steady for a continuous endurance block plus a hard finish, and it worked: distance dead-on, real aerobic chunk, and speed still in the tank on the same weekend as a brutal long-run grind. 9/10."
       }
     ]
   },
@@ -4955,6 +4985,20 @@ const RECOVERY_DATA = [
     "vo2": "42",
     "status": "Unproductive",
     "flags": "BEST sleep week of block (~15min deficit). BB floor 2 Thu (swim PR + Z2 bike double). VO2 42 (cyc down; run stale 46). Unproductive = High Aerobic Shortage (no running + bailed intervals). RHR 46->49 (holiday)."
+  },
+  {
+    "week": "Wk15",
+    "dates": "Aug 24-30",
+    "hrv": "Balanced (78-81ms)",
+    "rhr": "49",
+    "sleep": "7h 10m / 8h 33m",
+    "bb_low": "47",
+    "bb_hi": "91",
+    "stress": "Low",
+    "atl": "1,364 (peak ~1,600)",
+    "vo2": "44",
+    "status": "Productive -> Poor (readiness crash)",
+    "flags": "Biggest week of the block: 3 PRs (bike x2, swim continuity), Training Status GREEN Productive all week. But ATL blew past Optimal Range (worst of the visible month) and Training Readiness bottomed at 2/100 \"Poor\" the morning after the long run (74h recovery need). Sleep crashed to 4h41m Wed (base-bike-PR + hard-ULO day). Thu Base Run + Fri lift misses = correct fatigue calls, confirmed by this data, not discipline failures."
   }
 ];
 const TRENDS_DATA   = {
@@ -5202,17 +5246,17 @@ const TRENDS_DATA   = {
       "week": "Wk15",
       "label": "Aug 24-30",
       "phase": "Build",
-      "score": null,
-      "swim_yd": 2875,
+      "score": 82,
+      "swim_yd": 4375,
       "bike_min": 189.6,
-      "run_mi": 8.1,
-      "total_min": 338.8,
+      "run_mi": 14.4,
+      "total_min": 436.7,
       "long_swim_yd": 1675,
       "long_bike_min": 75.5,
-      "long_run_mi": 4.8,
-      "run_sessions": 2,
-      "completed": 7,
-      "load_delta": 208
+      "long_run_mi": 6.3,
+      "run_sessions": 3,
+      "completed": 9,
+      "load_delta": 297
     }
   ],
   "durability": [
@@ -5318,8 +5362,8 @@ const TRENDS_DATA   = {
       "week": "Wk15",
       "long_swim_yd": 1675,
       "long_bike_min": 75.5,
-      "long_run_mi": 4.8,
-      "run_sessions": 2
+      "long_run_mi": 6.3,
+      "run_sessions": 3
     }
   ],
   "markers": [
@@ -5374,6 +5418,10 @@ const TRENDS_DATA   = {
         {
           "date": "Wk13",
           "value": 30
+        },
+        {
+          "date": "Wk15",
+          "value": 82
         }
       ]
     },
@@ -5747,17 +5795,24 @@ const TRENDS_DATA   = {
     {
       "week_num": 15,
       "week": "Wk15",
-      "load_min": 338.8,
+      "load_min": 436.7,
       "readiness": 72,
-      "hrv": "",
-      "rhr": "",
-      "sleep": "",
-      "atl": "",
-      "vo2": "",
-      "status": ""
+      "hrv": "Balanced (78-81ms)",
+      "rhr": "49",
+      "sleep": "7h 10m / 8h 33m",
+      "atl": "1,364 (peak ~1,600)",
+      "vo2": "44",
+      "status": "Productive -> Poor (readiness crash)"
     }
   ],
   "milestones": [
+    {
+      "date": "2026-08-29",
+      "title": "Long Run",
+      "detail": "Never reached the prescribed Z3 middle (8-9/mi); HR climbing at constant pace is the fatigue signature, confirmed independently by Training Readiness cratering to 2/100 the next morning",
+      "discipline": "run",
+      "week": "Wk15"
+    },
     {
       "date": "2026-08-28",
       "title": "Long Bike",
@@ -5834,13 +5889,6 @@ const TRENDS_DATA   = {
       "detail": "**All three work reps landed inside the true Z5 band (211-240W) at 224W \u2014 essentially identical across all three reps**, full structure matched almost to the second (51:14 vs 51:00 prescribed)",
       "discipline": "bike",
       "week": "Wk14"
-    },
-    {
-      "date": "2026-08-17",
-      "title": "Full Body",
-      "detail": "\u00b7 47min, 24,205 lb volume, 0 PRs \u00b7 Chest Press/Row stepped down from last week, Lateral Raise/Curl added load \u2014 clean but mixed, not a progression session",
-      "discipline": "lift",
-      "week": "Wk14"
     }
   ]
 };
@@ -5889,7 +5937,7 @@ const RACE_DATA     = {
       "predicted_range": "2:03:59\u20132:36:48",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 8:15/mi",
-      "evidence_3": "Recent run frequency signal: 3 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 4 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
