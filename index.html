@@ -248,7 +248,7 @@
   .week-spacer{flex:1;}
   .week-meta{color:var(--muted);font-size:.74rem;}
   .week-score{font-weight:800;padding:3px 8px;border-radius:5px;color:#fff;font-size:.72rem;white-space:nowrap;}
-  .ws-high{background:#1a7f37;}.ws-mid{background:#e36209;}.ws-low{background:#c0392b;}
+  .ws-green{background:#1a7f37;}.ws-yellow{background:var(--gold);color:#5a2f06;}.ws-orange{background:#e36209;}.ws-red{background:#c0392b;}
   .now-badge{font-size:.58rem;font-weight:800;background:var(--gold);color:#5a2f06;
     padding:3px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.03em;}
   .caret{font-size:.7rem;color:var(--muted);transition:transform .2s;}
@@ -6100,7 +6100,7 @@ function dow(iso){const [y,m,d]=dateParts(iso);return DOW[new Date(y,m-1,d).getD
 function md(iso){const [y,m,d]=dateParts(iso);return m+'/'+d;}
 function prettyDate(iso){const [y,m,d]=dateParts(iso);return MON[m-1]+' '+d;}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*/g,'');}
-function wsClass(s){if(s==null)return '';if(s>=80)return 'ws-high';if(s>=60)return 'ws-mid';return 'ws-low';}
+function wsClass(s){if(s==null)return '';if(s>=75)return 'ws-green';if(s>=50)return 'ws-yellow';if(s>=30)return 'ws-orange';return 'ws-red';}
 function phaseClass(p){return 'phase-'+p.toLowerCase();}
 function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
 
