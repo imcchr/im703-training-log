@@ -414,7 +414,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 03, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated September 04, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -524,6 +524,16 @@ const WEEKS_DATA = [
         "key_metric": "**Distance landed exactly on the 1,200yd prescription; real varied-interval structure with genuine rest breaks; closing 125yd nearly 30sec/100yd faster than the rest of the set**",
         "score": 9,
         "verdict": "Exact yardage match plus a genuinely strong finish \u2014 the last 125yd at 1:28/100yd shows real gas left in the tank, matching Ian's own \"felt good and fast.\" HR climbed appropriately with effort (139->177), no red flags. Buddy's specific structure doesn't map to the calendar's own shorthand (100H/100E-800T) so docked 1 point for not being able to verify the exact sub-split match \u2014 not for anything that actually went wrong."
+      },
+      {
+        "date": "2026-09-04",
+        "discipline": "bike",
+        "title": "Long Bike",
+        "prescribed": "Fri AM Long Bike \u00b7 1:30 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 endurance (151-180W) \u00b7 CD: 10min Z2 (111-150W)",
+        "actual": "1:01:01 active \u00b7 16.67 mi \u00b7 HR 146 avg \u00b7 150W avg (whole session) \u00b7 **WU 10:38 @ 121W \u00b7 MS 50:23 @ 156W (HR 151/164) \u00b7 no CD** \u2014 stopped after the MS block, 29min short of the 1:30 target",
+        "key_metric": "**Readiness bottomed at 1/100 that morning (77h High recovery need) \u2014 worst reading of a brutal week (8, 54, 7, 28, 1) \u2014 and what he did complete (WU + 50:23 MS) held clean Z3 power (156W) with zero fade**",
+        "score": 7,
+        "verdict": "Ian started sending daily Garmin readiness screenshots this week instead of bulk end-of-week, and it's a good thing he did \u2014 Friday's 1/100 with a 77h recovery need is about as clear a stop signal as this data produces, and it explains the shortfall completely. Notably Acute Load actually dropped to \"Optimal\" that day, meaning this is accumulated fatigue from the whole week (Mon bike+lift, Tue run+swim, Wed's off-plan triathlon, Thu's run+swim double) catching up, not a fresh overload. What he did execute was correct \u2014 WU clean Z2, then 50:23 of MS at 156W, solidly inside the 151-180W Z3 band with no fade. Real, meaningful volume shortfall (29min, including the entire CD) against a Half Ironman bike-leg buildup \u2014 not pretending otherwise \u2014 but stopping was the right call given the readiness data, not a discipline miss. Ian also flagged that the +15min/week Long Bike ramp might be too aggressive; full ride history already showed a ~1hr durability ceiling (Wk15's 1:15 PR was \"ridden while cooked\"), and this week's push to 1:30 produced a real shortfall on a legitimately brutal readiness week. Revised ramp proposal pending Ian's confirmation \u2014 see `_session_log.md`."
       }
     ]
   },
@@ -5358,15 +5368,15 @@ const TRENDS_DATA   = {
       "phase": "Build",
       "score": null,
       "swim_yd": 2525,
-      "bike_min": 64.9,
+      "bike_min": 125.9,
       "run_mi": 11.1,
-      "total_min": 233.7,
+      "total_min": 294.7,
       "long_swim_yd": 1325,
       "long_bike_min": 64.9,
       "long_run_mi": 5.5,
       "run_sessions": 3,
-      "completed": 6,
-      "load_delta": -46
+      "completed": 7,
+      "load_delta": -33
     }
   ],
   "durability": [
@@ -5950,7 +5960,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 16,
       "week": "Wk16",
-      "load_min": 233.7,
+      "load_min": 294.7,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -5962,6 +5972,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-04",
+      "title": "Long Bike",
+      "detail": "**Readiness bottomed at 1/100 that morning (77h High recovery need) \u2014 worst reading of a brutal week (8, 54, 7, 28, 1) \u2014 and what he did complete (WU + 50:23 MS) held clean Z3 power (156W) with zero fade**",
+      "discipline": "bike",
+      "week": "Wk16"
+    },
     {
       "date": "2026-09-03",
       "title": "Base Run",
@@ -6037,13 +6054,6 @@ const TRENDS_DATA   = {
       "title": "Base Bike",
       "detail": "**PR: longest ride ever (prev best 1:00:52) + highest avg power for distance (152W vs prior 141W)** \u00b7 HR 146 at 157W = efficient aerobic",
       "discipline": "bike",
-      "week": "Wk15"
-    },
-    {
-      "date": "2026-08-26",
-      "title": "Run (ULO \u2014 bonus)",
-      "detail": "Ran faster than the easy 9-10 target (8:15/mi) keeping up with faster friends in ~100\u00b0F heat",
-      "discipline": "run",
       "week": "Wk15"
     }
   ]
