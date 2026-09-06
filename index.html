@@ -414,7 +414,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 04, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated September 05, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -534,6 +534,16 @@ const WEEKS_DATA = [
         "key_metric": "**Readiness bottomed at 1/100 that morning (77h High recovery need) \u2014 worst reading of a brutal week (8, 54, 7, 28, 1) \u2014 and what he did complete (WU + 50:23 MS) held clean Z3 power (156W) with zero fade**",
         "score": 7,
         "verdict": "Ian started sending daily Garmin readiness screenshots this week instead of bulk end-of-week, and it's a good thing he did \u2014 Friday's 1/100 with a 77h recovery need is about as clear a stop signal as this data produces, and it explains the shortfall completely. Notably Acute Load actually dropped to \"Optimal\" that day, meaning this is accumulated fatigue from the whole week (Mon bike+lift, Tue run+swim, Wed's off-plan triathlon, Thu's run+swim double) catching up, not a fresh overload. What he did execute was correct \u2014 WU clean Z2, then 50:23 of MS at 156W, solidly inside the 151-180W Z3 band with no fade. Real, meaningful volume shortfall (29min, including the entire CD) against a Half Ironman bike-leg buildup \u2014 not pretending otherwise \u2014 but stopping was the right call given the readiness data, not a discipline miss. Ian also flagged that the +15min/week Long Bike ramp might be too aggressive; full ride history already showed a ~1hr durability ceiling (Wk15's 1:15 PR was \"ridden while cooked\"), and this week's push to 1:30 produced a real shortfall on a legitimately brutal readiness week. Revised ramp proposal pending Ian's confirmation \u2014 see `_session_log.md`."
+      },
+      {
+        "date": "2026-09-05",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sat AM Long Swim \u00b7 1,650yd \u00b7 WU: 200yd \u00b7 MS: 1,350yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "33:25 active (36:19 incl. rest) \u00b7 1,650 yd \u00b7 **1:52/100yd avg** \u00b7 HR 159 avg (152-174 range, backup only) \u00b7 **structure: one continuous 900yd block, then 100/350(mixed)/50/25/25/100/50/50yd reps with real rest breaks between each** \u2014 totals exactly to 1,650yd",
+        "key_metric": "**Distance landed exactly on the 1,650yd prescription; 1:52/100yd average sits right at his race-target pace (1:53/100yd)**",
+        "score": 9,
+        "verdict": "Readiness was still deep in the red that day (5/100, 72h recovery need \u2014 continuing a genuinely rough week: 8, 54, 7, 28, 1, 5) and he still turned in a swim at essentially race pace. Distance nailed exactly, no shortfall, no padding. Docked 1 point only because the actual structure (one long continuous opener + broken-up shorter rest-interval reps) doesn't literally match the prescribed steady-continuous MS block \u2014 same standard applied to Thursday's Interval Swim, structure mismatch not an execution problem. HR ran a bit hot for a nominal \"Z2 steady\" swim but that's backup-only info; pace is the anchor and pace was excellent."
       }
     ]
   },
@@ -5367,16 +5377,16 @@ const TRENDS_DATA   = {
       "label": "Aug 31 - Sep 6",
       "phase": "Build",
       "score": null,
-      "swim_yd": 2525,
+      "swim_yd": 4175,
       "bike_min": 125.9,
       "run_mi": 11.1,
-      "total_min": 294.7,
-      "long_swim_yd": 1325,
+      "total_min": 328.1,
+      "long_swim_yd": 1650,
       "long_bike_min": 64.9,
       "long_run_mi": 5.5,
       "run_sessions": 3,
-      "completed": 7,
-      "load_delta": -33
+      "completed": 8,
+      "load_delta": -25
     }
   ],
   "durability": [
@@ -5487,7 +5497,7 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk16",
-      "long_swim_yd": 1325,
+      "long_swim_yd": 1650,
       "long_bike_min": 64.9,
       "long_run_mi": 5.5,
       "run_sessions": 3
@@ -5960,7 +5970,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 16,
       "week": "Wk16",
-      "load_min": 294.7,
+      "load_min": 328.1,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -5972,6 +5982,13 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-05",
+      "title": "Long Swim",
+      "detail": "**Distance landed exactly on the 1,650yd prescription; 1:52/100yd average sits right at his race-target pace (1:53/100yd)**",
+      "discipline": "swim",
+      "week": "Wk16"
+    },
     {
       "date": "2026-09-04",
       "title": "Long Bike",
@@ -6047,13 +6064,6 @@ const TRENDS_DATA   = {
       "title": "Interval Swim",
       "detail": "**Continuous-swim PR: 800yd unbroken** vs 300yd ceiling two days ago (Aug 25) and break-down at ~40m in May \u00b7 nailed prescribed 1,200yd exactly, negative-split the close",
       "discipline": "swim",
-      "week": "Wk15"
-    },
-    {
-      "date": "2026-08-26",
-      "title": "Base Bike",
-      "detail": "**PR: longest ride ever (prev best 1:00:52) + highest avg power for distance (152W vs prior 141W)** \u00b7 HR 146 at 157W = efficient aerobic",
-      "discipline": "bike",
       "week": "Wk15"
     }
   ]
