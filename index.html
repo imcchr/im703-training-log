@@ -414,7 +414,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 05, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated September 06, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -443,7 +443,7 @@ const WEEKS_DATA = [
     "start": "2026-08-31",
     "label": "Aug 31 - Sep 6",
     "phase": "Build",
-    "score": null,
+    "score": 71,
     "sessions": [
       {
         "date": "2026-08-31",
@@ -536,6 +536,16 @@ const WEEKS_DATA = [
         "verdict": "Ian started sending daily Garmin readiness screenshots this week instead of bulk end-of-week, and it's a good thing he did \u2014 Friday's 1/100 with a 77h recovery need is about as clear a stop signal as this data produces, and it explains the shortfall completely. Notably Acute Load actually dropped to \"Optimal\" that day, meaning this is accumulated fatigue from the whole week (Mon bike+lift, Tue run+swim, Wed's off-plan triathlon, Thu's run+swim double) catching up, not a fresh overload. What he did execute was correct \u2014 WU clean Z2, then 50:23 of MS at 156W, solidly inside the 151-180W Z3 band with no fade. Real, meaningful volume shortfall (29min, including the entire CD) against a Half Ironman bike-leg buildup \u2014 not pretending otherwise \u2014 but stopping was the right call given the readiness data, not a discipline miss. Ian also flagged that the +15min/week Long Bike ramp might be too aggressive; full ride history already showed a ~1hr durability ceiling (Wk15's 1:15 PR was \"ridden while cooked\"), and this week's push to 1:30 produced a real shortfall on a legitimately brutal readiness week. Revised ramp proposal pending Ian's confirmation \u2014 see `_session_log.md`."
       },
       {
+        "date": "2026-09-04",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 not attempted",
+        "key_metric": "not attempted",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. not attempted"
+      },
+      {
         "date": "2026-09-05",
         "discipline": "swim",
         "title": "Long Swim",
@@ -543,7 +553,17 @@ const WEEKS_DATA = [
         "actual": "33:25 active (36:19 incl. rest) \u00b7 1,650 yd \u00b7 **1:52/100yd avg** \u00b7 HR 159 avg (152-174 range, backup only) \u00b7 **structure: one continuous 900yd block, then 100/350(mixed)/50/25/25/100/50/50yd reps with real rest breaks between each** \u2014 totals exactly to 1,650yd",
         "key_metric": "**Distance landed exactly on the 1,650yd prescription; 1:52/100yd average sits right at his race-target pace (1:53/100yd)**",
         "score": 9,
-        "verdict": "Readiness was still deep in the red that day (5/100, 72h recovery need \u2014 continuing a genuinely rough week: 8, 54, 7, 28, 1, 5) and he still turned in a swim at essentially race pace. Distance nailed exactly, no shortfall, no padding. Docked 1 point only because the actual structure (one long continuous opener + broken-up shorter rest-interval reps) doesn't literally match the prescribed steady-continuous MS block \u2014 same standard applied to Thursday's Interval Swim, structure mismatch not an execution problem. HR ran a bit hot for a nominal \"Z2 steady\" swim but that's backup-only info; pace is the anchor and pace was excellent."
+        "verdict": "Readiness was still deep in the red that morning (19/100, 50h recovery need \u2014 continuing a genuinely rough week: 8, 54, 7, 28, 1, 19, 30 \u2014 and it dropped further to 5/100 post-swim) and he still turned in a swim at essentially race pace. Distance nailed exactly, no shortfall, no padding. Docked 1 point only because the actual structure (one long continuous opener + broken-up shorter rest-interval reps) doesn't literally match the prescribed steady-continuous MS block \u2014 same standard applied to Thursday's Interval Swim, structure mismatch not an execution problem. HR ran a bit hot for a nominal \"Z2 steady\" swim but that's backup-only info; pace is the anchor and pace was excellent."
+      },
+      {
+        "date": "2026-09-06",
+        "discipline": "run",
+        "title": "Long Run",
+        "prescribed": "Sat PM Long Run \u00b7 1:10 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)",
+        "actual": "MISS \u2014 not attempted, and the Sun make-up was deliberately skipped too",
+        "key_metric": "",
+        "score": 0,
+        "verdict": "Ian's own call, not a slip: chose extra rest into Wk17 over cramming the make-up in on Sunday. Given the week's readiness averaged 21/100 across 7 daily readings with two sub-10 days (Fri 1/100, Wed 7/100), this reads as good judgment, not a discipline miss \u2014 same standard as every other fatigue-driven miss this week."
       }
     ]
   },
@@ -5112,6 +5132,20 @@ const RECOVERY_DATA = [
     "vo2": "44",
     "status": "Productive -> Poor (readiness crash)",
     "flags": "Biggest week of the block: 3 PRs (bike x2, swim continuity), Training Status GREEN Productive all week. But ATL blew past Optimal Range (worst of the visible month) and Training Readiness bottomed at 2/100 \"Poor\" the morning after the long run (74h recovery need). Sleep crashed to 4h41m Wed (base-bike-PR + hard-ULO day). Thu Base Run + Fri lift misses = correct fatigue calls, confirmed by this data, not discipline failures."
+  },
+  {
+    "week": "Wk16",
+    "dates": "Aug 31-Sep 6",
+    "hrv": "--",
+    "rhr": "--",
+    "sleep": "--",
+    "bb_low": "--",
+    "bb_hi": "--",
+    "stress": "--",
+    "atl": "--",
+    "vo2": "--",
+    "status": "--",
+    "flags": "Ian switched to daily Training Readiness screenshots instead of an end-of-week batch (new habit, keeps sticking) -- standard HRV/BB/Stress/ATL/VO2 weekly-trend views weren't captured this week, so those columns are honestly blank rather than guessed. Daily readiness (Mon-Sun, all AM/wake-up): 8, 54, 7, 28, 1, 19, 30 -> weekly avg 21/100 (down slightly from Wk15's 25). Fri (1/100, 77h recovery need) was the low point and directly explains the Long Bike shortfall that day. Despite the week staying mostly in the red, Sat's Long Swim still landed at essentially race pace (1:52/100yd) and Thu's Base Run/Interval Swim both scored well -- fitness is clearly still building underneath the fatigue. Two misses this week (Fri lift, Sat long run) both read as correct fatigue-driven calls given this data, not discipline failures."
   }
 ];
 const TRENDS_DATA   = {
@@ -5376,7 +5410,7 @@ const TRENDS_DATA   = {
       "week": "Wk16",
       "label": "Aug 31 - Sep 6",
       "phase": "Build",
-      "score": null,
+      "score": 71,
       "swim_yd": 4175,
       "bike_min": 125.9,
       "run_mi": 11.1,
@@ -5563,6 +5597,10 @@ const TRENDS_DATA   = {
         {
           "date": "Wk15",
           "value": 82
+        },
+        {
+          "date": "Wk16",
+          "value": 71
         }
       ]
     },
@@ -5971,14 +6009,14 @@ const TRENDS_DATA   = {
       "week_num": 16,
       "week": "Wk16",
       "load_min": 328.1,
-      "readiness": null,
+      "readiness": 21.0,
       "calories": null,
-      "hrv": "",
-      "rhr": "",
-      "sleep": "",
-      "atl": "",
-      "vo2": "",
-      "status": ""
+      "hrv": "--",
+      "rhr": "--",
+      "sleep": "--",
+      "atl": "--",
+      "vo2": "--",
+      "status": "--"
     }
   ],
   "milestones": [
@@ -6179,6 +6217,10 @@ const RECOVERY_IDX  = [
   {
     "week": "Wk15",
     "value": 25.0
+  },
+  {
+    "week": "Wk16",
+    "value": 21.0
   }
 ];
 
