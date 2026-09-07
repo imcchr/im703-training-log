@@ -6224,32 +6224,38 @@ const TARGET_DATA   = [
   {
     "leg": "Swim",
     "split": "40:00",
-    "pace": "1:53/100yd"
+    "pace": "1:53/100yd",
+    "watts": ""
   },
   {
     "leg": "T1",
     "split": "3:00",
-    "pace": "\u2014"
+    "pace": "\u2014",
+    "watts": ""
   },
   {
     "leg": "Bike",
     "split": "3:00:00",
-    "pace": "18.7 mph"
+    "pace": "18.7 mph",
+    "watts": "~196W (98% FTP)"
   },
   {
     "leg": "T2",
     "split": "3:00",
-    "pace": "\u2014"
+    "pace": "\u2014",
+    "watts": ""
   },
   {
     "leg": "Run",
     "split": "2:14:00",
-    "pace": "10:13/mi"
+    "pace": "10:13/mi",
+    "watts": ""
   },
   {
     "leg": "Total",
     "split": "6:00:00",
-    "pace": "\u2014"
+    "pace": "\u2014",
+    "watts": ""
   }
 ];
 const RECOVERY_IDX  = [
@@ -6968,7 +6974,7 @@ function renderRace(){
   if(TARGET_DATA.length){
     html+='<div class="section-card"><h3>Sub-6:00 Target Splits</h3><table class="rec-tbl"><tbody>';
     TARGET_DATA.forEach(t=>{const bold=/total/i.test(t.leg);
-      html+='<tr'+(bold?' style="font-weight:800"':'')+'><td>'+esc(t.leg)+'</td><td style="text-align:center">'+esc(t.split)+'</td><td style="text-align:right;color:#7c6f61">'+esc(t.pace||'')+'</td></tr>';});
+      html+='<tr'+(bold?' style="font-weight:800"':'')+'><td>'+esc(t.leg)+'</td><td style="text-align:center">'+esc(t.split)+'</td><td style="text-align:right;color:#7c6f61">'+esc(t.pace||'')+'</td><td style="text-align:right;color:#9a8f7f;font-size:0.9em">'+esc(t.watts||'')+'</td></tr>';});
     html+='</tbody></table></div>';
   }
   html+='<div class="race-hero">';
