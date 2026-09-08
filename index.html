@@ -414,7 +414,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 07, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated September 08, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -454,6 +454,36 @@ const WEEKS_DATA = [
         "key_metric": "**Full prescription completed to the second (1:17:13 vs 1:17:00), all 5 work reps dead-center Z5 at 224W, cadence 88-95rpm with zero fade**",
         "score": 10,
         "verdict": "First Monday session at 5 reps (progression step up from Wk16's 4) and it's a clean sweep. This is a Zwift/ERG-mode ride \u2014 the trainer holds the wattage automatically, so the 224W consistency isn't scored as athlete precision. What IS scored: every segment ran exactly on time (WU10:01, each rep exactly 5:00, each recovery exactly 8:00, CD10:00), and cadence held 88-95rpm the whole way \u2014 inside the 80-100 target band, trending slightly UP across the reps rather than fading, the opposite of a fatigue signal. Readiness bounced back hard this morning (60/100 Moderate, up from last week's 21 average, HRV Balanced 80ms) and it shows. **Execution = 10/10.**"
+      },
+      {
+        "date": "2026-09-07",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 \u00b7 not attempted",
+        "key_metric": "\u00b7 not attempted",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. \u00b7 not attempted"
+      },
+      {
+        "date": "2026-09-08",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Tue AM Interval Run \u00b7 50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x6min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)",
+        "actual": "43:27 active \u00b7 3.70mi \u00b7 avg HR 165 (backup only, max 196) \u00b7 **98\u00b0F avg on-watch temp (95-100\u00b0F range)** \u00b7 WU 1.00mi/9:39 (163hr) \u00b7 Rep1 6:05 @ 7:45/mi (189hr) \u00b7 rec 2:00 (174hr) \u00b7 Rep2 6:00 @ 9:10/mi (187hr) \u00b7 rec 2:00 (153hr) \u00b7 remainder ~18min walk/shuffle home @ 14-18/mi (142-163hr), reps 3-4 + CD never happened",
+        "key_metric": "**Only 1 of 4 prescribed Z4 reps completed in-band (25%)**",
+        "score": 4,
+        "verdict": "Brutal-heat session (98\u00b0F avg, confirmed via FIT temperature data) that started clean and fell apart hard. WU and Rep 1 were genuinely good \u2014 Rep 1 landed dead-center Z4 (7:45/mi) at the full 6-minute duration, this week's progression step (5min\u21926min reps). Rep 2 is the real story: HR stayed pegged at 187 \u2014 nearly identical to Rep 1's 189 \u2014 while pace collapsed to 9:10/mi, 1:25/mi off target. That combo (max effort + collapsed pace) is the textbook heat/cramping signature, not a motivation problem. Ian called it himself: cramps + side stitch + heat blew him up, and this is rare for him (usually pushes through hard/hot days). Reps 3-4 never happened \u2014 he walked the last ~18min home instead, the right call once he'd already maxed out once in that heat. **This is exactly the kind of interval-session failure Ian flagged for a new standing rule going forward (see Trends & Flags below).**"
+      },
+      {
+        "date": "2026-09-08",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Tue PM Base Swim \u00b7 1,400yd \u00b7 WU: 200yd \u00b7 MS: 1,100yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "1,425yd \u00b7 38:02 active \u00b7 1:57/100yd avg \u00b7 HR 150 avg / 173 max (backup only)",
+        "key_metric": "Distance essentially exact (1,425 vs 1,400yd prescribed)",
+        "score": 9,
+        "verdict": "Swum right after the run blowup and still landed a clean, on-target session \u2014 good resilience signal, the run failure was a real physiological limiter specific to that session/heat, not a system-wide crash. Docked 1 point only for HR running a touch warm for a nominally easy Z2 swim, plausible given the day's heat + morning cardiovascular carryover."
       }
     ]
   },
@@ -5447,16 +5477,16 @@ const TRENDS_DATA   = {
       "label": "Sep 7-13",
       "phase": "Build",
       "score": null,
-      "swim_yd": 0,
+      "swim_yd": 1425,
       "bike_min": 77.2,
-      "run_mi": 0.0,
-      "total_min": 77.2,
-      "long_swim_yd": 0,
+      "run_mi": 3.7,
+      "total_min": 158.7,
+      "long_swim_yd": 1425,
       "long_bike_min": 77.2,
-      "long_run_mi": 0.0,
-      "run_sessions": 0,
-      "completed": 1,
-      "load_delta": -76
+      "long_run_mi": 3.7,
+      "run_sessions": 1,
+      "completed": 3,
+      "load_delta": -52
     }
   ],
   "durability": [
@@ -5574,10 +5604,10 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk17",
-      "long_swim_yd": 0,
+      "long_swim_yd": 1425,
       "long_bike_min": 77.2,
-      "long_run_mi": 0.0,
-      "run_sessions": 0
+      "long_run_mi": 3.7,
+      "run_sessions": 1
     }
   ],
   "markers": [
@@ -5853,10 +5883,10 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk17",
-      "overall_min": 393.23333333333335,
+      "overall_min": 390.95,
       "swim_min": 37.93333333333333,
       "bike_min": 213.16666666666666,
-      "run_min": 136.11666666666667
+      "run_min": 133.83333333333334
     }
   ],
   "overlay": [
@@ -6071,7 +6101,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 17,
       "week": "Wk17",
-      "load_min": 77.2,
+      "load_min": 158.7,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6083,6 +6113,20 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-08",
+      "title": "Interval Run",
+      "detail": "**Only 1 of 4 prescribed Z4 reps completed in-band (25%)**",
+      "discipline": "run",
+      "week": "Wk17"
+    },
+    {
+      "date": "2026-09-08",
+      "title": "Base Swim",
+      "detail": "Distance essentially exact (1,425 vs 1,400yd prescribed)",
+      "discipline": "swim",
+      "week": "Wk17"
+    },
     {
       "date": "2026-09-07",
       "title": "Interval Bike",
@@ -6152,27 +6196,13 @@ const TRENDS_DATA   = {
       "detail": "\u00b7 38min, 16,880 lb, 6 PRs (2 full 1RM/Vol/Weight trifectas), up from last week's 14,500 lb",
       "discipline": "lift",
       "week": "Wk16"
-    },
-    {
-      "date": "2026-08-29",
-      "title": "Long Run",
-      "detail": "Never reached the prescribed Z3 middle (8-9/mi); HR climbing at constant pace is the fatigue signature, confirmed independently by Training Readiness cratering to 2/100 the next morning",
-      "discipline": "run",
-      "week": "Wk15"
-    },
-    {
-      "date": "2026-08-28",
-      "title": "Long Bike",
-      "detail": "**Distance PR 22.20mi (>20.19 Wed)** \u00b7 **first long bike >1hr ever completed** \u00b7 held target watts start-to-finish while cooked",
-      "discipline": "bike",
-      "week": "Wk15"
     }
   ]
 };
 const RACE_DATA     = {
   "overall": {
-    "projected_finish": "6:33:14",
-    "projected_range": "5:58:17\u20137:31:29",
+    "projected_finish": "6:30:57",
+    "projected_range": "5:56:12\u20137:28:51",
     "strongest_leg": "Swim",
     "limiter_leg": "Bike",
     "confidence_label": "Moderate",
@@ -6210,11 +6240,11 @@ const RACE_DATA     = {
       "readiness": 81,
       "confidence": 0.85,
       "confidence_label": "High",
-      "predicted_split": "2:16:07",
-      "predicted_range": "2:03:54\u20132:36:30",
+      "predicted_split": "2:13:50",
+      "predicted_range": "2:01:49\u20132:33:52",
       "evidence_1": "Longest logged run: 8.0mi",
-      "evidence_2": "Best sustainable pace evidence: 8:15/mi",
-      "evidence_3": "Recent run frequency signal: 3 completed sessions across latest 2 weeks",
+      "evidence_2": "Best sustainable pace evidence: 7:45/mi",
+      "evidence_3": "Recent run frequency signal: 4 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
