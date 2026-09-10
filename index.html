@@ -414,7 +414,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 08, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated September 09, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -484,6 +484,26 @@ const WEEKS_DATA = [
         "key_metric": "Distance essentially exact (1,425 vs 1,400yd prescribed)",
         "score": 9,
         "verdict": "Swum right after the run blowup and still landed a clean, on-target session \u2014 good resilience signal, the run failure was a real physiological limiter specific to that session/heat, not a system-wide crash. Docked 1 point only for HR running a touch warm for a nominally easy Z2 swim, plausible given the day's heat + morning cardiovascular carryover."
+      },
+      {
+        "date": "2026-09-09",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Wed AM Base Bike \u00b7 55min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W)",
+        "actual": "55:15 active \u00b7 16.31mi \u00b7 WU 10:00@129W (92rpm) \u00b7 MS 35:00@159W (94rpm) \u00b7 CD 10:00@129W (93rpm)",
+        "key_metric": "All 3 zones dead-center (129W Z2 / 159W Z3 / 129W Z2)",
+        "score": 9,
+        "verdict": "Clean bounce-back session the day after Tuesday's heat-blown run \u2014 zone execution was excellent throughout. Only deviation: 5min shifted from the MS tempo block into the CD (WU10/MS35/CD10 vs prescribed WU10/MS40/CD5), total duration still matched the 55min prescription exactly. Docked 1 point for the minor structural shift."
+      },
+      {
+        "date": "2026-09-09",
+        "discipline": "run",
+        "title": "Run (ULO \u2014 bonus)",
+        "prescribed": "Wed PM ULO Run (run club) \u00b7 easy Z2 @ 9:00-10:00/mi, 30min \u2014 **OPTIONAL/BONUS, not counted toward the weekly score or 70% gate**",
+        "actual": "28:41 \u00b7 3.31mi \u00b7 **8:40/mi avg** (9:14/8:53/8:15/~7:52 progression) \u00b7 HR 166\u2192198 (backup only) \u00b7 95\u00b0F avg on-watch temp",
+        "key_metric": "Ran well ahead of the easy 9-10/mi target, same pattern as the Aug 26 bonus run",
+        "score": 9,
+        "verdict": "Same story as the Aug 26 bonus ULO run \u2014 run-club pace in real heat, scored on pace (the anchor) which was genuinely strong, progressively building to a near-max-HR finish (198). Doesn't count toward the week's score or gate either way. **Pattern watch:** second day in a row of pushing well past prescribed intensity in serious heat (Tue's Interval Run blew up at 98\u00b0F; today pushed to near-max HR at 95\u00b0F). One each isn't a trend yet \u2014 see Trends & Flags."
       }
     ]
   },
@@ -5478,15 +5498,15 @@ const TRENDS_DATA   = {
       "phase": "Build",
       "score": null,
       "swim_yd": 1425,
-      "bike_min": 77.2,
-      "run_mi": 3.7,
-      "total_min": 158.7,
+      "bike_min": 132.5,
+      "run_mi": 7.0,
+      "total_min": 242.6,
       "long_swim_yd": 1425,
       "long_bike_min": 77.2,
       "long_run_mi": 3.7,
-      "run_sessions": 1,
-      "completed": 3,
-      "load_delta": -52
+      "run_sessions": 2,
+      "completed": 5,
+      "load_delta": -26
     }
   ],
   "durability": [
@@ -5607,7 +5627,7 @@ const TRENDS_DATA   = {
       "long_swim_yd": 1425,
       "long_bike_min": 77.2,
       "long_run_mi": 3.7,
-      "run_sessions": 1
+      "run_sessions": 2
     }
   ],
   "markers": [
@@ -6101,7 +6121,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 17,
       "week": "Wk17",
-      "load_min": 158.7,
+      "load_min": 242.6,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6113,6 +6133,20 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-09",
+      "title": "Base Bike",
+      "detail": "All 3 zones dead-center (129W Z2 / 159W Z3 / 129W Z2)",
+      "discipline": "bike",
+      "week": "Wk17"
+    },
+    {
+      "date": "2026-09-09",
+      "title": "Run (ULO \u2014 bonus)",
+      "detail": "Ran well ahead of the easy 9-10/mi target, same pattern as the Aug 26 bonus run",
+      "discipline": "run",
+      "week": "Wk17"
+    },
     {
       "date": "2026-09-08",
       "title": "Interval Run",
@@ -6182,20 +6216,6 @@ const TRENDS_DATA   = {
       "detail": "**Distance essentially exact (1,325 vs 1,300 target), steady controlled pace throughout, buoy-the-whole-way was a deliberate call for this supplementary slot**",
       "discipline": "swim",
       "week": "Wk16"
-    },
-    {
-      "date": "2026-08-31",
-      "title": "Interval Bike",
-      "detail": "**All 4 work reps landed dead-center Z5 (211-240W) at 223-224W, tight to each other (1W spread) \u2014 correct rep count on the first try against the brand-new progression**",
-      "discipline": "bike",
-      "week": "Wk16"
-    },
-    {
-      "date": "2026-08-31",
-      "title": "Full Body",
-      "detail": "\u00b7 38min, 16,880 lb, 6 PRs (2 full 1RM/Vol/Weight trifectas), up from last week's 14,500 lb",
-      "discipline": "lift",
-      "week": "Wk16"
     }
   ]
 };
@@ -6244,7 +6264,7 @@ const RACE_DATA     = {
       "predicted_range": "2:01:49\u20132:33:52",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 7:45/mi",
-      "evidence_3": "Recent run frequency signal: 4 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 5 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
