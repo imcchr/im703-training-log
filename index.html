@@ -414,7 +414,7 @@
   </section>
 
   <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 14, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
+    <p class="plan-intro">Prescribed plan &middot; updated September 15, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
     <div id="reentry-control"></div>
     <div id="plan-container"></div>
   </section>
@@ -454,6 +454,26 @@ const WEEKS_DATA = [
         "key_metric": "\u00b7 40min, 24,880 lb, 8 PRs (2 full 1RM/Vol/Weight trifectas: Bicep Curls 60lb\u00d720, Tricep Ext 60lb\u00d728) \u2014 first session in the new apartment gym, expect more consistent format/attendance going forward",
         "score": 9,
         "verdict": "Completed as logged in the calendar. \u00b7 40min, 24,880 lb, 8 PRs (2 full 1RM/Vol/Weight trifectas: Bicep Curls 60lb\u00d720, Tricep Ext 60lb\u00d728) \u2014 first session in the new apartment gym, expect more consistent format/attendance going forward"
+      },
+      {
+        "date": "2026-09-15",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Tue AM Interval Run \u00b7 50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x6min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2",
+        "actual": "WU 9:54/mi \u00b7 Rep1 6:00@7:57/mi \u00b7 Rep2 6:00@7:52/mi \u00b7 Rep3 6:00@7:51/mi (maxHR 203) \u00b7 Rep4 7:07 incl. 67s forced stoplight stop, fought through cramps to finish \u00b7 CD skipped \u00b7 93\u00b0F",
+        "key_metric": "3 of 4 reps dead-center in-band, full duration",
+        "score": 9,
+        "verdict": "**Complete turnaround from last week's 1/4.** FIT data confirms Rep 4's 67s gap lines up exactly with a forced stop at a major-intersection stoplight (not voluntary) -- double ab cramps hit around the same time and made the back half a genuine grind, but the stop itself was traffic-forced. Finished the rep under real duress. **Ian's call: counts.** Clears the Interval Rep-Completion Rule \u2014 Wk20's Interval Run hold is lifted, progresses normally to 4x7min. CD not completed \u2014 per new standing rule (see Trends & Flags), CD is optional on interval runs going forward, no penalty."
+      },
+      {
+        "date": "2026-09-15",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Tue PM Base Swim \u00b7 1,400yd \u00b7 WU: 200yd \u00b7 MS: 1,100yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "1,000yd (71%) \u00b7 25:22 \u00b7 2:04/100yd \u00b7 HR 155 avg (backup only)",
+        "key_metric": "71% of prescribed distance, pace ~7s/100yd slower than recent norm",
+        "score": 6,
+        "verdict": "Swum right after the run blowup, same-day back-to-back in 93\u00b0F heat. Ian's own framing: water felt great, but he was genuinely tired from both this morning's run and the day before. Scaling back to 1,000yd instead of forcing the full 1,400 is a sensible self-aware call, not a discipline lapse \u2014 real work still got done."
       }
     ]
   },
@@ -3990,7 +4010,7 @@ const PLAN_DATA  = [
         "day": "Tue AM",
         "disc": "run",
         "session": "Interval Run",
-        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x6min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u2014 HELD at Wk17's level per the Interval Rep-Completion Rule (Wk17 Tue Interval Run failed: only 1/4 reps in-band, 98\u00b0F heat + cramps). Was 4x7min/54min, reverted to 4x6min/50min. Post-bump note (Sep 14): Wk17's Completion Gate also failed overall, so Wk18 now directly repeats Wk17's attempt at this same level. If Wk18 clears clean, this hold is likely redundant and can progress to 4x7min at that point -- reassess at Wk18 close-out rather than holding automatically. If Wk18 fails again, this hold stands as the correct fallback."
+        "target": "54min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x7min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u2014 Resolved Sep 15: Wk18's Interval Run (the direct repeat of Wk17's failure) CLEARED \u2014 3/4 reps dead-center in-band full duration, Rep 4 forced-stopped by a traffic light + fought through cramps to finish (counted per Ian's call). Hold lifted, progression restored to the normal 4x7min/54min target."
       },
       {
         "day": "Tue PM",
@@ -4051,13 +4071,13 @@ const PLAN_DATA  = [
     "summary": {
       "swim": "4,700yd",
       "bike": "3:21",
-      "run": "21.8mi",
+      "run": "22.2mi",
       "swim_yd": 4700,
       "bike_min": 201,
-      "run_mi": 21.82,
+      "run_mi": 22.23,
       "swim_delta": 34,
       "bike_delta": 33,
-      "run_delta": 48
+      "run_delta": 51
     }
   },
   {
@@ -4150,7 +4170,7 @@ const PLAN_DATA  = [
       "run_mi": 24.2,
       "swim_delta": 10,
       "bike_delta": 8,
-      "run_delta": 11
+      "run_delta": 9
     }
   },
   {
@@ -5692,16 +5712,16 @@ const TRENDS_DATA   = {
       "label": "Sep 14-20",
       "phase": "Build",
       "score": null,
-      "swim_yd": 0,
+      "swim_yd": 1000,
       "bike_min": 0.0,
-      "run_mi": 0.0,
-      "total_min": 0.0,
-      "long_swim_yd": 0,
+      "run_mi": 1.0,
+      "total_min": 35.3,
+      "long_swim_yd": 1000,
       "long_bike_min": 0.0,
-      "long_run_mi": 0.0,
-      "run_sessions": 0,
-      "completed": 0,
-      "load_delta": -100
+      "long_run_mi": 1.0,
+      "run_sessions": 1,
+      "completed": 2,
+      "load_delta": -85
     }
   ],
   "durability": [
@@ -5826,10 +5846,10 @@ const TRENDS_DATA   = {
     },
     {
       "week": "Wk18",
-      "long_swim_yd": 0,
+      "long_swim_yd": 1000,
       "long_bike_min": 0.0,
-      "long_run_mi": 0.0,
-      "run_sessions": 0
+      "long_run_mi": 1.0,
+      "run_sessions": 1
     }
   ],
   "markers": [
@@ -6347,7 +6367,7 @@ const TRENDS_DATA   = {
     {
       "week_num": 18,
       "week": "Wk18",
-      "load_min": 0.0,
+      "load_min": 35.3,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6359,6 +6379,20 @@ const TRENDS_DATA   = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-15",
+      "title": "Interval Run",
+      "detail": "3 of 4 reps dead-center in-band, full duration",
+      "discipline": "run",
+      "week": "Wk18"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Base Swim",
+      "detail": "71% of prescribed distance, pace ~7s/100yd slower than recent norm",
+      "discipline": "swim",
+      "week": "Wk18"
+    },
     {
       "date": "2026-09-14",
       "title": "Full Body",
@@ -6428,20 +6462,6 @@ const TRENDS_DATA   = {
       "detail": "**Distance landed exactly on the 1,200yd prescription; real varied-interval structure with genuine rest breaks; closing 125yd nearly 30sec/100yd faster than the rest of the set**",
       "discipline": "swim",
       "week": "Wk16"
-    },
-    {
-      "date": "2026-09-02",
-      "title": "Run (OU Intramural Triathlon \u2014 bonus)",
-      "detail": "**5th of 103 \u2014 led the field off the bike and out of the water, lost 2nd only to a faster runner on tired legs**",
-      "discipline": "run",
-      "week": "Wk16"
-    },
-    {
-      "date": "2026-09-01",
-      "title": "Interval Run",
-      "detail": "**All 4 reps completed and all 4 landed inside the 7:30-8:00/mi Z4 band \u2014 full prescription done for the first time since the interval-run ramp restarted, in heat**",
-      "discipline": "run",
-      "week": "Wk16"
     }
   ]
 };
@@ -6490,7 +6510,7 @@ const RACE_DATA     = {
       "predicted_range": "2:01:49\u20132:33:52",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 7:45/mi",
-      "evidence_3": "Recent run frequency signal: 2 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 3 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
