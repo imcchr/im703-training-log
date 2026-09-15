@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e8">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="IM70.3">
-<meta name="theme-color" content="#e0531f">
-<link rel="apple-touch-icon" href="icon.png">
 <title>Training | IM70.3</title>
 <style>
   :root{
@@ -77,119 +74,6 @@
   .hm-cell.l4{background:#8f1d10;}
   .hm-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
     margin-top:10px;font-size:.62rem;color:var(--muted);gap:8px 12px;}
-  /* Trends / Race / Recovery tabs */
-  .section-card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px;margin-bottom:14px;}
-  .section-card h3{margin:0 0 2px;font-size:.9rem;color:var(--ink);overflow:hidden;}
-  .card-sub{font-size:.66rem;color:var(--muted);margin-bottom:9px;}
-  .chart-val{float:right;font-weight:800;font-size:.9rem;color:#c0392b;}
-  .spark{width:100%;height:72px;display:block;overflow:visible;}
-  .spark polyline{fill:none;stroke:#ea7317;stroke-width:2;vector-effect:non-scaling-stroke;}
-  .spark .area{fill:rgba(234,115,23,.13);stroke:none;}
-  .spark circle{fill:#c0392b;}
-  .spark .spark-hit{fill:transparent;}
-  .spark-pt{cursor:pointer;}
-  .spark-pt:hover circle.spark-dot,.spark-pt:focus circle.spark-dot{r:4.6;fill:#fff;stroke:#c0392b;stroke-width:1.6;outline:none;}
-  .chart-tip{position:fixed;z-index:9999;background:#17181c;color:#f4f4f4;padding:6px 10px;border-radius:7px;font-size:12.5px;font-weight:700;pointer-events:none;box-shadow:0 8px 20px rgba(0,0,0,.32);border:1px solid #ea7317;white-space:nowrap;display:none;}
-  .trends-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:14px;}
-  .tr-hero-main{background:var(--card);border:1px solid var(--line);overflow:hidden;position:relative;}
-  .tr-kicker{font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-  .tr-headline{font-size:1.05rem;font-weight:800;line-height:1.15;margin:0 0 6px;color:var(--ink);}
-  .tr-sub{font-size:.72rem;color:var(--muted);line-height:1.45;}
-  .tr-hero-side{display:grid;gap:12px;}
-  .tr-mini{background:var(--card);border:1px solid var(--line);}
-  .tr-mini .chart-val{color:#7c3aed;}
-  .tr-statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
-  .tr-stat{background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:8px 6px;text-align:center;}
-  .tr-stat .v{font-size:.88rem;font-weight:800;color:var(--ink);} .tr-stat .l{font-size:.52rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:3px;}
-  .trend-grid{display:grid;gap:12px;}
-  .load-lanes{display:grid;gap:10px;margin-top:10px;}
-  .load-row{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:start;}
-  .load-week{font-size:.63rem;font-weight:800;color:var(--muted);padding-top:2px;}
-  .load-tracks{display:grid;gap:7px;}
-  .load-line{display:grid;grid-template-columns:54px 1fr auto;gap:8px;align-items:center;}
-  .load-lbl{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
-  .load-track{height:8px;border-radius:999px;background:#edf2f7;overflow:hidden;position:relative;}
-  .load-fill{height:100%;border-radius:999px;}
-  .fill-swim{background:linear-gradient(90deg,#60a5fa,#2563eb);} .fill-bike{background:linear-gradient(90deg,#fb923c,#ea580c);} .fill-run{background:linear-gradient(90deg,#4ade80,#16a34a);} .fill-load{background:linear-gradient(90deg,#a78bfa,#7c3aed);}
-  .load-val{font-size:.63rem;font-weight:700;color:#475569;white-space:nowrap;}
-  .load-delta{margin-top:2px;padding-left:62px;font-size:.62rem;}
-  .delta-pos{color:#15803d;font-weight:800;} .delta-neg{color:#c2410c;font-weight:800;} .delta-flat{color:var(--muted);font-weight:800;}
-  .section-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;}
-  .dur-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-  .dur-card{background:#fbfdff;border:1px solid var(--line);border-radius:11px;padding:11px;}
-  .dur-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px;}
-  .dur-lbl{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
-  .dur-val{font-size:1rem;font-weight:800;color:var(--ink);}
-  .marker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-  .marker-card{background:linear-gradient(180deg,#ffffff,#f8fafc);border:1px solid var(--line);border-radius:12px;padding:12px;}
-  .marker-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px;}
-  .marker-name{font-size:.75rem;font-weight:800;color:var(--ink);}
-  .marker-val{font-size:.85rem;font-weight:800;color:#7c3aed;white-space:nowrap;}
-  .overlay-wrap{display:grid;gap:8px;margin-top:10px;}
-  .ov-row{display:grid;grid-template-columns:42px 1fr auto;gap:8px;align-items:center;}
-  .ov-bars{display:grid;gap:5px;}
-  .ov-bar{height:10px;border-radius:999px;background:#eef2ff;overflow:hidden;}
-  .ov-fill-load{height:100%;background:linear-gradient(90deg,#a78bfa,#6d28d9);} .ov-fill-rec{height:100%;background:linear-gradient(90deg,#34d399,#059669);}
-  .ov-meta{font-size:.61rem;color:var(--muted);text-align:right;}
-  .status-chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 8px;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:#eef2ff;color:#4338ca;}
-  .status-good{background:#dcfce7;color:#166534;} .status-mid{background:#fef3c7;color:#92400e;} .status-low{background:#fee2e2;color:#991b1b;}
-  .milestones-card{position:relative;cursor:pointer;user-select:none;overflow:hidden;}
-  .milestones-shell{position:relative;overflow:hidden;transition:max-height .28s ease;}
-  .milestones-shell.clamped{max-height:var(--milestone-max,320px);padding-bottom:58px;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 120px),rgba(0,0,0,.92) calc(100% - 84px),rgba(0,0,0,.55) calc(100% - 44px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 120px),rgba(0,0,0,.92) calc(100% - 84px),rgba(0,0,0,.55) calc(100% - 44px),transparent 100%);}
-  .milestones-card.expanded .milestones-shell{max-height:2000px;padding-bottom:0;-webkit-mask-image:none;mask-image:none;}
-  .milestones-fade{position:absolute;left:0;right:0;bottom:0;height:112px;background:linear-gradient(180deg,rgba(247,241,232,0),rgba(247,241,232,.24) 32%,rgba(247,241,232,.56) 58%,rgba(247,241,232,.84) 82%,rgba(247,241,232,.98) 100%);backdrop-filter:blur(4px);pointer-events:none;opacity:1;transition:opacity .18s ease;}
-  .milestones-card.expanded .milestones-fade{opacity:0;}
-  .milestones-toggle{position:absolute;left:14px;right:14px;bottom:12px;display:flex;justify-content:flex-end;font-size:.67rem;font-weight:800;color:#7c3aed;text-transform:uppercase;letter-spacing:.05em;text-shadow:0 1px 0 rgba(255,255,255,.7);pointer-events:none;}
-  .timeline{position:relative;margin-top:8px;padding-left:18px;}
-  .timeline:before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,#93c5fd,#c4b5fd,#86efac);}
-  .tl-item{position:relative;padding:0 0 14px 12px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-dot{position:absolute;left:-1px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px rgba(148,163,184,.2);}
-  .tl-swim{background:var(--swim);} .tl-bike{background:var(--bike);} .tl-run{background:var(--run);} .tl-unknown{background:#8b5cf6;}
-  .tl-date{font-size:.58rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
-  .tl-title{font-size:.78rem;font-weight:800;color:var(--ink);margin-top:1px;}
-  .tl-detail{font-size:.67rem;color:#475569;line-height:1.4;margin-top:3px;}
-  @media (max-width:720px){.trends-hero,.section-split,.dur-grid,.marker-grid{grid-template-columns:1fr;}.tr-statgrid{grid-template-columns:repeat(2,1fr);}}
-  .race-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-bottom:14px;}
-  .race-hero-main{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;}
-  .race-kicker{font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-  .race-big{font-size:1.45rem;font-weight:900;color:var(--ink);line-height:1.05;margin:0 0 4px;}
-  .race-range{font-size:.82rem;font-weight:800;color:#7c3aed;}
-  .race-sub2{font-size:.68rem;color:var(--muted);margin-bottom:4px;line-height:1.45;}
-  .race-side{display:grid;gap:12px;}
-  .race-chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-  .race-chip{display:inline-flex;align-items:center;gap:6px;background:#fafbfc;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:.62rem;font-weight:800;color:#475569;}
-  .race-track{height:12px;border-radius:999px;background:#eceff3;overflow:hidden;margin:8px 0 10px;}
-  .race-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#f7b12e,#ea7317,#c0392b);}
-  .race-leggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-  .race-leg{background:linear-gradient(180deg,#ffffff,#fafbfc);border:1px solid var(--line);border-radius:12px;padding:12px;}
-  .race-leghead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
-  .race-legtitle{font-size:.84rem;font-weight:900;color:var(--ink);}
-  .race-legpct{font-size:1rem;font-weight:900;}
-  .race-split{font-size:.9rem;font-weight:900;color:#111827;margin-top:6px;}
-  .race-range2{font-size:.65rem;color:#7c3aed;font-weight:800;margin-top:2px;}
-  .race-evidence{margin-top:10px;display:grid;gap:6px;}
-  .race-ev{font-size:.66rem;color:#475569;line-height:1.35;padding-left:11px;position:relative;}
-  .race-ev:before{content:'';position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:#cbd5e1;}
-  .race-note{font-size:.62rem;color:var(--muted);margin-top:8px;line-height:1.4;}
-  @media (max-width:720px){.race-hero,.race-leggrid{grid-template-columns:1fr;}}
-  .rec-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:9px;}
-  .rec-stat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center;}
-  .rec-stat .v{font-size:.95rem;font-weight:800;color:var(--ink);line-height:1.15;}
-  .rec-stat .l{font-size:.54rem;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-top:3px;}
-  .rec-tbl{width:100%;border-collapse:collapse;font-size:.66rem;}
-  .rec-tbl th,.rec-tbl td{padding:5px 4px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
-  .rec-tbl th{color:var(--muted);font-size:.56rem;text-transform:uppercase;}
-  .rec-tbl td:first-child,.rec-tbl th:first-child{text-align:left;font-weight:700;color:var(--ink);}
-  .rec-flags{font-size:.64rem;color:var(--muted);line-height:1.45;}
-  .hm-caption{font-weight:700;color:var(--ink);}
-  .hm-legend{display:flex;align-items:center;gap:3px;white-space:nowrap;}
-  .hm-legend .hm-cell{width:11px;height:11px;cursor:default;}
-  .hm-injury{position:absolute;top:18px;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;
-    background:rgba(217,83,79,.06);pointer-events:none;box-sizing:border-box;}
-  .hm-injury-tag{position:absolute;left:50%;top:0;transform:translateX(-50%);
-    font-size:.5rem;font-weight:800;letter-spacing:.02em;color:#c0392b;background:var(--card);
-    padding:0 3px;border-radius:3px;line-height:13px;white-space:nowrap;}
   /* Missed / fully-skipped days (prescribed + logged but scored 0) */
   .hm-cell.miss{background:#8ea2b4;box-shadow:inset 0 0 0 1.5px #5f7488;}
   /* Training-block grouping brackets across the top of the heatmap */
@@ -364,78 +248,268 @@
     .stats{grid-template-columns:repeat(6,1fr);}
     .session{grid-template-columns:58px 1fr 34px;}
   }
+
+/* Editorial training system. Native typography, no network dependencies. */
+:root{--muted:#74695d;--accent:#d64d20;--line:#e5dccf;--card:#fffdf9;--swim:#347b99;--bike:#d96232;--run:#47785d;--lift:#806d98}
+html{scroll-behavior:smooth}
+body{font-size:15px;line-height:1.5;padding-bottom:0}
+button,a,summary{-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+button{touch-action:manipulation}
+.skip-link{position:fixed;top:-100px;left:20px;z-index:100;background:white;padding:12px}
+.skip-link:focus{top:10px}
+.app-header{background:rgba(247,241,232,.93);color:var(--ink);box-shadow:none;border-bottom:1px solid var(--line);backdrop-filter:blur(20px)}
+.app-header-inner{max-width:1200px;padding:18px 36px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.app-title-row{align-items:center;gap:24px}
+.wordmark{font-weight:850;letter-spacing:-1px;font-size:21px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand-mark{display:inline-grid;place-items:center;background:var(--accent);color:var(--bg);width:30px;height:30px;border-radius:50%;font-weight:400}
+.app-sub{font-size:9px;letter-spacing:1.5px;font-weight:650;opacity:1;color:var(--muted);margin-left:10px}
+.countdown{background:transparent;color:var(--muted);font-size:11px;padding:0;font-weight:500}
+.tabbar{margin:0;gap:3px;background:#eae3d9;border-radius:30px;padding:4px}
+.tab{color:var(--muted);padding:8px 23px;border:0;border-radius:22px;font-weight:600;font-size:13px;min-height:40px;transition:background .2s,color .2s,box-shadow .2s}
+.tab.active{color:var(--ink);background:var(--card);box-shadow:0 2px 5px #173a5a0b}
+.tab:hover:not(.active){color:var(--ink);background:#ffffff55}
+.page-wrap{max-width:1200px;padding:0 36px;margin:auto}
+.page-heading{padding:65px 0 44px;position:relative}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:23px}
+.page-heading h1{font-size:clamp(48px,6.5vw,82px);letter-spacing:-.065em;line-height:1.02;font-weight:650;max-width:850px}
+.page-heading h1 span{color:var(--accent)}
+.page-heading p{font-size:16px;max-width:450px;color:var(--muted);margin-top:24px;line-height:1.6}
+.freshness{font-size:11px;color:var(--muted);margin-top:14px}
+.freshness:before{content:'';display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;margin-right:8px}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:34px 0 18px}
+.section-heading h2{font-size:25px;letter-spacing:-.8px;font-weight:600}
+.section-heading>span{font-size:11px;color:var(--muted)}
+.log-overview{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:25px 0;gap:20px}
+.overview-stat{border-right:1px solid var(--line);padding-right:16px}
+.overview-stat:last-child{border:0}
+.overview-stat strong{font-size:36px;letter-spacing:-1.5px;font-weight:550;display:block;font-variant-numeric:tabular-nums}
+.overview-stat span{font-size:11px;color:var(--muted)}
+.consistency{border-bottom:1px solid var(--line);padding:15px 0}
+.consistency summary{font-size:12px;cursor:pointer;padding:8px 0}
+.consistency summary span{float:right;color:var(--muted);font-size:11px}
+.heatmap-card{margin:18px 0 0;background:transparent;border:0;padding:0}
+.hm-scroll{scrollbar-width:thin}
+.filter-bar{gap:6px;margin:0 0 20px;flex-wrap:wrap}
+.pill{background:transparent;border:1px solid var(--line);border-radius:24px;padding:10px 18px;font-size:12px;min-height:44px;color:var(--muted)}
+.pill.active{background:var(--ink);border-color:var(--ink);color:white}
+.pill:hover{border-color:var(--ink)}
+.week-card{border:1px solid var(--line);border-radius:18px;box-shadow:none;background:var(--card);margin-bottom:12px;overflow:hidden}
+.week-head{padding:22px 24px;min-height:72px;gap:12px;background:transparent;cursor:pointer;flex-wrap:wrap}
+.week-title{font-size:16px;font-weight:650;letter-spacing:-.4px}
+.week-dates{font-size:12px;color:var(--muted)}
+.phase-badge{font-size:9px;letter-spacing:.6px;border-radius:5px;padding:4px 7px;font-weight:600}
+.week-score{font-size:11px;border-radius:20px;font-weight:600;padding:5px 9px}
+.week-meta{font-size:11px}
+.week-body{padding:0 24px 12px}
+.session-wrap{border:0;border-top:1px solid var(--line);border-radius:0;margin:0;background:transparent}
+.session{padding:19px 0;grid-template-columns:54px 1fr 38px;gap:16px;border-left:0;background:transparent}
+.sess-date{font-size:15px;font-weight:550}
+.sess-day{font-size:10px;color:var(--muted);margin-top:3px}
+.sess-title{font-size:15px;font-weight:600;letter-spacing:-.2px}
+.sess-title:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--disc-color,var(--ink));margin-right:8px}
+.disc-swim{--disc-color:var(--swim)}
+.disc-bike{--disc-color:var(--bike)}
+.disc-run{--disc-color:var(--run)}
+.disc-lift{--disc-color:var(--lift)}
+.sess-detail{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.score{background:var(--ink);color:white;font-size:13px;border-radius:50%;width:34px;height:34px;display:grid;place-items:center;font-weight:650}
+.sess-expand{font-size:13px;line-height:1.8;padding:8px 12px 22px 70px;background:transparent}
+.sess-expand .block{margin-bottom:10px}
+.session:hover{background:#f7f1e860}
+.caret{font-size:10px;color:var(--muted)}
+.plan-intro{font-size:12px;color:var(--muted);margin-bottom:25px}
+.block-banner{margin:30px 0 16px;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;padding:18px 0 0}
+.block-banner-label{font-size:11px;letter-spacing:1.5px;color:var(--muted)}
+.plan-grid{gap:8px}
+.pg-item{padding:13px;border-radius:10px}
+.pg-name{font-size:12px;line-height:1.4}
+.pg-tgt{font-size:11px;line-height:1.7}
+.plan-target{font-size:12px;line-height:1.7}
+.plan-row{padding:18px 0}
+.plan-summary{padding:20px;border-radius:12px;background:var(--bg)}
+.plan-pillar{background:var(--card)}
+.archive-toggle{padding:18px 0;font-size:13px}
+.reentry-card{background:var(--card);border:1px solid var(--line);box-shadow:none;border-radius:18px;padding:24px}
+.reentry-copy,.reentry-preview{font-size:12px;line-height:1.7}
+.reentry-btn{min-height:44px}
+.reentry-title{font-size:17px}
+.reentry-badge{background:var(--bg);color:var(--ink)}
+.progress-toolbar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:20px 0;gap:15px;flex-wrap:wrap}
+.segmented{display:flex;gap:3px;background:#eae3d9;padding:4px;border-radius:24px}
+.segmented button{min-height:40px;padding:8px 18px;border:0;background:transparent;border-radius:20px;font-size:12px;color:var(--muted)}
+.segmented button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 2px 6px #173a5a0a}
+.range-label{font-size:11px;color:var(--muted)}
+.progress-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.insight-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px;min-width:0}
+.card-eyebrow{font-size:10px;font-weight:650;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+.metric-value{font-size:54px;line-height:1.1;font-weight:550;letter-spacing:-2.5px;margin:18px 0 8px;font-variant-numeric:tabular-nums}
+.metric-value small{font-size:17px;letter-spacing:-.3px;color:var(--muted);font-weight:450}
+.metric-caption{font-size:12px;line-height:1.7;color:var(--muted);min-height:40px}
+.metric-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0}
+.metric-tabs button{font-size:11px;padding:8px 12px;border:1px solid var(--line);border-radius:18px;background:transparent;color:var(--muted);min-height:38px}
+.metric-tabs button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:white}
+.chart-control-spacer{height:38px;margin:22px 0}.chart{width:100%;height:210px;display:block;overflow:visible}
+.chart-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:3 5}
+.chart-axis{font-size:12px;fill:var(--muted)}
+.chart-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart-dot{fill:var(--card);stroke:var(--accent);stroke-width:2}
+.chart-hit{fill:transparent;cursor:pointer}
+.chart-point:focus{outline:none}
+.chart-point:focus .chart-dot,.chart-point:hover .chart-dot{fill:var(--accent);stroke-width:5}
+.chart-readout{font-size:12px;color:var(--ink);min-height:42px;padding:12px 0 0;border-top:1px solid var(--line);margin-top:12px;font-variant-numeric:tabular-nums}
+.chart-note{font-size:10px;line-height:1.7;color:var(--muted);margin-top:12px}
+.data-details{margin-top:18px;font-size:12px}
+.data-details summary{cursor:pointer;min-height:38px;padding:8px 0}
+.data-table{width:100%;border-collapse:collapse;font-size:11px}
+.data-table td,.data-table th{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line)}
+.data-table th{font-weight:600;color:var(--muted)}
+.race-story{background:var(--ink);color:var(--bg);padding:42px;border-radius:24px;display:grid;grid-template-columns:1.15fr 1fr;gap:40px;overflow:hidden;position:relative}
+.race-story:after{content:'70.3';position:absolute;right:-12px;bottom:-65px;font-size:180px;letter-spacing:-15px;line-height:1;font-weight:650;opacity:.035;pointer-events:none}
+.race-story .card-eyebrow{color:#c6cbd0}
+.race-story h3{font-size:56px;font-weight:500;letter-spacing:-2px;line-height:1.2;margin:18px 0 8px}
+.race-story p{font-size:12px;line-height:1.8;color:#cbd4d9}
+.race-story strong{color:#f6af8c}
+.race-summary{border-left:1px solid #ffffff25;padding-left:35px;align-self:center}
+.race-summary h4{font-size:23px;font-weight:500;letter-spacing:-.6px;margin:10px 0}
+.race-range{color:#e9c6ad;font-size:13px;font-weight:400;margin-bottom:15px}
+.race-legs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.leg-card{background:var(--card);border:1px solid var(--line);padding:25px;border-radius:20px}
+.leg-top{display:flex;justify-content:space-between;align-items:center}
+.leg-name{font-size:15px;font-weight:600}
+.leg-number{font-size:10px;color:var(--muted)}
+.leg-split{font-size:34px;letter-spacing:-1px;font-weight:550;margin:18px 0 3px}
+.leg-range{font-size:11px;color:var(--muted)}
+.leg-limiter{font-size:12px;line-height:1.6;margin-top:20px;padding-top:15px;border-top:1px solid var(--line)}
+.leg-card details{font-size:11px;line-height:1.8;margin-top:16px}
+.leg-card summary{cursor:pointer;padding:8px 0}
+.leg-card ul{padding-left:16px;margin-top:10px;color:var(--muted)}
+.model-note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:20px;max-width:800px}
+.app-footer{border-top:1px solid var(--line);margin-top:65px;padding:25px 0 35px;display:flex;justify-content:space-between;gap:20px;font-size:10px;color:var(--muted);letter-spacing:.3px}
+.view.active{animation:arrive .35s ease-out}
+.empty-chart{min-height:210px;display:grid;place-items:center;font-size:13px;color:var(--muted);text-align:center}
+.recovery-context{margin:18px 0 0;border:1px solid var(--line);border-radius:20px;padding:15px 25px;background:var(--card)}
+.recovery-context summary{cursor:pointer;font-size:13px;padding:8px 0}
+.recovery-context summary span{display:block;color:var(--muted);font-size:10px;margin:4px 0 0 16px}
+.recovery-context-row{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-top:1px solid var(--line);font-size:12px}
+.recovery-context-row small{display:block;font-size:10px;color:var(--muted);margin-top:3px}
+.recovery-context-row strong{font-size:12px;font-weight:550;text-align:right;max-width:55%}
+.pg-preview{font-size:12px;margin-top:6px;color:var(--muted)}
+.prescription summary{font-size:10px;color:var(--muted);cursor:pointer;min-height:36px;padding:10px 0}
+.pg-head{font-size:10px;background:transparent}
+.pg-head>div{padding:12px}
+.pg-row{grid-template-columns:45px minmax(0,1fr) minmax(0,1fr)}
+.pg-head{grid-template-columns:45px 1fr 1fr}
+.pg-slot{padding:14px 10px}
+.pg-daylabel{font-size:11px;background:transparent;font-weight:500}
+.pg-item{border-radius:0;padding:0 0 0 12px;border-left-width:2px}
+.pg-sess{font-size:13px;line-height:1.5}
+.pg-tgt{overflow-wrap:anywhere}
+.reentry-controls{flex-wrap:wrap}
+.reentry-title{color:var(--ink);font-weight:550}
+.reentry-copy{color:var(--muted)}
+@keyframes arrive{from{opacity:0;transform:translateY(7px)}
+to{opacity:1;transform:translateY(0)}
+}
+@media(min-width:1000px){.page-heading:after{content:'SWIM / BIKE / RUN';position:absolute;right:0;top:86px;writing-mode:vertical-rl;font-size:10px;letter-spacing:3px;color:var(--muted)}
+.plan-grid{grid-template-columns:40px repeat(7,minmax(0,1fr))}
+}
+@media(max-width:850px){.app-sub{display:none}
+.app-header-inner{padding:14px 24px;gap:15px}
+.countdown{display:none}
+.page-wrap{padding:0 24px}
+.progress-grid{grid-template-columns:1fr}
+.race-story{padding:30px;gap:25px}
+.race-legs{gap:10px}
+.leg-card{padding:20px}
+.leg-split{font-size:29px}
+}
+@media(max-width:560px){#view-progress .page-heading{padding:30px 0 20px}#view-progress .page-heading h1{font-size:43px}#view-progress .page-heading p{margin-top:14px;font-size:13px}.chart-axis{font-size:13px}.chart-control-spacer{display:none}.app-header{backdrop-filter:none;background:var(--bg)}
+body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+.app-header-inner{padding:16px 20px}
+.countdown{display:block}
+.app-title-row{width:100%;justify-content:space-between}
+.wordmark{font-size:18px}
+.brand-mark{width:26px;height:26px}
+.tabbar{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));left:20px;right:20px;box-shadow:0 5px 35px #173a5a25;border:1px solid #ffffffa0;background:#eae3d9f5;backdrop-filter:blur(20px);padding:5px;border-radius:30px}
+.tab{padding:12px 15px;font-size:13px;min-height:46px}
+.page-wrap{padding:0 20px}
+.page-heading{padding:40px 0 30px}
+.eyebrow{margin-bottom:18px;font-size:9px}
+.page-heading h1{font-size:53px}
+.page-heading p{font-size:14px;max-width:310px;margin-top:20px}
+.log-overview{grid-template-columns:repeat(2,1fr);padding:20px 0;gap:22px}
+.overview-stat:nth-child(2){border:0}
+.overview-stat strong{font-size:31px}
+.consistency summary span{font-size:9px}
+.section-heading h2{font-size:23px}
+.section-heading>span{font-size:10px}
+.filter-bar{gap:5px}
+.pill{padding:9px 12px;font-size:11px}
+.week-head{padding:18px 16px;gap:8px}
+.week-body{padding:0 16px 8px}
+.week-title{font-size:14px}
+.week-dates{font-size:11px}
+.week-meta{display:none}
+.week-score{font-size:10px;padding:4px 7px}
+.session{grid-template-columns:36px 1fr 30px;gap:10px;padding:17px 0}
+.sess-title{font-size:13px}
+.sess-detail{font-size:11px}
+.sess-date{font-size:13px}
+.score{width:28px;height:28px;font-size:11px}
+.sess-expand{padding:5px 0 18px;font-size:12px}
+.insight-card{padding:23px 20px;border-radius:20px}
+.metric-value{font-size:47px}
+.progress-toolbar{align-items:flex-start}
+.segmented button{padding:8px 15px}
+.race-story{grid-template-columns:1fr;padding:28px 24px;gap:25px}
+.race-story h3{font-size:51px}
+.race-summary{border-left:0;border-top:1px solid #ffffff25;padding:20px 0 0}
+.race-legs{grid-template-columns:1fr}
+.leg-card{padding:24px}
+.leg-split{font-size:36px}
+.leg-limiter{margin-top:15px}
+.app-footer{margin-top:40px;font-size:9px}
+.reentry-card{padding:20px}
+.chart{height:190px}
+.plan-summary{padding:12px}
+.plan-grid{overflow-x:auto}
+.pg-tgt{font-size:11px}
+.plan-row{gap:8px}
+.plan-target{font-size:12px}
+.plan-note{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*:before,*:after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
-
-<header class="app-header">
-  <div class="app-header-inner">
-    <div class="app-title-row">
-      <h1>IM 70.3<span class="app-sub">Ian &middot; Dallas Little Elm</span></h1>
-      <span class="countdown" id="countdown"></span>
-    </div>
-    <nav class="tabbar">
-      <button class="tab active" data-view="log">Log</button>
-      <button class="tab" data-view="plan">Plan</button>
-      <button class="tab" data-view="trends">Trends</button>
-      <button class="tab" data-view="race">Race</button>
-      <button class="tab" data-view="recovery">Recovery</button>
-    </nav>
-  </div>
-</header>
-
-<main class="page-wrap">
-
-  <section id="view-log" class="view active">
-    <div class="heatmap-card" id="heatmap-card">
-      <div class="hm-title">Performance &middot; avg session score</div>
-      <div class="hm-scroll"><div class="hm-grid" id="hm-grid"></div></div>
-      <div class="hm-foot">
-        <span class="hm-caption" id="hm-caption"></span>
-        <span class="hm-legend">Low
-          <span class="hm-cell"></span>
-          <span class="hm-cell l1"></span>
-          <span class="hm-cell l2"></span>
-          <span class="hm-cell l3"></span>
-          <span class="hm-cell l4"></span>
-        High</span>
-      </div>
-    </div>
-
-    <div class="stats" id="stats"></div>
-    <div class="filter-bar">
-      <button class="pill active" data-disc="all">All</button>
-      <button class="pill" data-disc="swim"><span class="swatch sw-swim"></span>Swim</button>
-      <button class="pill" data-disc="bike"><span class="swatch sw-bike"></span>Bike</button>
-      <button class="pill" data-disc="run"><span class="swatch sw-run"></span>Run</button>
-      <button class="pill" data-disc="lift"><span class="swatch sw-lift"></span>Lift</button>
-    </div>
-    <div id="weeks-container"></div>
-  </section>
-
-  <section id="view-plan" class="view">
-    <p class="plan-intro">Prescribed plan &middot; updated September 15, 2026. Upcoming weeks first &mdash; current week highlighted. Completed weeks are archived below.</p>
-    <div id="reentry-control"></div>
-    <div id="plan-container"></div>
-  </section>
-
-  <section id="view-trends" class="view">
-    <p class="plan-intro">Trends mission control &middot; load, durability, race metrics, recovery, and milestones in one place.</p>
-    <div id="trends-container"></div>
-  </section>
-
-  <section id="view-race" class="view">
-    <p class="plan-intro">Race readiness &middot; current best vs the 70.3 Dallas Little Elm demand.</p>
-    <div id="race-container"></div>
-  </section>
-
-  <section id="view-recovery" class="view">
-    <p class="plan-intro">Recovery &middot; the Garmin story behind the training.</p>
-    <div id="recovery-container"></div>
-  </section>
-
+<a class="skip-link" href="#main">Skip to training</a>
+<header class="app-header"><div class="app-header-inner">
+  <div class="app-title-row"><a class="wordmark" href="#log" aria-label="IM70.3 training home"><span class="brand-mark">/</span> IM 70.3<span class="app-sub">THE TRAINING JOURNAL</span></a><span class="countdown" id="countdown"></span></div>
+  <nav class="tabbar" aria-label="Main navigation"><button class="tab active" data-view="log">Log</button><button class="tab" data-view="plan">Plan</button><button class="tab" data-view="progress">Progress</button></nav>
+</div></header>
+<main class="page-wrap" id="main" tabindex="-1">
+<section id="view-log" class="view active" aria-label="Training log">
+  <div class="page-heading"><div class="eyebrow">01 / THE WORK</div><h1>Every session.<br><span>Forward.</span></h1><p>Your training, one day at a time. The work behind race day.</p><div class="freshness" id="log-freshness"></div></div>
+  <div class="log-overview" id="log-overview"></div>
+  <details class="consistency"><summary>Consistency map <span>Explore your session scores ↗</span></summary><div class="heatmap-card" id="heatmap-card"><div class="hm-title">Average session score · includes prescribed sessions</div><div class="hm-scroll"><div class="hm-grid" id="hm-grid"></div></div><div class="hm-foot"><span id="hm-caption"></span><span class="hm-legend">Low <span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span> High</span></div></div></details>
+  <div class="section-heading"><h2>The journal</h2><span>Latest entries first</span></div>
+  <div class="filter-bar" aria-label="Filter discipline"><button class="pill active" data-disc="all">All sessions</button><button class="pill" data-disc="swim">Swim</button><button class="pill" data-disc="bike">Bike</button><button class="pill" data-disc="run">Run</button><button class="pill" data-disc="lift">Strength</button></div>
+  <div id="weeks-container"></div>
+</section>
+<section id="view-plan" class="view" aria-label="Training plan">
+  <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
+  <p class="plan-intro">Prescribed plan · updated September 15, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+</section>
+<section id="view-progress" class="view" aria-label="Training progress">
+  <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
+  <div id="progress-container"></div>
+</section>
+<footer class="app-footer"><span>IM 70.3 / Dallas Little Elm</span><span>Built on the work.</span></footer>
 </main>
-
 <script>
 const WEEKS_DATA = [
   {
@@ -2392,8 +2466,8 @@ const BLOCKS_DATA = [
     "start": "2026-08-24",
     "end": "2026-12-20"
   }
-];  // [{label,start,end}] training-block ranges for heatmap brackets
-const PLAN_DATA  = [
+];
+const PLAN_DATA = [
   {
     "num": 1,
     "start": "2026-05-04",
@@ -5300,7 +5374,7 @@ const EXPECTED_COUNTS = {
   "2026-12-17": 2,
   "2026-12-18": 2,
   "2026-12-19": 2
-};  // ISO date -> # workouts prescribed that day (heatmap multi-workout-day averaging)
+};
 const RECOVERY_DATA = [
   {
     "week": "Wk2",
@@ -5415,7 +5489,7 @@ const RECOVERY_DATA = [
     "flags": "Ian switched to daily Training Readiness screenshots instead of an end-of-week batch (new habit, keeps sticking) -- standard HRV/BB/Stress/ATL/VO2 weekly-trend views weren't captured this week, so those columns are honestly blank rather than guessed. Daily readiness (Mon-Sun, all AM/wake-up): 8, 54, 7, 28, 1, 19, 30 -> weekly avg 21/100 (down slightly from Wk15's 25). Fri (1/100, 77h recovery need) was the low point and directly explains the Long Bike shortfall that day. Despite the week staying mostly in the red, Sat's Long Swim still landed at essentially race pace (1:52/100yd) and Thu's Base Run/Interval Swim both scored well -- fitness is clearly still building underneath the fatigue. Two misses this week (Fri lift, Sat long run) both read as correct fatigue-driven calls given this data, not discipline failures."
   }
 ];
-const TRENDS_DATA   = {
+const TRENDS_DATA = {
   "load": [
     {
       "week_num": 1,
@@ -6465,7 +6539,7 @@ const TRENDS_DATA   = {
     }
   ]
 };
-const RACE_DATA     = {
+const RACE_DATA = {
   "overall": {
     "projected_finish": "6:30:57",
     "projected_range": "5:56:12\u20137:28:51",
@@ -6516,7 +6590,7 @@ const RACE_DATA     = {
     }
   ]
 };
-const TARGET_DATA   = [
+const TARGET_DATA = [
   {
     "leg": "Swim",
     "split": "40:00",
@@ -6554,7 +6628,7 @@ const TARGET_DATA   = [
     "watts": ""
   }
 ];
-const RECOVERY_IDX  = [
+const RECOVERY_IDX = [
   {
     "week": "Wk1",
     "value": 44.0
@@ -6588,7 +6662,6 @@ const RECOVERY_IDX  = [
     "value": 21.0
   }
 ];
-
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -6746,38 +6819,6 @@ function renderHeatmap(){
   });
 }
 
-function renderStats(){
-  let totalSessions=0,scoreSum=0,scoreCount=0;
-  const disc={swim:0,bike:0,run:0,lift:0};
-  const weekly=[];
-  WEEKS_DATA.forEach(w=>{
-    if(w.score!=null)weekly.push(w.score);
-    w.sessions.forEach(s=>{
-      totalSessions++;
-      if(s.score>0){scoreSum+=s.score;scoreCount++;}
-      if(disc[s.discipline]!==undefined)disc[s.discipline]++;
-    });
-  });
-  const avgWeek=weekly.length?(weekly.reduce((a,b)=>a+b,0)/weekly.length).toFixed(0):'-';
-  const avgSess=scoreCount?(scoreSum/scoreCount).toFixed(1):'-';
-  const best=weekly.length?Math.max(...weekly):'-';
-  const items=[
-    {v:WEEKS_DATA.length,l:'Weeks'},
-    {v:totalSessions,l:'Sessions'},
-    {v:avgSess,l:'Avg sess'},
-    {v:avgWeek,l:'Avg week'},
-    {v:best,l:'Best week'},
-    {v:disc.swim+'/'+disc.bike+'/'+disc.run+'/'+disc.lift,l:'S/B/R/L'},
-  ];
-  const root=document.getElementById('stats');
-  items.forEach(s=>{
-    const c=document.createElement('div');
-    c.className='stat';
-    c.innerHTML='<div class="stat-val">'+s.v+'</div><div class="stat-lbl">'+s.l+'</div>';
-    root.appendChild(c);
-  });
-}
-
 function renderLog(){
   const root=document.getElementById('weeks-container');
   if(!WEEKS_DATA.length){
@@ -6855,7 +6896,7 @@ function planItemHTML(w,r){
   return '<div class="pg-item disc-'+discClass(r.disc)+'">'+
     '<div class="pg-sess">'+esc(r.session)+'</div>'+
     (adjusted?'<span class="reentry-chip">Ramp adjusted</span>':'')+
-    (target?'<div class="pg-tgt">'+esc(target).replace(/·/g,'<br>')+'</div>':'')+
+    (target?'<div class="pg-preview">'+esc(target.split('·')[0])+'</div><details class="prescription"><summary>Session details</summary><div class="pg-tgt">'+esc(target).replace(/·/g,'<br>')+'</div></details>':'')+
     (adjusted?'<div class="reentry-original">Original: '+esc(r.target)+'</div>':'')+'</div>';
 }
 function slotEl(w,items){
@@ -6952,6 +6993,10 @@ function makePlanCard(w,cur){
       '<span class="caret">&#9656;</span>'+
     '</div><div class="week-body"></div>';
   const body=card.querySelector('.week-body');
+  let populated=false;
+  function populate(){
+  if(populated)return;
+  populated=true;
   const rows=w.rows||[];
   const dayRows=rows.filter(function(r){return parseDay(r.day);});
   const otherRows=rows.filter(function(r){return !parseDay(r.day);});
@@ -6969,7 +7014,12 @@ function makePlanCard(w,cur){
     n.textContent='See training calendar.';
     body.appendChild(n);
   }
-  card.querySelector('.week-head').addEventListener('click',()=>card.classList.toggle('open'));
+  }
+  if(isCur)populate();
+  card.querySelector('.week-head').addEventListener('click',()=>{
+    populate();
+    card.classList.toggle('open');
+  });
   return card;
 }
 
@@ -7020,9 +7070,13 @@ function applyFilter(disc){
 }
 
 function switchView(v){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.classList.toggle('active',t.dataset.view===v);
+    if(t.dataset.view===v)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current');
+  });
+  if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v));
-  window.scrollTo(0,0);
+  window.scrollTo({top:0,behavior:'instant'});
 }
 
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
@@ -7084,240 +7138,151 @@ function rerenderPlan(){
 }
 
 renderHeatmap();
-renderStats();
+
 renderLog();
 renderPlan();
 renderReentryControl();
 
-/* ---------- Trends tab ---------- */
-function sparkSVG(points){
-  if(!points||points.length<2)return '';
-  const W=300,H=72,pad=9,vals=points.map(p=>Number(p.value)||0);
-  let mn=Math.min(...vals),mx=Math.max(...vals);
-  if(mn===mx){mn-=1;mx+=1;}
-  const x=i=>pad+(W-2*pad)*(i/(points.length-1));
-  const y=v=>pad+(H-2*pad)*(1-(v-mn)/(mx-mn));
-  const line=points.map((p,i)=>x(i).toFixed(1)+','+y(Number(p.value)||0).toFixed(1)).join(' ');
-  const area=line+' '+x(points.length-1).toFixed(1)+','+(H-pad)+' '+x(0).toFixed(1)+','+(H-pad);
-  const dots=points.map((p,i)=>{
-    const cx=x(i).toFixed(1), cy=y(Number(p.value)||0).toFixed(1);
-    const tip=esc(p.tip!=null?String(p.tip):String(p.value));
-    return '<g class="spark-pt" tabindex="0" data-tip="'+tip+'"><circle class="spark-hit" cx="'+cx+'" cy="'+cy+'" r="9"/><circle class="spark-dot" cx="'+cx+'" cy="'+cy+'" r="2.6"/></g>';
-  }).join('');
-  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+
-    '<polygon class="area" points="'+area+'"/><polyline points="'+line+'"/>'+dots+'</svg>';
+
+/* Progress: one chart per question. No chart library or remote requests. */
+const progressState = {period:'weekly', metric:'total_min'};
+const metricDefinitions = {
+  total_min:{label:'Tri time', unit:'hours', divisor:60},
+  swim_yd:{label:'Swim', unit:'yards', divisor:1},
+  bike_min:{label:'Bike', unit:'hours', divisor:60},
+  run_mi:{label:'Run', unit:'miles', divisor:1}
+};
+const text = value => esc(String(value ?? '')).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const validNumber = value => typeof value === 'number' && Number.isFinite(value);
+const weekNumber = label => Number(String(label).match(/\d+/)?.[0]);
+const trainingWeek = number => WEEKS_DATA.find(week => week.num === number);
+const latestSessionDate = WEEKS_DATA.flatMap(week => week.sessions).map(session => session.date).sort().at(-1);
+function displayNumber(value){return validNumber(value)?value.toLocaleString(undefined,{maximumFractionDigits:1}):'—';}
+function cleanRecovery(value){return value && !/^(--|—|n\/a)$/i.test(value.trim())?value:null;}
+function weekStart(number){return trainingWeek(number)?.start || PLAN_DATA.find(week=>week.num===number)?.start;}
+function periodLabel(start){return new Date(start+'T12:00:00').toLocaleDateString(undefined,{month:'short',year:'numeric'});}
+function loadPoints(){
+  return (TRENDS_DATA.load || []).map(row=>({label:row.week,detail:row.label,start:weekStart(row.week_num),value:validNumber(row[progressState.metric])?row[progressState.metric]/metricDefinitions[progressState.metric].divisor:null}));
 }
-(function initChartTooltip(){
-  const tip=document.createElement('div');
-  tip.className='chart-tip';
-  document.body.appendChild(tip);
-  function place(e){
-    const pad=14;
-    let px=e.clientX+pad, py=e.clientY+pad;
-    const r=tip.getBoundingClientRect();
-    if(px+r.width>window.innerWidth-8) px=e.clientX-r.width-pad;
-    if(py+r.height>window.innerHeight-8) py=e.clientY-r.height-pad;
-    tip.style.left=px+'px'; tip.style.top=py+'px';
-  }
-  function show(e,el){
-    const t=el.getAttribute('data-tip');
-    if(!t)return;
-    tip.textContent=t; tip.style.display='block'; place(e);
-  }
-  document.addEventListener('pointerover',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el)show(e,el);});
-  document.addEventListener('pointermove',e=>{if(tip.style.display==='block'){const el=e.target.closest&&e.target.closest('.spark-pt');if(el)place(e);else tip.style.display='none';}});
-  document.addEventListener('pointerout',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el)tip.style.display='none';});
-  document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el){const r=el.getBoundingClientRect();show({clientX:r.left+r.width/2,clientY:r.top},el);}});
-  document.addEventListener('focusout',e=>{const el=e.target.closest&&e.target.closest('.spark-pt');if(el)tip.style.display='none';});
-})();
-function fmtMin(v){v=Math.round(Number(v)||0);const h=Math.floor(v/60),m=v%60;return h?(m?`${h}:${String(m).padStart(2,'0')}`:`${h}hr`):`${m}min`;}
-function fmtMi(v){return (Number(v)||0).toFixed(1)+'mi';}
-function fmtYd(v){return (Number(v)||0).toLocaleString()+'yd';}
-function deltaTag(n){if(n==null)return '<span class="delta-flat">—</span>';if(n>0)return '<span class="delta-pos">+'+n+'%</span>';if(n<0)return '<span class="delta-neg">'+n+'%</span>';return '<span class="delta-flat">0%</span>';}
-function pct(val,max){return Math.max(4,Math.round(((Number(val)||0)/(max||1))*100));}
-function statCell(v,l){return '<div class="tr-stat"><div class="v">'+esc(v)+'</div><div class="l">'+esc(l)+'</div></div>';}
-function statusChip(s){const low=(s||'').toLowerCase();let cls='status-mid';if(/productive|high|good|ready|excellent/.test(low))cls='status-good';if(/strained|low|poor|holding/.test(low))cls='status-low';return '<span class="status-chip '+cls+'">'+esc(s||'No status')+'</span>';}
-function renderTrends(){
-  const root=document.getElementById('trends-container');
-  const data=TRENDS_DATA||{};
-  const load=data.load||[];
-  if(!load.length){root.innerHTML='<div class="empty-state">No trend data yet.</div>';return;}
-  const latest=load[load.length-1], prev=load.length>1?load[load.length-2]:null;
-  const maxSwim=Math.max(1,...load.map(r=>r.swim_yd||0));
-  const maxBike=Math.max(1,...load.map(r=>r.bike_min||0));
-  const maxRun=Math.max(1,...load.map(r=>r.run_mi||0));
-  const maxLoad=Math.max(1,...load.map(r=>r.total_min||0));
-  const durability=data.durability||[];
-  const raceMetrics=data.race_metrics||[];
-  const overlay=data.overlay||[];
-  const maxReady=Math.max(1,...overlay.map(r=>Number(r.readiness)||0));
-  let html='';
-  html+='<div class="trends-hero">';
-  html+='<div class="section-card tr-hero-main"><div class="tr-kicker">Section 1 · Training Load</div><div class="tr-headline">Latest logged week: '+esc(latest.week)+' · '+esc(latest.label)+'</div><div class="tr-sub">This section auto-updates from the most recent logged training week. No manual week swapping nonsense required when Wk9, Wk10, and beyond roll in.</div><div class="tr-statgrid">'+
-    statCell(fmtYd(latest.swim_yd),'Swim volume')+statCell(fmtMin(latest.bike_min),'Bike volume')+statCell(fmtMi(latest.run_mi),'Run volume')+statCell(fmtMin(latest.total_min),'Total tri time')+
-    '</div></div>';
-  html+='<div class="tr-hero-side">';
-  html+='<div class="section-card tr-mini"><h3>Ramp Radar<span class="chart-val">'+deltaTag(latest.load_delta)+'</span></h3><div class="card-sub">Auto-tracks total-load change from the previous logged week to the current one. This card follows the data forward by itself.</div>'+sparkSVG(load.map(r=>({value:r.total_min, tip:r.week+' ('+esc(r.label)+'): '+fmtMin(r.total_min)+' total load'})))+'</div>';
-  html+='<div class="section-card tr-mini"><h3>Recovery Link<span class="chart-val">'+esc((overlay[overlay.length-1]&&overlay[overlay.length-1].readiness)!=null?Math.round(overlay[overlay.length-1].readiness)+'/100':'—')+'</span></h3><div class="card-sub">Also auto-follows the latest logged week, pairing current load with the newest recovery/readiness context available.</div>'+(overlay.length?statusChip(overlay[overlay.length-1].status):'')+'</div>';
-  html+='</div></div>';
-
-  html+='<div class="section-card"><h3>Weekly Load Matrix</h3><div class="card-sub">Each week shows labeled swim, bike, run, and total-load bars with the value printed inline, so you don\'t need to decode a mystery number stack off to the side like a cave goblin.</div><div class="load-lanes">';
-  load.forEach(r=>{html+='<div class="load-row"><div class="load-week">'+esc(r.week)+'</div><div><div class="load-tracks">'+
-    '<div class="load-line"><div class="load-lbl">Swim</div><div class="load-track"><div class="load-fill fill-swim" style="width:'+pct(r.swim_yd,maxSwim)+'%"></div></div><div class="load-val">'+esc(fmtYd(r.swim_yd))+'</div></div>'+
-    '<div class="load-line"><div class="load-lbl">Bike</div><div class="load-track"><div class="load-fill fill-bike" style="width:'+pct(r.bike_min,maxBike)+'%"></div></div><div class="load-val">'+esc(fmtMin(r.bike_min))+'</div></div>'+
-    '<div class="load-line"><div class="load-lbl">Run</div><div class="load-track"><div class="load-fill fill-run" style="width:'+pct(r.run_mi,maxRun)+'%"></div></div><div class="load-val">'+esc(fmtMi(r.run_mi))+'</div></div>'+
-    '<div class="load-line"><div class="load-lbl">Load</div><div class="load-track"><div class="load-fill fill-load" style="width:'+pct(r.total_min,maxLoad)+'%"></div></div><div class="load-val">'+esc(fmtMin(r.total_min))+'</div></div>'+
-    '</div><div class="load-delta">Week-over-week: '+deltaTag(r.load_delta)+'</div></div></div>';});
-  html+='</div></div>';
-
-  html+='<div class="section-split">';
-  html+='<div class="section-card"><h3>Section 2 · Durability & Long Sessions</h3><div class="card-sub">The longest single swim, ride, and run each week — because race confidence is built on durable ceiling work, not just weekly mush.</div><div class="dur-grid">';
-  const fmtByUnit={yd:fmtYd, min:fmtMin, mi:fmtMi, sessions:v=>v+' runs'};
-  const durCards=[
-    ['Longest Swim','yd',durability.map(r=>({value:r.long_swim_yd, week:r.week})), fmtYd(latest.long_swim_yd)],
-    ['Longest Ride','min',durability.map(r=>({value:r.long_bike_min, week:r.week})), fmtMin(latest.long_bike_min)],
-    ['Longest Run','mi',durability.map(r=>({value:r.long_run_mi, week:r.week})), fmtMi(latest.long_run_mi)],
-    ['Run Frequency','sessions',durability.map(r=>({value:r.run_sessions, week:r.week})), String(latest.run_sessions)]
-  ];
-  durCards.forEach(([lbl,unit,pts,val])=>{
-    const fmt=fmtByUnit[unit]||(v=>String(v));
-    pts=pts.map(p=>({value:p.value, tip:p.week+': '+fmt(p.value)}));
-    html+='<div class="dur-card"><div class="dur-top"><div class="dur-lbl">'+lbl+'</div><div class="dur-val">'+esc(val)+'</div></div>'+sparkSVG(pts)+'</div>';});
-  html+='</div></div>';
-
-  html+='<div class="section-card"><h3>Section 3 · Race Metrics</h3><div class="card-sub">Projected split history from the same conservative model used in the Race tab. If the prediction shifts, this shows when and where it moved.</div><div class="marker-grid">';
-  const raceCards=[
-    ['Overall Projected Finish','',raceMetrics.map(r=>({value:r.overall_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].overall_min):'—'],
-    ['Projected Swim Split','',raceMetrics.map(r=>({value:r.swim_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].swim_min):'—'],
-    ['Projected Bike Split','',raceMetrics.map(r=>({value:r.bike_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].bike_min):'—'],
-    ['Projected Run Split','',raceMetrics.map(r=>({value:r.run_min, week:r.week})), raceMetrics.length?fmtMin(raceMetrics[raceMetrics.length-1].run_min):'—']
-  ];
-  raceCards.forEach(([name,unit,pts,last])=>{
-    pts=pts.map(p=>({value:p.value, tip:p.week+': '+fmtMin(p.value)}));
-    html+='<div class="marker-card"><div class="marker-head"><div class="marker-name">'+esc(name)+'</div><div class="marker-val">'+esc(last)+'</div></div><div class="card-sub">'+pts.length+' weekly projection points</div>'+(pts.length>1?sparkSVG(pts):'<div class="card-sub">Need one more logged week for a proper line.</div>')+'</div>';});
-  html+='</div></div>';
-  html+='</div>';
-
-  html+='<div class="section-split">';
-  html+='<div class="section-card"><h3>Section 4 · Recovery Overlay</h3><div class="card-sub">Purple = weekly load. Green = Garmin readiness (real data only; blank means we genuinely do not have a number for that week, never a guess). Calories burned shown when logged.</div><div class="overlay-wrap">';
-  overlay.forEach(r=>{html+='<div class="ov-row"><div class="load-week">'+esc(r.week)+'</div><div class="ov-bars"><div class="ov-bar"><div class="ov-fill-load" style="width:'+pct(r.load_min,maxLoad)+'%"></div></div><div class="ov-bar"><div class="ov-fill-rec" style="width:'+pct(r.readiness,maxReady)+'%"></div></div></div><div class="ov-meta">'+esc(fmtMin(r.load_min))+'<br>'+((r.readiness!=null)?Math.round(r.readiness)+'/100':'—')+(r.calories!=null?'<br>'+Math.round(r.calories).toLocaleString()+' kcal':'')+'</div></div>';});
-  if(overlay.length){const last=overlay[overlay.length-1];html+='<div style="margin-top:8px">'+statusChip(last.status)+' <span class="card-sub" style="margin-left:6px">HRV '+esc((last.hrv||'').split('/')[0].trim()||'—')+' · RHR '+esc(last.rhr||'—')+' · ATL '+esc(last.atl||'—')+' · VO2 '+esc(last.vo2||'—')+'</span></div>';}
-  html+='</div></div>';
-
-  html+='<div class="section-card milestones-card" id="milestones-card"><h3>Section 5 · Milestones</h3><div class="card-sub">Benchmarks, breakthroughs, race sims, and PR-ish moments — the narrative layer, not just the spreadsheet layer.</div><div class="milestones-shell clamped" id="milestones-shell"><div class="timeline">';
-  (data.milestones||[]).forEach(m=>{const dc=['swim','bike','run'].includes(m.discipline)?m.discipline:'unknown';html+='<div class="tl-item"><div class="tl-dot tl-'+dc+'"></div><div class="tl-date">'+esc(m.week)+' · '+esc(prettyDate(m.date))+'</div><div class="tl-title">'+esc(m.title)+'</div><div class="tl-detail">'+esc(m.detail)+'</div></div>';});
-  html+='</div><div class="milestones-fade" id="milestones-fade"></div></div><div class="milestones-toggle" id="milestones-toggle">Tap to expand</div></div>';
-  html+='</div>';
-
-  root.innerHTML=html;
-  initMilestonesClamp();
+function recoveryPoints(){
+  const index = new Map((RECOVERY_IDX || []).map(row=>[weekNumber(row.week),row.value]));
+  const numbers = [...new Set([...index.keys(),...(TRENDS_DATA.load||[]).map(row=>row.week_num)])].sort((a,b)=>a-b);
+  return numbers.map(number=>({label:'Wk'+number,detail:trainingWeek(number)?.label||'',start:weekStart(number),value:validNumber(index.get(number))?index.get(number):null}));
 }
-
-function initMilestonesClamp(){
-  const card=document.getElementById('milestones-card');
-  const shell=document.getElementById('milestones-shell');
-  const fade=document.getElementById('milestones-fade');
-  const toggle=document.getElementById('milestones-toggle');
-  if(!card||!shell||!toggle) return;
-  const recoveryCard=Array.from(document.querySelectorAll('#trends-container .section-card')).find(el=>el.querySelector('h3')&&el.querySelector('h3').textContent.includes('Section 4 · Recovery Overlay'));
-  const cardChrome=()=>{
-    const cs=getComputedStyle(card);
-    let total=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);
-    Array.from(card.children).forEach(el=>{
-      if(el===shell || el===toggle) return;
-      total += el.getBoundingClientRect().height;
-    });
-    return total;
-  };
-  const sync=()=>{
-    if(!recoveryCard) return;
-    if(card.classList.contains('expanded')){
-      shell.classList.remove('clamped');
-      fade.style.display='none';
-      toggle.style.display='flex';
-      return;
-    }
-    const available=Math.max(150, Math.floor(recoveryCard.getBoundingClientRect().height - cardChrome()));
-    shell.style.setProperty('--milestone-max', available+'px');
-    const needsClamp=shell.scrollHeight>available+6;
-    shell.classList.toggle('clamped', needsClamp);
-    fade.style.display=needsClamp?'block':'none';
-    toggle.style.display=needsClamp?'flex':'none';
-  };
-  const flip=()=>{
-    const expanded=card.classList.toggle('expanded');
-    toggle.textContent=expanded?'Tap to collapse':'Tap to expand';
-    window.requestAnimationFrame(sync);
-  };
-  card.addEventListener('click', flip);
-  window.requestAnimationFrame(sync);
-  window.addEventListener('resize', sync, {passive:true});
-  if(window.ResizeObserver && recoveryCard){
-    const ro=new ResizeObserver(sync);
-    ro.observe(recoveryCard);
-    ro.observe(card);
-  }
-}
-
-/* ---------- Race tab ---------- */
-function bar(pct){pct=Math.max(0,Math.min(100,Math.round(pct)));return '<div class="race-track"><div class="race-fill" style="width:'+pct+'%"></div></div>';}
-function renderRace(){
-  const root=document.getElementById('race-container');
-  if(!RACE_DATA || !RACE_DATA.legs || !RACE_DATA.legs.length){root.innerHTML='<div class="empty-state">No race data yet.</div>';return;}
-  const colors={Swim:'#2f78c0',Bike:'#e0531f',Run:'#2e9e5b'};
-  const o=RACE_DATA.overall||{};
-  let html='';
-  if(TARGET_DATA.length){
-    html+='<div class="section-card"><h3>Sub-6:00 Target Splits</h3><table class="rec-tbl"><tbody>';
-    TARGET_DATA.forEach(t=>{const bold=/total/i.test(t.leg);
-      html+='<tr'+(bold?' style="font-weight:800"':'')+'><td>'+esc(t.leg)+'</td><td style="text-align:center">'+esc(t.split)+'</td><td style="text-align:right;color:#7c6f61">'+esc(t.pace||'')+'</td><td style="text-align:right;color:#9a8f7f;font-size:0.9em">'+esc(t.watts||'')+'</td></tr>';});
-    html+='</tbody></table></div>';
-  }
-  html+='<div class="race-hero">';
-  html+='<div class="race-hero-main"><div class="race-kicker">Projected Race Capability</div><div class="race-big">'+esc(o.projected_finish||'—')+'</div><div class="race-range">Likely range: '+esc(o.projected_range||'—')+'</div><div class="race-sub2" style="margin-top:8px">This is a conservative projection built from live training evidence: demonstrated speed, longest distance, durability support, and confidence penalties. No more stale manual mph raccoons.</div><div class="race-chiprow"><span class="race-chip">Confidence: '+esc(o.confidence_label||'—')+'</span><span class="race-chip">Strongest leg: '+esc(o.strongest_leg||'—')+'</span><span class="race-chip">Primary limiter: '+esc(o.limiter_leg||'—')+'</span></div></div>';
-  html+='<div class="race-side"><div class="section-card"><h3>How this works</h3><div class="race-sub2">Each leg now gets one smart readiness bar that blends speed, distance durability, and evidence confidence instead of pretending separate pace/distance bars equal race preparedness.</div></div><div class="section-card"><h3>Model note</h3><div class="race-sub2">'+esc(o.method_note||'')+'</div></div></div>';
-  html+='</div>';
-  html+='<div class="race-leggrid">';
-  RACE_DATA.legs.forEach(r=>{
-    const col=colors[r.disc]||'#c0392b';
-    html+='<div class="race-leg"><div class="race-leghead"><div><div class="race-legtitle">'+esc(r.disc)+'</div><div class="race-split">'+esc(r.predicted_split)+'</div><div class="race-range2">Range: '+esc(r.predicted_range)+'</div></div><div class="race-legpct" style="color:'+col+'">'+Math.round(r.readiness)+'%</div></div>'+bar(r.readiness)+'<div class="race-chiprow"><span class="race-chip">Confidence: '+esc(r.confidence_label)+'</span><span class="race-chip">Limiter: '+esc(r.limiter)+'</span></div><div class="race-evidence"><div class="race-ev">'+esc(r.evidence_1)+'</div><div class="race-ev">'+esc(r.evidence_2)+'</div><div class="race-ev">'+esc(r.evidence_3)+'</div></div><div class="race-note">'+esc(r.summary)+'</div></div>';
+function groupedPoints(points, average=false){
+  if(progressState.period==='weekly') return points.slice(-12);
+  const groups = new Map();
+  points.forEach(point=>{
+    if(!point.start) return;
+    const key=point.start.slice(0,7);
+    if(!groups.has(key)) groups.set(key,{label:periodLabel(point.start),detail:'Weeks starting in '+periodLabel(point.start),values:[],missing:0});
+    const group=groups.get(key);
+    if(validNumber(point.value)) group.values.push(point.value); else group.missing++;
   });
-  html+='</div>';
-  root.innerHTML=html;
+  return [...groups.values()].map(group=>({label:group.label,detail:group.detail+(group.missing?' · '+group.missing+' unrecorded week(s)':''),value:group.values.length?group.values.reduce((sum,value)=>sum+value,0)/(average?group.values.length:1):null}));
 }
-
-/* ---------- Recovery tab ---------- */
-function recStat(v,l){return '<div class="rec-stat"><div class="v">'+esc(v||'\u2014')+'</div><div class="l">'+l+'</div></div>';}
-function shortHrv(h){return (h||'').replace(/\s*\([^)]*\)/,'');}
-function shortSleep(s){return (s||'').split('/')[0].trim();}
-function renderRecovery(){
-  const root=document.getElementById('recovery-container');
-  if(!RECOVERY_DATA.length){root.innerHTML='<div class="empty-state">No recovery data yet.</div>';return;}
-  const L=RECOVERY_DATA[RECOVERY_DATA.length-1];
-  let html='';
-  if(RECOVERY_IDX.length>1){
-    const pts=RECOVERY_IDX.map(r=>({value:r.value, tip:r.week+': '+Math.round(r.value)+'/100'})), lastR=RECOVERY_IDX[RECOVERY_IDX.length-1];
-    html+='<div class="section-card"><h3>Body Recovery<span class="chart-val">'+lastR.value+'/100</span></h3>'+
-      '<div class="card-sub">Garmin Training Readiness \u2014 HRV + sleep + recovery time + stress + load, weekly avg \u00b7 '+esc(RECOVERY_IDX[0].week)+'\u2013'+esc(lastR.week)+'</div>'+
-      sparkSVG(pts)+'</div>';
-  }
-  html+='<div class="section-card"><h3>'+esc(L.week)+' \u00b7 Recovery</h3>'+
-    '<div class="card-sub">'+esc(L.dates)+' \u00b7 latest snapshot</div>'+
-    '<div class="rec-hero">'+recStat(shortHrv(L.hrv),'HRV')+recStat(L.rhr,'RHR bpm')+recStat(L.vo2,'VO2 Max')+'</div>'+
-    '<div class="rec-hero">'+recStat(shortSleep(L.sleep),'Sleep')+recStat(L.bb_low,'BB Floor')+recStat(L.atl,'Load (ATL)')+'</div>'+
-    '<div class="card-sub" style="margin:8px 0 0">Status: <b>'+esc(L.status)+'</b></div>'+
-    (L.flags?'<div class="rec-flags" style="margin-top:6px">'+esc(L.flags)+'</div>':'')+'</div>';
-  html+='<div class="section-card"><h3>Weekly Trend</h3><div style="overflow-x:auto"><table class="rec-tbl">'+
-    '<thead><tr><th>Wk</th><th>HRV</th><th>RHR</th><th>Sleep</th><th>BB\u2193</th><th>ATL</th><th>VO2</th></tr></thead><tbody>';
-  RECOVERY_DATA.forEach(r=>{html+='<tr><td>'+esc(r.week)+'</td><td>'+esc(shortHrv(r.hrv))+'</td><td>'+esc(r.rhr)+
-    '</td><td>'+esc(shortSleep(r.sleep))+'</td><td>'+esc(r.bb_low)+'</td><td>'+esc(r.atl)+'</td><td>'+esc(r.vo2)+'</td></tr>';});
-  html+='</tbody></table></div></div>';
-  root.innerHTML=html;
+function chartMarkup(points, unit, id, fixedMax){
+  const values=points.map(point=>point.value).filter(validNumber);
+  if(!values.length) return '<div class="empty-chart">No recorded values in this period.<br>Missing data is never plotted as zero.</div>';
+  const width=window.innerWidth<560?320:500,height=200,left=38,right=15,top=16,bottom=32;
+  const max=fixedMax || Math.max(1,...values)*1.12;
+  const x=index=>left+(width-left-right)*(points.length===1?.5:index/(points.length-1));
+  const y=value=>height-bottom-(height-top-bottom)*value/max;
+  const grid=[0,.5,1].map(fraction=>`<line class="chart-grid" x1="${left}" x2="${width-right}" y1="${y(max*fraction)}" y2="${y(max*fraction)}"/><text class="chart-axis" x="${left-8}" y="${y(max*fraction)+4}" text-anchor="end">${displayNumber(max*fraction)}</text>`).join('');
+  let path='',connected=false;
+  points.forEach((point,index)=>{
+    if(!validNumber(point.value)){connected=false;return;}
+    path+=(connected?' L':' M')+x(index)+' '+y(point.value);connected=true;
+  });
+  const dots=points.map((point,index)=>validNumber(point.value)?`<g class="chart-point" tabindex="0" role="button" aria-label="${text(point.label)}: ${displayNumber(point.value)} ${unit}" data-chart="${id}" data-point="${index}"><circle class="chart-hit" cx="${x(index)}" cy="${y(point.value)}" r="18"/><circle class="chart-dot" cx="${x(index)}" cy="${y(point.value)}" r="4"/></g>`:'').join('');
+  const labels=points.map((point,index)=>index===0||index===points.length-1||index===Math.floor(points.length/2)?`<text class="chart-axis" x="${x(index)}" y="${height-7}" text-anchor="${index===0?'start':index===points.length-1?'end':'middle'}">${text(point.label)}</text>`:'').join('');
+  return `<svg class="chart" viewBox="0 0 ${width} ${height}" role="group" aria-label="${unit} by ${progressState.period==='weekly'?'week':'month'}; focus or tap a point to inspect">${grid}<path class="chart-line" d="${path}"/>${dots}${labels}</svg>`;
 }
+function dataTable(points,unit){return `<details class="data-details"><summary>View the numbers</summary><table class="data-table"><thead><tr><th scope="col">Period</th><th scope="col">${text(unit)}</th></tr></thead><tbody>${points.map(point=>`<tr><th scope="row">${text(point.label)}</th><td>${validNumber(point.value)?displayNumber(point.value):'Not recorded'}</td></tr>`).join('')}</tbody></table></details>`;}
+function chartCard(points,definition,id,caption,controls=''){
+  const last=points.at(-1);
+  const lastValue=last?.value;
+  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Training volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(last?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${last?text(last.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Recorded triathlon volume; strength excluded. Zero means no volume captured by the existing log parser, not proof of rest.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
+}
+function recoveryContext(){
+  const fields=[['hrv','HRV'],['rhr','Resting heart rate'],['sleep','Sleep'],['vo2','VO₂ max']];
+  const rows=fields.map(([key,label])=>{
+    const row=[...RECOVERY_DATA].reverse().find(item=>cleanRecovery(item[key]));
+    return row?`<div class="recovery-context-row"><span>${label}<small>${text(row.week)} · ${text(row.dates)}</small></span><strong>${text(row[key])}</strong></div>`:'';
+  }).join('');
+  return `<details class="recovery-context"><summary>Recovery context <span>Latest available readings, individually dated</span></summary>${rows||'<p>No additional recovery readings recorded.</p>'}<p class="chart-note">These snapshots may be older than your latest training. They are not a current health assessment.</p></details>`;
+}
+function goalContext(finish){
+  if(!/^\d+:\d{2}:\d{2}$/.test(finish||'')) return 'Not enough evidence to compare with the goal.';
+  const [hours,minutes,seconds]=finish.split(':').map(Number);
+  const difference=hours*60+minutes+seconds/60-360;
+  if(Math.abs(difference)<1) return 'The current estimate is around the six-hour target.';
+  return `Current estimate: ${Math.round(Math.abs(difference))} minutes ${difference>0?'above':'under'} the six-hour target.`;
+}
+function raceMarkup(){
+  const overall=RACE_DATA?.overall;
+  if(!overall) return '<div class="empty-state">No race projection available yet.</div>';
+  const splits=TARGET_DATA||[];
+  return `<div class="section-heading"><h2>The road to race day</h2><span>March 14, 2027</span></div>
+    <article class="race-story"><div><div class="card-eyebrow">Projected finish / current evidence</div><h3>${text(overall.projected_finish||'—')}</h3><div class="race-range">Estimated range ${text(overall.projected_range||'—')}</div><p>Goal: sub-6:00. ${text(goalContext(overall.projected_finish))}<br>A training-based estimate, not a finish-time guarantee.<br>Evidence through ${text(latestSessionDate||'the latest log')}.</p></div><div class="race-summary"><div class="card-eyebrow">Where to focus</div><h4>${text(overall.limiter_leg||'More evidence')} is the current limiter.</h4><p>Strongest modeled leg: <strong>${text(overall.strongest_leg||'Not available')}</strong>.<br>Model confidence: <strong>${text(overall.confidence_label||'Not available')}</strong>. Compare demonstrated endurance with the race demand below.</p></div></article>
+    <div class="race-legs">${(RACE_DATA.legs||[]).map((leg,index)=>`<article class="leg-card"><div class="leg-top"><span class="leg-name">${text(leg.disc)}</span><span class="leg-number">0${index+1} / ${{Swim:'1.2 MI',Bike:'56 MI',Run:'13.1 MI'}[leg.disc]||''}</span></div><div class="leg-split">${text(leg.predicted_split||'—')}</div><div class="leg-range">Projected · ${text(leg.predicted_range||'—')}</div><div class="leg-limiter">${text(leg.limiter||'More evidence needed')}</div><details><summary>Evidence & target</summary><ul>${[leg.evidence_1,leg.evidence_2,leg.evidence_3].filter(Boolean).map(item=>'<li>'+text(item)+'</li>').join('')}</ul><p>Confidence: ${text(leg.confidence_label)}. Model readiness: ${displayNumber(leg.readiness)}% (not a probability of finishing).</p>${splits.filter(target=>target.leg.toLowerCase()===leg.disc.toLowerCase()).map(target=>`<p>Target split: ${text(target.split)} · ${text(target.pace)} ${text(target.watts)}</p>`).join('')}</details></article>`).join('')}</div><p class="model-note">${text(overall.method_note)} These figures describe the logged evidence, not a definitive race-day verdict. A sub-6 outcome also depends on sustained preparation, conditions, fueling, and execution.</p>`;
+}
+function renderProgress(){
+  const volume=groupedPoints(loadPoints()),recovery=groupedPoints(recoveryPoints(),true);
+  const definition=metricDefinitions[progressState.metric];
+  const latestRecorded=recoveryPoints().filter(point=>validNumber(point.value)).at(-1);
+  const controls=`<div class="metric-tabs" aria-label="Volume metric">${Object.entries(metricDefinitions).map(([key,value])=>`<button data-metric="${key}" aria-pressed="${key===progressState.metric}">${value.label}</button>`).join('')}</div>`;
+  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'Latest 12 logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Latest recorded readiness: '+latestRecorded.label+' · '+displayNumber(latestRecorded.value)+'/100':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
+  document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;renderProgress();document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
+  document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;renderProgress();document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
+  document.querySelectorAll('.chart-point').forEach(point=>{
+    const inspect=()=>{
+      const item=(point.dataset.chart==='volume'?volume:recovery)[Number(point.dataset.point)];
+      const unit=point.dataset.chart==='volume'?definition.unit:'/ 100';
+      document.getElementById(point.dataset.chart+'-readout').textContent=item.label+' · '+displayNumber(item.value)+' '+unit+(item.detail?' · '+item.detail:'');
+    };
+    ['pointerenter','click','focus'].forEach(event=>point.addEventListener(event,inspect));
+    point.addEventListener('keydown',event=>{
+      if(event.key==='Enter'||event.key===' '){event.preventDefault();inspect();}
+      if(event.key==='ArrowRight'||event.key==='ArrowLeft'){
+        event.preventDefault();const siblings=[...point.parentElement.querySelectorAll('.chart-point')];
+        siblings[siblings.indexOf(point)+(event.key==='ArrowRight'?1:-1)]?.focus();
+      }
+    });
+  });
+}
+function enhanceDisclosureControls(root=document){
+  root.querySelectorAll('.week-head,.session').forEach(control=>{
+    control.setAttribute('role','button');control.tabIndex=0;
+    const expanded=()=>control.parentElement.classList.contains(control.classList.contains('session')?'expanded':'open');
+    control.setAttribute('aria-expanded',expanded());
+    control.setAttribute('aria-label',control.classList.contains('session')?control.querySelector('.sess-title').textContent:control.innerText.trim().replace(/\s+/g,' '));
+    control.addEventListener('click',()=>control.setAttribute('aria-expanded',expanded()));
+    control.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();control.click();}});
+  });
+}
+function renderOverview(){
+  const load=TRENDS_DATA.load||[],latest=load.at(-1);
+  const completed=load.reduce((sum,week)=>sum+(week.completed||0),0);
+  const items=[[load.length,'Weeks of recorded training'],[completed,'Completed tri sessions'],[latest?displayNumber(latest.total_min/60)+' h':'—','Latest week · tri time'],[latest?.week||'—','Latest logged week']];
+  document.getElementById('log-overview').innerHTML=items.map(([value,label])=>`<div class="overview-stat"><strong>${text(value)}</strong><span>${text(label)}</span></div>`).join('');
+  document.getElementById('log-freshness').textContent='Latest entry '+(latestSessionDate||'not available')+' · historical entries are preserved';
+}
+renderOverview();
+renderProgress();
+enhanceDisclosureControls();
+const originalRerenderPlan=rerenderPlan;
+rerenderPlan=function(){originalRerenderPlan();enhanceDisclosureControls(document.getElementById('plan-container'));};
+const originalApplyFilter=applyFilter;
+applyFilter=function(discipline){originalApplyFilter(discipline);document.querySelectorAll('.pill').forEach(button=>button.setAttribute('aria-pressed',button.dataset.disc===discipline));document.querySelectorAll('#view-log .week-head').forEach(control=>control.setAttribute('aria-expanded',control.parentElement.classList.contains('open')));};
+applyFilter('all');
+function syncNavigation(){
+  const view=location.hash.slice(1);
+  switchView(['log','plan','progress'].includes(view)?view:'log');
+}
+window.addEventListener('hashchange',syncNavigation);
+syncNavigation();
 
-renderTrends();
-renderRace();
-renderRecovery();
 </script>
 </body>
 </html>
