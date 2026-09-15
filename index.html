@@ -76,16 +76,11 @@
     margin-top:10px;font-size:.62rem;color:var(--muted);gap:8px 12px;}
   /* Missed / fully-skipped days (prescribed + logged but scored 0) */
   .hm-cell.miss{background:#8ea2b4;box-shadow:inset 0 0 0 1.5px #5f7488;}
-  /* Training-block grouping brackets across the top of the heatmap */
-  .hm-block{position:absolute;height:11px;border:1.5px solid var(--muted);border-bottom:none;
-    border-radius:6px 6px 0 0;box-sizing:border-box;pointer-events:none;}
-  .hm-block.b0{border-color:#c98a2b;}
-  .hm-block.b1{border-color:#2b7a9e;}
-  .hm-block-tag{position:absolute;top:-4px;left:50%;transform:translateX(-50%);
-    font-size:.5rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;
-    background:var(--card);padding:0 4px;white-space:nowrap;line-height:9px;}
-  .hm-block.b0 .hm-block-tag{color:#c98a2b;}
-  .hm-block.b1 .hm-block-tag{color:#2b7a9e;}
+  /* Training-block labels (the band itself is styled in the design layer) */
+  .hm-block-tag{position:absolute;font-size:.5rem;font-weight:800;text-transform:uppercase;
+    letter-spacing:.03em;white-space:nowrap;line-height:9px;}
+  .hm-band.b0 .hm-block-tag{color:#c98a2b;}
+  .hm-band.b1 .hm-block-tag{color:#2b7a9e;}
   /* Plan tab training-block divider banner */
   .block-banner{display:flex;align-items:center;gap:8px;margin:6px 0 12px;padding:7px 13px;
     border-radius:9px;background:linear-gradient(135deg,#2b7a9e,#1f5f7d);color:#fff;
@@ -288,31 +283,34 @@ button{touch-action:manipulation}
 .overview-stat span{font-size:11px;color:var(--muted)}
 .log-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:50px;align-items:center}
 .log-hero .page-heading{padding:65px 0 44px}
-.heatmap-card{margin:0;background:transparent;border:0;padding:0;min-width:0}
-.hm-grid{padding-top:34px;padding-right:0}
+.heatmap-card{margin:0;background:transparent;border:0;padding:0;min-width:0;width:var(--hm-width,auto);max-width:100%}
+.hm-grid{padding-top:34px;padding-right:0;position:relative}
+.hm-col{position:relative;z-index:2}
+/* Training-block aura: a soft field that breathes when idle, focuses on hover. */
+@property --band-strength{syntax:'<number>';inherits:false;initial-value:0.2}
+.hm-band{position:absolute;top:0;bottom:-6px;left:var(--band-left);width:var(--band-width);
+  --band-hue:201,138,43;--band-strength:.2;border-radius:16px;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(var(--band-hue),0) 0%,rgba(var(--band-hue),var(--band-strength)) 27%,
+    rgba(var(--band-hue),var(--band-strength)) 71%,rgba(var(--band-hue),0) 100%);
+  animation:bandBreathe 9s ease-in-out infinite alternate;
+  transition:left .55s cubic-bezier(.22,1,.36,1),width .55s cubic-bezier(.22,1,.36,1),filter .45s ease,opacity .45s ease}
+.hm-band.b1{--band-hue:43,122,158;opacity:.78}
+.hm-band.is-focused{left:calc(var(--band-left) - 8px);width:calc(var(--band-width) + 16px);animation-play-state:paused;filter:saturate(2) brightness(1.03)}
+.hm-grid:hover .hm-band:not(.is-focused){opacity:.4}
+.hm-band .hm-block-tag{top:14px;left:0;transform:none;background:none;padding:0;opacity:.72;transition:opacity .4s ease}
+.hm-band.is-focused .hm-block-tag{opacity:1}
+@keyframes bandBreathe{from{--band-strength:.12}to{--band-strength:.27}}
+.hm-particles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.hm-particles span{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#fff;opacity:0;animation:moteDrift linear infinite}
+@keyframes moteDrift{0%{transform:translate3d(0,0,0) scale(var(--scale));opacity:0}20%{opacity:.8}70%{opacity:.5}100%{transform:translate3d(var(--drift),-165px,0) scale(var(--scale));opacity:0}}
+.hm-readout{min-height:30px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:11px;line-height:1.45;color:var(--ink);font-variant-numeric:tabular-nums}
+.hm-readout:empty:before{content:'Select a day for detail';color:var(--muted);opacity:.75}
 .hm-month{font-size:10px;width:13px}
 .hm-cell{width:13px;height:13px;border-radius:3px}
 .hm-foot{font-size:11px;margin-top:14px;color:var(--muted)}
 .hm-legend{display:flex;align-items:center;gap:3px;white-space:nowrap}
 .hm-legend .hm-cell{width:11px;height:11px;cursor:default}
-.hm-block{height:12px;top:18px;border-width:1.5px}
-.hm-block-tag{background:var(--bg);top:-5px;font-size:9px;letter-spacing:.5px;padding:0 5px}
-.hm-block.open-ended{border-right:0;border-top-right-radius:0}
-.hm-block.open-ended .hm-block-tag{left:0;transform:none}
-/* Block marker variants. Geometry comes from JS; only appearance changes. */
-.blocks-tint .hm-block{top:47px;bottom:0;height:auto;border:0;border-radius:8px;background:#c98a2b14}
-.blocks-tint .hm-block.b1{background:#2b7a9e14}
-.blocks-tint .hm-block-tag{top:-33px;left:0;transform:none;background:none;padding:0}
-.blocks-rule{padding-bottom:26px}
-.blocks-rule .hm-block{top:auto;bottom:24px;height:0;border:0;border-top:2px solid #c98a2b;border-radius:0}
-.blocks-rule .hm-block.b1{border-top-color:#2b7a9e}
-.blocks-rule .hm-injury{bottom:26px}
-.blocks-rule .hm-block-tag{top:7px;left:0;transform:none;background:none;padding:0}
-.blocks-tab .hm-block{top:12px;height:17px;border:0;border-radius:9px;background:#c98a2b1f}
-.blocks-tab .hm-block.b1{background:#2b7a9e1f}
-.blocks-tab .hm-block-tag{position:static;display:block;line-height:17px;text-align:center;background:none;overflow:hidden;text-overflow:ellipsis}
-.blocks-tab .hm-block.open-ended .hm-block-tag{position:absolute;left:0;text-align:left;overflow:visible}
-.hm-injury{position:absolute;top:47px;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;background:#d9534f0f;pointer-events:none;box-sizing:border-box}
+.hm-injury{position:absolute;z-index:2;top:47px;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;background:#d9534f0f;pointer-events:none;box-sizing:border-box}
 .hm-injury-key{display:inline-flex;align-items:center;gap:6px;color:#c0392b;font-weight:550}
 .hm-injury-key:before{content:'';width:13px;height:11px;border:1.5px dashed #d9534f;border-radius:3px;background:#d9534f14}
 .hm-foot{justify-content:flex-start;gap:8px 18px}
@@ -387,7 +385,10 @@ button{touch-action:manipulation}
 .chart-control-spacer{height:38px;margin:22px 0}.chart{width:100%;height:210px;display:block;overflow:visible}
 .chart-grid{stroke:var(--line);stroke-width:1;stroke-dasharray:3 5}
 .chart-axis{font-size:12px;fill:var(--muted)}
-.chart-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:chartDraw 1.1s cubic-bezier(.33,1,.68,1) forwards}
+.chart-shine{fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;animation:chartShineIn .6s ease 1.1s forwards;mix-blend-mode:screen;pointer-events:none}
+@keyframes chartDraw{to{stroke-dashoffset:0}}
+@keyframes chartShineIn{to{opacity:.85}}
 .chart-dot{fill:var(--card);stroke:var(--accent);stroke-width:2}
 .chart-hit{fill:transparent;cursor:pointer}
 .chart-point:focus{outline:none}
@@ -449,7 +450,7 @@ to{opacity:1;transform:translateY(0)}
 @media(min-width:1000px){#view-plan .page-heading:after,#view-progress .page-heading:after{content:'SWIM / BIKE / RUN';position:absolute;right:0;top:86px;writing-mode:vertical-rl;font-size:10px;letter-spacing:3px;color:var(--muted)}
 .plan-grid{grid-template-columns:40px repeat(7,minmax(0,1fr))}
 }
-@media(max-width:850px){.log-hero{grid-template-columns:1fr;gap:10px}.log-hero .page-heading{padding-bottom:26px}.app-sub{display:none}
+@media(max-width:850px){.log-hero{grid-template-columns:minmax(0,1fr);gap:10px}.log-hero .page-heading{padding-bottom:26px}.app-sub{display:none}
 .app-header-inner{padding:14px 24px;gap:15px}
 .countdown{display:none}
 .page-wrap{padding:0 24px}
@@ -514,7 +515,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 .plan-target{font-size:12px}
 .plan-note{font-size:12px}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chart-line{stroke-dasharray:none;stroke-dashoffset:0}.chart-shine,.hm-particles{display:none}
 *,*:before,*:after{animation:none!important;transition:none!important}
 }
 </style>
@@ -528,7 +529,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 <main class="page-wrap" id="main" tabindex="-1">
 <section id="view-log" class="view active" aria-label="Training log">
   <div class="log-hero"><div class="page-heading"><div class="eyebrow">01 / THE WORK</div><h1>Every session.<br><span>Forward.</span></h1><p>Your training, one day at a time. The work behind race day.</p><div class="freshness" id="log-freshness"></div></div>
-  <div class="heatmap-card" id="heatmap-card" role="group" aria-label="Training consistency heatmap"><div class="hm-scroll"><div class="hm-grid blocks-tint" id="hm-grid"></div></div><div class="hm-foot"><span id="hm-caption"></span><span class="hm-legend">Low <span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span> High</span></div></div></div>
+  <div class="heatmap-card" id="heatmap-card" role="group" aria-label="Training consistency heatmap"><div class="hm-scroll"><div class="hm-grid" id="hm-grid"></div></div><div class="hm-foot"><span class="hm-legend">Low <span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span> High</span></div><p class="hm-readout" id="hm-caption" aria-live="polite"></p></div></div>
   <div class="log-overview" id="log-overview"></div>
   <div class="section-heading"><h2>The journal</h2><span>Latest entries first</span></div>
   <div class="filter-bar" aria-label="Filter discipline"><button class="pill active" data-disc="all">All sessions</button><button class="pill" data-disc="swim">Swim</button><button class="pill" data-disc="bike">Bike</button><button class="pill" data-disc="run">Run</button><button class="pill" data-disc="lift">Strength</button></div>
@@ -6717,6 +6718,48 @@ function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
 })();
 
 /* GitHub-style consistency heatmap - colored by PERFORMANCE (avg session score), not quantity */
+/* Pointer/keyboard focus for a training block: the column under the pointer
+   decides which band lights up, so day cells keep their own interactions. */
+function addBandFocus(grid){
+  const bands=[...grid.querySelectorAll('.hm-band')];
+  if(!bands.length)return;
+  const focus=band=>bands.forEach(other=>other.classList.toggle('is-focused',other===band));
+  const bandAtColumn=column=>bands.find(band=>
+    column>=Number(band.dataset.first)&&column<=Number(band.dataset.last))||null;
+  grid.addEventListener('pointermove',event=>{
+    if(event.pointerType!=='mouse')return;
+    const x=event.clientX-grid.getBoundingClientRect().left;
+    focus(bandAtColumn(Math.floor(x/16)));
+  });
+  grid.addEventListener('pointerleave',()=>focus(null));
+  grid.addEventListener('focusin',event=>{
+    const cell=event.target.closest('.hm-col .hm-cell');
+    if(!cell)return;
+    const column=[...grid.querySelectorAll('.hm-col')].indexOf(cell.parentElement);
+    focus(bandAtColumn(column));
+  });
+  grid.addEventListener('focusout',()=>focus(null));
+}
+
+/* Sparse drifting motes. Purely decorative, never over the reading path. */
+function addParticles(grid,columns){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const field=document.createElement('div');
+  field.className='hm-particles';
+  field.setAttribute('aria-hidden','true');
+  for(let i=0;i<12;i++){
+    const mote=document.createElement('span');
+    const spread=(i*37)%100;
+    mote.style.left=(spread/100*columns*16)+'px';
+    mote.style.setProperty('--drift',((i%5)-2)*14+'px');
+    mote.style.setProperty('--scale',(0.6+(i%4)*0.25).toFixed(2));
+    mote.style.animationDuration=(15+(i%6)*3)+'s';
+    mote.style.animationDelay=(i*-2.4)+'s';
+    field.appendChild(mote);
+  }
+  grid.appendChild(field);
+}
+
 function hmLevel(sc){if(!sc)return 0;if(sc<5)return 1;if(sc<7)return 2;if(sc<9)return 3;return 4;}
 function isoOf(dt){
   return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
@@ -6792,20 +6835,21 @@ function renderHeatmap(){
     cols.forEach((c,ci)=>{ if(c.start<=be&&c.end>=bs){ if(a===null)a=ci; b=ci; } });
     if(a===null)return;
     const ncols=b-a+1;
-    const bracket=document.createElement('div');
-    bracket.className='hm-block b'+(bi%2);
-    bracket.style.left=(a*16)+'px';
-    bracket.style.width=(ncols*16-3)+'px';
+    const band=document.createElement('div');
+    band.className='hm-band b'+(bi%2);
+    band.style.setProperty('--band-left',(a*16)+'px');
+    band.style.setProperty('--band-width',(ncols*16-3)+'px');
+    band.style.animationDelay=(bi*-3.5)+'s';
+    band.dataset.first=a;
+    band.dataset.last=b;
     const tag=document.createElement('span');
     tag.className='hm-block-tag';
     tag.textContent=blk.label;
-    // A block still in progress, or too narrow to hold a centered label, is
-    // marked open-ended: the label anchors at the block start and reads
-    // rightward instead of colliding with its neighbour.
-    if(be>end || ncols<3) bracket.classList.add('open-ended');
-    bracket.appendChild(tag);
-    grid.appendChild(bracket);
+    band.appendChild(tag);
+    grid.appendChild(band);
   });
+  addBandFocus(grid);
+  addParticles(grid,cols.length);
   if(injA!==null){
     const band=document.createElement('div');
     band.className='hm-injury';
@@ -6824,7 +6868,10 @@ function renderHeatmap(){
   const gridLeft=grid.getBoundingClientRect().left;
   const labelEdge=Math.max(...[...grid.querySelectorAll('.hm-block-tag')]
     .map(tag=>tag.getBoundingClientRect().right-gridLeft), contentWidth);
-  grid.style.width=Math.ceil(labelEdge+4)+'px';
+  const gridWidth=Math.ceil(labelEdge+4);
+  grid.style.width=gridWidth+'px';
+  // Pin the card to the grid: the readout must never resize or shift the map.
+  document.getElementById('heatmap-card').style.setProperty('--hm-width',gridWidth+'px');
   // The caption is the tap/focus readout, so it starts empty rather than
   // repeating a static summary the stats row already covers.
   const cap=document.getElementById('hm-caption');
@@ -7230,7 +7277,14 @@ function chartMarkup(points, unit, id, fixedMax){
   });
   const dots=points.map((point,index)=>validNumber(point.value)?`<g class="chart-point" tabindex="0" role="button" aria-label="${text(point.label)}: ${displayNumber(point.value)} ${unit}" data-chart="${id}" data-point="${index}"><circle class="chart-hit" cx="${x(index)}" cy="${y(point.value)}" r="18"/><circle class="chart-dot" cx="${x(index)}" cy="${y(point.value)}" r="4"/></g>`:'').join('');
   const labels=points.map((point,index)=>index===0||index===points.length-1||index===Math.floor(points.length/2)?`<text class="chart-axis" x="${x(index)}" y="${height-7}" text-anchor="${index===0?'start':index===points.length-1?'end':'middle'}">${text(point.label)}</text>`:'').join('');
-  return `<svg class="chart" viewBox="0 0 ${width} ${height}" role="group" aria-label="${unit} by ${progressState.period==='weekly'?'week':'month'}; focus or tap a point to inspect">${grid}<path class="chart-line" d="${path}"/>${dots}${labels}</svg>`;
+  // A highlight sweeps the plotted line left to right, then rests.
+  const sweep=width+160;
+  const shine=`<linearGradient id="shine-${id}" gradientUnits="userSpaceOnUse" x1="-160" y1="0" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".92"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      <animate attributeName="x1" values="-160;${sweep};${sweep}" keyTimes="0;.42;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="0;${sweep+160};${sweep+160}" keyTimes="0;.42;1" dur="6s" repeatCount="indefinite"/>
+    </linearGradient>`;
+  return `<svg class="chart" viewBox="0 0 ${width} ${height}" role="group" aria-label="${unit} by ${progressState.period==='weekly'?'week':'month'}; focus or tap a point to inspect"><defs>${shine}</defs>${grid}<path class="chart-line" pathLength="1" d="${path}"/><path class="chart-shine" d="${path}" stroke="url(#shine-${id})"/>${dots}${labels}</svg>`;
 }
 function dataTable(points,unit){return `<details class="data-details"><summary>View the numbers</summary><table class="data-table"><thead><tr><th scope="col">Period</th><th scope="col">${text(unit)}</th></tr></thead><tbody>${points.map(point=>`<tr><th scope="row">${text(point.label)}</th><td>${validNumber(point.value)?displayNumber(point.value):'Not recorded'}</td></tr>`).join('')}</tbody></table></details>`;}
 function chartCard(points,definition,id,caption,controls=''){
