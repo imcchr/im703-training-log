@@ -297,7 +297,21 @@ button{touch-action:manipulation}
 .hm-legend .hm-cell{width:11px;height:11px;cursor:default}
 .hm-block{height:12px;top:18px;border-width:1.5px}
 .hm-block-tag{background:var(--bg);top:-5px;font-size:9px;letter-spacing:.5px;padding:0 5px}
+.hm-block.open-ended{border-right:0;border-top-right-radius:0}
 .hm-block.open-ended .hm-block-tag{left:0;transform:none}
+/* Block marker variants. Geometry comes from JS; only appearance changes. */
+.blocks-tint .hm-block{top:47px;bottom:0;height:auto;border:0;border-radius:8px;background:#c98a2b14}
+.blocks-tint .hm-block.b1{background:#2b7a9e14}
+.blocks-tint .hm-block-tag{top:-33px;left:0;transform:none;background:none;padding:0}
+.blocks-rule{padding-bottom:26px}
+.blocks-rule .hm-block{top:auto;bottom:24px;height:0;border:0;border-top:2px solid #c98a2b;border-radius:0}
+.blocks-rule .hm-block.b1{border-top-color:#2b7a9e}
+.blocks-rule .hm-injury{bottom:26px}
+.blocks-rule .hm-block-tag{top:7px;left:0;transform:none;background:none;padding:0}
+.blocks-tab .hm-block{top:12px;height:17px;border:0;border-radius:9px;background:#c98a2b1f}
+.blocks-tab .hm-block.b1{background:#2b7a9e1f}
+.blocks-tab .hm-block-tag{position:static;display:block;line-height:17px;text-align:center;background:none;overflow:hidden;text-overflow:ellipsis}
+.blocks-tab .hm-block.open-ended .hm-block-tag{position:absolute;left:0;text-align:left;overflow:visible}
 .hm-injury{position:absolute;top:47px;bottom:0;border:1.5px dashed #d9534f;border-radius:6px;background:#d9534f0f;pointer-events:none;box-sizing:border-box}
 .hm-injury-key{display:inline-flex;align-items:center;gap:6px;color:#c0392b;font-weight:550}
 .hm-injury-key:before{content:'';width:13px;height:11px;border:1.5px dashed #d9534f;border-radius:3px;background:#d9534f14}
@@ -514,7 +528,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 <main class="page-wrap" id="main" tabindex="-1">
 <section id="view-log" class="view active" aria-label="Training log">
   <div class="log-hero"><div class="page-heading"><div class="eyebrow">01 / THE WORK</div><h1>Every session.<br><span>Forward.</span></h1><p>Your training, one day at a time. The work behind race day.</p><div class="freshness" id="log-freshness"></div></div>
-  <div class="heatmap-card" id="heatmap-card" role="group" aria-label="Training consistency heatmap"><div class="hm-scroll"><div class="hm-grid" id="hm-grid"></div></div><div class="hm-foot"><span id="hm-caption"></span><span class="hm-legend">Low <span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span> High</span></div></div></div>
+  <div class="heatmap-card" id="heatmap-card" role="group" aria-label="Training consistency heatmap"><div class="hm-scroll"><div class="hm-grid blocks-tint" id="hm-grid"></div></div><div class="hm-foot"><span id="hm-caption"></span><span class="hm-legend">Low <span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span> High</span></div></div></div>
   <div class="log-overview" id="log-overview"></div>
   <div class="section-heading"><h2>The journal</h2><span>Latest entries first</span></div>
   <div class="filter-bar" aria-label="Filter discipline"><button class="pill active" data-disc="all">All sessions</button><button class="pill" data-disc="swim">Swim</button><button class="pill" data-disc="bike">Bike</button><button class="pill" data-disc="run">Run</button><button class="pill" data-disc="lift">Strength</button></div>
@@ -6771,7 +6785,7 @@ function renderHeatmap(){
     if(colStart<=INJ_END&&colEnd>=INJ_START){if(injA===null)injA=colIdx;injB=colIdx;}
     colIdx++;
   }
-  // Training-block grouping brackets across the top
+  // Training-block markers. Geometry lives here; appearance is CSS-only.
   (BLOCKS_DATA||[]).forEach((blk,bi)=>{
     const bs=new Date(blk.start+'T00:00:00'), be=new Date(blk.end+'T00:00:00');
     let a=null,b=null;
@@ -6781,30 +6795,14 @@ function renderHeatmap(){
     const bracket=document.createElement('div');
     bracket.className='hm-block b'+(bi%2);
     bracket.style.left=(a*16)+'px';
-    bracket.style.top='18px';
     bracket.style.width=(ncols*16-3)+'px';
     const tag=document.createElement('span');
     tag.className='hm-block-tag';
     tag.textContent=blk.label;
-    // A block that has only just begun (1-2 logged weeks) is too narrow to fit
-    // a centered label -- centering would spill it LEFT over the previous
-    // block's bracket/label (the Summer-vs-Fall collision). Left-anchor the
-    // label so it reads rightward into the empty header space instead, never
-    // colliding with the neighbour. Once the block spans 3+ columns it has room
-    // to center normally.
-    if(be>end || ncols<3){
-      // Just-started block: a full bracket collapses into a tiny box whose right
-      // leg looks like a stray vertical 'trying to close' under the label. Drop
-      // the right leg (and its corner radius) so it renders as an OPEN left
-      // bracket -- a start tick + short top bar -- with the label reading
-      // rightward from the block's start. Re-centers into a full closed bracket
-      // once the block spans 3+ logged columns.
-      bracket.classList.add('open-ended');
-      bracket.style.borderRight='none';
-      bracket.style.borderTopRightRadius='0';
-      tag.style.left='0';
-      tag.style.transform='none';
-    }
+    // A block still in progress, or too narrow to hold a centered label, is
+    // marked open-ended: the label anchors at the block start and reads
+    // rightward instead of colliding with its neighbour.
+    if(be>end || ncols<3) bracket.classList.add('open-ended');
     bracket.appendChild(tag);
     grid.appendChild(bracket);
   });
@@ -6817,16 +6815,19 @@ function renderHeatmap(){
     // Labelled in the footer legend: a floating chip collides with the month row.
     const key=document.createElement('span');
     key.className='hm-injury-key';
-    key.textContent='Injury \u00b7 '+prettyDate(isoOf(INJ_START))+'\u2013'+prettyDate(isoOf(INJ_END));
+    key.textContent='Injury';
+    key.title='Injury period: '+prettyDate(isoOf(INJ_START))+'\u2013'+prettyDate(isoOf(INJ_END));
     document.querySelector('.hm-foot').prepend(key);
   }
   // Reserve room for an open-ended block label reading past the final column.
   const contentWidth=cols.length*16;
+  const gridLeft=grid.getBoundingClientRect().left;
   const labelEdge=Math.max(...[...grid.querySelectorAll('.hm-block-tag')]
-    .map(tag=>tag.offsetLeft+tag.offsetWidth), contentWidth);
+    .map(tag=>tag.getBoundingClientRect().right-gridLeft), contentWidth);
   grid.style.width=Math.ceil(labelEdge+4)+'px';
+  // The caption is the tap/focus readout, so it starts empty rather than
+  // repeating a static summary the stats row already covers.
   const cap=document.getElementById('hm-caption');
-  cap.textContent=total+' workouts \u00b7 colored by avg score';
   grid.querySelectorAll('.hm-col .hm-cell').forEach(cell=>{
     cell.tabIndex=0;
     cell.setAttribute('role','button');
