@@ -286,20 +286,27 @@ button{touch-action:manipulation}
 .heatmap-card{margin:0;background:transparent;border:0;padding:0;min-width:0;width:var(--hm-width,auto);max-width:100%}
 .hm-grid{padding-top:34px;padding-right:0;position:relative}
 .hm-col{position:relative;z-index:2}
-/* Training-block aura: a soft field that breathes when idle, focuses on hover. */
-@property --band-strength{syntax:'<number>';inherits:false;initial-value:0.2}
-.hm-band{position:absolute;top:0;bottom:-6px;left:var(--band-left);width:var(--band-width);
-  --band-hue:201,138,43;--band-strength:.2;border-radius:16px;pointer-events:none;z-index:1;
-  background:linear-gradient(180deg,rgba(var(--band-hue),0) 0%,rgba(var(--band-hue),var(--band-strength)) 27%,
-    rgba(var(--band-hue),var(--band-strength)) 71%,rgba(var(--band-hue),0) 100%);
+/* Training-block aura: an ambient wash that bleeds into the card background.
+   Every edge is feathered, so the block reads as atmosphere rather than a box.
+   Focus adjusts strength ONLY -- shifting the geometry clipped the label
+   against .hm-scroll's overflow box. */
+@property --band-strength{syntax:'<number>';inherits:false;initial-value:0.16}
+.hm-band{position:absolute;top:0;bottom:-14px;left:var(--band-left);width:var(--band-width);
+  --band-hue:201,138,43;--band-strength:.16;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(var(--band-hue),0) 0%,
+    rgba(var(--band-hue),var(--band-strength)) 24%,
+    rgba(var(--band-hue),var(--band-strength)) 74%,
+    rgba(var(--band-hue),0) 100%);
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);
+  mask:linear-gradient(90deg,transparent 0,#000 20px,#000 calc(100% - 20px),transparent 100%);
   animation:bandBreathe 9s ease-in-out infinite alternate;
-  transition:left .55s cubic-bezier(.22,1,.36,1),width .55s cubic-bezier(.22,1,.36,1),filter .45s ease,opacity .45s ease}
-.hm-band.b1{--band-hue:43,122,158;opacity:.78}
-.hm-band.is-focused{left:calc(var(--band-left) - 8px);width:calc(var(--band-width) + 16px);animation-play-state:paused;filter:saturate(2) brightness(1.03)}
-.hm-grid:hover .hm-band:not(.is-focused){opacity:.4}
-.hm-band .hm-block-tag{top:14px;left:0;transform:none;background:none;padding:0;opacity:.72;transition:opacity .4s ease}
+  transition:--band-strength .5s ease,opacity .45s ease}
+.hm-band.b1{--band-hue:43,122,158}
+.hm-band.is-focused{--band-strength:.30;animation:none}
+.hm-grid:hover .hm-band:not(.is-focused){opacity:.6}
+.hm-band .hm-block-tag{top:12px;left:6px;transform:none;background:none;padding:0;opacity:.78;transition:opacity .4s ease}
 .hm-band.is-focused .hm-block-tag{opacity:1}
-@keyframes bandBreathe{from{--band-strength:.12}to{--band-strength:.27}}
+@keyframes bandBreathe{from{--band-strength:.12}to{--band-strength:.2}}
 .hm-particles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
 .hm-particles span{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#fff;opacity:0;animation:moteDrift linear infinite}
 @keyframes moteDrift{0%{transform:translate3d(0,0,0) scale(var(--scale));opacity:0}20%{opacity:.8}70%{opacity:.5}100%{transform:translate3d(var(--drift),-165px,0) scale(var(--scale));opacity:0}}
@@ -315,7 +322,9 @@ button{touch-action:manipulation}
 .hm-injury-key:before{content:'';width:13px;height:11px;border:1.5px dashed #d9534f;border-radius:3px;background:#d9534f14}
 .hm-foot{justify-content:flex-start;gap:8px 18px}
 .hm-foot #hm-caption{margin-right:auto}
-.hm-scroll{scrollbar-width:thin}
+/* overflow-x:auto forces overflow-y:auto, so the aura only bleeds as far as
+   this padding allows. Keep it in sync with .hm-band's negative bottom. */
+.hm-scroll{scrollbar-width:thin;padding-bottom:14px}
 .filter-bar{gap:6px;margin:0 0 20px;flex-wrap:wrap}
 .pill{background:transparent;border:1px solid var(--line);border-radius:24px;padding:10px 18px;font-size:12px;min-height:44px;color:var(--muted)}
 .pill.active{background:var(--ink);border-color:var(--ink);color:white}
