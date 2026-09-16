@@ -612,6 +612,19 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 *,*:before,*:after{animation:none!important;transition:none!important}
 }
 
+/* Interval recovery: one row per session, oldest first, so the trend reads
+   top to bottom. The bar is relative to the best session, not to zero -- these
+   are all double-digit drops and a zero-based bar would show seven near-equal
+   stripes. */
+.hrr-list{display:flex;flex-direction:column;gap:8px;margin:18px 0 14px}
+.hrr-row{display:grid;grid-template-columns:58px minmax(0,1fr) 46px;align-items:center;gap:10px}
+.hrr-when{font-size:.78rem;color:var(--ink-3)}
+.hrr-track{height:8px;border-radius:99px;background:rgba(19,42,66,.08);overflow:hidden}
+.hrr-fill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#c8542a,#e08b4a)}
+.hrr-value{font-variant-numeric:tabular-nums;font-size:.84rem;color:var(--ink-1);text-align:right}
+.hrr-reps{grid-column:1/-1;font-size:.72rem;color:var(--ink-3);letter-spacing:.01em}
+@media(max-width:850px){.hrr-row{grid-template-columns:52px minmax(0,1fr) 42px}}
+
 /* Shared motion language: settle quickly, never bounce information. */
 .tabbar{isolation:isolate}
 @media(min-width:561px){.tabbar{position:relative}}
@@ -5676,13 +5689,13 @@ const TRENDS_DATA = {
       "swim_yd": 3172,
       "bike_min": 65.3,
       "run_mi": 4.5,
-      "total_min": 204.2,
+      "total_min": 230.3,
       "long_swim_yd": 1094,
       "long_bike_min": 65.3,
       "long_run_mi": 4.5,
       "run_sessions": 1,
       "completed": 6,
-      "load_delta": 323
+      "load_delta": 377
     },
     {
       "week_num": 3,
@@ -5691,15 +5704,15 @@ const TRENDS_DATA = {
       "phase": "Base",
       "score": 44,
       "swim_yd": 1008,
-      "bike_min": 114.0,
+      "bike_min": 118.2,
       "run_mi": 11.5,
-      "total_min": 250.8,
+      "total_min": 300.0,
       "long_swim_yd": 1008,
-      "long_bike_min": 72.0,
+      "long_bike_min": 76.2,
       "long_run_mi": 8.0,
       "run_sessions": 2,
       "completed": 5,
-      "load_delta": 23
+      "load_delta": 30
     },
     {
       "week_num": 4,
@@ -5708,15 +5721,15 @@ const TRENDS_DATA = {
       "phase": "Base",
       "score": 48,
       "swim_yd": 1305,
-      "bike_min": 40.6,
+      "bike_min": 40.7,
       "run_mi": 7.4,
-      "total_min": 155.3,
+      "total_min": 192.5,
       "long_swim_yd": 1205,
-      "long_bike_min": 40.6,
+      "long_bike_min": 40.7,
       "long_run_mi": 4.0,
       "run_sessions": 2,
       "completed": 5,
-      "load_delta": -38
+      "load_delta": -36
     },
     {
       "week_num": 5,
@@ -5725,15 +5738,15 @@ const TRENDS_DATA = {
       "phase": "Recovery",
       "score": 84,
       "swim_yd": 2300,
-      "bike_min": 102.5,
+      "bike_min": 102.6,
       "run_mi": 8.6,
-      "total_min": 245.6,
+      "total_min": 289.7,
       "long_swim_yd": 1200,
       "long_bike_min": 45.5,
       "long_run_mi": 5.1,
       "run_sessions": 3,
       "completed": 8,
-      "load_delta": 58
+      "load_delta": 50
     },
     {
       "week_num": 6,
@@ -5744,13 +5757,13 @@ const TRENDS_DATA = {
       "swim_yd": 670,
       "bike_min": 0.0,
       "run_mi": 0.0,
-      "total_min": 15.8,
+      "total_min": 20.8,
       "long_swim_yd": 670,
       "long_bike_min": 0.0,
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 1,
-      "load_delta": -94
+      "load_delta": -93
     },
     {
       "week_num": 7,
@@ -5761,13 +5774,13 @@ const TRENDS_DATA = {
       "swim_yd": 2473,
       "bike_min": 60.5,
       "run_mi": 0.0,
-      "total_min": 133.1,
+      "total_min": 135.0,
       "long_swim_yd": 1451,
       "long_bike_min": 30.4,
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 4,
-      "load_delta": 742
+      "load_delta": 549
     },
     {
       "week_num": 8,
@@ -5776,15 +5789,15 @@ const TRENDS_DATA = {
       "phase": "Recovery",
       "score": 34,
       "swim_yd": 2509,
-      "bike_min": 50.1,
+      "bike_min": 50.5,
       "run_mi": 0.0,
-      "total_min": 126.1,
+      "total_min": 126.5,
       "long_swim_yd": 1506,
-      "long_bike_min": 30.0,
+      "long_bike_min": 30.4,
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 6,
-      "load_delta": -5
+      "load_delta": -6
     },
     {
       "week_num": 9,
@@ -5827,15 +5840,15 @@ const TRENDS_DATA = {
       "phase": "Build",
       "score": 21,
       "swim_yd": 0,
-      "bike_min": 51.3,
+      "bike_min": 52.1,
       "run_mi": 4.0,
-      "total_min": 92.0,
+      "total_min": 92.9,
       "long_swim_yd": 0,
-      "long_bike_min": 51.3,
+      "long_bike_min": 52.1,
       "long_run_mi": 4.0,
       "run_sessions": 1,
       "completed": 2,
-      "load_delta": -63
+      "load_delta": -62
     },
     {
       "week_num": 12,
@@ -5897,13 +5910,13 @@ const TRENDS_DATA = {
       "swim_yd": 4375,
       "bike_min": 189.6,
       "run_mi": 14.4,
-      "total_min": 436.7,
+      "total_min": 455.4,
       "long_swim_yd": 1675,
       "long_bike_min": 75.5,
       "long_run_mi": 6.3,
       "run_sessions": 3,
       "completed": 9,
-      "load_delta": 297
+      "load_delta": 314
     },
     {
       "week_num": 16,
@@ -5912,15 +5925,15 @@ const TRENDS_DATA = {
       "phase": "Build",
       "score": 71,
       "swim_yd": 4175,
-      "bike_min": 125.9,
+      "bike_min": 126.5,
       "run_mi": 11.6,
-      "total_min": 331.9,
+      "total_min": 375.9,
       "long_swim_yd": 1650,
-      "long_bike_min": 64.9,
+      "long_bike_min": 65.0,
       "long_run_mi": 5.5,
       "run_sessions": 3,
       "completed": 8,
-      "load_delta": -24
+      "load_delta": -17
     },
     {
       "week_num": 17,
@@ -5931,13 +5944,13 @@ const TRENDS_DATA = {
       "swim_yd": 1425,
       "bike_min": 132.5,
       "run_mi": 7.0,
-      "total_min": 242.6,
+      "total_min": 244.1,
       "long_swim_yd": 1425,
       "long_bike_min": 77.2,
       "long_run_mi": 3.7,
       "run_sessions": 2,
       "completed": 5,
-      "load_delta": -27
+      "load_delta": -35
     },
     {
       "week_num": 18,
@@ -5948,13 +5961,13 @@ const TRENDS_DATA = {
       "swim_yd": 1000,
       "bike_min": 0.0,
       "run_mi": 2.5,
-      "total_min": 50.5,
+      "total_min": 71.6,
       "long_swim_yd": 1000,
       "long_bike_min": 0.0,
       "long_run_mi": 2.5,
       "run_sessions": 1,
       "completed": 2,
-      "load_delta": -79
+      "load_delta": -71
     }
   ],
   "durability": [
@@ -5975,14 +5988,14 @@ const TRENDS_DATA = {
     {
       "week": "Wk3",
       "long_swim_yd": 1008,
-      "long_bike_min": 72.0,
+      "long_bike_min": 76.2,
       "long_run_mi": 8.0,
       "run_sessions": 2
     },
     {
       "week": "Wk4",
       "long_swim_yd": 1205,
-      "long_bike_min": 40.6,
+      "long_bike_min": 40.7,
       "long_run_mi": 4.0,
       "run_sessions": 2
     },
@@ -6010,7 +6023,7 @@ const TRENDS_DATA = {
     {
       "week": "Wk8",
       "long_swim_yd": 1506,
-      "long_bike_min": 30.0,
+      "long_bike_min": 30.4,
       "long_run_mi": 0.0,
       "run_sessions": 0
     },
@@ -6031,7 +6044,7 @@ const TRENDS_DATA = {
     {
       "week": "Wk11",
       "long_swim_yd": 0,
-      "long_bike_min": 51.3,
+      "long_bike_min": 52.1,
       "long_run_mi": 4.0,
       "run_sessions": 1
     },
@@ -6066,7 +6079,7 @@ const TRENDS_DATA = {
     {
       "week": "Wk16",
       "long_swim_yd": 1650,
-      "long_bike_min": 64.9,
+      "long_bike_min": 65.0,
       "long_run_mi": 5.5,
       "run_sessions": 3
     },
@@ -6392,7 +6405,7 @@ const TRENDS_DATA = {
     {
       "week_num": 2,
       "week": "Wk2",
-      "load_min": 204.2,
+      "load_min": 230.3,
       "readiness": 29.1,
       "calories": null,
       "hrv": "Improving",
@@ -6405,7 +6418,7 @@ const TRENDS_DATA = {
     {
       "week_num": 3,
       "week": "Wk3",
-      "load_min": 250.8,
+      "load_min": 300.0,
       "readiness": 27.9,
       "calories": null,
       "hrv": "Balanced",
@@ -6418,7 +6431,7 @@ const TRENDS_DATA = {
     {
       "week_num": 4,
       "week": "Wk4",
-      "load_min": 155.3,
+      "load_min": 192.5,
       "readiness": 63.4,
       "calories": null,
       "hrv": "Balanced",
@@ -6431,7 +6444,7 @@ const TRENDS_DATA = {
     {
       "week_num": 5,
       "week": "Wk5",
-      "load_min": 245.6,
+      "load_min": 289.7,
       "readiness": 57.7,
       "calories": null,
       "hrv": "Balanced",
@@ -6444,7 +6457,7 @@ const TRENDS_DATA = {
     {
       "week_num": 6,
       "week": "Wk6",
-      "load_min": 15.8,
+      "load_min": 20.8,
       "readiness": 76.4,
       "calories": null,
       "hrv": "Balanced ALL",
@@ -6457,7 +6470,7 @@ const TRENDS_DATA = {
     {
       "week_num": 7,
       "week": "Wk7",
-      "load_min": 133.1,
+      "load_min": 135.0,
       "readiness": null,
       "calories": null,
       "hrv": "Balanced (78ms)",
@@ -6470,7 +6483,7 @@ const TRENDS_DATA = {
     {
       "week_num": 8,
       "week": "Wk8",
-      "load_min": 126.1,
+      "load_min": 126.5,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6509,7 +6522,7 @@ const TRENDS_DATA = {
     {
       "week_num": 11,
       "week": "Wk11",
-      "load_min": 92.0,
+      "load_min": 92.9,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6561,7 +6574,7 @@ const TRENDS_DATA = {
     {
       "week_num": 15,
       "week": "Wk15",
-      "load_min": 436.7,
+      "load_min": 455.4,
       "readiness": 25.0,
       "calories": 24080.0,
       "hrv": "Balanced (78-81ms)",
@@ -6574,7 +6587,7 @@ const TRENDS_DATA = {
     {
       "week_num": 16,
       "week": "Wk16",
-      "load_min": 331.9,
+      "load_min": 375.9,
       "readiness": 21.0,
       "calories": null,
       "hrv": "--",
@@ -6587,7 +6600,7 @@ const TRENDS_DATA = {
     {
       "week_num": 17,
       "week": "Wk17",
-      "load_min": 242.6,
+      "load_min": 244.1,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6600,7 +6613,7 @@ const TRENDS_DATA = {
     {
       "week_num": 18,
       "week": "Wk18",
-      "load_min": 50.5,
+      "load_min": 71.6,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6819,6 +6832,126 @@ const RECOVERY_IDX = [
   {
     "week": "Wk16",
     "value": 21.0
+  }
+];
+const HRR_DATA = [
+  {
+    "date": "2026-07-30",
+    "week": "Wk11",
+    "reps": 3,
+    "mean_drop": 13.3,
+    "drops": [
+      8,
+      24,
+      8
+    ],
+    "hr_end": [
+      191,
+      193,
+      189
+    ]
+  },
+  {
+    "date": "2026-08-11",
+    "week": "Wk13",
+    "reps": 3,
+    "mean_drop": 17.3,
+    "drops": [
+      17,
+      16,
+      19
+    ],
+    "hr_end": [
+      197,
+      200,
+      208
+    ]
+  },
+  {
+    "date": "2026-08-19",
+    "week": "Wk14",
+    "reps": 3,
+    "mean_drop": 17.7,
+    "drops": [
+      16,
+      27,
+      10
+    ],
+    "hr_end": [
+      186,
+      189,
+      196
+    ]
+  },
+  {
+    "date": "2026-08-25",
+    "week": "Wk15",
+    "reps": 3,
+    "mean_drop": 23.3,
+    "drops": [
+      35,
+      19,
+      16
+    ],
+    "hr_end": [
+      191,
+      195,
+      192
+    ]
+  },
+  {
+    "date": "2026-09-01",
+    "week": "Wk16",
+    "reps": 4,
+    "mean_drop": 18.8,
+    "drops": [
+      20,
+      17,
+      19,
+      19
+    ],
+    "hr_end": [
+      188,
+      194,
+      199,
+      194
+    ]
+  },
+  {
+    "date": "2026-09-08",
+    "week": "Wk17",
+    "reps": 4,
+    "mean_drop": 7.8,
+    "drops": [
+      22,
+      14,
+      -3,
+      -2
+    ],
+    "hr_end": [
+      193,
+      167,
+      149,
+      139
+    ]
+  },
+  {
+    "date": "2026-09-15",
+    "week": "Wk18",
+    "reps": 4,
+    "mean_drop": 18.0,
+    "drops": [
+      20,
+      19,
+      14,
+      19
+    ],
+    "hr_end": [
+      189,
+      193,
+      196,
+      195
+    ]
   }
 ];
 /* Interaction choreography. Data renderers remain synchronous and authoritative. */
@@ -7596,6 +7729,34 @@ function recoveryContext(){
   }).join('');
   return `<details class="recovery-context"><summary>Recovery context <span>Latest available readings, individually dated</span></summary>${rows||'<p>No additional recovery readings recorded.</p>'}<p class="chart-note">These snapshots may be older than your latest training. They are not a current health assessment.</p></details>`;
 }
+// Heart-rate recovery: how far HR falls in the 60s after a hard rep. It rises
+// as fitness and freshness improve, so it is read week over week rather than as
+// a single number. Only run intervals qualify; see garmin_fit.py.
+function intervalRecoveryMarkup(){
+  const rows=(typeof HRR_DATA==='undefined'?[]:HRR_DATA)||[];
+  if(!rows.length) return '';
+  const first=rows[0], latest=rows[rows.length-1];
+  const change=latest.mean_drop-first.mean_drop;
+  const best=Math.max(...rows.map(row=>row.mean_drop),1);
+  const when=value=>value?new Date(value+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';
+  const body=rows.map(row=>{
+    const width=Math.max(2,Math.round(row.mean_drop/best*100));
+    const reps=row.drops.map(drop=>drop+' bpm').join(' \u00b7 ');
+    return '<div class="hrr-row"><span class="hrr-when">'+text(when(row.date))+'</span>'+
+      '<span class="hrr-track"><span class="hrr-fill" style="width:'+width+'%"></span></span>'+
+      '<span class="hrr-value">'+displayNumber(row.mean_drop)+'</span>'+
+      '<span class="hrr-reps">'+text(reps)+'</span></div>';
+  }).join('');
+  return '<section class="insight-card hrr-card"><p class="metric-eyebrow">03 / Interval recovery</p>'+
+    '<p class="metric-value">'+displayNumber(latest.mean_drop)+'<span class="metric-unit">bpm drop</span></p>'+
+    '<p class="metric-caption">'+text(when(latest.date))+' \u00b7 '+
+    (change>=0?'up ':'down ')+displayNumber(Math.abs(change))+' bpm since '+text(when(first.date))+'</p>'+
+    '<div class="hrr-list">'+body+'</div>'+
+    '<p class="chart-note">Heart-rate fall in the 60 seconds after each hard rep. A bigger drop means you '+
+    'recovered faster, which tracks fitness and freshness. Read week to week, not as a single number. '+
+    'Taken from the device\u2019s own lap structure: only reps followed by a real recovery lap count, so a '+
+    'continuous swim is never dressed up as an interval session.</p></section>';
+}
 function goalContext(finish){
   if(!/^\d+:\d{2}:\d{2}$/.test(finish||'')) return 'Not enough evidence to compare with the goal.';
   const [hours,minutes,seconds]=finish.split(':').map(Number);
@@ -7616,7 +7777,7 @@ function renderProgress(){
   const definition=metricDefinitions[progressState.metric];
   const latestRecorded=recoveryPoints().filter(point=>validNumber(point.value)).at(-1);
   const controls=`<div class="metric-tabs" aria-label="Volume metric">${Object.entries(metricDefinitions).map(([key,value])=>`<button data-metric="${key}" aria-pressed="${key===progressState.metric}">${value.label}</button>`).join('')}</div>`;
-  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
+  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${intervalRecoveryMarkup()}${raceMarkup()}`;
   document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;animateChartChange(renderProgress);document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;animateChartChange(renderProgress);document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('.chart-point').forEach(point=>{
