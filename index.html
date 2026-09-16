@@ -286,34 +286,89 @@ button{touch-action:manipulation}
 .heatmap-card{margin:0;background:transparent;border:0;padding:0;min-width:0;width:var(--hm-width,auto);max-width:100%}
 .hm-grid{padding-top:34px;padding-right:0;position:relative}
 .hm-col{position:relative;z-index:2}
-/* Training-block aura: a broad atmospheric field the calendar sits inside, not
-   a box drawn around it. It deliberately overspills the card on every side --
-   see the .hm-scroll override below, which is what lets it escape.
-   Focus adjusts strength ONLY; shifting the geometry clipped the label. */
+/* Training-block waterfall: each block is a cascade of light falling behind the
+   calendar, in that block's hue. Two stream layers at different speeds and
+   widths give it depth; the field mask shapes the whole thing.
+
+   LEGIBILITY CONTRACT: the mask deliberately drops to ~40% across the rows the
+   day cells occupy. Cells are opaque and paint above (.hm-col is z-index 2), so
+   colour is never altered -- but a busy cascade in the 3px gutters destroys the
+   read of a missed day (#8ea2b4 on #ece1d2, a low-contrast pair by design).
+   The cascade therefore runs loud above and below the grid and hushed behind
+   it. Raise --fall-behind-rows at your peril. */
 @property --band-strength{syntax:'<number>';inherits:false;initial-value:0.16}
 .hm-band{position:absolute;top:var(--aura-top,0);bottom:var(--aura-bottom,-14px);
   left:calc(var(--band-left) - var(--aura-side,0px));
   width:calc(var(--band-width) + var(--aura-side,0px) * 2);
-  --band-hue:201,138,43;--band-strength:.16;pointer-events:none;z-index:1;
+  --band-hue:201,138,43;--band-strength:.19;--fall-behind-rows:.4;
+  pointer-events:none;z-index:1;overflow:hidden;
   /* Radii stay at 50% so the falloff reaches zero exactly AT the box edge.
-     Anything wider is still opaque when it hits the edge, leaving a seam. */
+     Anything wider is still opaque when it hits the edge, leaving a seam.
+     Layer 1 shapes the cascade vertically, layer 2 feathers the field; they
+     are intersected so the result can never touch an edge. */
   background:radial-gradient(50% 50% at 50% 48%,
     rgba(var(--band-hue),var(--band-strength)) 0%,
     rgba(var(--band-hue),calc(var(--band-strength) * .82)) 44%,
     rgba(var(--band-hue),calc(var(--band-strength) * .38)) 72%,
     rgba(var(--band-hue),0) 100%);
+  -webkit-mask-image:var(--fall-shape),var(--fall-field);
+  -webkit-mask-composite:source-in;
+  mask-image:var(--fall-shape),var(--fall-field);
+  mask-composite:intersect;
+  --fall-shape:linear-gradient(180deg,transparent 0,#000 13%,#000 26%,
+    rgba(0,0,0,var(--fall-behind-rows)) 40%,rgba(0,0,0,var(--fall-behind-rows)) 63%,
+    #000 80%,transparent 100%);
+  --fall-field:radial-gradient(50% 50% at 50% 48%,#000 0,rgba(0,0,0,.92) 46%,
+    rgba(0,0,0,.45) 74%,transparent 100%);
   animation:bandBreathe 9s ease-in-out infinite alternate;
   transition:--band-strength .5s ease,opacity .45s ease}
+/* The falling streams. Tall overscan plus a translate of exactly one tile
+   period makes the loop seamless. */
+.hm-band:before,.hm-band:after{content:'';position:absolute;left:0;right:0;
+  top:-260px;bottom:-260px;will-change:transform;
+  animation:hmFall var(--fall-time) linear infinite}
+/* Each drop ramps up gradually then cuts off hard at the bottom: the soft part
+   is the trail, the hard edge is the head, so it reads as falling rather than
+   pulsing. Column periods are coprime (19/31, 23/37) and composited with add,
+   so streams never line up into a barcode. */
+.hm-band:before{--fall:150px;--fall-time:3.6s;
+  background-image:repeating-linear-gradient(180deg,
+    rgba(var(--band-hue),0) 0 40px,
+    rgba(var(--band-hue),calc(var(--band-strength) * 2.1)) 108px,
+    rgba(var(--band-hue),calc(var(--band-strength) * 6.4)) 131px,
+    rgba(var(--band-hue),0) 137px 150px);
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg,transparent 0 6px,#000 6px 11px,transparent 11px 19px),
+    repeating-linear-gradient(90deg,transparent 0 13px,#000 13px 16px,transparent 16px 31px);
+  -webkit-mask-composite:source-over;
+  mask-image:
+    repeating-linear-gradient(90deg,transparent 0 6px,#000 6px 11px,transparent 11px 19px),
+    repeating-linear-gradient(90deg,transparent 0 13px,#000 13px 16px,transparent 16px 31px);
+  mask-composite:add}
+.hm-band:after{--fall:196px;--fall-time:6.4s;animation-delay:-2.7s;
+  background-image:repeating-linear-gradient(180deg,
+    rgba(var(--band-hue),0) 0 54px,
+    rgba(var(--band-hue),calc(var(--band-strength) * 1.5)) 140px,
+    rgba(var(--band-hue),calc(var(--band-strength) * 4.2)) 174px,
+    rgba(var(--band-hue),0) 181px 196px);
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg,transparent 0 9px,#000 9px 16px,transparent 16px 23px),
+    repeating-linear-gradient(90deg,transparent 0 21px,#000 21px 24px,transparent 24px 37px);
+  -webkit-mask-composite:source-over;
+  mask-image:
+    repeating-linear-gradient(90deg,transparent 0 9px,#000 9px 16px,transparent 16px 23px),
+    repeating-linear-gradient(90deg,transparent 0 21px,#000 21px 24px,transparent 24px 37px);
+  mask-composite:add}
+@keyframes hmFall{from{transform:translateY(calc(var(--fall) * -1))}to{transform:translateY(0)}}
 .hm-band.b1{--band-hue:43,122,158}
-.hm-band.is-focused{--band-strength:.30;animation:none}
+.hm-band.is-focused{--band-strength:.4;animation:none}
 .hm-grid:hover .hm-band:not(.is-focused){opacity:.6}
-/* The tag rides the band, so cancel the aura's overspill to keep the label
-   pinned to the grid instead of floating off with the field. */
-.hm-band .hm-block-tag{top:calc(12px - var(--aura-top,0px));
-  left:calc(6px + var(--aura-side,0px));
-  transform:none;background:none;padding:0;opacity:.78;transition:opacity .4s ease}
-.hm-band.is-focused .hm-block-tag{opacity:1}
-@keyframes bandBreathe{from{--band-strength:.12}to{--band-strength:.2}}
+/* The label is a grid sibling now, so it carries no aura offset and is never
+   touched by the band's mask. */
+.hm-block-tag{top:12px;left:calc(var(--tag-left) + 6px);
+  transform:none;background:none;padding:0;opacity:.78;transition:opacity .4s ease;z-index:2}
+.hm-block-tag.is-focused{opacity:1}
+@keyframes bandBreathe{from{--band-strength:.15}to{--band-strength:.25}}
 .hm-particles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
 .hm-particles span{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#fff;opacity:0;animation:moteDrift linear infinite}
 @keyframes moteDrift{0%{transform:translate3d(0,0,0) scale(var(--scale));opacity:0}20%{opacity:.8}70%{opacity:.5}100%{transform:translate3d(var(--drift),-165px,0) scale(var(--scale));opacity:0}}
@@ -545,6 +600,8 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 .plan-note{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chart-line{stroke-dasharray:none;stroke-dashoffset:0}.chart-shine,.hm-particles{display:none}
+/* Frozen streams would read as arbitrary stripes; fall back to the still field. */
+.hm-band:before,.hm-band:after{display:none}
 *,*:before,*:after{animation:none!important;transition:none!important}
 }
 </style>
@@ -6752,7 +6809,11 @@ function discClass(d){return ['swim','bike','run','lift'].includes(d)?d:'';}
 function addBandFocus(grid){
   const bands=[...grid.querySelectorAll('.hm-band')];
   if(!bands.length)return;
-  const focus=band=>bands.forEach(other=>other.classList.toggle('is-focused',other===band));
+  const focus=band=>bands.forEach(other=>{
+    const on=other===band;
+    other.classList.toggle('is-focused',on);
+    if(other.tag)other.tag.classList.toggle('is-focused',on);
+  });
   const bandAtColumn=column=>bands.find(band=>
     column>=Number(band.dataset.first)&&column<=Number(band.dataset.last))||null;
   grid.addEventListener('pointermove',event=>{
@@ -6871,11 +6932,15 @@ function renderHeatmap(){
     band.style.animationDelay=(bi*-3.5)+'s';
     band.dataset.first=a;
     band.dataset.last=b;
+    // The label is a sibling, not a child: the band is a masked, animated
+    // decoration and anything inside it inherits that mask.
     const tag=document.createElement('span');
-    tag.className='hm-block-tag';
+    tag.className='hm-block-tag b'+(bi%2);
+    tag.style.setProperty('--tag-left',(a*16)+'px');
     tag.textContent=blk.label;
-    band.appendChild(tag);
+    band.tag=tag;
     grid.appendChild(band);
+    grid.appendChild(tag);
   });
   addBandFocus(grid);
   addParticles(grid,cols.length);
