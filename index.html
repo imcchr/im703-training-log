@@ -612,18 +612,17 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 *,*:before,*:after{animation:none!important;transition:none!important}
 }
 
-/* Interval recovery: one row per session, oldest first, so the trend reads
-   top to bottom. The bar is relative to the best session, not to zero -- these
-   are all double-digit drops and a zero-based bar would show seven near-equal
-   stripes. */
-.hrr-list{display:flex;flex-direction:column;gap:8px;margin:18px 0 14px}
-.hrr-row{display:grid;grid-template-columns:58px minmax(0,1fr) 46px;align-items:center;gap:10px}
-.hrr-when{font-size:.78rem;color:var(--ink-3)}
-.hrr-track{height:8px;border-radius:99px;background:rgba(19,42,66,.08);overflow:hidden}
-.hrr-fill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#c8542a,#e08b4a)}
-.hrr-value{font-variant-numeric:tabular-nums;font-size:.84rem;color:var(--ink-1);text-align:right}
-.hrr-reps{grid-column:1/-1;font-size:.72rem;color:var(--ink-3);letter-spacing:.01em}
-@media(max-width:850px){.hrr-row{grid-template-columns:52px minmax(0,1fr) 42px}}
+/* Interval recovery lives inside the recovery dropdown: a glanceable list, not
+   a chart. The percentage is the change against the previous run-interval
+   session, so the direction is readable without reading the numbers. */
+.recovery-context-heading{margin:16px 0 6px;font-size:.74rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.recovery-context-heading span{text-transform:none;letter-spacing:.01em;font-size:.72rem;opacity:.8}
+.hrr-row strong{display:inline-flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.hrr-delta{font-style:normal;font-size:.76rem;font-weight:600;padding:1px 6px;border-radius:99px}
+.hrr-delta.up{color:#1f6f43;background:rgba(31,111,67,.10)}
+.hrr-delta.down{color:#a8341f;background:rgba(168,52,31,.10)}
+
 
 /* Shared motion language: settle quickly, never bounce information. */
 .tabbar{isolation:isolate}
@@ -6849,7 +6848,9 @@ const HRR_DATA = [
       191,
       193,
       189
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 180
   },
   {
     "date": "2026-08-11",
@@ -6865,7 +6866,9 @@ const HRR_DATA = [
       197,
       200,
       208
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 180
   },
   {
     "date": "2026-08-19",
@@ -6881,7 +6884,9 @@ const HRR_DATA = [
       186,
       189,
       196
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 120
   },
   {
     "date": "2026-08-25",
@@ -6897,7 +6902,9 @@ const HRR_DATA = [
       191,
       195,
       192
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 120
   },
   {
     "date": "2026-09-01",
@@ -6915,7 +6922,9 @@ const HRR_DATA = [
       194,
       199,
       194
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 120
   },
   {
     "date": "2026-09-08",
@@ -6933,7 +6942,9 @@ const HRR_DATA = [
       167,
       149,
       139
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 120
   },
   {
     "date": "2026-09-15",
@@ -6951,7 +6962,9 @@ const HRR_DATA = [
       193,
       196,
       195
-    ]
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 120
   }
 ];
 /* Interaction choreography. Data renderers remain synchronous and authoritative. */
@@ -7727,35 +7740,35 @@ function recoveryContext(){
     const row=[...RECOVERY_DATA].reverse().find(item=>cleanRecovery(item[key]));
     return row?`<div class="recovery-context-row"><span>${label}<small>${text(row.week)} · ${text(row.dates)}</small></span><strong>${text(row[key])}</strong></div>`:'';
   }).join('');
-  return `<details class="recovery-context"><summary>Recovery context <span>Latest available readings, individually dated</span></summary>${rows||'<p>No additional recovery readings recorded.</p>'}<p class="chart-note">These snapshots may be older than your latest training. They are not a current health assessment.</p></details>`;
+  return `<details class="recovery-context"><summary>Recovery context <span>Latest available readings, individually dated</span></summary>${rows||'<p>No additional recovery readings recorded.</p>'}${intervalRecoveryRows()}<p class="chart-note">These snapshots may be older than your latest training. They are not a current health assessment.</p></details>`;
 }
-// Heart-rate recovery: how far HR falls in the 60s after a hard rep. It rises
-// as fitness and freshness improve, so it is read week over week rather than as
-// a single number. Only run intervals qualify; see garmin_fit.py.
-function intervalRecoveryMarkup(){
+// Heart-rate recovery after a hard rep, folded into the recovery dropdown so it
+// is there on expand and out of the way otherwise. Runs only -- see
+// garmin_fit.py. The window is a fixed 60s, so it stays comparable even though
+// the rest between reps shortened from 3min to 2min during the block.
+function intervalRecoveryRows(){
   const rows=(typeof HRR_DATA==='undefined'?[]:HRR_DATA)||[];
   if(!rows.length) return '';
-  const first=rows[0], latest=rows[rows.length-1];
-  const change=latest.mean_drop-first.mean_drop;
-  const best=Math.max(...rows.map(row=>row.mean_drop),1);
   const when=value=>value?new Date(value+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';
-  const body=rows.map(row=>{
-    const width=Math.max(2,Math.round(row.mean_drop/best*100));
-    const reps=row.drops.map(drop=>drop+' bpm').join(' \u00b7 ');
-    return '<div class="hrr-row"><span class="hrr-when">'+text(when(row.date))+'</span>'+
-      '<span class="hrr-track"><span class="hrr-fill" style="width:'+width+'%"></span></span>'+
-      '<span class="hrr-value">'+displayNumber(row.mean_drop)+'</span>'+
-      '<span class="hrr-reps">'+text(reps)+'</span></div>';
+  const body=[...rows].reverse().map((row,index,list)=>{
+    const previous=list[index+1];
+    let change='';
+    if(previous&&previous.mean_drop>0){
+      const pct=Math.round((row.mean_drop-previous.mean_drop)/previous.mean_drop*100);
+      const up=pct>=0;
+      change=`<em class="hrr-delta ${up?'up':'down'}">${up?'+':'\u2212'}${Math.abs(pct)}%</em>`;
+    }
+    return `<div class="recovery-context-row hrr-row"><span>${text(when(row.date))}`+
+      `<small>${text(row.week||'')} \u00b7 ${row.reps} reps</small></span>`+
+      `<strong>${displayNumber(row.mean_drop)} bpm ${change}</strong></div>`;
   }).join('');
-  return '<section class="insight-card hrr-card"><p class="metric-eyebrow">03 / Interval recovery</p>'+
-    '<p class="metric-value">'+displayNumber(latest.mean_drop)+'<span class="metric-unit">bpm drop</span></p>'+
-    '<p class="metric-caption">'+text(when(latest.date))+' \u00b7 '+
-    (change>=0?'up ':'down ')+displayNumber(Math.abs(change))+' bpm since '+text(when(first.date))+'</p>'+
-    '<div class="hrr-list">'+body+'</div>'+
-    '<p class="chart-note">Heart-rate fall in the 60 seconds after each hard rep. A bigger drop means you '+
-    'recovered faster, which tracks fitness and freshness. Read week to week, not as a single number. '+
-    'Taken from the device\u2019s own lap structure: only reps followed by a real recovery lap count, so a '+
-    'continuous swim is never dressed up as an interval session.</p></section>';
+  const shortest=Math.min(...rows.map(row=>row.shortest_rest_s||0));
+  return `<p class="recovery-context-heading">Interval recovery <span>Run intervals only \u00b7 `+
+    `fall in the ${rows[0].window_s||60}s after each rep</span></p>${body}`+
+    `<p class="chart-note">A bigger drop means you recovered faster. Measured over a fixed `+
+    `${rows[0].window_s||60} seconds, never the length of the rest itself, so it stays comparable `+
+    `as recoveries shorten \u2014 the shortest rest in this block is ${shortest}s, still longer than `+
+    `the window. Swims and bikes are excluded: their laps have no true rest.</p>`;
 }
 function goalContext(finish){
   if(!/^\d+:\d{2}:\d{2}$/.test(finish||'')) return 'Not enough evidence to compare with the goal.';
@@ -7777,7 +7790,7 @@ function renderProgress(){
   const definition=metricDefinitions[progressState.metric];
   const latestRecorded=recoveryPoints().filter(point=>validNumber(point.value)).at(-1);
   const controls=`<div class="metric-tabs" aria-label="Volume metric">${Object.entries(metricDefinitions).map(([key,value])=>`<button data-metric="${key}" aria-pressed="${key===progressState.metric}">${value.label}</button>`).join('')}</div>`;
-  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${intervalRecoveryMarkup()}${raceMarkup()}`;
+  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
   document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;animateChartChange(renderProgress);document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;animateChartChange(renderProgress);document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('.chart-point').forEach(point=>{
