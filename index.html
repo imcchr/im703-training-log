@@ -7524,13 +7524,17 @@ function displayNumber(value){return validNumber(value)?value.toLocaleString(und
 function cleanRecovery(value){return value && !/^(--|—|n\/a)$/i.test(value.trim())?value:null;}
 function weekStart(number){return trainingWeek(number)?.start || PLAN_DATA.find(week=>week.num===number)?.start;}
 function periodLabel(start){return new Date(start+'T12:00:00').toLocaleDateString(undefined,{month:'short',year:'numeric'});}
+// Axis labels name the date a week begins ('Aug 24'), not its ordinal. Week
+// numbers only mean something to someone holding the plan; dates are readable
+// on their own. The week number stays in each point's detail text.
+function dayLabel(start){return start?new Date(start+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';}
 function loadPoints(){
-  return (TRENDS_DATA.load || []).map(row=>({label:row.week,detail:row.label,start:weekStart(row.week_num),value:validNumber(row[progressState.metric])?row[progressState.metric]/metricDefinitions[progressState.metric].divisor:null}));
+  return (TRENDS_DATA.load || []).map(row=>({label:dayLabel(weekStart(row.week_num))||row.week,detail:row.week+(row.label?' · '+row.label:''),start:weekStart(row.week_num),value:validNumber(row[progressState.metric])?row[progressState.metric]/metricDefinitions[progressState.metric].divisor:null}));
 }
 function recoveryPoints(){
   const index = new Map((RECOVERY_IDX || []).map(row=>[weekNumber(row.week),row.value]));
   const numbers = [...new Set([...index.keys(),...(TRENDS_DATA.load||[]).map(row=>row.week_num)])].sort((a,b)=>a-b);
-  return numbers.map(number=>({label:'Wk'+number,detail:trainingWeek(number)?.label||'',start:weekStart(number),value:validNumber(index.get(number))?index.get(number):null}));
+  return numbers.map(number=>({label:dayLabel(weekStart(number))||('Wk'+number),detail:'Wk'+number+(trainingWeek(number)?.label?' · '+trainingWeek(number).label:''),start:weekStart(number),value:validNumber(index.get(number))?index.get(number):null}));
 }
 function groupedPoints(points, average=false){
   // Show the whole block. Cropping to the last 12 weeks hid Wk1-6, which is
