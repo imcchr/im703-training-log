@@ -359,7 +359,16 @@ button{touch-action:manipulation}
 .hm-scroll{scrollbar-width:thin;padding-bottom:14px}
 @media(min-width:851px){
   .hm-scroll{overflow:visible;padding-bottom:0}
-  .hm-grid{--aura-top:-70px;--aura-bottom:-200px;--aura-side:100px}
+  /* Roomier canvas for the facet field. Facet COUNT scales with this in
+     training_core.js while facet SIZE shrinks proportionally, so the polygons
+     stay the size they are today rather than inflating with the box. */
+  .hm-grid{--aura-top:-150px;--aura-bottom:-320px;--aura-side:200px}
+  /* Heading track sizes to its own text (the h1 has an explicit <br>, so
+     max-content cannot unwrap it), leaving the rest of the row for the
+     calendar, which centres itself in that leftover space. Adding weeks widens
+     the card and it simply re-centres -- no fixed offsets anywhere. */
+  .log-hero{grid-template-columns:minmax(0,max-content) minmax(0,1fr);gap:0}
+  .log-hero>.heatmap-card{justify-self:center}
 }
 /* Below the breakpoint the scroller still clips, which slices the orb and its
    outline into hard wedges that look like a rendering fault. Keep only the
@@ -515,7 +524,9 @@ to{opacity:1;transform:translateY(0)}
 /* Log carries the rail on the hero, not the heading: the heading is only the
    left column here, so right:0 on it would land the rail mid-page. Reserving
    the gutter also pulls the heatmap left off the page edge. */
-#view-log .log-hero{position:relative;padding-right:104px}
+/* The gutter is exactly the rail's own width, so the centring track ends at the
+   rail's left edge and the whitespace either side of the calendar matches. */
+#view-log .log-hero{position:relative;padding-right:var(--rail-w,13px)}
 .plan-grid{grid-template-columns:40px repeat(7,minmax(0,1fr))}
 }
 @media(max-width:850px){.log-hero{grid-template-columns:minmax(0,1fr);gap:10px}.log-hero .page-heading{padding-bottom:26px}.app-sub{display:none}
@@ -6893,7 +6904,7 @@ function seededRandom(seed){
 }
 function fillFacets(band,seed){
   const random=seededRandom(seed+11);
-  for(let i=0;i<16;i++){
+  for(let i=0;i<26;i++){
     const facet=document.createElement('i');
     facet.className='hm-facet';
     const points=[];
@@ -6901,7 +6912,7 @@ function fillFacets(band,seed){
     facet.style.clipPath='polygon('+points.join(',')+')';
     facet.style.setProperty('--fx',Math.round(random()*118-9)+'%');
     facet.style.setProperty('--fy',Math.round(random()*118-9)+'%');
-    facet.style.setProperty('--fs',(30+Math.round(random()*52))+'%');
+    facet.style.setProperty('--fs',(21+Math.round(random()*37))+'%');
     // Faint by design: these sit behind real data, never competing with a cell.
     facet.style.setProperty('--fa',(0.10+random()*0.17).toFixed(3));
     // Mixed focus reproduces the reference's depth of field.
