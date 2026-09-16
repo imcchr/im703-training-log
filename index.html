@@ -286,73 +286,72 @@ button{touch-action:manipulation}
 .heatmap-card{margin:0;background:transparent;border:0;padding:0;min-width:0;width:var(--hm-width,auto);max-width:100%}
 .hm-grid{padding-top:34px;padding-right:0;position:relative}
 .hm-col{position:relative;z-index:2}
-/* Luminous beam field, adapted from the reference motion loop.
-   Three properties of that reference drive every choice here:
-   1. The bright core does NOT travel -- it intensifies in place, two swells per
-      5s cycle with a small coupled sway. Animating position is what made every
-      earlier attempt feel like cheap CSS rather than light.
-   2. Long parallel diagonals (~130deg) bleeding off all four edges, at two
-      scales: wide defocused slabs plus a few blown-out hairline speculars.
-   3. Its speculars are white-hot because its ground is near-black. A dark pool
-      floated on cream just desaturates into grey smudge, so the tonality is
-      inverted instead of copied: on a light ground the specular equivalent of a
-      blown-out white hairline is a CRISP SATURATED one. Structure transplants;
-      tonality must be re-derived for the ground it lands on.
-   The cell rows stay hushed (--row-hush) regardless: the palette runs pale for
-   rest (#ece1d2) and dark for peak (#8f1d10), so a busy field behind the grid
-   attacks both ends of the scale at once. */
+/* Glass-slab field, built from the reference clip frame by frame.
+   What the frames actually show (and what every earlier guess got wrong):
+   wide polished slabs on a ~128deg diagonal, each shading dark->bright along
+   its width, separated by THIN blown-out specular edges, with large soft blooms
+   floating over the top. The slabs slide slowly along their own normal while
+   the blooms swell. Two motions, not one.
+   Saturation is the thing that makes it read as glass rather than dirt: the
+   earlier dark attempt used desaturated navy at partial alpha, which is the
+   literal recipe for grey mud on a cream page. These tones stay saturated. */
 .hm-band{position:absolute;top:var(--aura-top,0);bottom:var(--aura-bottom,-14px);
   left:calc(var(--band-left) - var(--aura-side,0px));
   width:calc(var(--band-width) + var(--aura-side,0px) * 2);
-  --beam:224,108,34;--spec:168,74,18;--row-hush:.12;
+  --deep:152,54,12;--mid:226,110,32;--hot:255,214,152;--row-hush:.13;
   pointer-events:none;z-index:1;overflow:hidden;isolation:isolate;
-  /* Layer 1 hushes the field across the cell rows; layer 2 feathers every edge.
-     Radii stay at 50% so falloff reaches zero exactly AT the box edge. */
+  /* Layer 1 hushes the cell rows, layer 2 feathers every edge. Radii stay at
+     50% so falloff reaches zero exactly AT the box edge and never clips. */
+  /* Feather the edges on each AXIS rather than with a radial vignette. A
+     radial mask squeezes everything into a disc, which is why earlier passes
+     read as blobs no matter what was drawn inside -- slabs need to run off the
+     edges to look like slabs. */
   mask-image:
-    linear-gradient(180deg,#000 0 9%,rgba(0,0,0,var(--row-hush)) 19%,
-      rgba(0,0,0,var(--row-hush)) 55%,#000 70%,#000 100%),
-    radial-gradient(ellipse 50% 50% at 50% 50%,#000 0 54%,
-      rgba(0,0,0,.66) 78%,transparent 100%);
+    linear-gradient(180deg,transparent 0,#000 15%,
+      rgba(0,0,0,var(--row-hush)) 24%,rgba(0,0,0,var(--row-hush)) 54%,
+      #000 72%,#000 80%,transparent 100%),
+    linear-gradient(90deg,transparent 0,#000 30%,#000 70%,transparent 100%);
   -webkit-mask-composite:source-in;mask-composite:intersect;
-  transition:opacity .65s ease}
-.hm-band:before,.hm-band:after{content:'';position:absolute;inset:-20%;
-  will-change:opacity,transform;
-  animation:beamSwell 5s cubic-bezier(.45,0,.35,1) infinite}
-/* Wide defocused slabs. Stops are irregular on purpose: even spacing is what
-   turned an earlier pass into a barcode. Only four bands, all parallel. */
-.hm-band:before{
-  background:linear-gradient(130deg,transparent 1%,
-    rgba(var(--beam),.66) 12%,transparent 23%,
-    rgba(var(--beam),.92) 35%,transparent 49%,
-    rgba(var(--beam),.54) 60%,transparent 71%,
-    rgba(var(--beam),.8) 84%,transparent 95%);
-  filter:blur(20px)}
-/* The speculars: a few hairlines clipped to near-white, each with its own glow.
-   This sharp-against-soft pairing is the whole signature of the reference. */
-.hm-band:after{animation-delay:-.35s;
-  background:linear-gradient(130deg,
-    transparent 14.6%,rgba(var(--spec),.55) 14.9%,transparent 15.3%,
-    transparent 27.4%,rgba(var(--spec),.95) 27.9%,transparent 28.6%,
-    transparent 33.1%,rgba(var(--spec),.45) 33.4%,transparent 33.8%,
-    transparent 44.4%,rgba(var(--spec),.62) 44.8%,transparent 45.2%,
-    transparent 58.1%,rgba(var(--spec),.88) 58.7%,transparent 59.3%,
-    transparent 66.8%,rgba(var(--spec),.4) 67.1%,transparent 67.5%,
-    transparent 79.5%,rgba(var(--spec),.58) 79.9%,transparent 80.4%,
-    transparent 90.2%,rgba(var(--spec),.36) 90.5%,transparent 90.9%);
-  filter:blur(.6px) drop-shadow(0 0 8px rgba(var(--beam),.85))}
-/* Two swells per cycle, easing hard into each peak and settling at the trough,
-   with a small drift along the band normal coupled to the rise. */
-@keyframes beamSwell{
-  0%{opacity:.5;transform:translate(0,0)}
-  18%{opacity:1;transform:translate(1.6%,1.3%)}
-  45%{opacity:.46;transform:translate(0,0)}
-  66%{opacity:.95;transform:translate(1.3%,1%)}
-  95%,100%{opacity:.5;transform:translate(0,0)}}
-.hm-band.b1{--beam:34,124,168;--spec:18,84,118}
-.hm-band.b1:before{animation-delay:-2.4s}
-.hm-band.b1:after{animation-delay:-2.75s}
-.hm-band.is-focused{--row-hush:.16}
-.hm-band.is-focused:before,.hm-band.is-focused:after{animation-duration:3.4s}
+  transition:opacity .6s ease}
+/* The slabs. One 420px period holds four slabs of deliberately unequal width,
+   so the repeat never reads as a stripe pattern, and the translate below is
+   exactly one period along the gradient normal, so the loop is seamless. */
+.hm-band:before{content:'';position:absolute;inset:-45%;
+  background:repeating-linear-gradient(128deg,
+    rgba(var(--deep),.42) 0 46px,
+    rgba(var(--mid),.72) 92px,
+    rgba(var(--hot),.95) 104px,
+    rgba(var(--mid),.5) 112px,
+    rgba(var(--deep),.3) 168px,
+    rgba(var(--mid),.66) 214px,
+    rgba(var(--hot),.8) 222px,
+    rgba(var(--deep),.36) 268px,
+    rgba(var(--mid),.58) 322px,
+    rgba(var(--hot),.9) 330px,
+    rgba(var(--deep),.4) 390px,
+    rgba(var(--deep),.42) 420px);
+  filter:blur(3px);will-change:transform;
+  animation:glassSlide 19s linear infinite}
+/* Blooms: large defocused highlights that drift across the slabs and swell.
+   These are what stop the slabs reading as a flat repeating texture. */
+.hm-band:after{content:'';position:absolute;inset:-20%;
+  background:
+    radial-gradient(ellipse 34% 40% at 30% 34%,rgba(var(--hot),.85),transparent 72%),
+    radial-gradient(ellipse 30% 34% at 73% 68%,rgba(var(--hot),.6),transparent 74%);
+  filter:blur(26px);will-change:opacity,transform;
+  animation:bloomSwell 6.5s cubic-bezier(.45,0,.35,1) infinite}
+@keyframes glassSlide{to{transform:translate(331px,259px)}}
+@keyframes bloomSwell{
+  0%{opacity:.34;transform:translate(0,0) scale(1)}
+  22%{opacity:.95;transform:translate(2.4%,-1.8%) scale(1.06)}
+  48%{opacity:.3;transform:translate(0,0) scale(1)}
+  71%{opacity:.85;transform:translate(-2%,1.6%) scale(1.05)}
+  96%,100%{opacity:.34;transform:translate(0,0) scale(1)}}
+.hm-band.b1{--deep:10,58,98;--mid:32,126,190;--hot:176,234,255}
+.hm-band.b1:before{animation-delay:-8s}
+.hm-band.b1:after{animation-delay:-3.1s}
+.hm-band.is-focused{--row-hush:.2}
+.hm-band.is-focused:after{animation-duration:4.2s}
 .hm-grid:has(.hm-band.is-focused) .hm-band:not(.is-focused){opacity:.4}
 .hm-block-tag{top:12px;left:calc(var(--tag-left) + 6px);transform:none;
   background:none;padding:0;opacity:1;z-index:2;pointer-events:none}
@@ -399,9 +398,8 @@ button{touch-action:manipulation}
    the row hush that protects the desktop layout erases the field entirely.
    Relax it here: cells are opaque and still paint on top, so this lights the
    gutters rather than the data. */
-@media(max-width:850px){.hm-band{opacity:.85;--row-hush:.34}
-  .hm-band:before{filter:blur(15px)}
-  .hm-band:after{filter:blur(.6px) drop-shadow(0 0 5px rgba(var(--beam),.8))}}
+@media(max-width:850px){.hm-band{opacity:.9;--row-hush:.32}
+  .hm-band:before{filter:blur(5px)}.hm-band:after{filter:blur(18px)}}
 /* Safety net at the viewport, not the content column: clip (not hidden/auto)
    stops the spill ever making a horizontal scrollbar, without creating a scroll
    container and without cutting the field short of the page edge. */
@@ -543,7 +541,12 @@ body{overflow-x:clip}
 @keyframes arrive{from{opacity:0;transform:translateY(7px)}
 to{opacity:1;transform:translateY(0)}
 }
-@media(min-width:1000px){#view-plan .page-heading:after,#view-progress .page-heading:after{content:'SWIM / BIKE / RUN';position:absolute;right:0;top:86px;writing-mode:vertical-rl;font-size:10px;letter-spacing:3px;color:var(--muted)}
+@media(min-width:1000px){#view-plan .page-heading:after,#view-progress .page-heading:after,
+#view-log .log-hero:after{content:'SWIM / BIKE / RUN';position:absolute;right:0;top:86px;writing-mode:vertical-rl;font-size:10px;letter-spacing:3px;color:var(--muted)}
+/* Log carries the rail on the hero, not the heading: the heading is only the
+   left column here, so right:0 on it would land the rail mid-page. Reserving
+   the gutter also pulls the heatmap left off the page edge. */
+#view-log .log-hero{position:relative;padding-right:104px}
 .plan-grid{grid-template-columns:40px repeat(7,minmax(0,1fr))}
 }
 @media(max-width:850px){.log-hero{grid-template-columns:minmax(0,1fr);gap:10px}.log-hero .page-heading{padding-bottom:26px}.app-sub{display:none}
@@ -613,7 +616,8 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chart-line{stroke-dasharray:none;stroke-dashoffset:0}.chart-shine,.hm-particles{display:none}
 /* Preserve the ribbon composition without motion; remove the travelling light. */
-.hm-band:before,.hm-band:after{animation:none!important;opacity:.8;will-change:auto}
+.hm-band:before{animation:none!important;will-change:auto}
+.hm-band:after{animation:none!important;opacity:.6;will-change:auto}
 .chart-light-window{display:none}
 *,*:before,*:after{animation:none!important;transition:none!important}
 }
