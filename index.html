@@ -6380,7 +6380,7 @@ const TRENDS_DATA = {
       "week_num": 1,
       "week": "Wk1",
       "load_min": 48.3,
-      "readiness": 44.0,
+      "readiness": 32.4,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -6393,7 +6393,7 @@ const TRENDS_DATA = {
       "week_num": 2,
       "week": "Wk2",
       "load_min": 160.2,
-      "readiness": 24.0,
+      "readiness": 29.1,
       "calories": null,
       "hrv": "Improving",
       "rhr": "49",
@@ -6406,7 +6406,7 @@ const TRENDS_DATA = {
       "week_num": 3,
       "week": "Wk3",
       "load_min": 231.5,
-      "readiness": 33.0,
+      "readiness": 27.9,
       "calories": null,
       "hrv": "Balanced",
       "rhr": "48",
@@ -6419,7 +6419,7 @@ const TRENDS_DATA = {
       "week_num": 4,
       "week": "Wk4",
       "load_min": 114.2,
-      "readiness": 52.0,
+      "readiness": 63.4,
       "calories": null,
       "hrv": "Balanced",
       "rhr": "~48",
@@ -6432,7 +6432,7 @@ const TRENDS_DATA = {
       "week_num": 5,
       "week": "Wk5",
       "load_min": 199.8,
-      "readiness": 52.0,
+      "readiness": 57.7,
       "calories": null,
       "hrv": "Balanced",
       "rhr": "~47",
@@ -6445,7 +6445,7 @@ const TRENDS_DATA = {
       "week_num": 6,
       "week": "Wk6",
       "load_min": 15.8,
-      "readiness": 75.0,
+      "readiness": 76.4,
       "calories": null,
       "hrv": "Balanced ALL",
       "rhr": "46",
@@ -6790,27 +6790,27 @@ const TARGET_DATA = [
 const RECOVERY_IDX = [
   {
     "week": "Wk1",
-    "value": 44.0
+    "value": 32.4
   },
   {
     "week": "Wk2",
-    "value": 24.0
+    "value": 29.1
   },
   {
     "week": "Wk3",
-    "value": 33.0
+    "value": 27.9
   },
   {
     "week": "Wk4",
-    "value": 52.0
+    "value": 63.4
   },
   {
     "week": "Wk5",
-    "value": 52.0
+    "value": 57.7
   },
   {
     "week": "Wk6",
-    "value": 75.0
+    "value": 76.4
   },
   {
     "week": "Wk15",
@@ -7533,7 +7533,10 @@ function recoveryPoints(){
   return numbers.map(number=>({label:'Wk'+number,detail:trainingWeek(number)?.label||'',start:weekStart(number),value:validNumber(index.get(number))?index.get(number):null}));
 }
 function groupedPoints(points, average=false){
-  if(progressState.period==='weekly') return points.slice(-12);
+  // Show the whole block. Cropping to the last 12 weeks hid Wk1-6, which is
+  // where most recorded readiness lives, so the recovery chart looked empty
+  // while the data existed all along.
+  if(progressState.period==='weekly') return points;
   const groups = new Map();
   points.forEach(point=>{
     if(!point.start) return;
@@ -7573,8 +7576,13 @@ function chartMarkup(points, unit, id, fixedMax){
 function dataTable(points,unit){return `<details class="data-details"><summary>View the numbers</summary><table class="data-table"><thead><tr><th scope="col">Period</th><th scope="col">${text(unit)}</th></tr></thead><tbody>${points.map(point=>`<tr><th scope="row">${text(point.label)}</th><td>${validNumber(point.value)?displayNumber(point.value):'Not recorded'}</td></tr>`).join('')}</tbody></table></details>`;}
 function chartCard(points,definition,id,caption,controls=''){
   const last=points.at(-1);
-  const lastValue=last?.value;
-  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Training volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(last?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${last?text(last.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Recorded triathlon volume; strength excluded. Zero means no volume captured by the existing log parser, not proof of rest.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
+  // Headline the most recent period that actually has a reading. The final
+  // period is often unrecorded, and a giant em-dash reads as a redaction bar
+  // rather than as 'no data yet'. The label always names the period shown, so
+  // this never implies the latest week holds a value it does not have.
+  const headline=[...points].reverse().find(point=>validNumber(point.value))||last;
+  const lastValue=headline?.value;
+  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Training volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(headline?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${last?text(last.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Recorded triathlon volume; strength excluded. Zero means no volume captured by the existing log parser, not proof of rest.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
 }
 function recoveryContext(){
   const fields=[['hrv','HRV'],['rhr','Resting heart rate'],['sleep','Sleep'],['vo2','VO₂ max']];
@@ -7604,7 +7612,7 @@ function renderProgress(){
   const definition=metricDefinitions[progressState.metric];
   const latestRecorded=recoveryPoints().filter(point=>validNumber(point.value)).at(-1);
   const controls=`<div class="metric-tabs" aria-label="Volume metric">${Object.entries(metricDefinitions).map(([key,value])=>`<button data-metric="${key}" aria-pressed="${key===progressState.metric}">${value.label}</button>`).join('')}</div>`;
-  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'Latest 12 logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Latest recorded readiness: '+latestRecorded.label+' · '+displayNumber(latestRecorded.value)+'/100':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
+  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
   document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;animateChartChange(renderProgress);document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;animateChartChange(renderProgress);document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('.chart-point').forEach(point=>{
