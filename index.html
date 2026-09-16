@@ -292,8 +292,8 @@ button{touch-action:manipulation}
    Each facet rotates a full 360deg and returns to its exact starting scale and
    opacity, so the loop closes seamlessly with no visible jump. */
 .hm-band{position:absolute;top:var(--aura-top,0);bottom:var(--aura-bottom,-14px);
-  left:calc(var(--band-left) - var(--aura-side,0px));
-  width:calc(var(--band-width) + var(--aura-side,0px) * 2);
+  left:calc(var(--band-left) - var(--aura-left,0px));
+  width:calc(var(--band-width) + var(--aura-left,0px) + var(--aura-right,0px));
   --facet:206,104,38;opacity:.85;--row-hush:.3;
   pointer-events:none;z-index:1;overflow:hidden;isolation:isolate;
   /* Feather per AXIS, not with a radial vignette: a radial mask squeezes the
@@ -340,7 +340,12 @@ button{touch-action:manipulation}
 .hm-particles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
 .hm-particles span{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#fff;opacity:0;animation:moteDrift linear infinite}
 @keyframes moteDrift{0%{transform:translate3d(0,0,0) scale(var(--scale));opacity:0}20%{opacity:.8}70%{opacity:.5}100%{transform:translate3d(var(--drift),-165px,0) scale(var(--scale));opacity:0}}
-.hm-readout{min-height:30px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:11px;line-height:1.45;color:var(--ink);font-variant-numeric:tabular-nums}
+/* Fixed height, not min-height: the hero centres its items, so any growth here
+   re-centres the row and shoves the calendar upward. Reserving the space means
+   a long readout wraps in place and the calendar never moves. Overflow stays
+   visible so an unusually long caption spills into the whitespace below rather
+   than being clipped -- losing text would be worse than overflowing it. */
+.hm-readout{height:52px;box-sizing:border-box;margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:11px;line-height:1.45;color:var(--ink);font-variant-numeric:tabular-nums}
 .hm-readout:empty:before{content:'Select a day for detail';color:var(--muted);opacity:.75}
 .hm-month{font-size:10px;width:13px}
 .hm-cell{width:13px;height:13px;border-radius:3px}
@@ -359,10 +364,14 @@ button{touch-action:manipulation}
 .hm-scroll{scrollbar-width:thin;padding-bottom:14px}
 @media(min-width:851px){
   .hm-scroll{overflow:visible;padding-bottom:0}
-  /* Roomier canvas for the facet field. Facet COUNT scales with this in
-     training_core.js while facet SIZE shrinks proportionally, so the polygons
-     stay the size they are today rather than inflating with the box. */
-  .hm-grid{--aura-top:-150px;--aura-bottom:-320px;--aura-side:200px}
+  /* Canvas bounds are pinned to real page landmarks, not round numbers:
+     top stops at the sticky header's lower edge (it is opaque and paints over
+     the band, so anything above that line became a hard cut rather than a
+     fade), and bottom stops just short of the rule above the metrics row so
+     the field never sits behind those figures.
+     Facet COUNT scales with this canvas while facet SIZE shrinks
+     proportionally, so polygons stay their current size instead of inflating. */
+  .hm-grid{--aura-top:-82px;--aura-bottom:-152px;--aura-left:300px;--aura-right:200px}
   /* Heading track sizes to its own text (the h1 has an explicit <br>, so
      max-content cannot unwrap it), leaving the rest of the row for the
      calendar, which centres itself in that leftover space. Adding weeks widens
@@ -652,7 +661,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated September 15, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated September 16, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -6902,6 +6911,56 @@ function seededRandom(seed){
   let state=(seed*1664525+1013904223)>>>0;
   return function(){state=(state*1664525+1013904223)>>>0;return state/4294967296;};
 }
+// The sticky header is opaque and paints above the decoration, so any part of
+// the field reaching past its lower edge gets sliced off into a hard line
+// instead of fading. Measure the real distance rather than hard-coding one:
+// the grid's position moves whenever the heading or readout changes height, and
+// a fixed offset silently drifts back under the header when it does.
+function alignAuraToHeader(grid){
+  const header=document.querySelector('.app-header');
+  if(!header)return;
+  // Below this breakpoint the scroller clips anyway and no aura is set.
+  if(!window.matchMedia('(min-width:851px)').matches){
+    grid.style.removeProperty('--aura-top');
+    return;
+  }
+  const band=grid.querySelector('.hm-band');
+  if(!band)return;
+  // Correct from the band's OWN measured position rather than deriving it from
+  // the grid. The band's containing block is not where a naive calculation
+  // assumes, and that error was silently repeatable rather than obviously
+  // wrong, which is the kind that survives review.
+  // Computed, not inline: the effective value starts life in a media query, so
+  // reading the inline style reports 0 and the correction cancels itself out.
+  const current=parseFloat(getComputedStyle(grid).getPropertyValue('--aura-top'))||0;
+  const delta=header.getBoundingClientRect().bottom-band.getBoundingClientRect().top;
+  // No rounding: the header edge and band edge both land on sub-pixel
+  // boundaries, and rounding each pass leaves a permanent 1px sliver of band
+  // poking out above the header. The epsilon just stops the feedback loop.
+  const next=Math.min(0,current+delta);
+  if(Math.abs(next-current)>0.05)grid.style.setProperty('--aura-top',next+'px');
+  if(!grid.dataset.auraWatched){
+    grid.dataset.auraWatched='1';
+    // Re-measure whenever reflow could have moved the grid: crossing the
+    // breakpoint, rewrapping the heading, or the readout changing height.
+    const watch=new ResizeObserver(()=>alignAuraToHeader(grid));
+    watch.observe(document.body);
+    // The hero is watched too: it can reflow internally (the readout rewrapping
+    // re-centres the row) without the page height changing at all, and the body
+    // observer stays silent for that.
+    const hero=grid.closest('.log-hero');
+    if(hero)watch.observe(hero);
+    // A ResizeObserver also never fires for an element that MOVES without
+    // changing size, and the first measurement lands before layout settles, so
+    // re-measure once things have come to rest. The function is a self-
+    // correcting feedback step, so extra calls are harmless no-ops.
+    requestAnimationFrame(()=>alignAuraToHeader(grid));
+    setTimeout(()=>alignAuraToHeader(grid),300);
+    if(document.fonts&&document.fonts.ready){
+      document.fonts.ready.then(()=>alignAuraToHeader(grid));
+    }
+  }
+}
 function fillFacets(band,seed){
   const random=seededRandom(seed+11);
   for(let i=0;i<26;i++){
@@ -7094,6 +7153,7 @@ function renderHeatmap(){
   grid.style.width=gridWidth+'px';
   // Pin the card to the grid: the readout must never resize or shift the map.
   document.getElementById('heatmap-card').style.setProperty('--hm-width',gridWidth+'px');
+  alignAuraToHeader(grid);
   // The caption is the tap/focus readout, so it starts empty rather than
   // repeating a static summary the stats row already covers.
   const cap=document.getElementById('hm-caption');
