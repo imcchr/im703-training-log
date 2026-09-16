@@ -286,27 +286,47 @@ button{touch-action:manipulation}
 .heatmap-card{margin:0;background:transparent;border:0;padding:0;min-width:0;width:var(--hm-width,auto);max-width:100%}
 .hm-grid{padding-top:34px;padding-right:0;position:relative}
 .hm-col{position:relative;z-index:2}
-/* Liquid-light ribbons: finite, feathered surfaces, never a repeated texture.
-   Decorative layers stay below opaque calendar cells; labels are independent. */
+/* Orbital field: depth comes from pairing DEFOCUSED light pools with one CRISP
+   layer -- a thin elliptical outline and a small dimensional sphere. All-blur
+   reads as a smudge; the sharp edge is what makes it feel composed.
+   Light is weighted to the corners so the calendar centre stays clean. */
 .hm-band{position:absolute;top:var(--aura-top,0);bottom:var(--aura-bottom,-14px);
   left:calc(var(--band-left) - var(--aura-side,0px));
   width:calc(var(--band-width) + var(--aura-side,0px) * 2);
-  --ribbon:212,92,29;pointer-events:none;z-index:1;opacity:.72;
+  --ribbon:212,92,29;--orb-x:27%;--orb-y:74%;
+  pointer-events:none;z-index:1;opacity:.82;
   overflow:hidden;isolation:isolate;
-  mask-image:radial-gradient(ellipse 50% 50% at center,#000 35%,transparent 100%);
+  /* Radii stay at 50% so falloff hits zero exactly at the box edge, but the
+     core holds full strength far longer -- a narrow core erases the artwork. */
+  mask-image:radial-gradient(ellipse 50% 50% at 50% 46%,#000 0 52%,
+    rgba(0,0,0,.62) 76%,transparent 100%);
   transition:opacity .65s ease}
-.hm-band:before,.hm-band:after{content:'';position:absolute;inset:-12%;
+.hm-band:before,.hm-band:after{content:'';position:absolute;
+  transform-origin:50% 50%;will-change:transform}
+/* Defocused layer: pools pushed to the corners, never massed over the grid. */
+.hm-band:before{inset:-16%;
   border-radius:44% 56% 65% 35% / 55% 40% 60% 45%;
-  transform-origin:50% 50%;will-change:transform;
   background:
-    radial-gradient(ellipse 26% 65% at 24% 48%,rgba(var(--ribbon),.72),transparent 78%),
-    radial-gradient(ellipse 32% 70% at 78% 55%,rgba(var(--ribbon),.5),transparent 80%);
-  filter:blur(13px);animation:ribbonDrift 13s ease-in-out infinite alternate}
-.hm-band:after{inset:-5%;opacity:.8;filter:blur(5px);
-  background:radial-gradient(ellipse 65% 23% at 48% 72%,transparent 46%,
-    rgba(var(--ribbon),.6) 64%,rgba(255,232,183,.6) 70%,transparent 83%);
-  animation:ribbonFold 17s ease-in-out -7s infinite alternate}
-.hm-band.b1{--ribbon:36,124,159}
+    radial-gradient(ellipse 33% 37% at 24% 28%,rgba(var(--ribbon),.85),transparent 76%),
+    radial-gradient(ellipse 35% 33% at 77% 71%,rgba(var(--ribbon),.8),transparent 78%),
+    radial-gradient(ellipse 24% 20% at 57% 16%,rgba(255,241,206,.9),transparent 80%);
+  filter:blur(13px);animation:ribbonDrift 24s ease-in-out infinite alternate}
+/* Crisp layer: the border is the orbital outline, the gradient is the sphere.
+   The band mask fades both to nothing before the box edge clips them. */
+.hm-band:after{inset:7% 1%;border-radius:50%;
+  border:1.5px solid rgba(var(--ribbon),.34);
+  /* Sphere, not ring: a near-flat body with a defined edge, lit by a separate
+     offset highlight. A pale centre stop just reads as a doughnut on cream. */
+  background:
+    radial-gradient(circle 44px at calc(var(--orb-x) - 20px) calc(var(--orb-y) - 19px),
+      rgba(255,243,211,.85),transparent 72%),
+    radial-gradient(circle 88px at var(--orb-x) var(--orb-y),
+      rgba(var(--ribbon),.5) 0 66%,rgba(var(--ribbon),.42) 84%,transparent 91%);
+  animation:ribbonFold 29s ease-in-out -9s infinite alternate}
+/* Offset the second block's orb so the two bands compose instead of tiling.
+   Both sit below the cell rows: a crisp orb edge slicing through the grid
+   fights the data, and the lower aura is empty space built for exactly this. */
+.hm-band.b1{--ribbon:30,116,158;--orb-x:74%;--orb-y:69%;opacity:.7}
 .hm-band.b1:before{animation-delay:-6s}
 .hm-band.b1:after{animation-delay:-11s}
 .hm-band.is-focused{opacity:1}
@@ -315,12 +335,13 @@ button{touch-action:manipulation}
   background:none;padding:0;opacity:1;z-index:2;pointer-events:none}
 .hm-block-tag.b0{color:#99501e}
 .hm-block-tag.b1{color:#27687f}
+/* Long, small-travel cycles: atmosphere, not a loading indicator. */
 @keyframes ribbonDrift{
   from{transform:translate(-3%,-4%) rotate(-9deg) scale(.96,1.04)}
   to{transform:translate(4%,3%) rotate(12deg) scale(1.08,.95)}}
 @keyframes ribbonFold{
-  from{transform:translate(3%,-7%) rotate(-16deg) scale(1.05,.94)}
-  to{transform:translate(-4%,6%) rotate(14deg) scale(.96,1.08)}}
+  from{transform:translate(2%,-3%) rotate(-11deg) scale(1.02,.97)}
+  to{transform:translate(-3%,3%) rotate(9deg) scale(.97,1.04)}}
 /* Information must not inherit the animated background's opacity or blending. */
 .hm-col .hm-cell{opacity:1;mix-blend-mode:normal}
 .hm-foot,.hm-readout{position:relative;z-index:2}
@@ -348,6 +369,10 @@ button{touch-action:manipulation}
   .hm-scroll{overflow:visible;padding-bottom:0}
   .hm-grid{--aura-top:-70px;--aura-bottom:-200px;--aura-side:100px}
 }
+/* Below the breakpoint the scroller still clips, which slices the orb and its
+   outline into hard wedges that look like a rendering fault. Keep only the
+   defocused pools there -- soft light survives cropping, hard geometry does not. */
+@media(max-width:850px){.hm-band:after{display:none}.hm-band{opacity:.6}}
 /* Safety net at the viewport, not the content column: clip (not hidden/auto)
    stops the spill ever making a horizontal scrollbar, without creating a scroll
    container and without cutting the field short of the page edge. */
@@ -562,6 +587,37 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 .hm-band:before,.hm-band:after{animation:none!important;will-change:auto}
 .chart-light-window{display:none}
 *,*:before,*:after{animation:none!important;transition:none!important}
+}
+
+/* Shared motion language: settle quickly, never bounce information. */
+.tabbar{isolation:isolate}
+@media(min-width:561px){.tabbar{position:relative}}
+.nav-indicator{position:absolute;left:0;top:0;z-index:-1;border-radius:25px;
+  background:var(--card);box-shadow:0 3px 12px #173a5a12;
+  transition:transform .42s cubic-bezier(.22,1,.36,1),width .42s cubic-bezier(.22,1,.36,1),height .25s ease;
+  pointer-events:none}
+.tabbar .tab.active{background:transparent;box-shadow:none}
+.calendar-halo{position:absolute;left:0;top:0;width:19px;height:19px;z-index:4;
+  pointer-events:none;opacity:0;border:1.5px solid var(--ink);border-radius:6px;
+  box-shadow:0 0 0 2px #fffdf9c0,0 3px 10px #173a5a26;
+  transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .18s ease}
+.calendar-halo.is-visible{opacity:1}
+.week-body{overflow:hidden;box-sizing:border-box}
+.insight-card{position:relative}
+.chart-ghost{position:absolute;pointer-events:none;z-index:1}
+.chart-ghost .chart-line{animation:none;stroke-dashoffset:0}
+.chart-ghost .chart-shine,.chart-ghost .chart-point{display:none}
+.chart-light-window{animation-duration:3.4s}
+/* One decorative glint on arrival, not a fabricated readiness/progress score. */
+.race-story:before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,#c5e7ff16 45%,#fff3 50%,transparent 65%);
+  transform:translateX(-110%)}
+.race-story.race-arrived:before{animation:raceGlint 1.5s cubic-bezier(.22,1,.36,1) both}
+@keyframes raceGlint{to{transform:translateX(110%)}}
+@media(prefers-reduced-motion:reduce){
+  .nav-indicator,.calendar-halo{transition:none}
+  .race-story:before,.chart-ghost{display:none}
+  .chart-light-window{animation:none;display:none}
 }
 </style>
 </head>
@@ -6742,6 +6798,78 @@ const RECOVERY_IDX = [
     "value": 21.0
   }
 ];
+/* Interaction choreography. Data renderers remain synchronous and authoritative. */
+const motionReduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+function animateChartChange(render){
+  const cards=[...document.querySelectorAll('.progress-grid .chart')];
+  const snapshots=cards.map(chart=>({html:chart.outerHTML,box:chart.getBoundingClientRect()}));
+  render();
+  if(motionReduced())return;
+  // Crossfade, rather than morphing incompatible weekly/monthly samples into
+  // fictional intermediate data. Ghosts never participate in focus or layout.
+  snapshots.forEach(({html,box},index)=>{
+    const chart=document.querySelectorAll('.progress-grid .chart')[index];
+    if(!chart)return;
+    const holder=chart.parentElement;
+    const ghost=document.createElement('div');
+    ghost.className='chart-ghost';ghost.inert=true;ghost.setAttribute('aria-hidden','true');
+    ghost.innerHTML=html;
+    ghost.querySelectorAll('defs,.chart-shine').forEach(node=>node.remove());
+    ghost.querySelectorAll('[id]').forEach(node=>node.removeAttribute('id'));
+    Object.assign(ghost.style,{left:chart.offsetLeft+'px',top:chart.offsetTop+'px',width:box.width+'px'});
+    holder.appendChild(ghost);
+    const fade=ghost.animate([{opacity:.65},{opacity:0}],{duration:280,easing:'ease-out'});
+    fade.onfinish=()=>ghost.remove();
+    chart.animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
+  });
+}
+function toggleWeek(card){
+  const body=card.querySelector('.week-body');
+  const start=body.getBoundingClientRect().height;
+  body.getAnimations().forEach(animation=>animation.cancel());
+  const opening=!card.classList.contains('open');
+  card.classList.toggle('open',opening);
+  body.inert=!opening;
+  if(motionReduced()){body.style.display='';return;}
+  // Keep closing contents painted until collapse finishes, including padding.
+  body.style.display='block';
+  const target=opening?body.scrollHeight:0;
+  const animation=body.animate([
+    {height:start+'px',opacity:opening?.2:1},
+    {height:target+'px',opacity:opening?1:0}
+  ],{duration:340,easing:'cubic-bezier(.22,1,.36,1)'});
+  animation.onfinish=()=>{body.style.display='';};
+}
+function initializeMotion(){
+  const nav=document.querySelector('.tabbar');
+  const pill=document.createElement('span');pill.className='nav-indicator';pill.setAttribute('aria-hidden','true');
+  nav.prepend(pill);
+  const positionPill=()=>{
+    const tab=nav.querySelector('.tab.active');
+    pill.style.width=tab.offsetWidth+'px';pill.style.height=tab.offsetHeight+'px';
+    pill.style.transform=`translate(${tab.offsetLeft}px,${tab.offsetTop}px)`;
+  };
+  new MutationObserver(positionPill).observe(nav,{subtree:true,attributes:true,attributeFilter:['class']});
+  new ResizeObserver(positionPill).observe(nav);positionPill();
+  const grid=document.querySelector('.hm-grid');
+  const halo=document.createElement('span');halo.className='calendar-halo';halo.setAttribute('aria-hidden','true');grid.appendChild(halo);
+  const select=event=>{
+    const cell=event.target.closest('.hm-col .hm-cell');if(!cell)return;
+    const box=cell.getBoundingClientRect(),base=grid.getBoundingClientRect();
+    grid.querySelectorAll('[aria-pressed=true]').forEach(item=>item.setAttribute('aria-pressed','false'));
+    cell.setAttribute('aria-pressed','true');
+    halo.style.transform=`translate(${box.left-base.left-3}px,${box.top-base.top-3}px)`;
+    halo.classList.add('is-visible');
+  };
+  grid.addEventListener('click',select);grid.addEventListener('focusin',select);
+  grid.querySelectorAll('.hm-col .hm-cell').forEach(cell=>cell.setAttribute('aria-pressed','false'));
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('race-arrived');observer.unobserve(entry.target);}
+  }),{threshold:.3});
+  const observeRace=()=>document.querySelectorAll('.race-story:not(.race-arrived)').forEach(card=>observer.observe(card));
+  new MutationObserver(observeRace).observe(document.querySelector('#progress-container'),{childList:true});observeRace();
+}
+
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -6995,7 +7123,7 @@ function renderLog(){
       wrap.querySelector('.session').addEventListener('click',()=>wrap.classList.toggle('expanded'));
       body.appendChild(wrap);
     });
-    card.querySelector('.week-head').addEventListener('click',()=>card.classList.toggle('open'));
+    card.querySelector('.week-head').addEventListener('click',()=>toggleWeek(card));
     root.appendChild(card);
   });
 }
@@ -7152,7 +7280,7 @@ function makePlanCard(w,cur){
   if(isCur)populate();
   card.querySelector('.week-head').addEventListener('click',()=>{
     populate();
-    card.classList.toggle('open');
+    toggleWeek(card);
   });
   return card;
 }
@@ -7376,8 +7504,8 @@ function renderProgress(){
   const latestRecorded=recoveryPoints().filter(point=>validNumber(point.value)).at(-1);
   const controls=`<div class="metric-tabs" aria-label="Volume metric">${Object.entries(metricDefinitions).map(([key,value])=>`<button data-metric="${key}" aria-pressed="${key===progressState.metric}">${value.label}</button>`).join('')}</div>`;
   document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'Latest 12 logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Latest recorded readiness: '+latestRecorded.label+' · '+displayNumber(latestRecorded.value)+'/100':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
-  document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;renderProgress();document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
-  document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;renderProgress();document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
+  document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;animateChartChange(renderProgress);document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
+  document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;animateChartChange(renderProgress);document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('.chart-point').forEach(point=>{
     const inspect=()=>{
       const item=(point.dataset.chart==='volume'?volume:recovery)[Number(point.dataset.point)];
@@ -7426,6 +7554,7 @@ function syncNavigation(){
 window.addEventListener('hashchange',syncNavigation);
 syncNavigation();
 
+initializeMotion();
 </script>
 </body>
 </html>
