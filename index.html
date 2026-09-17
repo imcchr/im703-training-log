@@ -463,10 +463,14 @@ body{overflow-x:clip}
 .chart-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:chartDraw 1.1s cubic-bezier(.33,1,.68,1) forwards}
 .chart-shine{fill:none;stroke:#ffe2bd;stroke-width:3;stroke-linecap:round;
   stroke-linejoin:round;pointer-events:none;opacity:.95}
-.chart-light-window{animation:chartLight 7s cubic-bezier(.4,0,.2,1) 1.2s infinite}
+/* The sweep travels for 3.4s and repeats straight away. It used to be a 7s
+   cycle whose keyframes finished at 48%, i.e. the same 3.4s of travel followed
+   by 3.6s parked off-screen. The travel speed is unchanged -- only the dwell is
+   gone -- so the highlight now crosses the chart continuously. */
+.chart-light-window{animation:chartLight 3.4s cubic-bezier(.4,0,.2,1) 1.2s infinite}
 @keyframes chartDraw{to{stroke-dashoffset:0}}
 @keyframes chartLight{0%{transform:translateX(0)}
-  48%,100%{transform:translateX(var(--sweep-end))}}
+  100%{transform:translateX(var(--sweep-end))}}
 .chart-dot{transition:fill .2s ease,stroke-width .2s ease}
 .insight-card{transition:border-color .3s ease,box-shadow .3s ease}
 .insight-card:focus-within{border-color:#d4b392;box-shadow:0 8px 28px #173b5710}
@@ -724,11 +728,11 @@ const WEEKS_DATA = [
         "date": "2026-09-16",
         "discipline": "bike",
         "title": "Interval Bike",
-        "prescribed": "Mon AM Interval Bike \u00b7 1:01 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 4\u00d75min Z5 VO2max (211-240W), 7min free ride rec \u00b7 CD: 10min Z2 \u2014 executed Wed in place of the prescribed Base Bike",
-        "actual": "1:07:18 elapsed \u00b7 19.75mi \u00b7 **5\u00d75min @ 224W** (all five dead-center in the 211-240W Z5 band) \u00b7 8min free-ride recoveries \u00b7 WU 4:54 and CD 5:24, **both halved for time** to make run club \u00b7 HR by rep 147/155/160/160/164 \u00b7 152W avg overall \u00b7 589kcal",
-        "key_metric": "5 reps delivered against 4 prescribed, 100% of main-set time in Z5, power identical rep to rep (224W \u00d75)",
+        "prescribed": "Wk18 Mon AM Interval Bike \u00b7 1:17 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: **5\u00d75min Z5 VO2max (211-240W), 8min free ride recovery** \u00b7 CD: 10min Z2 \u2014 executed Wed in place of the prescribed Base Bike",
+        "actual": "1:07:18 elapsed \u00b7 19.75mi \u00b7 **5\u00d75min @ 224W** with **8min recoveries** \u2014 main set executed exactly as prescribed, every rep dead-centre in the 211-240W band and identical rep to rep \u00b7 WU 4:54 and CD 5:24, **both halved** for the run-club hard stop \u00b7 HR by rep 147/155/160/160/164 \u00b7 152W avg overall \u00b7 589kcal",
+        "key_metric": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
         "score": 9,
-        "verdict": "Over-delivered. The main set is the session and it was executed exactly; WU/CD were the right thing to sacrifice under a hard stop. Rising HR at flat power across reps is normal accumulation, not fade."
+        "verdict": "Main set delivered exactly as written \u2014 reps, wattage and recoveries all on spec. WU/CD were the right thing to sacrifice under a hard stop, and nothing of the actual stimulus was lost. Rising HR at flat power across reps is normal accumulation, not fade."
       },
       {
         "date": "2026-09-16",
@@ -6647,7 +6651,7 @@ const TRENDS_DATA = {
     {
       "date": "2026-09-16",
       "title": "Interval Bike",
-      "detail": "5 reps delivered against 4 prescribed, 100% of main-set time in Z5, power identical rep to rep (224W \u00d75)",
+      "detail": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
       "discipline": "bike",
       "week": "Wk18"
     },
