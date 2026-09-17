@@ -6419,6 +6419,12 @@ const TRENDS_DATA = {
       "long_run_mi": 3.1,
       "run_sessions": 2,
       "completed": 4,
+      "completed_disc": {
+        "bike": 1,
+        "run": 2,
+        "swim": 1,
+        "lift": 1
+      },
       "load_delta": null
     },
     {
@@ -6436,6 +6442,12 @@ const TRENDS_DATA = {
       "long_run_mi": 4.5,
       "run_sessions": 1,
       "completed": 6,
+      "completed_disc": {
+        "lift": 1,
+        "bike": 2,
+        "swim": 3,
+        "run": 1
+      },
       "load_delta": 377
     },
     {
@@ -6453,6 +6465,12 @@ const TRENDS_DATA = {
       "long_run_mi": 8.0,
       "run_sessions": 2,
       "completed": 5,
+      "completed_disc": {
+        "lift": 3,
+        "bike": 2,
+        "run": 2,
+        "swim": 1
+      },
       "load_delta": 30
     },
     {
@@ -6470,6 +6488,12 @@ const TRENDS_DATA = {
       "long_run_mi": 4.0,
       "run_sessions": 2,
       "completed": 5,
+      "completed_disc": {
+        "lift": 2,
+        "bike": 1,
+        "run": 2,
+        "swim": 2
+      },
       "load_delta": -36
     },
     {
@@ -6487,6 +6511,12 @@ const TRENDS_DATA = {
       "long_run_mi": 5.1,
       "run_sessions": 3,
       "completed": 8,
+      "completed_disc": {
+        "lift": 3,
+        "bike": 3,
+        "run": 3,
+        "swim": 2
+      },
       "load_delta": 50
     },
     {
@@ -6504,6 +6534,9 @@ const TRENDS_DATA = {
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 1,
+      "completed_disc": {
+        "swim": 1
+      },
       "load_delta": -93
     },
     {
@@ -6521,6 +6554,10 @@ const TRENDS_DATA = {
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 4,
+      "completed_disc": {
+        "bike": 2,
+        "swim": 2
+      },
       "load_delta": 549
     },
     {
@@ -6538,6 +6575,12 @@ const TRENDS_DATA = {
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 6,
+      "completed_disc": {
+        "lift": 1,
+        "bike": 2,
+        "run": 2,
+        "swim": 2
+      },
       "load_delta": -6
     },
     {
@@ -6555,6 +6598,11 @@ const TRENDS_DATA = {
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 7,
+      "completed_disc": {
+        "bike": 2,
+        "swim": 2,
+        "run": 3
+      },
       "load_delta": 30
     },
     {
@@ -6572,6 +6620,11 @@ const TRENDS_DATA = {
       "long_run_mi": 2.5,
       "run_sessions": 3,
       "completed": 7,
+      "completed_disc": {
+        "bike": 3,
+        "swim": 1,
+        "run": 3
+      },
       "load_delta": 51
     },
     {
@@ -6589,6 +6642,11 @@ const TRENDS_DATA = {
       "long_run_mi": 4.0,
       "run_sessions": 1,
       "completed": 2,
+      "completed_disc": {
+        "lift": 1,
+        "bike": 1,
+        "run": 1
+      },
       "load_delta": -62
     },
     {
@@ -6606,6 +6664,7 @@ const TRENDS_DATA = {
       "long_run_mi": 0.0,
       "run_sessions": 0,
       "completed": 0,
+      "completed_disc": {},
       "load_delta": -100
     },
     {
@@ -6623,6 +6682,12 @@ const TRENDS_DATA = {
       "long_run_mi": 3.7,
       "run_sessions": 1,
       "completed": 3,
+      "completed_disc": {
+        "lift": 1,
+        "bike": 1,
+        "run": 1,
+        "swim": 1
+      },
       "load_delta": null
     },
     {
@@ -6640,6 +6705,12 @@ const TRENDS_DATA = {
       "long_run_mi": 3.2,
       "run_sessions": 1,
       "completed": 3,
+      "completed_disc": {
+        "lift": 1,
+        "bike": 1,
+        "run": 1,
+        "swim": 1
+      },
       "load_delta": -3
     },
     {
@@ -6657,6 +6728,12 @@ const TRENDS_DATA = {
       "long_run_mi": 6.3,
       "run_sessions": 3,
       "completed": 9,
+      "completed_disc": {
+        "bike": 3,
+        "lift": 1,
+        "run": 3,
+        "swim": 3
+      },
       "load_delta": 314
     },
     {
@@ -6674,6 +6751,12 @@ const TRENDS_DATA = {
       "long_run_mi": 5.5,
       "run_sessions": 3,
       "completed": 8,
+      "completed_disc": {
+        "bike": 2,
+        "lift": 1,
+        "run": 3,
+        "swim": 3
+      },
       "load_delta": -17
     },
     {
@@ -6691,6 +6774,11 @@ const TRENDS_DATA = {
       "long_run_mi": 3.7,
       "run_sessions": 2,
       "completed": 5,
+      "completed_disc": {
+        "bike": 2,
+        "run": 2,
+        "swim": 1
+      },
       "load_delta": -35
     },
     {
@@ -6708,6 +6796,12 @@ const TRENDS_DATA = {
       "long_run_mi": 3.3,
       "run_sessions": 2,
       "completed": 4,
+      "completed_disc": {
+        "lift": 1,
+        "run": 2,
+        "swim": 1,
+        "bike": 1
+      },
       "load_delta": -31
     }
   ],
@@ -8349,6 +8443,7 @@ function renderPlan(){
 function applyFilter(disc){
   document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('active',p.dataset.disc===disc));
   hmPaint(disc);
+  renderOverview(disc);
   document.querySelectorAll('#view-log .week-card').forEach(card=>{
     let vis=0;
     card.querySelectorAll('.session-wrap').forEach(w=>{
@@ -8602,10 +8697,17 @@ function enhanceDisclosureControls(root=document){
     control.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();control.click();}});
   });
 }
-function renderOverview(){
+function renderOverview(disc){
+  disc=disc||'all';
   const load=TRENDS_DATA.load||[],latest=load.at(-1);
-  const completed=load.reduce((sum,week)=>sum+(week.completed||0),0);
-  const items=[[load.length,'Weeks of recorded training'],[completed,'Completed tri sessions'],[latest?displayNumber(latest.total_min/60)+' h':'—','Latest week · tri time'],[latest?.week||'—','Latest logged week']];
+  // 'all' keeps the established meaning -- tri only, strength excluded. A
+  // discipline filter counts that discipline alone, using the same not-a-miss
+  // rule the builder applies, so the parts never contradict the whole.
+  const completed=load.reduce((sum,week)=>sum+(disc==='all'?(week.completed||0)
+    :((week.completed_disc||{})[disc]||0)),0);
+  const label=disc==='all'?'Completed tri sessions'
+    :'Completed '+(HM_DISC_LABEL[disc]||disc).toLowerCase()+' sessions';
+  const items=[[load.length,'Weeks of recorded training'],[completed,label],[latest?displayNumber(latest.total_min/60)+' h':'—','Latest week · tri time'],[latest?.week||'—','Latest logged week']];
   document.getElementById('log-overview').innerHTML=items.map(([value,label])=>`<div class="overview-stat"><strong>${text(value)}</strong><span>${text(label)}</span></div>`).join('');
   document.getElementById('log-freshness').textContent='Latest entry '+(latestSessionDate||'not available')+' · historical entries are preserved';
 }
