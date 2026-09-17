@@ -719,6 +719,26 @@ const WEEKS_DATA = [
         "key_metric": "71% of prescribed distance, pace ~7s/100yd slower than recent norm",
         "score": 7,
         "verdict": "Swum right after the run blowup, same-day back-to-back in 93\u00b0F heat. Ian's own framing: water felt great, but he was genuinely tired from both this morning's run and the day before. Scaling back to 1,000yd instead of forcing the full 1,400 is a sensible self-aware call, not a discipline lapse \u2014 real work still got done. **Bumped 6\u21927 (Ian caught it):** checked against precedent \u2014 07-15 Swim (58% of prescribed) scored 6, 07-17 Swim (57%) scored ~6, 07-18 Long Bike (42%) scored 5. This session's 71% completion beats all three anchor cases in a harder context (same-day double), so matching the same 6 was inconsistent \u2014 corrected to 7."
+      },
+      {
+        "date": "2026-09-16",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Mon AM Interval Bike \u00b7 1:01 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 4\u00d75min Z5 VO2max (211-240W), 7min free ride rec \u00b7 CD: 10min Z2 \u2014 executed Wed in place of the prescribed Base Bike",
+        "actual": "1:07:18 elapsed \u00b7 19.75mi \u00b7 **5\u00d75min @ 224W** (all five dead-center in the 211-240W Z5 band) \u00b7 8min free-ride recoveries \u00b7 WU 4:54 and CD 5:24, **both halved for time** to make run club \u00b7 HR by rep 147/155/160/160/164 \u00b7 152W avg overall \u00b7 589kcal",
+        "key_metric": "5 reps delivered against 4 prescribed, 100% of main-set time in Z5, power identical rep to rep (224W \u00d75)",
+        "score": 9,
+        "verdict": "Over-delivered. The main set is the session and it was executed exactly; WU/CD were the right thing to sacrifice under a hard stop. Rising HR at flat power across reps is normal accumulation, not fade."
+      },
+      {
+        "date": "2026-09-16",
+        "discipline": "run",
+        "title": "Run (ULO \u2014 run club, off the bike)",
+        "prescribed": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi",
+        "actual": "30:14 \u00b7 3.27mi \u00b7 9:05 / 9:28 / 9:18 per mile + 0.27mi @ 8:34 \u00b7 avg HR 180, max 192 \u00b7 **95-97\u00b0F** \u00b7 started 39min after the bike finished",
+        "key_metric": "Pace in band for every mile, but HR climbed 169 \u2192 180 \u2192 186 \u2192 190: Z2 by pace, Z4/Z5 by heart rate",
+        "score": 8,
+        "verdict": "Prescription met on both pace and duration. The heat and the bike in the legs made the physiological cost far higher than a Z2 session \u2014 count it as completed, but it did not buy easy-aerobic adaptation."
       }
     ]
   },
@@ -5958,15 +5978,15 @@ const TRENDS_DATA = {
       "phase": "Build",
       "score": null,
       "swim_yd": 1000,
-      "bike_min": 0.0,
-      "run_mi": 2.5,
-      "total_min": 71.6,
+      "bike_min": 67.3,
+      "run_mi": 5.8,
+      "total_min": 169.1,
       "long_swim_yd": 1000,
-      "long_bike_min": 0.0,
-      "long_run_mi": 2.5,
-      "run_sessions": 1,
-      "completed": 2,
-      "load_delta": -71
+      "long_bike_min": 67.3,
+      "long_run_mi": 3.3,
+      "run_sessions": 2,
+      "completed": 4,
+      "load_delta": -31
     }
   ],
   "durability": [
@@ -6092,9 +6112,9 @@ const TRENDS_DATA = {
     {
       "week": "Wk18",
       "long_swim_yd": 1000,
-      "long_bike_min": 0.0,
-      "long_run_mi": 2.5,
-      "run_sessions": 1
+      "long_bike_min": 67.3,
+      "long_run_mi": 3.3,
+      "run_sessions": 2
     }
   ],
   "markers": [
@@ -6612,7 +6632,7 @@ const TRENDS_DATA = {
     {
       "week_num": 18,
       "week": "Wk18",
-      "load_min": 71.6,
+      "load_min": 169.1,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -6624,6 +6644,20 @@ const TRENDS_DATA = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-16",
+      "title": "Interval Bike",
+      "detail": "5 reps delivered against 4 prescribed, 100% of main-set time in Z5, power identical rep to rep (224W \u00d75)",
+      "discipline": "bike",
+      "week": "Wk18"
+    },
+    {
+      "date": "2026-09-16",
+      "title": "Run (ULO \u2014 run club, off the bike)",
+      "detail": "Pace in band for every mile, but HR climbed 169 \u2192 180 \u2192 186 \u2192 190: Z2 by pace, Z4/Z5 by heart rate",
+      "discipline": "run",
+      "week": "Wk18"
+    },
     {
       "date": "2026-09-15",
       "title": "Interval Run",
@@ -6693,20 +6727,6 @@ const TRENDS_DATA = {
       "detail": "**Readiness bottomed at 1/100 that morning (77h High recovery need) \u2014 worst reading of a brutal week (8, 54, 7, 28, 1) \u2014 and what he did complete (WU + 50:23 MS) held clean Z3 power (156W) with zero fade**",
       "discipline": "bike",
       "week": "Wk16"
-    },
-    {
-      "date": "2026-09-03",
-      "title": "Base Run",
-      "detail": "**Every single lap (9:23-9:51/mi) landed dead inside the redefined 9:00-10:00/mi easy band**",
-      "discipline": "run",
-      "week": "Wk16"
-    },
-    {
-      "date": "2026-09-03",
-      "title": "Interval Swim",
-      "detail": "**Distance landed exactly on the 1,200yd prescription; real varied-interval structure with genuine rest breaks; closing 125yd nearly 30sec/100yd faster than the rest of the set**",
-      "discipline": "swim",
-      "week": "Wk16"
     }
   ]
 };
@@ -6755,7 +6775,7 @@ const RACE_DATA = {
       "predicted_range": "2:01:49\u20132:33:52",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 7:45/mi",
-      "evidence_3": "Recent run frequency signal: 3 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 4 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
@@ -6994,20 +7014,30 @@ function animateChartChange(render){
 }
 function toggleWeek(card){
   const body=card.querySelector('.week-body');
-  const start=body.getBoundingClientRect().height;
+  const startHeight=body.getBoundingClientRect().height;
+  const startPad=parseFloat(getComputedStyle(body).paddingBottom)||0;
   body.getAnimations().forEach(animation=>animation.cancel());
   const opening=!card.classList.contains('open');
   card.classList.toggle('open',opening);
   body.inert=!opening;
-  if(motionReduced()){body.style.display='';return;}
+  if(motionReduced()){body.style.display='';body.style.paddingBottom='';return;}
   // Keep closing contents painted until collapse finishes, including padding.
   body.style.display='block';
+  body.style.paddingBottom='';
+  const endPad=parseFloat(getComputedStyle(body).paddingBottom)||0;
   const target=opening?body.scrollHeight:0;
+  // Padding has to animate with height. The body is border-box, so a height of
+  // 0 still leaves its 12px bottom padding standing: the element snapped to
+  // 12px on the first frame and flashed a sliver of content before the
+  // animation had moved at all. Opening from fully closed therefore starts the
+  // padding at 0 too; an interrupted collapse keeps whatever padding it had
+  // reached, so reversing mid-flight stays continuous.
+  const fromPad=opening&&startHeight===0?0:startPad;
   const animation=body.animate([
-    {height:start+'px',opacity:opening?.2:1},
-    {height:target+'px',opacity:opening?1:0}
+    {height:startHeight+'px',paddingBottom:fromPad+'px',opacity:opening?0:1},
+    {height:target+'px',paddingBottom:(opening?endPad:0)+'px',opacity:opening?1:0}
   ],{duration:340,easing:'cubic-bezier(.22,1,.36,1)'});
-  animation.onfinish=()=>{body.style.display='';};
+  animation.onfinish=()=>{body.style.display='';body.style.paddingBottom='';};
 }
 function initializeMotion(){
   const nav=document.querySelector('.tabbar');
