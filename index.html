@@ -677,7 +677,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated September 17, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated September 18, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -694,6 +694,16 @@ const WEEKS_DATA = [
     "phase": "Build",
     "score": null,
     "sessions": [
+      {
+        "date": "2026-09-14",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Wk18 Mon AM Interval Bike \u00b7 1:17 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: **5\u00d75min Z5 VO2max (211-240W), 8min free ride recovery** \u00b7 CD: 10min Z2 \u2014 **executed Wed Sep 16** in place of that day\u2019s Base Bike",
+        "actual": "1:07:18 elapsed \u00b7 19.75mi \u00b7 **5\u00d75min @ 224W** with **8min recoveries** \u2014 main set executed exactly as prescribed, every rep dead-centre in the 211-240W band and identical rep to rep \u00b7 WU 4:54 and CD 5:24, **both halved** for the run-club hard stop \u00b7 HR by rep 147/155/160/160/164 \u00b7 152W avg overall \u00b7 589kcal",
+        "key_metric": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
+        "score": 9,
+        "verdict": "Main set delivered exactly as written \u2014 reps, wattage and recoveries all on spec. WU/CD were the right thing to sacrifice under a hard stop, and nothing of the actual stimulus was lost. Rising HR at flat power across reps is normal accumulation, not fade."
+      },
       {
         "date": "2026-09-14",
         "discipline": "lift",
@@ -727,12 +737,12 @@ const WEEKS_DATA = [
       {
         "date": "2026-09-16",
         "discipline": "bike",
-        "title": "Interval Bike",
-        "prescribed": "Wk18 Mon AM Interval Bike \u00b7 1:17 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: **5\u00d75min Z5 VO2max (211-240W), 8min free ride recovery** \u00b7 CD: 10min Z2 \u2014 executed Wed in place of the prescribed Base Bike",
-        "actual": "1:07:18 elapsed \u00b7 19.75mi \u00b7 **5\u00d75min @ 224W** with **8min recoveries** \u2014 main set executed exactly as prescribed, every rep dead-centre in the 211-240W band and identical rep to rep \u00b7 WU 4:54 and CD 5:24, **both halved** for the run-club hard stop \u00b7 HR by rep 147/155/160/160/164 \u00b7 152W avg overall \u00b7 589kcal",
-        "key_metric": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
-        "score": 9,
-        "verdict": "Main set delivered exactly as written \u2014 reps, wattage and recoveries all on spec. WU/CD were the right thing to sacrifice under a hard stop, and nothing of the actual stimulus was lost. Rising HR at flat power across reps is normal accumulation, not fade."
+        "title": "Base Bike",
+        "prescribed": "Wed AM Base Bike \u00b7 55min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2",
+        "actual": "**MISSED** \u2014 the slot was spent on Monday's Interval Bike make-up instead (logged 09-14)",
+        "key_metric": "0 of 55min",
+        "score": 0,
+        "verdict": "A deliberate swap, not a no-show: the harder session was the one banked. It is still a miss against this week's prescription, and the Z3 aerobic work it was meant to add did not happen."
       },
       {
         "date": "2026-09-16",
@@ -743,6 +753,46 @@ const WEEKS_DATA = [
         "key_metric": "Pace in band for every mile, but HR climbed 169 \u2192 180 \u2192 186 \u2192 190: Z2 by pace, Z4/Z5 by heart rate",
         "score": 8,
         "verdict": "Prescription met on both pace and duration. The heat and the bike in the legs made the physiological cost far higher than a Z2 session \u2014 count it as completed, but it did not buy easy-aerobic adaptation."
+      },
+      {
+        "date": "2026-09-17",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Thu AM Base Run \u00b7 55min \u00b7 easy Z2 9:00-10:00/mi",
+        "actual": "**MISSED** \u2014 not attempted Thursday; attempted Friday Sep 18 after the lift and abandoned early with a side stitch and cramping",
+        "key_metric": "0 of 55min",
+        "score": 0,
+        "verdict": "Bailing on a run that was already going wrong is the right call, not a failure of will. Worth noting it was attempted straight off a 44min lift in a week already carrying a doubled swim."
+      },
+      {
+        "date": "2026-09-17",
+        "discipline": "swim",
+        "title": "Interval Swim",
+        "prescribed": "Thu PM Interval Swim \u00b7 1,400yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,000T \u00b7 CD: 200yd",
+        "actual": "**Executed Fri Sep 18** (pool closed Thursday) \u00b7 the first 1,400yd of a single 2,600yd session \u00b7 34:13 \u00b7 25:59 swimming \u00b7 1:51/100yd swimming (2:26 including rest) \u00b7 HR 156 avg / 187 max",
+        "key_metric": "1,400 of 1,400yd = 100% of prescription",
+        "score": 9,
+        "verdict": "Full prescription delivered a day late through no fault of his own. The 1:51/100yd swimming pace is the quick half of the session and sits at the front of it."
+      },
+      {
+        "date": "2026-09-18",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "Completed \u2014 \u00b7 44min, 25,062 lb, 9 PRs \u00b7 DB Bench 180\u00d78 (1RM/vol/weight), Lat Pulldown 200\u00d712, Lateral Raises 60\u00d76 (1RM/vol/weight), Bicep Curls 60\u00d720, Tricep Ext 60\u00d728, Decline Crunch (vol/weight/reps) \u2014 up on Monday's 40min/24,880lb/8PRs",
+        "key_metric": "\u00b7 44min, 25,062 lb, 9 PRs \u00b7 DB Bench 180\u00d78 (1RM/vol/weight), Lat Pulldown 200\u00d712, Lateral Raises 60\u00d76 (1RM/vol/weight), Bicep Curls 60\u00d720, Tricep Ext 60\u00d728, Decline Crunch (vol/weight/reps) \u2014 up on Monday's 40min/24,880lb/8PRs",
+        "score": 9,
+        "verdict": "Completed as logged in the calendar. \u00b7 44min, 25,062 lb, 9 PRs \u00b7 DB Bench 180\u00d78 (1RM/vol/weight), Lat Pulldown 200\u00d712, Lateral Raises 60\u00d76 (1RM/vol/weight), Bicep Curls 60\u00d720, Tricep Ext 60\u00d728, Decline Crunch (vol/weight/reps) \u2014 up on Monday's 40min/24,880lb/8PRs"
+      },
+      {
+        "date": "2026-09-19",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sat AM Long Swim \u00b7 1,800yd \u00b7 WU: 200yd \u00b7 MS: 1,500yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "**Executed Fri Sep 18** (pool closed Saturday) \u00b7 the remaining 1,200yd of that same 2,600yd session \u00b7 28:08 \u00b7 23:28 swimming \u00b7 1:57/100yd swimming (2:20 including rest) \u00b7 HR 156 avg / 173 max",
+        "key_metric": "1,200 of 1,800yd = 67%",
+        "score": 7,
+        "verdict": "Partial, and honestly so \u2014 but it came on top of a full interval swim in one pool visit. Pace held at 1:57/100yd against 1:51 for the first half, which is a 5% fade across 2,600yd and genuinely good pacing at a distance never swum before."
       }
     ]
   },
@@ -6569,7 +6619,7 @@ const TRENDS_DATA = {
       "swim_yd": 2509,
       "bike_min": 50.5,
       "run_mi": 0.0,
-      "total_min": 126.5,
+      "total_min": 126.4,
       "long_swim_yd": 1506,
       "long_bike_min": 30.4,
       "long_run_mi": 0.0,
@@ -6787,22 +6837,22 @@ const TRENDS_DATA = {
       "label": "Sep 14-20",
       "phase": "Build",
       "score": null,
-      "swim_yd": 1000,
+      "swim_yd": 3600,
       "bike_min": 67.3,
       "run_mi": 5.8,
-      "total_min": 169.1,
-      "long_swim_yd": 1000,
+      "total_min": 231.5,
+      "long_swim_yd": 1400,
       "long_bike_min": 67.3,
       "long_run_mi": 3.3,
       "run_sessions": 2,
-      "completed": 4,
+      "completed": 6,
       "completed_disc": {
-        "lift": 1,
+        "bike": 1,
+        "lift": 2,
         "run": 2,
-        "swim": 1,
-        "bike": 1
+        "swim": 3
       },
-      "load_delta": -31
+      "load_delta": -5
     }
   ],
   "durability": [
@@ -6927,7 +6977,7 @@ const TRENDS_DATA = {
     },
     {
       "week": "Wk18",
-      "long_swim_yd": 1000,
+      "long_swim_yd": 1400,
       "long_bike_min": 67.3,
       "long_run_mi": 3.3,
       "run_sessions": 2
@@ -7306,7 +7356,7 @@ const TRENDS_DATA = {
       "week_num": 7,
       "week": "Wk7",
       "load_min": 135.0,
-      "readiness": null,
+      "readiness": 72.1,
       "calories": null,
       "hrv": "Balanced (78ms)",
       "rhr": "49",
@@ -7318,8 +7368,8 @@ const TRENDS_DATA = {
     {
       "week_num": 8,
       "week": "Wk8",
-      "load_min": 126.5,
-      "readiness": null,
+      "load_min": 126.4,
+      "readiness": 71.7,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7332,7 +7382,7 @@ const TRENDS_DATA = {
       "week_num": 9,
       "week": "Wk9",
       "load_min": 164.0,
-      "readiness": null,
+      "readiness": 56.6,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7345,7 +7395,7 @@ const TRENDS_DATA = {
       "week_num": 10,
       "week": "Wk10",
       "load_min": 247.7,
-      "readiness": null,
+      "readiness": 35.9,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7358,7 +7408,7 @@ const TRENDS_DATA = {
       "week_num": 11,
       "week": "Wk11",
       "load_min": 92.9,
-      "readiness": null,
+      "readiness": 64.0,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7371,7 +7421,7 @@ const TRENDS_DATA = {
       "week_num": 12,
       "week": "Wk12",
       "load_min": 0.0,
-      "readiness": null,
+      "readiness": 80.1,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7384,7 +7434,7 @@ const TRENDS_DATA = {
       "week_num": 13,
       "week": "Wk13",
       "load_min": 113.7,
-      "readiness": null,
+      "readiness": 42.7,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7397,7 +7447,7 @@ const TRENDS_DATA = {
       "week_num": 14,
       "week": "Wk14",
       "load_min": 110.1,
-      "readiness": null,
+      "readiness": 61.9,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7436,7 +7486,7 @@ const TRENDS_DATA = {
       "week_num": 17,
       "week": "Wk17",
       "load_min": 244.1,
-      "readiness": null,
+      "readiness": 55.3,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7448,8 +7498,8 @@ const TRENDS_DATA = {
     {
       "week_num": 18,
       "week": "Wk18",
-      "load_min": 169.1,
-      "readiness": null,
+      "load_min": 231.5,
+      "readiness": 50.3,
       "calories": null,
       "hrv": "",
       "rhr": "",
@@ -7461,10 +7511,17 @@ const TRENDS_DATA = {
   ],
   "milestones": [
     {
-      "date": "2026-09-16",
-      "title": "Interval Bike",
-      "detail": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
-      "discipline": "bike",
+      "date": "2026-09-18",
+      "title": "Full Body",
+      "detail": "\u00b7 44min, 25,062 lb, 9 PRs \u00b7 DB Bench 180\u00d78 (1RM/vol/weight), Lat Pulldown 200\u00d712, Lateral Raises 60\u00d76 (1RM/vol/weight), Bicep Curls 60\u00d720, Tricep Ext 60\u00d728, Decline Crunch (vol/weight/reps) \u2014 up on Monday's 40min/24,880lb/8PRs",
+      "discipline": "lift",
+      "week": "Wk18"
+    },
+    {
+      "date": "2026-09-17",
+      "title": "Interval Swim",
+      "detail": "1,400 of 1,400yd = 100% of prescription",
+      "discipline": "swim",
       "week": "Wk18"
     },
     {
@@ -7486,6 +7543,13 @@ const TRENDS_DATA = {
       "title": "Base Swim",
       "detail": "71% of prescribed distance, pace ~7s/100yd slower than recent norm",
       "discipline": "swim",
+      "week": "Wk18"
+    },
+    {
+      "date": "2026-09-14",
+      "title": "Interval Bike",
+      "detail": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
+      "discipline": "bike",
       "week": "Wk18"
     },
     {
@@ -7529,20 +7593,6 @@ const TRENDS_DATA = {
       "detail": "**Full prescription completed to the second (1:17:13 vs 1:17:00), all 5 work reps dead-center Z5 at 224W, cadence 88-95rpm with zero fade**",
       "discipline": "bike",
       "week": "Wk17"
-    },
-    {
-      "date": "2026-09-05",
-      "title": "Long Swim",
-      "detail": "**Distance landed exactly on the 1,650yd prescription; 1:52/100yd average sits right at his race-target pace (1:53/100yd)**",
-      "discipline": "swim",
-      "week": "Wk16"
-    },
-    {
-      "date": "2026-09-04",
-      "title": "Long Bike",
-      "detail": "**Readiness bottomed at 1/100 that morning (77h High recovery need) \u2014 worst reading of a brutal week (8, 54, 7, 28, 1) \u2014 and what he did complete (WU + 50:23 MS) held clean Z3 power (156W) with zero fade**",
-      "discipline": "bike",
-      "week": "Wk16"
     }
   ]
 };
@@ -7661,12 +7711,52 @@ const RECOVERY_IDX = [
     "value": 76.4
   },
   {
+    "week": "Wk7",
+    "value": 72.1
+  },
+  {
+    "week": "Wk8",
+    "value": 71.7
+  },
+  {
+    "week": "Wk9",
+    "value": 56.6
+  },
+  {
+    "week": "Wk10",
+    "value": 35.9
+  },
+  {
+    "week": "Wk11",
+    "value": 64.0
+  },
+  {
+    "week": "Wk12",
+    "value": 80.1
+  },
+  {
+    "week": "Wk13",
+    "value": 42.7
+  },
+  {
+    "week": "Wk14",
+    "value": 61.9
+  },
+  {
     "week": "Wk15",
     "value": 25.0
   },
   {
     "week": "Wk16",
     "value": 21.0
+  },
+  {
+    "week": "Wk17",
+    "value": 55.3
+  },
+  {
+    "week": "Wk18",
+    "value": 50.3
   }
 ];
 const HRR_DATA = [
