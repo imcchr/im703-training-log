@@ -245,7 +245,7 @@
   }
 
 /* Editorial training system. Native typography, no network dependencies. */
-:root{--muted:#74695d;--accent:#d64d20;--line:#e5dccf;--card:#fffdf9;--swim:#347b99;--bike:#d96232;--run:#47785d;--lift:#806d98}
+:root{--muted:#74695d;--accent:#d64d20;--glow:#f07c2a;--line:#e5dccf;--card:#fffdf9;--swim:#347b99;--bike:#d96232;--run:#47785d;--lift:#806d98}
 html{scroll-behavior:smooth}
 body{font-size:15px;line-height:1.5;padding-bottom:0}
 button,a,summary{-webkit-tap-highlight-color:transparent}
@@ -448,7 +448,7 @@ body{overflow-x:clip}
 .segmented button{min-height:40px;padding:8px 18px;border:0;background:transparent;border-radius:20px;font-size:12px;color:var(--muted)}
 .segmented button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 2px 6px #173a5a0a}
 .range-label{font-size:11px;color:var(--muted)}
-.progress-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.progress-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
 .insight-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px;min-width:0}
 .card-eyebrow{font-size:10px;font-weight:650;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
 .metric-value{font-size:54px;line-height:1.1;font-weight:550;letter-spacing:-2.5px;margin:18px 0 8px;font-variant-numeric:tabular-nums}
@@ -478,6 +478,12 @@ body{overflow-x:clip}
 .chart-hit{fill:transparent;cursor:pointer}
 .chart-point:focus{outline:none}
 .chart-point:focus .chart-dot,.chart-point:hover .chart-dot{fill:var(--accent);stroke-width:5}
+/* Hovering one chart lights the same week on BOTH, so a volume spike can be
+   read against the recovery it cost. The halo is drawn with stroke + shadow
+   rather than by animating the circle's r, which is not reliably animatable
+   as a CSS property across browsers. */
+.chart-point.linked .chart-dot{fill:var(--glow);stroke:var(--glow);stroke-width:4;
+  filter:drop-shadow(0 0 3px rgba(240,124,42,.95)) drop-shadow(0 0 8px rgba(240,124,42,.6))}
 .chart-readout{font-size:12px;color:var(--ink);min-height:42px;padding:12px 0 0;border-top:1px solid var(--line);margin-top:12px;font-variant-numeric:tabular-nums}
 .chart-note{font-size:10px;line-height:1.7;color:var(--muted);margin-top:12px}
 .data-details{margin-top:18px;font-size:12px}
@@ -8668,7 +8674,7 @@ function groupedPoints(points, average=false){
 function chartMarkup(points, unit, id, fixedMax){
   const values=points.map(point=>point.value).filter(validNumber);
   if(!values.length) return '<div class="empty-chart">No recorded values in this period.<br>Missing data is never plotted as zero.</div>';
-  const width=window.innerWidth<560?320:500,height=200,left=38,right=15,top=16,bottom=32;
+  const width=window.innerWidth<560?320:460,height=200,left=38,right=15,top=16,bottom=32;
   const max=fixedMax || Math.max(1,...values)*1.12;
   const x=index=>left+(width-left-right)*(points.length===1?.5:index/(points.length-1));
   const y=value=>height-bottom-(height-top-bottom)*value/max;
@@ -8678,7 +8684,7 @@ function chartMarkup(points, unit, id, fixedMax){
     if(!validNumber(point.value)){connected=false;return;}
     path+=(connected?' L':' M')+x(index)+' '+y(point.value);connected=true;
   });
-  const dots=points.map((point,index)=>validNumber(point.value)?`<g class="chart-point" tabindex="0" role="button" aria-label="${text(point.label)}: ${displayNumber(point.value)} ${unit}" data-chart="${id}" data-point="${index}"><circle class="chart-hit" cx="${x(index)}" cy="${y(point.value)}" r="18"/><circle class="chart-dot" cx="${x(index)}" cy="${y(point.value)}" r="4"/></g>`:'').join('');
+  const dots=points.map((point,index)=>validNumber(point.value)?`<g class="chart-point" tabindex="0" role="button" aria-label="${text(point.label)}: ${displayNumber(point.value)} ${unit}" data-chart="${id}" data-point="${index}" data-key="${text(point.label)}"><circle class="chart-hit" cx="${x(index)}" cy="${y(point.value)}" r="18"/><circle class="chart-dot" cx="${x(index)}" cy="${y(point.value)}" r="4"/></g>`:'').join('');
   const labels=points.map((point,index)=>index===0||index===points.length-1||index===Math.floor(points.length/2)?`<text class="chart-axis" x="${x(index)}" y="${height-7}" text-anchor="${index===0?'start':index===points.length-1?'end':'middle'}">${text(point.label)}</text>`:'').join('');
   // Move a feathered light window across a stationary copy of the exact path.
   // Unlike a dashed stroke, the light crosses gaps without restarting on them.
@@ -8761,13 +8767,34 @@ function renderProgress(){
   document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
   document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;animateChartChange(renderProgress);document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;animateChartChange(renderProgress);document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
+  // The two charts cover the same periods, so one week can be read across both
+  // at once. Points are matched on their period LABEL rather than their index:
+  // the series need not hold the same weeks, and a positional match would
+  // silently pair the wrong ones the day they diverge.
+  const series={volume:volume,recovery:recovery};
+  const units={volume:definition.unit,recovery:'/ 100'};
+  const readoutFor=(chart,key)=>{
+    const node=document.getElementById(chart+'-readout');
+    if(!node)return;
+    const item=(series[chart]||[]).find(entry=>entry.label===key);
+    // A week the other chart never measured says so. It must not inherit the
+    // hovered chart's value, and it must not read as a zero.
+    if(!item||!validNumber(item.value)){node.textContent=key+' · Not recorded';return;}
+    node.textContent=item.label+' · '+displayNumber(item.value)+' '+units[chart]+(item.detail?' · '+item.detail:'');
+  };
+  const linkPeriod=key=>document.querySelectorAll('#view-progress .chart-point').forEach(node=>
+    node.classList.toggle('linked',key!==null&&node.dataset.key===key));
+
   document.querySelectorAll('.chart-point').forEach(point=>{
     const inspect=()=>{
-      const item=(point.dataset.chart==='volume'?volume:recovery)[Number(point.dataset.point)];
-      const unit=point.dataset.chart==='volume'?definition.unit:'/ 100';
-      document.getElementById(point.dataset.chart+'-readout').textContent=item.label+' · '+displayNumber(item.value)+' '+unit+(item.detail?' · '+item.detail:'');
+      const key=point.dataset.key;
+      linkPeriod(key);
+      Object.keys(series).forEach(chart=>readoutFor(chart,key));
     };
     ['pointerenter','click','focus'].forEach(event=>point.addEventListener(event,inspect));
+    // Only the glow is cleared on the way out; the readouts stay on the last
+    // period inspected so the numbers can still be read after the mouse leaves.
+    ['pointerleave','blur'].forEach(event=>point.addEventListener(event,()=>linkPeriod(null)));
     point.addEventListener('keydown',event=>{
       if(event.key==='Enter'||event.key===' '){event.preventDefault();inspect();}
       if(event.key==='ArrowRight'||event.key==='ArrowLeft'){
