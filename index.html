@@ -805,10 +805,10 @@ const WEEKS_DATA = [
         "discipline": "run",
         "title": "Long Run",
         "prescribed": "Sat PM Long Run \u00b7 1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2",
-        "actual": "Treadmill \u00b7 1:09:09 (ended ~5min early, bathroom) \u00b7 **distance disputed: Garmin Connect shows exactly 7.00mi, the watch's own record stream integrates to 7.79mi** \u00b7 mile splits 10:08 / 8:53 / 8:56 / 8:53 / 8:56 / 8:45 / 8:15 / 8:02 \u00b7 HR 157 avg / 183 max, climbing 133 \u2014> 173 by lap \u00b7 ran ~41min after the bike \u00b7 deliberate finish-ramp over the last 15min",
-        "key_metric": "Negative split throughout; final two miles 8:15 and 8:02",
-        "score": 9,
-        "verdict": "Strong and controlled. Split discipline is the story: six near-identical middle miles then a genuine ramp, with HR rising 133 to 173 across a steady effort. Ended 5min short of 1:15 for a bathroom stop, which costs nothing."
+        "actual": "Treadmill \u00b7 1:09:09 (ended ~5min early, bathroom) \u00b7 **7.00mi confirmed** (Ian corrects watch distance to the console reading at session end; the watch had over-read by 11.2%, so raw lap splits are inflated and are scaled below) \u00b7 true splits 11:16 / 9:53 / 9:56 / 9:53 / 9:56 / 9:44 / 9:11 / **8:56** \u00b7 avg **9:53/mi** \u00b7 HR 157 avg / 183 max, climbing 133 \u2192 173 \u00b7 ran ~41min after the long bike \u00b7 deliberate finish ramp over the last 15min",
+        "key_metric": "MS ran at 9:53/mi against a prescribed 8-9:00/mi, but HR held 157-160 = top of Z3, the intended stimulus",
+        "score": 8,
+        "verdict": "Superb pacing discipline and a real negative split. Scored 8 rather than 9 because the main set sat a minute per mile outside its prescribed band \u2014 but the fault is the band, not the run. HR says he was squarely in Z3 the whole time. **See the pace-zone flag below: his prescribed bands look ~1min/mi too fast.**"
       },
       {
         "date": "2026-09-19",
@@ -7537,6 +7537,13 @@ const TRENDS_DATA = {
   ],
   "milestones": [
     {
+      "date": "2026-09-19",
+      "title": "Long Run",
+      "detail": "MS ran at 9:53/mi against a prescribed 8-9:00/mi, but HR held 157-160 = top of Z3, the intended stimulus",
+      "discipline": "run",
+      "week": "Wk18"
+    },
+    {
       "date": "2026-09-18",
       "title": "Full Body",
       "detail": "\u00b7 44min, 25,062 lb, 9 PRs \u00b7 DB Bench 180\u00d78 (1RM/vol/weight), Lat Pulldown 200\u00d712, Lateral Raises 60\u00d76 (1RM/vol/weight), Bicep Curls 60\u00d720, Tricep Ext 60\u00d728, Decline Crunch (vol/weight/reps) \u2014 up on Monday's 40min/24,880lb/8PRs",
@@ -7611,13 +7618,6 @@ const TRENDS_DATA = {
       "title": "Base Swim",
       "detail": "Distance essentially exact (1,425 vs 1,400yd prescribed)",
       "discipline": "swim",
-      "week": "Wk17"
-    },
-    {
-      "date": "2026-09-07",
-      "title": "Interval Bike",
-      "detail": "**Full prescription completed to the second (1:17:13 vs 1:17:00), all 5 work reps dead-center Z5 at 224W, cadence 88-95rpm with zero fade**",
-      "discipline": "bike",
       "week": "Wk17"
     }
   ]
