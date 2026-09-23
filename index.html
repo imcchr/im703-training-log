@@ -683,7 +683,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated September 19, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated September 22, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -693,6 +693,65 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </main>
 <script>
 const WEEKS_DATA = [
+  {
+    "num": 19,
+    "start": "2026-09-21",
+    "label": "Sep 21-27",
+    "phase": "Recovery",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-09-21",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Mon AM Interval Bike \u00b7 51min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 3\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)",
+        "actual": "**Executed Tue Sep 22, 6:25pm** (made up \u2014 Monday planning slipped) \u00b7 indoor trainer / ERG, **new aerobars fitted** \u00b7 51:22 \u00b7 14.95mi \u00b7 147W avg (whole session, incl. WU/CD/rec) \u00b7 HR 143 avg / 172 max (backup only) \u00b7 **WU 10:01 @ 129W (88rpm) \u00b7 Rep1 5:00 @ 223W (90rpm) \u00b7 Rec1 8:00 @ 97W (87rpm) \u00b7 Rep2 5:00 @ 223W (93rpm) \u00b7 Rec2 8:00 @ 101W (89rpm) \u00b7 Rep3 5:00 @ 224W (96rpm) \u00b7 CD 10:00 @ 129W (92rpm)**",
+        "key_metric": "**Full prescription to the second (51:22 vs 51:00), all 3 reps dead-center Z5, WU *and* CD both complete, cadence 87-96rpm trending UP across the session**",
+        "score": 10,
+        "verdict": "**The equipment session.** New fully-adjustable aerobars + rear-mounted hydration holders + a slightly raised/tweaked saddle, and Ian held aero for the **entire 51 minutes** \u2014 previous ceiling with the old narrow/short bars was 1-2 minutes. That is the whole story: a position you cannot hold for 2 minutes is worth nothing over a 56-mile race bike leg; a position you can hold for 51 minutes *while pushing VO2max reps* is worth real minutes on race day. This is a closed equipment limiter, not a fitness gain. Zwift/ERG ride \u2014 the trainer holds the wattage, so the 223-224W consistency is **not** scored as athlete precision. What IS scored: every segment on time (WU 10:01, reps exactly 5:00, recoveries exactly 8:00, CD 10:00 \u2014 the first session in weeks with both WU and CD intact, vs Wk18 where both were halved for a hard stop), and cadence 87-96rpm inside the 80-100 band trending *upward* rather than fading \u2014 the opposite of a torque-fatigue signal, and consistent with Ian's report that the new position let him push instead of squirming. **Execution = 10/10.**"
+      },
+      {
+        "date": "2026-09-21",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 Monday planning slipped; the Interval Bike was recovered Tuesday, the lift was not",
+        "key_metric": "Monday planning slipped; the Interval Bike was recovered Tuesday, the lift was not",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. Monday planning slipped; the Interval Bike was recovered Tuesday, the lift was not"
+      },
+      {
+        "date": "2026-09-22",
+        "discipline": "run",
+        "title": "Interval Run",
+        "prescribed": "Tue AM Interval Run \u00b7 32min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)",
+        "actual": "31:11 \u00b7 3.41mi \u00b7 9:09/mi avg \u00b7 HR 171 avg / **195 max** (backup only) \u00b7 **~70\u00b0F, cloudy, sprinkling** \u00b7 WU 9:33 @ 9:33/mi (156hr) \u00b7 **Rep1 5:00 @ 7:22/mi (183hr) \u00b7 rec 2:00 \u00b7 Rep2 5:00 @ 7:18/mi (180hr) \u00b7 rec 2:00 \u00b7 Rep3 5:00 @ 7:12/mi (185hr)** \u00b7 CD 2:11 (optional per standing rule)",
+        "key_metric": "**3 of 3 reps completed at full duration with a negative split (7:22 \u2192 7:18 \u2192 7:12), recovery HR \u221221 bpm at 60s after all three reps**",
+        "score": 10,
+        "verdict": "**The clearest cool-weather signal of the block.** Direct comparison to last week's same session in 93\u00b0F: rep paces were 7:57/7:52/7:51 at 203 max \u2014 this week 7:22/7:18/7:12 at 195 max. **~37 sec/mi faster per rep, 3/3 instead of 3/4, and 8 bpm lower peak.** Structure was clean: warm-up in-band at 9:33/mi, all three reps full duration, both recoveries exactly 2:00, and the reps got *faster* as the set went on rather than decaying. Recovery HR is the standout and it is remarkably consistent \u2014 21 bpm drop in the first 60 seconds after rep 1, 21 after rep 2, 21 after rep 3. Identical three times over means zero autonomic fatigue accumulating across the set; he finished the session with the same recovery capacity he started it with. CD truncated to 2:11, which does not dock under the Sep 15 standing rule. **Pace-band note (flag only, no change made):** reps ran 8-18 s/mi *faster* than the prescribed 7:30-8:00 band, which would normally draw the chronic run-too-hot flag \u2014 it does not here, because the rep effort sat at 180-185 avg = **dead mid-Z4 on LTHR 190 (167-194)**, exactly the zone prescribed. The band is stale, not the execution. See Trends & Flags."
+      },
+      {
+        "date": "2026-09-22",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Tue PM Base Swim \u00b7 1,100yd \u00b7 WU: 200yd \u00b7 MS: 800yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "**1,100yd = 100% of prescription** \u00b7 18:21 swimming / 24:47 incl. rest / 33:05 elapsed \u00b7 **1:40/100yd swimming** \u00b7 HR 161 avg / 188 max (backup only) \u00b7 **550yd continuous @ 1:42 (152hr) \u00b7 200yd @ 1:44 \u00b7 150yd @ 1:33 \u00b7 200yd @ 1:34** \u00b7 530 strokes \u00b7 26 spm in the paddle warm-up \u2192 31-32 spm on the main sets",
+        "key_metric": "**1:40/100yd against a recent baseline of 1:51-2:04 \u2014 11 to 24 s/100yd faster than anything logged in the last month, at full prescribed distance**",
+        "score": 10,
+        "verdict": "Full distance, and by a distance the fastest swim in the log. Recent comparables: 2:04 (Wk18 base), 1:51 (Wk18 interval), 1:57 (Wk18 long). Today was 1:40 overall with the closing 150 and 200 at **1:33 and 1:34** \u2014 those are the unintentional PRs Ian noticed. Two plausible drivers, both worth keeping: (1) **swim paddles in the warm-up**, which force a real catch and punish sloppy form \u2014 visible in the data as 26 spm during the paddle block (long, loaded, low-turnover) opening up to 31-32 spm once they came off; (2) **pacing a faster training partner** for chunks of the swim, which is exactly the kind of overload that pulls pace up without requiring a prescribed intensity bump. Controlled, not thrashed: the 550yd continuous opener ran 1:42 at only 152 avg HR. **Stroke-distance note:** this file did not record `avg_stroke_distance`, so DPS is *derived* \u2014 530 strokes over 1,006m = **~1.90 m/stroke**, cross-checked against 32 spm at 1:34/100yd \u2192 ~1.83 m/stroke. Prior logged best was 1.71 m/stroke avg (band 1.45-1.79 on the Aug 19 no-buoy 800). Directionally a real improvement, but flagged as derived from a different field than the historical figures \u2014 treat as indicative, not a clean like-for-like PR."
+      },
+      {
+        "date": "2026-09-23",
+        "discipline": "run",
+        "title": "Run (ULO)",
+        "prescribed": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi",
+        "actual": "**Executed early, Mon Sep 21, 8:14pm** \u2014 outdoor social \"glow run\" (Ian's call to count it against this slot) \u00b7 28:59 \u00b7 2.84mi \u00b7 **10:12/mi avg** \u00b7 HR 165 avg / 180 max (backup only) \u00b7 splits **10:15 / 10:36 / 9:40** per mile",
+        "key_metric": "**Ran slower than the easy band (10:12/mi vs 9:00-10:00 prescribed) \u2014 pace discipline win on an athlete whose chronic flag is the opposite**",
+        "score": 9,
+        "verdict": "Duration essentially exact (28:59 vs 30min) and the pace story is the good one. Ian's single most persistent flag since Wk2 has been running easy days too fast; here he went out socially at night and genuinely ran easy, finishing *above* the prescribed band rather than under it. That is the flag behaving, and it is worth noting that it happened on a fun/social run rather than a disciplined solo one \u2014 the social format appears to protect the easy pace rather than threaten it. Docked 1 point for the shape: the final 0.84mi at 9:40/mi was the fastest segment after two miles at 10:15-10:36, a mild version of the fast-finish pattern. Still inside the band, so a nudge and not a violation. Reported as feeling excellent, which lines up with a genuinely aerobic effort."
+      }
+    ]
+  },
   {
     "num": 18,
     "start": "2026-09-14",
@@ -4154,76 +4213,76 @@ const PLAN_DATA = [
     "block": "Fall Block",
     "rows": [
       {
-        "day": "Mon AM",
+        "day": "Mon",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "1:17 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 5\u00d75min Z5 VO2max (211-240W), 8min free ride recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "Wk18 Mon AM Interval Bike \u00b7 1:17 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: **5\u00d75min Z5 VO2max (211-240W), 8min free ride recovery** \u00b7 CD: 10min Z2 \u2014 **executed Wed Sep 16** in place of that day\u2019s Base Bike"
       },
       {
-        "day": "Mon PM",
+        "day": "Mon",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "run",
         "session": "Interval Run",
-        "target": "50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x6min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "Tue AM Interval Run \u00b7 50min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 4x6min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2"
       },
       {
-        "day": "Tue PM",
+        "day": "Tue",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,400yd \u00b7 WU: 200yd \u00b7 MS: 1,100yd Z2 steady \u00b7 CD: 100yd"
+        "target": "Tue PM Base Swim \u00b7 1,400yd \u00b7 WU: 200yd \u00b7 MS: 1,100yd Z2 steady \u00b7 CD: 100yd"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "55min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W)"
+        "target": "Wed AM Base Bike \u00b7 55min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2"
       },
       {
-        "day": "Wed PM",
+        "day": "Wed",
         "disc": "run",
-        "session": "ULO Run",
-        "target": "30min \u00b7 easy Z2 9:00-10:00/mi"
+        "session": "Run (ULO \u2014 run club, off the bike)",
+        "target": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi"
       },
       {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "run",
         "session": "Base Run",
-        "target": "55min \u00b7 easy Z2 9:00-10:00/mi"
+        "target": "Thu AM Base Run \u00b7 55min \u00b7 easy Z2 9:00-10:00/mi"
       },
       {
-        "day": "Thu PM",
+        "day": "Thu",
         "disc": "swim",
         "session": "Interval Swim",
-        "target": "1,400yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,000T \u00b7 CD: 200yd"
+        "target": "Thu PM Interval Swim \u00b7 1,400yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,000T \u00b7 CD: 200yd"
       },
       {
-        "day": "Fri AM",
+        "day": "Fri",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "1:15 \u00b7 easy Z2 111-150W"
+        "target": "Fri AM Long Bike \u00b7 1:15 \u00b7 easy Z2 111-150W"
       },
       {
-        "day": "Fri PM",
+        "day": "Fri",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Sat AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "1,800yd \u00b7 WU: 200yd \u00b7 MS: 1,500yd Z2 steady \u00b7 CD: 100yd"
-      },
-      {
-        "day": "Sat PM",
+        "day": "Sat",
         "disc": "run",
         "session": "Long Run",
-        "target": "1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "target": "Sat PM Long Run \u00b7 1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2"
+      },
+      {
+        "day": "Sat",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "Sat AM Long Swim \u00b7 1,800yd \u00b7 WU: 200yd \u00b7 MS: 1,500yd Z2 steady \u00b7 CD: 100yd"
       }
     ],
     "notes": [],
@@ -6893,6 +6952,28 @@ const TRENDS_DATA = {
         "swim": 3
       },
       "load_delta": 55
+    },
+    {
+      "week_num": 19,
+      "week": "Wk19",
+      "label": "Sep 21-27",
+      "phase": "Recovery",
+      "score": null,
+      "swim_yd": 1100,
+      "bike_min": 15.0,
+      "run_mi": 6.2,
+      "total_min": 87.5,
+      "long_swim_yd": 1100,
+      "long_bike_min": 15.0,
+      "long_run_mi": 3.4,
+      "run_sessions": 2,
+      "completed": 4,
+      "completed_disc": {
+        "bike": 1,
+        "run": 2,
+        "swim": 1
+      },
+      "load_delta": -77
     }
   ],
   "durability": [
@@ -7021,6 +7102,13 @@ const TRENDS_DATA = {
       "long_bike_min": 77.4,
       "long_run_mi": 7.0,
       "run_sessions": 3
+    },
+    {
+      "week": "Wk19",
+      "long_swim_yd": 1100,
+      "long_bike_min": 15.0,
+      "long_run_mi": 3.4,
+      "run_sessions": 2
     }
   ],
   "markers": [
@@ -7315,6 +7403,13 @@ const TRENDS_DATA = {
       "swim_min": 37.93333333333333,
       "bike_min": 213.1,
       "run_min": 133.83333333333334
+    },
+    {
+      "week": "Wk19",
+      "overall_min": 390.8666666666667,
+      "swim_min": 37.93333333333333,
+      "bike_min": 213.1,
+      "run_min": 133.83333333333334
     }
   ],
   "overlay": [
@@ -7551,9 +7646,50 @@ const TRENDS_DATA = {
       "atl": "--",
       "vo2": "45 run / 42 bike",
       "status": "--"
+    },
+    {
+      "week_num": 19,
+      "week": "Wk19",
+      "load_min": 87.5,
+      "readiness": null,
+      "calories": null,
+      "hrv": "",
+      "rhr": "",
+      "sleep": "",
+      "atl": "",
+      "vo2": "",
+      "status": ""
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-23",
+      "title": "Run (ULO)",
+      "detail": "**Ran slower than the easy band (10:12/mi vs 9:00-10:00 prescribed) \u2014 pace discipline win on an athlete whose chronic flag is the opposite**",
+      "discipline": "run",
+      "week": "Wk19"
+    },
+    {
+      "date": "2026-09-22",
+      "title": "Interval Run",
+      "detail": "**3 of 3 reps completed at full duration with a negative split (7:22 \u2192 7:18 \u2192 7:12), recovery HR \u221221 bpm at 60s after all three reps**",
+      "discipline": "run",
+      "week": "Wk19"
+    },
+    {
+      "date": "2026-09-22",
+      "title": "Base Swim",
+      "detail": "**1:40/100yd against a recent baseline of 1:51-2:04 \u2014 11 to 24 s/100yd faster than anything logged in the last month, at full prescribed distance**",
+      "discipline": "swim",
+      "week": "Wk19"
+    },
+    {
+      "date": "2026-09-21",
+      "title": "Interval Bike",
+      "detail": "**Full prescription to the second (51:22 vs 51:00), all 3 reps dead-center Z5, WU *and* CD both complete, cadence 87-96rpm trending UP across the session**",
+      "discipline": "bike",
+      "week": "Wk19"
+    },
     {
       "date": "2026-09-19",
       "title": "Long Run",
@@ -7609,34 +7745,6 @@ const TRENDS_DATA = {
       "detail": "\u00b7 40min, 24,880 lb, 8 PRs (2 full 1RM/Vol/Weight trifectas: Bicep Curls 60lb\u00d720, Tricep Ext 60lb\u00d728) \u2014 first session in the new apartment gym, expect more consistent format/attendance going forward",
       "discipline": "lift",
       "week": "Wk18"
-    },
-    {
-      "date": "2026-09-09",
-      "title": "Base Bike",
-      "detail": "All 3 zones dead-center (129W Z2 / 159W Z3 / 129W Z2)",
-      "discipline": "bike",
-      "week": "Wk17"
-    },
-    {
-      "date": "2026-09-09",
-      "title": "Run (ULO \u2014 bonus)",
-      "detail": "Ran well ahead of the easy 9-10/mi target -- deliberate, Ian's own call",
-      "discipline": "run",
-      "week": "Wk17"
-    },
-    {
-      "date": "2026-09-08",
-      "title": "Interval Run",
-      "detail": "**Only 1 of 4 prescribed Z4 reps completed in-band (25%)**",
-      "discipline": "run",
-      "week": "Wk17"
-    },
-    {
-      "date": "2026-09-08",
-      "title": "Base Swim",
-      "detail": "Distance essentially exact (1,425 vs 1,400yd prescribed)",
-      "discipline": "swim",
-      "week": "Wk17"
     }
   ]
 };
@@ -7931,6 +8039,24 @@ const HRR_DATA = [
       189,
       193,
       196,
+      195
+    ],
+    "window_s": 60,
+    "shortest_rest_s": 120
+  },
+  {
+    "date": "2026-09-22",
+    "week": "Wk19",
+    "reps": 3,
+    "mean_drop": 24.3,
+    "drops": [
+      24,
+      25,
+      24
+    ],
+    "hr_end": [
+      185,
+      190,
       195
     ],
     "window_s": 60,
