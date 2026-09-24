@@ -683,7 +683,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated September 22, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated September 23, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -742,6 +742,16 @@ const WEEKS_DATA = [
       },
       {
         "date": "2026-09-23",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Wed AM Base Bike \u00b7 40min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W)",
+        "actual": "31:39 active / 33:22 elapsed \u00b7 6.52mi \u00b7 150W avg (whole session) \u00b7 **no HR recorded** (strap not worn/paired) \u00b7 **WU 6:12 @ 125W (89rpm) \u00b7 MS 25:00 @ 159W (93rpm) \u00b7 CD not done**",
+        "key_metric": "**Main set 100% complete and dead-centre Z3 (25:00 @ 159W); total duration 79% of prescription (31:39 of 40:00), cooldown dropped entirely**",
+        "score": 8,
+        "verdict": "**Correct triage under a time constraint.** Ian had other plans and cut the session, but what he cut was the warm-up (6:12 of 10min) and the cooldown (0 of 5min) \u2014 the main set, which is the entire point of a Base Bike, came in fully intact at 25:00 and sat squarely mid-Z3 at 159W. Given a choice between shortening the quality block or shortening the bookends, he shortened the bookends. That is the right call and worth crediting explicitly. Zwift/ERG ride \u2014 power pinned at 159/162W is the trainer holding the target, **not** scored as athlete precision. Scored controllables: duration (79%, docked) and cadence, which ran 89rpm in the warm-up and 93rpm through the main set \u2014 inside the 80-100 band and trending slightly up, no fade. **Docked 2 for the 21% duration shortfall with the cooldown skipped entirely** \u2014 note the Sep 15 cooldown exemption applies only to Interval Runs, not to bike sessions. Data-quality note: no HR at all this ride, which costs us the recovery-HR datapoint started Tuesday but does not affect the score (HR is not a scoring input). Position note, Ian's report: held aero for the majority but had to come up at times, and the **right aerobar feels slightly lopsided/off versus the left** \u2014 recorded here as session context; Ian has opted to eyeball the bars rather than open a tracked fit item."
+      },
+      {
+        "date": "2026-09-23",
         "discipline": "run",
         "title": "Run (ULO)",
         "prescribed": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi",
@@ -749,6 +759,16 @@ const WEEKS_DATA = [
         "key_metric": "**Ran slower than the easy band (10:12/mi vs 9:00-10:00 prescribed) \u2014 pace discipline win on an athlete whose chronic flag is the opposite**",
         "score": 9,
         "verdict": "Duration essentially exact (28:59 vs 30min) and the pace story is the good one. Ian's single most persistent flag since Wk2 has been running easy days too fast; here he went out socially at night and genuinely ran easy, finishing *above* the prescribed band rather than under it. That is the flag behaving, and it is worth noting that it happened on a fun/social run rather than a disciplined solo one \u2014 the social format appears to protect the easy pace rather than threaten it. Docked 1 point for the shape: the final 0.84mi at 9:40/mi was the fastest segment after two miles at 10:15-10:36, a mild version of the fast-finish pattern. Still inside the band, so a nudge and not a violation. Reported as feeling excellent, which lines up with a genuinely aerobic effort."
+      },
+      {
+        "date": "2026-09-24",
+        "discipline": "run",
+        "title": "Base Run",
+        "prescribed": "Thu AM Base Run \u00b7 35min \u00b7 easy Z2 9:00-10:00/mi",
+        "actual": "**Executed early, Wed Sep 23 6:08pm** \u2014 run club (Ian's call to count it against this slot) \u00b7 26:43 \u00b7 3.15mi \u00b7 **8:29/mi avg** \u00b7 HR 181 avg / 196 max (backup only) \u00b7 90F wrist sensor (not ambient) \u00b7 splits **8:56 / 8:26 / 8:09** then 0.15mi @ 7:51 \u00b7 ran alongside another athlete racing IM 70.3 Waco in early Oct, which pulled the pace",
+        "key_metric": "**76% of prescribed duration (26:43 of 35:00), and the session delivered a progressive tempo stimulus rather than the prescribed easy aerobic one**",
+        "score": 7,
+        "verdict": "Genuine quality work and Ian reports feeling strong \u2014 but not the session the slot was for. Two separate deductions, both on duration and stimulus, **neither on heart rate**: (1) 76% of prescribed duration, a run-club hard stop; (2) a Base Run exists to accumulate aerobic volume at a low fatigue cost, and this was a negative-split effort ramping 8:56 to 7:51/mi. The stimulus delivered was not the stimulus prescribed. **Explicitly NOT docked for running faster than the 9:00-10:00 band as a compliance failure** \u2014 that argument is closed on the record (coach proposed HR-capped easy runs on 2026-09-19, Ian rejected it outright, no easy-pace prescription will be issued). The dock concerns what the session was for, which is a separate question from whether Ian can be held to a slower pace. **Fatigue datapoint worth keeping (narrative context, not a scoring input):** mile 3 today ran 8:09/mi at 189 HR, against Tuesday's interval reps at 7:12/mi at 185 HR \u2014 roughly 57 s/mi slower for 4 bpm more, the day after a three-session Tuesday including VO2max bike reps. It was also 9F warmer at the wrist. Ian's read that it felt easier than the HR suggested is fair; the accumulated cost from Tuesday is still visible in the numbers."
       }
     ]
   },
@@ -4333,7 +4353,7 @@ const PLAN_DATA = [
         "day": "Wed AM",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "40min \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W)"
+        "target": "40min - WU: 10min Z2 (111-150W) - MS: Z3 (151-180W) - CD: 5min Z2 (111-150W)"
       },
       {
         "day": "Wed PM",
@@ -4345,7 +4365,7 @@ const PLAN_DATA = [
         "day": "Thu AM",
         "disc": "run",
         "session": "Base Run",
-        "target": "35min \u00b7 easy Z2 9:00-10:00/mi"
+        "target": "35min - easy Z2 9:00-10:00/mi"
       },
       {
         "day": "Thu PM",
@@ -6960,20 +6980,20 @@ const TRENDS_DATA = {
       "phase": "Recovery",
       "score": null,
       "swim_yd": 1100,
-      "bike_min": 15.0,
-      "run_mi": 6.2,
-      "total_min": 87.5,
+      "bike_min": 48.4,
+      "run_mi": 9.4,
+      "total_min": 145.5,
       "long_swim_yd": 1100,
-      "long_bike_min": 15.0,
+      "long_bike_min": 33.4,
       "long_run_mi": 3.4,
-      "run_sessions": 2,
-      "completed": 4,
+      "run_sessions": 3,
+      "completed": 6,
       "completed_disc": {
-        "bike": 1,
-        "run": 2,
+        "bike": 2,
+        "run": 3,
         "swim": 1
       },
-      "load_delta": -77
+      "load_delta": -62
     }
   ],
   "durability": [
@@ -7106,9 +7126,9 @@ const TRENDS_DATA = {
     {
       "week": "Wk19",
       "long_swim_yd": 1100,
-      "long_bike_min": 15.0,
+      "long_bike_min": 33.4,
       "long_run_mi": 3.4,
-      "run_sessions": 2
+      "run_sessions": 3
     }
   ],
   "markers": [
@@ -7650,7 +7670,7 @@ const TRENDS_DATA = {
     {
       "week_num": 19,
       "week": "Wk19",
-      "load_min": 87.5,
+      "load_min": 145.5,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -7662,6 +7682,20 @@ const TRENDS_DATA = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-24",
+      "title": "Base Run",
+      "detail": "**76% of prescribed duration (26:43 of 35:00), and the session delivered a progressive tempo stimulus rather than the prescribed easy aerobic one**",
+      "discipline": "run",
+      "week": "Wk19"
+    },
+    {
+      "date": "2026-09-23",
+      "title": "Base Bike",
+      "detail": "**Main set 100% complete and dead-centre Z3 (25:00 @ 159W); total duration 79% of prescription (31:39 of 40:00), cooldown dropped entirely**",
+      "discipline": "bike",
+      "week": "Wk19"
+    },
     {
       "date": "2026-09-23",
       "title": "Run (ULO)",
@@ -7731,20 +7765,6 @@ const TRENDS_DATA = {
       "detail": "71% of prescribed distance, pace ~7s/100yd slower than recent norm",
       "discipline": "swim",
       "week": "Wk18"
-    },
-    {
-      "date": "2026-09-14",
-      "title": "Interval Bike",
-      "detail": "Main set 100% to prescription (5/5 reps, correct recoveries). The 77min target minus 9.7min of trimmed WU/CD lands exactly on the 67.3min recorded",
-      "discipline": "bike",
-      "week": "Wk18"
-    },
-    {
-      "date": "2026-09-14",
-      "title": "Full Body",
-      "detail": "\u00b7 40min, 24,880 lb, 8 PRs (2 full 1RM/Vol/Weight trifectas: Bicep Curls 60lb\u00d720, Tricep Ext 60lb\u00d728) \u2014 first session in the new apartment gym, expect more consistent format/attendance going forward",
-      "discipline": "lift",
-      "week": "Wk18"
     }
   ]
 };
@@ -7793,7 +7813,7 @@ const RACE_DATA = {
       "predicted_range": "2:01:50\u20132:33:52",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 7:45/mi",
-      "evidence_3": "Recent run frequency signal: 5 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 6 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
