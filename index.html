@@ -8976,7 +8976,7 @@ function periodLabel(start){return new Date(start+'T12:00:00').toLocaleDateStrin
 // on their own. The week number stays in each point's detail text.
 function dayLabel(start){return start?new Date(start+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'';}
 function loadPoints(){
-  return (TRENDS_DATA.load || []).map(row=>({label:dayLabel(weekStart(row.week_num))||row.week,detail:row.week+(row.label?' · '+row.label:''),start:weekStart(row.week_num),value:validNumber(row[progressState.metric])?row[progressState.metric]/metricDefinitions[progressState.metric].divisor:null}));
+  return (TRENDS_DATA.load || []).map(row=>({label:dayLabel(weekStart(row.week_num))||row.week,detail:row.week+(row.label?' · '+row.label:''),start:weekStart(row.week_num),value:validNumber(row[progressState.metric])?row[progressState.metric]/metricDefinitions[progressState.metric].divisor:null,closed:validNumber(row.score)}));
 }
 function recoveryPoints(){
   const index = new Map((RECOVERY_IDX || []).map(row=>[weekNumber(row.week),row.value]));
@@ -9031,9 +9031,12 @@ function chartCard(points,definition,id,caption,controls=''){
   // period is often unrecorded, and a giant em-dash reads as a redaction bar
   // rather than as 'no data yet'. The label always names the period shown, so
   // this never implies the latest week holds a value it does not have.
-  const headline=[...points].reverse().find(point=>validNumber(point.value))||last;
+  const recorded=[...points].reverse().find(point=>validNumber(point.value));
+  const closed=id==='volume'&&progressState.period==='weekly'
+    ?[...points].reverse().find(point=>point.closed&&validNumber(point.value)):null;
+  const headline=closed||recorded||last;
   const lastValue=headline?.value;
-  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Completed tri volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(headline?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${last?text(last.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Completed swim, bike and run time only; prescribed-but-missed sessions and strength are excluded. Shifted workouts remain graded on their prescribed day, while duration comes from the physical activity.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
+  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Completed tri volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(headline?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${headline?text(headline.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Completed swim, bike and run time only; prescribed-but-missed sessions and strength are excluded. Shifted workouts remain graded on their prescribed day, while duration comes from the physical activity.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
 }
 function recoveryContext(){
   const fields=[['hrv','HRV'],['rhr','Resting heart rate'],['sleep','Sleep'],['vo2','VO₂ max']];
@@ -9091,7 +9094,7 @@ function renderProgress(){
   const definition=metricDefinitions[progressState.metric];
   const latestRecorded=recoveryPoints().filter(point=>validNumber(point.value)).at(-1);
   const controls=`<div class="metric-tabs" aria-label="Volume metric">${Object.entries(metricDefinitions).map(([key,value])=>`<button data-metric="${key}" aria-pressed="${key===progressState.metric}">${value.label}</button>`).join('')}</div>`;
-  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Latest logged week; may be partial.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
+  document.getElementById('progress-container').innerHTML=`<div class="progress-toolbar"><div class="segmented" aria-label="Trend period"><button data-period="weekly" aria-pressed="${progressState.period==='weekly'}">Weekly</button><button data-period="monthly" aria-pressed="${progressState.period==='monthly'}">Monthly</button></div><span class="range-label">${progressState.period==='weekly'?'All '+volume.length+' logged weeks':'Grouped by week-start month · not calendar-month totals'}</span></div><div class="progress-grid">${chartCard(volume,definition,'volume',progressState.period==='weekly'?'Last closed week; current partial week remains on the chart.':'Sum of logged weeks starting in this month.',controls)}${chartCard(recovery,{unit:'/ 100'},'recovery',latestRecorded?'Most recent week with recorded readiness.':'No readiness recorded.')}</div>${recoveryContext()}${raceMarkup()}`;
   document.querySelectorAll('[data-period]').forEach(button=>button.addEventListener('click',()=>{progressState.period=button.dataset.period;animateChartChange(renderProgress);document.querySelector(`[data-period="${progressState.period}"]`).focus({preventScroll:true});}));
   document.querySelectorAll('[data-metric]').forEach(button=>button.addEventListener('click',()=>{progressState.metric=button.dataset.metric;animateChartChange(renderProgress);document.querySelector(`[data-metric="${progressState.metric}"]`).focus({preventScroll:true});}));
   // The two charts cover the same periods, so one week can be read across both
@@ -9144,6 +9147,7 @@ function enhanceDisclosureControls(root=document){
 function renderOverview(disc){
   disc=disc||'all';
   const load=TRENDS_DATA.load||[],latest=load.at(-1);
+  const latestClosed=[...load].reverse().find(week=>validNumber(week.score))||latest;
   // 'all' keeps the established meaning -- tri only, strength excluded. A
   // discipline filter counts that discipline alone, using the same not-a-miss
   // rule the builder applies, so the parts never contradict the whole.
@@ -9151,7 +9155,7 @@ function renderOverview(disc){
     :((week.completed_disc||{})[disc]||0)),0);
   const label=disc==='all'?'Completed tri sessions'
     :'Completed '+(HM_DISC_LABEL[disc]||disc).toLowerCase()+' sessions';
-  const items=[[load.length,'Weeks of recorded training'],[completed,label],[latest?displayNumber(latest.total_min/60)+' h':'—','Latest week · tri time'],[latest?.week||'—','Latest logged week']];
+  const items=[[load.length,'Weeks of recorded training'],[completed,label],[latestClosed?displayNumber(latestClosed.total_min/60)+' h':'—','Latest closed week · tri time'],[latest?.week||'—','Latest logged week']];
   document.getElementById('log-overview').innerHTML=items.map(([value,label])=>`<div class="overview-stat"><strong>${text(value)}</strong><span>${text(label)}</span></div>`).join('');
   document.getElementById('log-freshness').textContent='Latest entry '+(latestSessionDate||'not available')+' · historical entries are preserved';
 }
