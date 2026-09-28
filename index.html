@@ -794,7 +794,7 @@ const WEEKS_DATA = [
         "discipline": "swim",
         "title": "Interval Swim",
         "prescribed": "Thu PM Interval Swim \u00b7 1,000yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 600T \u00b7 CD: 200yd",
-        "actual": "**First 1,000yd of one combined 2,375yd pool session** \u00b7 18:01 swimming \u00b7 **1:48/100yd** \u00b7 100% distance \u00b7 HR backup only (whole visit 154 avg / 191 max)",
+        "actual": "**First 1,000yd of one combined 2,375yd pool session** \u00b7 **21:46 elapsed / 18:01 swimming** \u00b7 **1:48/100yd** \u00b7 100% distance \u00b7 HR backup only (whole visit 154 avg / 191 max)",
         "key_metric": "**1,000 of 1,000yd = 100%**",
         "score": 10,
         "verdict": "One pool visit covered both remaining swim prescriptions, following the established Wk18 split-session precedent. The first prescribed block is allocated here in full. Distance exact; pace remained controlled across varied interval lengths. No HR scoring."
@@ -834,7 +834,7 @@ const WEEKS_DATA = [
         "discipline": "swim",
         "title": "Long Swim",
         "prescribed": "Sat AM Long Swim \u00b7 1,400yd \u00b7 WU: 200yd \u00b7 MS: 1,100yd Z2 steady \u00b7 CD: 100yd",
-        "actual": "**Executed early Thu Sep 24** as the remaining 1,375yd of the combined 2,375yd pool visit \u00b7 26:32 swimming \u00b7 **1:56/100yd**",
+        "actual": "**Executed early Thu Sep 24** as the remaining 1,375yd of the combined 2,375yd pool visit \u00b7 **35:12 elapsed / 26:32 swimming** \u00b7 **1:56/100yd**",
         "key_metric": "**1,375 of 1,400yd = 98%** (one 25yd pool length short)",
         "score": 10,
         "verdict": "Honest remainder after filling the Interval Swim first, exactly as Wk18's combined swim was allocated. One pool length short is within normal watch/pool tolerance. Pace faded only 8 sec/100yd from the first 1,000yd allocation across a 2,375yd visit \u2014 controlled endurance, not a collapse."
@@ -7063,11 +7063,11 @@ const TRENDS_DATA = {
       "phase": "Recovery",
       "score": 75,
       "swim_yd": 3475,
-      "bike_min": 48.4,
+      "bike_min": 84.7,
       "run_mi": 9.4,
-      "total_min": 229.0,
+      "total_min": 261.7,
       "long_swim_yd": 1375,
-      "long_bike_min": 33.4,
+      "long_bike_min": 51.4,
       "long_run_mi": 3.4,
       "run_sessions": 3,
       "completed": 8,
@@ -7076,7 +7076,7 @@ const TRENDS_DATA = {
         "run": 3,
         "swim": 3
       },
-      "load_delta": -39
+      "load_delta": -31
     },
     {
       "week_num": 20,
@@ -7096,7 +7096,7 @@ const TRENDS_DATA = {
       "completed_disc": {
         "bike": 1
       },
-      "load_delta": -73
+      "load_delta": -76
     }
   ],
   "durability": [
@@ -7229,7 +7229,7 @@ const TRENDS_DATA = {
     {
       "week": "Wk19",
       "long_swim_yd": 1375,
-      "long_bike_min": 33.4,
+      "long_bike_min": 51.4,
       "long_run_mi": 3.4,
       "run_sessions": 3
     },
@@ -7791,7 +7791,7 @@ const TRENDS_DATA = {
     {
       "week_num": 19,
       "week": "Wk19",
-      "load_min": 229.0,
+      "load_min": 261.7,
       "readiness": 43.7,
       "calories": null,
       "hrv": "Balanced (7d avg 75\u219281ms; valid overnight avg 80.8ms)",
@@ -9033,7 +9033,7 @@ function chartCard(points,definition,id,caption,controls=''){
   // this never implies the latest week holds a value it does not have.
   const headline=[...points].reverse().find(point=>validNumber(point.value))||last;
   const lastValue=headline?.value;
-  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Training volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(headline?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${last?text(last.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Recorded triathlon volume; strength excluded. Zero means no volume captured by the existing log parser, not proof of rest.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
+  return `<article class="insight-card"><div class="card-eyebrow">${id==='volume'?'01 / Completed tri volume':'02 / Recovery'}</div><div class="metric-value">${displayNumber(lastValue)} <small>${validNumber(lastValue)?definition.unit:''}</small></div><div class="metric-caption">${text(headline?.label||'No data')} · ${text(caption)}</div>${controls||'<div class="chart-control-spacer" aria-hidden="true"></div>'}${chartMarkup(points,definition.unit,id,id==='recovery'?100:null)}<div class="chart-readout" id="${id}-readout" aria-live="polite">${last?text(last.label)+' · '+(validNumber(lastValue)?displayNumber(lastValue)+' '+definition.unit:'Not recorded'):'No data yet'}</div><p class="chart-note">${id==='volume'?'Completed swim, bike and run time only; prescribed-but-missed sessions and strength are excluded. Shifted workouts remain graded on their prescribed day, while duration comes from the physical activity.':'Garmin Training Readiness · 0–100. Gaps are unrecorded, not zero. Monthly values average available weekly readings.'}</p>${dataTable(points,definition.unit)}</article>`;
 }
 function recoveryContext(){
   const fields=[['hrv','HRV'],['rhr','Resting heart rate'],['sleep','Sleep'],['vo2','VO₂ max']];
