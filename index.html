@@ -9147,7 +9147,6 @@ function enhanceDisclosureControls(root=document){
 function renderOverview(disc){
   disc=disc||'all';
   const load=TRENDS_DATA.load||[],latest=load.at(-1);
-  const latestClosed=[...load].reverse().find(week=>validNumber(week.score))||latest;
   // 'all' keeps the established meaning -- tri only, strength excluded. A
   // discipline filter counts that discipline alone, using the same not-a-miss
   // rule the builder applies, so the parts never contradict the whole.
@@ -9155,7 +9154,7 @@ function renderOverview(disc){
     :((week.completed_disc||{})[disc]||0)),0);
   const label=disc==='all'?'Completed tri sessions'
     :'Completed '+(HM_DISC_LABEL[disc]||disc).toLowerCase()+' sessions';
-  const items=[[load.length,'Weeks of recorded training'],[completed,label],[latestClosed?displayNumber(latestClosed.total_min/60)+' h':'—','Latest closed week · tri time'],[latest?.week||'—','Latest logged week']];
+  const items=[[load.length,'Weeks of recorded training'],[completed,label],[latest?displayNumber(latest.total_min/60)+' h':'—','Current logged week · tri time'],[latest?.week||'—','Latest logged week']];
   document.getElementById('log-overview').innerHTML=items.map(([value,label])=>`<div class="overview-stat"><strong>${text(value)}</strong><span>${text(label)}</span></div>`).join('');
   document.getElementById('log-freshness').textContent='Latest entry '+(latestSessionDate||'not available')+' · historical entries are preserved';
 }
