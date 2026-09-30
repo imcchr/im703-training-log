@@ -683,7 +683,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated September 29, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated September 30, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -739,6 +739,16 @@ const WEEKS_DATA = [
         "key_metric": "Distance short by external constraint; freestyle pace held 1:44-1:58 and the session finished on its quickest 100",
         "score": 8,
         "verdict": "Sole deduction is completion at 76%, consistent with precedent (Wk19 Base Bike 79% -> 8, Wk19 Base Run 76% -> 8). Main set was more fragmented than the prescribed single 1,150yd steady block, but that is a consequence of the same hard stop and is not double-counted. Finishing on the fastest 100 is the opposite of a fatigue fade."
+      },
+      {
+        "date": "2026-09-30",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Wed AM Base Bike \u00b7 1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W)",
+        "actual": "**42:18 moving / 45:12 elapsed = 70.5% of prescription** \u00b7 10.00mi \u00b7 151W avg / 153W NP / 163W max \u00b7 cad 89 \u00b7 HR 133 avg / 148 max (backup only) \u00b7 384kJ \u00b7 WU ~12min @ 127-129W \u00b7 **MS 29min @ 159.6W steady (Z3)** \u00b7 no CD \u00b7 **zone split: 74.2% Z3, 24.9% Z2, 0% above Z3** \u00b7 Ian: legs fatigued and tired, \"just did not feel it today\"",
+        "key_metric": "Main set on target with **cadence RISING late (88.8 mid-session -> 91.8/91.1 final two blocks)** \u2014 not a fatigue-collapse signature; deduction is duration only",
+        "score": 7,
+        "verdict": "**Quantity short, execution of what was attempted was good, and the decision to stop was correct.** Trainer held 159.6W so power precision is not credited per standing rule; scored on duration/cadence/completion. **Context \u2014 day 3 of a front-loaded week:** Mon Z5 bike intervals + 43min lift (12 PRs), Tue the block's largest Z4 run volume + swim, then this. Five sessions in three days with back-to-back peak days; Tuesday's HRR decay (-24/-22/-17/-15) already showed fatigue accruing. Cooked legs Wednesday is the expected result, not a discipline failure. **Base Bike is the right session to cut** \u2014 lowest stimulus in the week, and Thu/Fri/Sat carry Base Run + Interval Swim, Long Bike, Long Swim + Long Run. **Notably against his own failure mode:** risk trait #7 is running through fatigue signals (how the ankle sprain happened); backing off a low-value session while carrying real fatigue and a new knee complaint is the opposite. **Absolute vs relative:** prescription jumped 40 -> 60min, so he rode 11min MORE base bike than Wk19 (31:39) while scoring lower. Scale consistency: 76-79% scored 8 elsewhere, 70.5% with no CD sits one below."
       }
     ]
   },
@@ -4545,7 +4555,7 @@ const PLAN_DATA = [
         "day": "Wed AM",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W)"
+        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: Z3 (151-180W) \u00b7 CD: 5min Z2 (111-150W) \u2014 [SHORT] 7/10 \u00b7 42:18 of 60:00 (70.5%) \u00b7 legs fatigued after a front-loaded Mon+Tue \u00b7 MS 29min @ 159.6W Z3 on target \u00b7 cadence rose late (89 -> 91) \u00b7 no CD \u00b7 rode 11min MORE than Wk19 despite the lower score (target grew 40 -> 60min)"
       },
       {
         "day": "Wed PM",
@@ -7115,21 +7125,21 @@ const TRENDS_DATA = {
       "phase": "Build",
       "score": null,
       "swim_yd": 1100,
-      "bike_min": 61.6,
+      "bike_min": 106.8,
       "run_mi": 5.7,
-      "total_min": 151.9,
+      "total_min": 197.1,
       "long_swim_yd": 1100,
       "long_bike_min": 61.6,
       "long_run_mi": 5.7,
       "run_sessions": 1,
-      "completed": 3,
+      "completed": 4,
       "completed_disc": {
-        "bike": 1,
+        "bike": 2,
         "lift": 1,
         "run": 1,
         "swim": 1
       },
-      "load_delta": -42
+      "load_delta": -25
     }
   ],
   "durability": [
@@ -7837,7 +7847,7 @@ const TRENDS_DATA = {
     {
       "week_num": 20,
       "week": "Wk20",
-      "load_min": 151.9,
+      "load_min": 197.1,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -7849,6 +7859,13 @@ const TRENDS_DATA = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-09-30",
+      "title": "Base Bike",
+      "detail": "Main set on target with **cadence RISING late (88.8 mid-session -> 91.8/91.1 final two blocks)** \u2014 not a fatigue-collapse signature; deduction is duration only",
+      "discipline": "bike",
+      "week": "Wk20"
+    },
     {
       "date": "2026-09-29",
       "title": "Interval Run",
@@ -7925,13 +7942,6 @@ const TRENDS_DATA = {
       "detail": "**Full prescription to the second (51:22 vs 51:00), all 3 reps dead-center Z5, WU *and* CD both complete, cadence 87-96rpm trending UP across the session**",
       "discipline": "bike",
       "week": "Wk19"
-    },
-    {
-      "date": "2026-09-19",
-      "title": "Long Run",
-      "detail": "MS ran at 9:53/mi against a prescribed 8-9:00/mi, but HR held 157-160 = top of Z3, the intended stimulus",
-      "discipline": "run",
-      "week": "Wk18"
     }
   ]
 };
