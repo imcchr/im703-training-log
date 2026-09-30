@@ -749,16 +749,6 @@ const WEEKS_DATA = [
         "key_metric": "Main set on target with **cadence RISING late (88.8 mid-session -> 91.8/91.1 final two blocks)** \u2014 not a fatigue-collapse signature; deduction is duration only",
         "score": 7,
         "verdict": "**Quantity short, execution of what was attempted was good, and the decision to stop was correct.** Trainer held 159.6W so power precision is not credited per standing rule; scored on duration/cadence/completion. **Context \u2014 day 3 of a front-loaded week:** Mon Z5 bike intervals + 43min lift (12 PRs), Tue the block's largest Z4 run volume + swim, then this. Five sessions in three days with back-to-back peak days; Tuesday's HRR decay (-24/-22/-17/-15) already showed fatigue accruing. Cooked legs Wednesday is the expected result, not a discipline failure. **Base Bike is the right session to cut** \u2014 lowest stimulus in the week, and Thu/Fri/Sat carry Base Run + Interval Swim, Long Bike, Long Swim + Long Run. **Notably against his own failure mode:** risk trait #7 is pushing through fatigue signals; backing off a low-value session while carrying real fatigue and a new knee complaint is the opposite. (Trait #7's evidence is a foot stress fracture from an untrained marathon ~2yr ago, NOT the ankle sprain \u2014 corrected Sep 30.) **Absolute vs relative:** prescription jumped 40 -> 60min, so he rode 11min MORE base bike than Wk19 (31:39) while scoring lower. Scale consistency: 76-79% scored 8 elsewhere, 70.5% with no CD sits one below."
-      },
-      {
-        "date": "2026-09-30",
-        "discipline": "run",
-        "title": "Run (ULO)",
-        "prescribed": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi",
-        "actual": "**NOT DONE \u2014 two independent external causes: Ian had a presentation during the slot, AND the run was cancelled due to flash flooding**",
-        "key_metric": "No session. Neither cause is training-related or discretionary",
-        "score": 0,
-        "verdict": "**Scores 0 per the codified ULO rule (Sep 28):** a scheduled ULO calendar slot counts toward numerator, denominator, weekly score and Completion Gate; only truly off-plan bonus workouts with no calendar slot are excluded. This slot exists in the Wk20 calendar, so it counts. Ian referred to it as a \"bonus\" ULO \u2014 flagging that, because if he wants scheduled ULO slots reclassified as excludable the rule needs an explicit amendment rather than a case-by-case exception. Cause is fully external and blameless: a work presentation plus a weather cancellation."
       }
     ]
   },
@@ -767,7 +757,7 @@ const WEEKS_DATA = [
     "start": "2026-09-21",
     "label": "Sep 21-27",
     "phase": "Recovery",
-    "score": 75,
+    "score": 73,
     "sessions": [
       {
         "date": "2026-09-21",
@@ -822,7 +812,7 @@ const WEEKS_DATA = [
       {
         "date": "2026-09-23",
         "discipline": "run",
-        "title": "Run (ULO)",
+        "title": "Run (ULO \u2014 bonus, uncounted)",
         "prescribed": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi",
         "actual": "**Executed early, Mon Sep 21, 8:14pm** \u2014 outdoor social \"glow run\" (Ian's call to count it against this slot) \u00b7 28:59 \u00b7 2.84mi \u00b7 **10:12/mi avg** \u00b7 HR 165 avg / 180 max (backup only) \u00b7 splits **10:15 / 10:36 / 9:40** per mile",
         "key_metric": "**Ran slower than the easy band (10:12/mi vs 9:00-10:00 prescribed) \u2014 pace discipline win on an athlete whose chronic flag is the opposite**",
@@ -896,7 +886,7 @@ const WEEKS_DATA = [
     "start": "2026-09-14",
     "label": "Sep 14-20",
     "phase": "Build",
-    "score": 67,
+    "score": 66,
     "sessions": [
       {
         "date": "2026-09-14",
@@ -951,7 +941,7 @@ const WEEKS_DATA = [
       {
         "date": "2026-09-16",
         "discipline": "run",
-        "title": "Run (ULO \u2014 run club, off the bike)",
+        "title": "Run (ULO \u2014 bonus, uncounted)",
         "prescribed": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi",
         "actual": "30:14 \u00b7 3.27mi \u00b7 9:05 / 9:28 / 9:18 per mile + 0.27mi @ 8:34 \u00b7 avg HR 180, max 192 \u00b7 **95-97\u00b0F** \u00b7 started 39min after the bike finished",
         "key_metric": "Pace in band for every mile, but HR climbed 169 \u2192 180 \u2192 186 \u2192 190: Z2 by pace, Z4/Z5 by heart rate",
@@ -4384,7 +4374,7 @@ const PLAN_DATA = [
       {
         "day": "Wed",
         "disc": "run",
-        "session": "Run (ULO \u2014 run club, off the bike)",
+        "session": "Run (ULO \u2014 bonus, uncounted)",
         "target": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi"
       },
       {
@@ -4477,7 +4467,7 @@ const PLAN_DATA = [
       {
         "day": "Wed",
         "disc": "run",
-        "session": "Run (ULO)",
+        "session": "Run (ULO \u2014 bonus, uncounted)",
         "target": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:00-10:00/mi"
       },
       {
@@ -4571,7 +4561,7 @@ const PLAN_DATA = [
         "day": "Wed PM",
         "disc": "run",
         "session": "ULO Run",
-        "target": "30min \u00b7 easy Z2 9:00-10:00/mi"
+        "target": "30min \u00b7 easy Z2 9:00-10:00/mi \u2014 [NOT DONE - BONUS, uncounted] \u00b7 presentation during the slot AND the run was cancelled for flash flooding \u00b7 ULO is always bonus: skipping it is never a miss and costs no score"
       },
       {
         "day": "Thu AM",
@@ -7088,7 +7078,7 @@ const TRENDS_DATA = {
       "week": "Wk18",
       "label": "Sep 14-20",
       "phase": "Build",
-      "score": 67,
+      "score": 66,
       "swim_yd": 3600,
       "bike_min": 144.7,
       "run_mi": 12.8,
@@ -7111,7 +7101,7 @@ const TRENDS_DATA = {
       "week": "Wk19",
       "label": "Sep 21-27",
       "phase": "Recovery",
-      "score": 75,
+      "score": 73,
       "swim_yd": 3475,
       "bike_min": 84.7,
       "run_mi": 9.4,
@@ -7142,11 +7132,11 @@ const TRENDS_DATA = {
       "long_bike_min": 61.6,
       "long_run_mi": 5.7,
       "run_sessions": 1,
-      "completed": 5,
+      "completed": 4,
       "completed_disc": {
         "bike": 2,
         "lift": 1,
-        "run": 2,
+        "run": 1,
         "swim": 1
       },
       "load_delta": -25
@@ -7365,11 +7355,11 @@ const TRENDS_DATA = {
         },
         {
           "date": "Wk18",
-          "value": 67
+          "value": 66
         },
         {
           "date": "Wk19",
-          "value": 75
+          "value": 73
         }
       ]
     },
@@ -7877,13 +7867,6 @@ const TRENDS_DATA = {
       "week": "Wk20"
     },
     {
-      "date": "2026-09-30",
-      "title": "Run (ULO)",
-      "detail": "No session. Neither cause is training-related or discretionary",
-      "discipline": "run",
-      "week": "Wk20"
-    },
-    {
       "date": "2026-09-29",
       "title": "Interval Run",
       "detail": "**4 of 4 reps at full duration, every rep in band, 6-second spread across 28min of Z4; cadence 162spm identical on all four reps**",
@@ -7934,7 +7917,7 @@ const TRENDS_DATA = {
     },
     {
       "date": "2026-09-23",
-      "title": "Run (ULO)",
+      "title": "Run (ULO \u2014 bonus, uncounted)",
       "detail": "**Ran slower than the easy band (10:12/mi vs 9:00-10:00 prescribed) \u2014 pace discipline win on an athlete whose chronic flag is the opposite**",
       "discipline": "run",
       "week": "Wk19"
@@ -7951,6 +7934,13 @@ const TRENDS_DATA = {
       "title": "Base Swim",
       "detail": "**1:40/100yd against a recent baseline of 1:51-2:04 \u2014 11 to 24 s/100yd faster than anything logged in the last month, at full prescribed distance**",
       "discipline": "swim",
+      "week": "Wk19"
+    },
+    {
+      "date": "2026-09-21",
+      "title": "Interval Bike",
+      "detail": "**Full prescription to the second (51:22 vs 51:00), all 3 reps dead-center Z5, WU *and* CD both complete, cadence 87-96rpm trending UP across the session**",
+      "discipline": "bike",
       "week": "Wk19"
     }
   ]
@@ -8000,7 +7990,7 @@ const RACE_DATA = {
       "predicted_range": "2:01:50\u20132:33:52",
       "evidence_1": "Longest logged run: 8.0mi",
       "evidence_2": "Best sustainable pace evidence: 7:45/mi",
-      "evidence_3": "Recent run frequency signal: 5 completed sessions across latest 2 weeks",
+      "evidence_3": "Recent run frequency signal: 4 completed sessions across latest 2 weeks",
       "limiter": "Run durability / injury recency",
       "summary": "Predicted from sustainable pace, longest-run durability, and a hard penalty for recent run interruption."
     }
