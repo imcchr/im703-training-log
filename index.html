@@ -683,7 +683,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated October 02, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated October 04, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -698,7 +698,7 @@ const WEEKS_DATA = [
     "start": "2026-09-28",
     "label": "Sep 28 - Oct 4",
     "phase": "Build",
-    "score": null,
+    "score": 67,
     "sessions": [
       {
         "date": "2026-09-28",
@@ -715,10 +715,10 @@ const WEEKS_DATA = [
         "discipline": "lift",
         "title": "Full Body",
         "prescribed": "",
-        "actual": "Completed \u2014 \u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total flagged as unreconciled, see coach log",
-        "key_metric": "\u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total flagged as unreconciled, see coach log",
+        "actual": "Completed \u2014 \u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total RECONCILED Oct 4: the gap is Strong adding bodyweight to dips/crunches (plus one bilateral exercise likely counted twice), not missing sets. Not a volume PR: dips entered as +190 inflated it; correctly entered ~23,650 lb vs best 25,455",
+        "key_metric": "\u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total RECONCILED Oct 4: the gap is Strong adding bodyweight to dips/crunches (plus one bilateral exercise likely counted twice), not missing sets. Not a volume PR: dips entered as +190 inflated it; correctly entered ~23,650 lb vs best 25,455",
         "score": 10,
-        "verdict": "Completed as logged in the calendar. \u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total flagged as unreconciled, see coach log"
+        "verdict": "Completed as logged in the calendar. \u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total RECONCILED Oct 4: the gap is Strong adding bodyweight to dips/crunches (plus one bilateral exercise likely counted twice), not missing sets. Not a volume PR: dips entered as +190 inflated it; correctly entered ~23,650 lb vs best 25,455"
       },
       {
         "date": "2026-09-29",
@@ -779,6 +779,36 @@ const WEEKS_DATA = [
         "key_metric": "**100% duration, fully in zone, cadence rising (88 -> 94) rather than fading**",
         "score": 10,
         "verdict": "**Clean on everything that is scored.** ERG held the 129-130W, so power precision earns no athlete credit; scored controllables were duration (80:00 of 80:00) and cadence (inside 80-100 the whole ride and climbing in the second half, no fatigue signature). Ian's own read: legs and energy felt great, could have kept going at the 1:20 mark. **Not docked for position** -- the prescription is easy Z2 with no aero requirement. **But this is now the main bike limiter for race day:** the Sep 22 aerobar fix removed the bar-width limit, and the next limit is the saddle. A 56mi race leg cannot be ridden 20-40% upright with no hands on the bars. Saddle soreness has been open in `profile/bike_fit.md` since Jul 9 and was marked improving on Sep 22; this ride says it is not solved. See Trends & Flags."
+      },
+      {
+        "date": "2026-10-02",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 \u00b7 did not happen (confirmed Oct 4)",
+        "key_metric": "\u00b7 did not happen (confirmed Oct 4)",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. \u00b7 did not happen (confirmed Oct 4)"
+      },
+      {
+        "date": "2026-10-03",
+        "discipline": "run",
+        "title": "Long Run",
+        "prescribed": "Sat PM Long Run \u00b7 1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi)",
+        "actual": "**MISS [INJ] \u2014 planned skip for the right knee** (Ian's call, Oct 2)",
+        "key_metric": "0 of 75min",
+        "score": 0,
+        "verdict": "Skipped on purpose after Friday's run stopped at ~1mi with right lateral knee pain. Self-tests Oct 3 point to IT band syndrome (Noble test positive, both hamstring-tendon checks negative). The right decision: 75min of the exact motion that was aggravating it, with symptoms arriving earlier each run, would have been trait #7 in action. Scores 0 like any miss; recorded as injury, not slack."
+      },
+      {
+        "date": "2026-10-03",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sat AM Long Swim \u00b7 1,850yd \u00b7 WU: 200yd \u00b7 MS: 1,550yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 1,850yd",
+        "score": 0,
+        "verdict": "Ian confirmed Oct 4 that it did not happen. No reason given and none required; recorded as a straight miss."
       }
     ]
   },
@@ -4627,7 +4657,7 @@ const PLAN_DATA = [
         "day": "Sat PM",
         "disc": "run",
         "session": "Long Run",
-        "target": "1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u2014 Planned skip (Ian's call, Oct 2): right lateral knee is getting worse (Open Item 17). Long Swim only on Saturday, no run. No running until a short test run early next week. Tag"
+        "target": "1:15 \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: Z3 (8-9/mi) \u00b7 CD: 10min Z2 (9:25-10:00/mi) \u2014 Planned skip (Ian's call, Oct 2): right lateral knee is getting worse (Open Item 17). Long Swim only on Saturday, no run. No running until a short test run early next week."
       }
     ],
     "notes": [],
@@ -6722,6 +6752,20 @@ const RECOVERY_DATA = [
     "vo2": "45",
     "status": "Recovery \u00b7 Load Focus Balanced",
     "flags": "Readiness 51, 48, 27, N/A, 3, 60, 73 \u2192 43.7 avg across 6 valid days. Sleep score avg 76.6 across 5 valid nights; deficit 1h23/night. Two rough early nights (6h05 and 5h30), then 8h36/8h06 recovery nights. RHR fell 51\u219245 while HRV rose into the low-mid 80s; no illness signal. Friday readiness floor 3 followed Thursday's 2,375yd combined swim + travel, then rebounded 60\u219273\u219289 by Wk20 Monday. Training Status Recovery, ATL 555 Low, VO2 45, Heat Acclimation 70% decreasing. BB weekly low/high and stress were not supplied and remain blank."
+  },
+  {
+    "week": "Wk20",
+    "dates": "Sep 28-Oct 4",
+    "hrv": "Balanced all 7d (~81\u219279ms, inside baseline)",
+    "rhr": "47",
+    "sleep": "7h 51m / 8h 13m",
+    "bb_low": "~10",
+    "bb_hi": "~100",
+    "stress": "30",
+    "atl": "--",
+    "vo2": "--",
+    "status": "--",
+    "flags": "Readiness 89, 79, 6, 47, 28, 35, 54 = 48.3 avg (third straight weekly rise). Best sleep in months: 22min/night deficit, need met Tue/Thu/Sun. Wed floor (readiness 6, BB high ~79) after front-loaded Mon+Tue. BB lows climbed 10\u219233 Thu-Sun as load dropped. Sleep score 71, overnight HR 51, SpO2 96%. BB values read off the chart (approx). ATL/VO2/status not supplied. Right knee (IT band, working theory) is the week's main flag."
   }
 ];
 const TRENDS_DATA = {
@@ -7153,7 +7197,7 @@ const TRENDS_DATA = {
       "week": "Wk20",
       "label": "Sep 28 - Oct 4",
       "phase": "Build",
-      "score": null,
+      "score": 67,
       "swim_yd": 2500,
       "bike_min": 187.1,
       "run_mi": 8.4,
@@ -7165,7 +7209,6 @@ const TRENDS_DATA = {
       "completed": 7,
       "completed_disc": {
         "bike": 3,
-        "lift": 1,
         "run": 2,
         "swim": 2
       },
@@ -7390,6 +7433,10 @@ const TRENDS_DATA = {
         {
           "date": "Wk19",
           "value": 73
+        },
+        {
+          "date": "Wk20",
+          "value": 67
         }
       ]
     },
@@ -7878,14 +7925,14 @@ const TRENDS_DATA = {
       "week_num": 20,
       "week": "Wk20",
       "load_min": 351.0,
-      "readiness": null,
+      "readiness": 48.3,
       "calories": null,
-      "hrv": "",
-      "rhr": "",
-      "sleep": "",
-      "atl": "",
-      "vo2": "",
-      "status": ""
+      "hrv": "Balanced all 7d (~81\u219279ms, inside baseline)",
+      "rhr": "47",
+      "sleep": "7h 51m / 8h 13m",
+      "atl": "--",
+      "vo2": "--",
+      "status": "--"
     }
   ],
   "milestones": [
@@ -7939,13 +7986,6 @@ const TRENDS_DATA = {
       "week": "Wk20"
     },
     {
-      "date": "2026-09-28",
-      "title": "Full Body",
-      "detail": "\u00b7 43min, 31,630 lb app-reported, 12 PRs \u00b7 Chest Dip bodyweight x15/15/12 all to failure \u00b7 Lat Pulldown 210x10x3 \u00b7 Lateral Raises 50x8x3 \u00b7 Preacher Curl 35x18/14 (1RM/Vol/Weight) \u00b7 Tricep Ext 60x30/25 (1RM/Vol/Weight) \u00b7 Decline Crunch +12x10 \u2014 ends the two-session gap from Wk19; volume total flagged as unreconciled, see coach log",
-      "discipline": "lift",
-      "week": "Wk20"
-    },
-    {
       "date": "2026-09-24",
       "title": "Base Run",
       "detail": "**76% of prescribed duration (26:43 of 35:00); pace moderately above the easy band but well short of the Z4 pace band**",
@@ -7970,6 +8010,13 @@ const TRENDS_DATA = {
       "date": "2026-09-23",
       "title": "Run (ULO \u2014 bonus, uncounted)",
       "detail": "**Ran slower than the easy band (10:12/mi vs 9:00-10:00 prescribed) \u2014 pace discipline win on an athlete whose chronic flag is the opposite**",
+      "discipline": "run",
+      "week": "Wk19"
+    },
+    {
+      "date": "2026-09-22",
+      "title": "Interval Run",
+      "detail": "**3 of 3 reps completed at full duration with a negative split (7:22 \u2192 7:18 \u2192 7:12), recovery HR \u221221 bpm at 60s after all three reps**",
       "discipline": "run",
       "week": "Wk19"
     }
@@ -8140,6 +8187,10 @@ const RECOVERY_IDX = [
   {
     "week": "Wk19",
     "value": 43.7
+  },
+  {
+    "week": "Wk20",
+    "value": 48.3
   }
 ];
 const HRR_DATA = [
