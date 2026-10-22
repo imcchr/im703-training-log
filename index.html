@@ -683,7 +683,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated October 21, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated October 22, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -759,6 +759,16 @@ const WEEKS_DATA = [
         "key_metric": "**35% of the usual 30min; pace inside the easy band throughout**",
         "score": 4,
         "verdict": "**Bonus, uncounted, scored for the record** (on the Oct 2 basis: 49% of duration was 5/10). The only dock is duration. This one was run right: easy pace the whole way, and he stopped when it hurt instead of running through it, unlike Oct 12. **The knee result is the important part:** pain at 5min at an easy 10:29/mi, after 9 days without running, a rested weekend and a basketball test. Not settled; impact running is still off."
+      },
+      {
+        "date": "2026-10-22",
+        "discipline": "swim",
+        "title": "Interval Swim",
+        "prescribed": "Thu PM Interval Swim \u00b7 1,600yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,200T \u00b7 CD: 200yd",
+        "actual": "Thu Oct 22, 11:33am \u00b7 25yd pool \u00b7 **1,600yd** = **1000yd TT 18:35.3 continuous** (no stops, no buoy, touch turns; 1:51.5/100yd) + 200 @ 3:17.8 + 200 @ 3:15.2 + 200 CD @ 3:44.6 \u00b7 100yd splits 1:35.3, 1:40.2, 1:50.0, 1:53.1, 1:58.6, 2:02.2, 1:55.1, 1:54.6, 1:52.9, 1:53.3 \u00b7 first 500 8:57.2 / second 500 9:38.1 \u00b7 strokes per length 9-11 for the first 100, 13-15 from 300yd on \u00b7 HR 178 avg / 196 max on the TT (context: a true max effort)",
+        "key_metric": "**100% of distance; self-swapped the main set for a 1000yd TT**",
+        "score": 9,
+        "verdict": "**PR and a milestone: first 1000yd ever without stopping or aids.** Ian picked a TT to get his confidence back (goal sub-20). The comparison is elapsed vs elapsed: May's benchmark was 41:50 (1000m), stopping every ~50yd (CORRECTED BY IAN). **-1: no warm-up before a max effort, and the prescribed hard/easy set was swapped out unplanned.** Pacing: went out at 1:35, faded to 2:02 by 600, then held 1:53-1:55 for the last 400. +41s positive split; an even 1:52 would likely have been as fast for less suffering. The 700-1000 pace (~1:54) is about the race target (1:53/100yd), but over half the race distance and in a pool. Swim CSS test is now unlocked (400yd unaided was the precondition)."
       }
     ]
   },
@@ -7818,19 +7828,20 @@ const TRENDS_DATA = {
       "label": "Oct 19-25",
       "phase": "Build",
       "score": null,
-      "swim_yd": 0,
+      "swim_yd": 25,
       "bike_min": 0.0,
       "run_mi": 1.0,
-      "total_min": 10.5,
-      "long_swim_yd": 0,
+      "total_min": 48.2,
+      "long_swim_yd": 25,
       "long_bike_min": 0.0,
       "long_run_mi": 1.0,
       "run_sessions": 1,
-      "completed": 1,
+      "completed": 2,
       "completed_disc": {
-        "run": 1
+        "run": 1,
+        "swim": 1
       },
-      "load_delta": -89
+      "load_delta": -51
     }
   ],
   "durability": [
@@ -7990,7 +8001,7 @@ const TRENDS_DATA = {
     },
     {
       "week": "Wk23",
-      "long_swim_yd": 0,
+      "long_swim_yd": 25,
       "long_bike_min": 0.0,
       "long_run_mi": 1.0,
       "run_sessions": 1
@@ -8631,7 +8642,7 @@ const TRENDS_DATA = {
     {
       "week_num": 23,
       "week": "Wk23",
-      "load_min": 10.5,
+      "load_min": 48.2,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -8643,6 +8654,13 @@ const TRENDS_DATA = {
     }
   ],
   "milestones": [
+    {
+      "date": "2026-10-22",
+      "title": "Interval Swim",
+      "detail": "**100% of distance; self-swapped the main set for a 1000yd TT**",
+      "discipline": "swim",
+      "week": "Wk23"
+    },
     {
       "date": "2026-10-14",
       "title": "Run (ULO \u2014 bonus, uncounted)",
@@ -8718,13 +8736,6 @@ const TRENDS_DATA = {
       "title": "Base Run",
       "detail": "**76% of prescribed duration (26:43 of 35:00); pace moderately above the easy band but well short of the Z4 pace band**",
       "discipline": "run",
-      "week": "Wk19"
-    },
-    {
-      "date": "2026-09-24",
-      "title": "Interval Swim",
-      "detail": "**1,000 of 1,000yd = 100%**",
-      "discipline": "swim",
       "week": "Wk19"
     }
   ]
