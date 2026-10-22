@@ -794,10 +794,10 @@ const WEEKS_DATA = [
         "discipline": "lift",
         "title": "Full Body",
         "prescribed": "",
-        "actual": "Completed \u2014 \u00b7 screenshot owed",
-        "key_metric": "\u00b7 screenshot owed",
-        "score": 10,
-        "verdict": "Completed as logged in the calendar. \u00b7 screenshot owed"
+        "actual": "Completed \u2014 \u00b7 done Wed Oct 14, 9:02pm per Strong (35min) \u00b7 Chest Dip +0 x17/15/12 (rep PR) \u00b7 Pull Up +0 x12/ \u00b7 Lateral Raise (DB) 70x12x3 \u00b7 Single-Arm Preacher Curl 35x19/12 \u00b7 Tricep Ext 60x32/21",
+        "key_metric": "\u00b7 done Wed Oct 14, 9:02pm per Strong (35min) \u00b7 Chest Dip +0 x17/15/12 (rep PR) \u00b7 Pull Up +0 x12/ \u00b7 Lateral Raise (DB) 70x12x3 \u00b7 Single-Arm Preacher Curl 35x19/12 \u00b7 Tricep Ext 60x32/21",
+        "score": 12,
+        "verdict": "Completed as logged in the calendar. \u00b7 done Wed Oct 14, 9:02pm per Strong (35min) \u00b7 Chest Dip +0 x17/15/12 (rep PR) \u00b7 Pull Up +0 x12/ \u00b7 Lateral Raise (DB) 70x12x3 \u00b7 Single-Arm Preacher Curl 35x19/12 \u00b7 Tricep Ext 60x32/21"
       },
       {
         "date": "2026-10-13",
@@ -7331,6 +7331,20 @@ const RECOVERY_DATA = [
     "vo2": "45",
     "status": "Strained \u00b7 Load Focus High Aerobic Shortage",
     "flags": "Readiness 60, 41, 53, 63, 68, 70, 71 = 60.9 avg (fourth straight rise, best of block, but on a near-zero training week: 1/9 sessions). Sleep deficit 35min/night (Wk20 22min); Fri ~5.5h vs ~8.0h need was the worst night, and HRV dropped below baseline the next two nights. Sleep score 70 avg. BB lows/highs and stress not supplied; avg overnight BB +65. Full breakdown: `uploads/health/wk21-oct5-oct11/wk21_recovery_summary.md`."
+  },
+  {
+    "week": "Wk22",
+    "dates": "Oct 12-18",
+    "hrv": "Low: 70-76ms vs 76-89 baseline (avg 73.0; Thu no reading)",
+    "rhr": "47.5",
+    "sleep": "8h 20m / 7h 40m",
+    "bb_low": "--",
+    "bb_hi": "--",
+    "stress": "--",
+    "atl": "-- (Oct 22: 359 Low)",
+    "vo2": "45 (Oct 22)",
+    "status": "Strained (Oct 22) \u00b7 Load Focus High Aerobic Shortage",
+    "flags": "Readiness 78, 5, 45, --, 61, 85, 89 = 60.5 (6 days). First sleep surplus of the block (+40min). HRV under baseline since Oct 9 despite near-zero load. Tue 5 = morning after the run club (knee)."
   }
 ];
 const TRENDS_DATA = {
@@ -8630,14 +8644,14 @@ const TRENDS_DATA = {
       "week_num": 22,
       "week": "Wk22",
       "load_min": 98.2,
-      "readiness": null,
+      "readiness": 60.5,
       "calories": null,
-      "hrv": "",
-      "rhr": "",
-      "sleep": "",
-      "atl": "",
-      "vo2": "",
-      "status": ""
+      "hrv": "Low: 70-76ms vs 76-89 baseline (avg 73.0; Thu no reading)",
+      "rhr": "47.5",
+      "sleep": "8h 20m / 7h 40m",
+      "atl": "-- (Oct 22: 359 Low)",
+      "vo2": "45 (Oct 22)",
+      "status": "Strained (Oct 22) \u00b7 Load Focus High Aerobic Shortage"
     },
     {
       "week_num": 23,
@@ -8666,6 +8680,13 @@ const TRENDS_DATA = {
       "title": "Run (ULO \u2014 bonus, uncounted)",
       "detail": "**84% of prescribed duration (25:12 of 30:00); every mile 1:03-1:42/mi faster than the easy band; miles 2-3 inside the Z4 interval band by pace**",
       "discipline": "run",
+      "week": "Wk22"
+    },
+    {
+      "date": "2026-10-12",
+      "title": "Full Body",
+      "detail": "\u00b7 done Wed Oct 14, 9:02pm per Strong (35min) \u00b7 Chest Dip +0 x17/15/12 (rep PR) \u00b7 Pull Up +0 x12/ \u00b7 Lateral Raise (DB) 70x12x3 \u00b7 Single-Arm Preacher Curl 35x19/12 \u00b7 Tricep Ext 60x32/21",
+      "discipline": "lift",
       "week": "Wk22"
     },
     {
@@ -8730,13 +8751,6 @@ const TRENDS_DATA = {
       "detail": "**4/4 reps full duration; every rep cadence inside 80-100rpm; 61:00 moving exactly**",
       "discipline": "bike",
       "week": "Wk20"
-    },
-    {
-      "date": "2026-09-24",
-      "title": "Base Run",
-      "detail": "**76% of prescribed duration (26:43 of 35:00); pace moderately above the easy band but well short of the Z4 pace band**",
-      "discipline": "run",
-      "week": "Wk19"
     }
   ]
 };
@@ -8913,6 +8927,10 @@ const RECOVERY_IDX = [
   {
     "week": "Wk21",
     "value": 60.9
+  },
+  {
+    "week": "Wk22",
+    "value": 60.5
   }
 ];
 const HRR_DATA = [
