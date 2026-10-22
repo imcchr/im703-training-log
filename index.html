@@ -683,7 +683,7 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 </section>
 <section id="view-plan" class="view" aria-label="Training plan">
   <div class="page-heading"><div class="eyebrow">02 / THE INTENTION</div><h1>A little structure.<br><span>A long way.</span></h1><p>Your next sessions, with the details that make them count.</p></div>
-  <p class="plan-intro">Prescribed plan · updated October 13, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
+  <p class="plan-intro">Prescribed plan · updated October 21, 2026. Current and upcoming weeks first.</p><div id="reentry-control"></div><div id="plan-container"></div>
 </section>
 <section id="view-progress" class="view" aria-label="Training progress">
   <div class="page-heading"><div class="eyebrow">03 / THE BIG PICTURE</div><h1>See the work.<br><span>Find your edge.</span></h1><p>Volume. Recovery. Race day. A clearer view of where you stand.</p></div>
@@ -694,11 +694,80 @@ body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 <script>
 const WEEKS_DATA = [
   {
+    "num": 23,
+    "start": "2026-10-19",
+    "label": "Oct 19-25",
+    "phase": "Build",
+    "score": null,
+    "sessions": [
+      {
+        "date": "2026-10-19",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Mon AM Interval Bike \u00b7 1:09 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 5\u00d75min Z5 VO2max (211-240W), 6min @ 100W fixed recovery between reps \u00b7 CD: 10min Z2 (111-150W)",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 69min",
+        "score": 0,
+        "verdict": "Not done; no training since Oct 12 (Ian, Oct 21: bummed about the knee, travel)."
+      },
+      {
+        "date": "2026-10-19",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 \u00b7 knee low, travel",
+        "key_metric": "\u00b7 knee low, travel",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. \u00b7 knee low, travel"
+      },
+      {
+        "date": "2026-10-20",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Tue AM Base Bike \u00b7 1:00 \u00b7 easy Z2 125-140W",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 60min",
+        "score": 0,
+        "verdict": "Not done; no training since Oct 12 (Ian, Oct 21: bummed about the knee, travel). Basketball shoot-around that day instead (unscheduled, unscored); knee came on slightly toward the end."
+      },
+      {
+        "date": "2026-10-20",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Tue PM Base Swim \u00b7 1,650yd \u00b7 WU: 200yd \u00b7 MS: 1,350yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 1,650yd",
+        "score": 0,
+        "verdict": "Not done; no training since Oct 12 (Ian, Oct 21: bummed about the knee, travel)."
+      },
+      {
+        "date": "2026-10-21",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Wed AM Base Bike \u00b7 1:05 \u00b7 easy Z2 125-140W",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 65min",
+        "score": 0,
+        "verdict": "Not done; Ian went to run club in the evening instead."
+      },
+      {
+        "date": "2026-10-21",
+        "discipline": "run",
+        "title": "Run (ULO \u2014 bonus, uncounted, off-plan)",
+        "prescribed": "Wed PM ULO Run (run club) \u00b7 not in the Wk23 plan (no running Wk22-24); Ian's call, for the social side, easy, walk at the first pain",
+        "actual": "Wed Oct 21, 6:10pm \u00b7 outdoor \u00b7 **10:31 \u00b7 1.00mi \u00b7 10:29/mi**, every 2min sample 10:00-11:09/mi (in the easy band) \u00b7 cadence 156-164spm \u00b7 HR 149 avg / 160 max (backup only) \u00b7 **Ian: pain about 5min in, noticeably hurting by 10min; stopped and walked back**",
+        "key_metric": "**35% of the usual 30min; pace inside the easy band throughout**",
+        "score": 4,
+        "verdict": "**Bonus, uncounted, scored for the record** (on the Oct 2 basis: 49% of duration was 5/10). The only dock is duration. This one was run right: easy pace the whole way, and he stopped when it hurt instead of running through it, unlike Oct 12. **The knee result is the important part:** pain at 5min at an easy 10:29/mi, after 9 days without running, a rested weekend and a basketball test. Not settled; impact running is still off."
+      }
+    ]
+  },
+  {
     "num": 22,
     "start": "2026-10-12",
     "label": "Oct 12-18",
     "phase": "Build",
-    "score": null,
+    "score": 11,
     "sessions": [
       {
         "date": "2026-10-12",
@@ -711,6 +780,46 @@ const WEEKS_DATA = [
         "verdict": "**Exact repeat of Oct 5, executed perfectly again.** ERG held the 225W, so the scored controllables are duration (73:00 of 73:00, WU and CD complete) and cadence (in band throughout, rising 91 -> 96 rather than fading). **Ian's read is correct, not bad memory (context only, never the score):** same watts, HR ran ~6-8 bpm higher across the whole session. WU 147 vs 131, reps 175.4 vs 169.6 avg, rep peaks 184 vs 178, recoveries 157 vs 149, max 186 vs 180. HRR60 mean 11.0 vs 13.5 (reps 2-4 near identical; rep 1 was 8 vs 16). **But the shape says baseline shift, not fatigue:** the offset is there from the warm-up, before any hard work, and within-session drift was smaller (rep HR +2 across the set vs +5 on Oct 5). Likely contributors: the near-zero Wk21 (plasma volume drops within days of inactivity, raising HR at a given power, and comes back within 1-2 weeks of training), HRV Low going in (73ms Oct 11, Garmin Strained), and 10am vs 6pm. A week off doesn't cost VO2 fitness in any meaningful way; the power is what matters and it was identical. **Next Monday (Wk23, 5x5 with 6min recoveries) is the check:** HR should come back toward Oct 5 levels once Wk22's volume is in. Side-by-side table: `analysis/2026-10-12_bike.md`."
       },
       {
+        "date": "2026-10-12",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "Completed \u2014 \u00b7 screenshot owed",
+        "key_metric": "\u00b7 screenshot owed",
+        "score": 10,
+        "verdict": "Completed as logged in the calendar. \u00b7 screenshot owed"
+      },
+      {
+        "date": "2026-10-13",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Tue AM Base Bike \u00b7 1:00 \u00b7 easy Z2 125-140W",
+        "actual": "**MISS [INJ] \u2014 not attempted**",
+        "key_metric": "0 of 60min",
+        "score": 0,
+        "verdict": "Knee hurt walking after the Oct 12 run club; coach advised no bike that day (pull-buoy swim only)."
+      },
+      {
+        "date": "2026-10-13",
+        "discipline": "swim",
+        "title": "Base Swim",
+        "prescribed": "Tue PM Base Swim \u00b7 1,550yd \u00b7 WU: 200yd \u00b7 MS: 1,250yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 1,550yd",
+        "score": 0,
+        "verdict": "Coach cleared a pull-buoy swim; not done. Knee hurting walking that day."
+      },
+      {
+        "date": "2026-10-14",
+        "discipline": "bike",
+        "title": "Base Bike",
+        "prescribed": "Wed AM Base Bike \u00b7 1:00 \u00b7 easy Z2 125-140W",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 60min",
+        "score": 0,
+        "verdict": "Not done. Ian (Oct 21): \"pretty bummed with my knee situation\", then travel at the weekend. Walking was pain-free again from Oct 14."
+      },
+      {
         "date": "2026-10-14",
         "discipline": "run",
         "title": "Run (ULO \u2014 bonus, uncounted)",
@@ -719,6 +828,66 @@ const WEEKS_DATA = [
         "key_metric": "**84% of prescribed duration (25:12 of 30:00); every mile 1:03-1:42/mi faster than the easy band; miles 2-3 inside the Z4 interval band by pace**",
         "score": 7,
         "verdict": "**Bonus run, uncounted, scored for the record.** -1 duration (84%). -2 pace: this slot is the easy band (9:30-10:30/mi), which was Ian's own Oct 4 change to protect the knee, and miles 2-3 ran 7:48 and 8:00, inside the 7:30-8:00 Z4 interval band, by pace alone. (The Sep 24 run club got no pace dock, but it ran 8:29, between the bands, before the knee band existed, and its Z4 label came from HR. This one is Z4 by pace, so the precedent does not apply.) **The real story is the knee, not the score:** first run since the Oct 2 stop at 27min, and the pain was there for the whole run rather than a late twinge, so ~10 days without running did not settle it. The Oct 5 guardrail was stop at the first twinge; it was run through. Aerobically he felt great, which matches Monday's bike: the engine is fine, the knee is the limiter. **The Oct 17 physio trigger (\"hasn't settled\") has effectively been answered early.** Hip-abductor work and ~168spm are still not in the plan; cadence today was 161-167 and faded."
+      },
+      {
+        "date": "2026-10-15",
+        "discipline": "bike",
+        "title": "Interval Bike",
+        "prescribed": "Thu AM Interval Bike \u00b7 1:00 \u00b7 WU: 10min Z2 \u00b7 MS: 40min Z3 tempo (151-180W) \u00b7 CD: 10min Z2",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 60min",
+        "score": 0,
+        "verdict": "Not done. Ian (Oct 21): \"pretty bummed with my knee situation\", then travel at the weekend. Walking was pain-free again from Oct 14."
+      },
+      {
+        "date": "2026-10-15",
+        "discipline": "swim",
+        "title": "Interval Swim",
+        "prescribed": "Thu PM Interval Swim \u00b7 1,600yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,200T \u00b7 CD: 200yd",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 1,600yd",
+        "score": 0,
+        "verdict": "Not done. Ian (Oct 21): \"pretty bummed with my knee situation\", then travel at the weekend. Walking was pain-free again from Oct 14."
+      },
+      {
+        "date": "2026-10-16",
+        "discipline": "bike",
+        "title": "Long Bike",
+        "prescribed": "Fri AM Long Bike \u00b7 1:25 \u00b7 easy Z2 111-150W",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 85min",
+        "score": 0,
+        "verdict": "Not done. Ian (Oct 21): \"pretty bummed with my knee situation\", then travel at the weekend. Walking was pain-free again from Oct 14."
+      },
+      {
+        "date": "2026-10-16",
+        "discipline": "lift",
+        "title": "Full Body",
+        "prescribed": "",
+        "actual": "MISSED \u2014 \u00b7 knee low, travel",
+        "key_metric": "\u00b7 knee low, travel",
+        "score": 0,
+        "verdict": "Missed session recorded in the calendar. \u00b7 knee low, travel"
+      },
+      {
+        "date": "2026-10-17",
+        "discipline": "bike",
+        "title": "Long Bike",
+        "prescribed": "Sat PM Long Bike \u00b7 1:25 \u00b7 easy Z2 125-140W",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 85min",
+        "score": 0,
+        "verdict": "Not done. Ian (Oct 21): \"pretty bummed with my knee situation\", then travel at the weekend. Walking was pain-free again from Oct 14."
+      },
+      {
+        "date": "2026-10-17",
+        "discipline": "swim",
+        "title": "Long Swim",
+        "prescribed": "Sat AM Long Swim \u00b7 2,000yd \u00b7 WU: 200yd \u00b7 MS: 1,700yd Z2 steady \u00b7 CD: 100yd",
+        "actual": "**MISS \u2014 not attempted**",
+        "key_metric": "0 of 2,000yd",
+        "score": 0,
+        "verdict": "Not done. Ian (Oct 21): \"pretty bummed with my knee situation\", then travel at the weekend. Walking was pain-free again from Oct 14."
       }
     ]
   },
@@ -4910,76 +5079,76 @@ const PLAN_DATA = [
     "block": "Fall Block",
     "rows": [
       {
-        "day": "Mon AM",
+        "day": "Mon",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "1:13 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 5\u00d75min Z5 VO2max (211-240W), 7min @ 100W fixed recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "Mon AM Interval Bike \u00b7 1:13 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 5\u00d75min Z5 VO2max (211-240W), 7min @ 100W fixed recovery between reps \u00b7 CD: 10min Z2 (111-150W)"
       },
       {
-        "day": "Mon PM",
+        "day": "Mon",
         "disc": "lift",
         "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Tue AM",
+        "day": "Tue",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "1:00 \u00b7 easy Z2 125-140W"
+        "target": "Tue AM Base Bike \u00b7 1:00 \u00b7 easy Z2 125-140W"
       },
       {
-        "day": "Tue PM",
+        "day": "Tue",
         "disc": "swim",
         "session": "Base Swim",
-        "target": "1,550yd \u00b7 WU: 200yd \u00b7 MS: 1,250yd Z2 steady \u00b7 CD: 100yd"
+        "target": "Tue PM Base Swim \u00b7 1,550yd \u00b7 WU: 200yd \u00b7 MS: 1,250yd Z2 steady \u00b7 CD: 100yd"
       },
       {
-        "day": "Wed AM",
+        "day": "Wed",
         "disc": "bike",
         "session": "Base Bike",
-        "target": "1:00 \u00b7 easy Z2 125-140W"
+        "target": "Wed AM Base Bike \u00b7 1:00 \u00b7 easy Z2 125-140W"
       },
       {
-        "day": "Wed PM",
+        "day": "Wed",
         "disc": "run",
-        "session": "ULO Run",
-        "target": "30min \u00b7 easy Z2 9:30-10:30/mi"
+        "session": "Run (ULO \u2014 bonus, uncounted)",
+        "target": "Wed PM ULO Run \u00b7 30min \u00b7 easy Z2 9:30-10:30/mi"
       },
       {
-        "day": "Thu AM",
+        "day": "Thu",
         "disc": "bike",
         "session": "Interval Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 40min Z3 tempo (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "target": "Thu AM Interval Bike \u00b7 1:00 \u00b7 WU: 10min Z2 \u00b7 MS: 40min Z3 tempo (151-180W) \u00b7 CD: 10min Z2"
       },
       {
-        "day": "Thu PM",
+        "day": "Thu",
         "disc": "swim",
         "session": "Interval Swim",
-        "target": "1,600yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,200T \u00b7 CD: 200yd"
+        "target": "Thu PM Interval Swim \u00b7 1,600yd \u00b7 WU: 200yd \u00b7 MS: 100H/100E - 1,200T \u00b7 CD: 200yd"
       },
       {
-        "day": "Fri AM",
+        "day": "Fri",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "1:25 \u00b7 easy Z2 111-150W"
+        "target": "Fri AM Long Bike \u00b7 1:25 \u00b7 easy Z2 111-150W"
       },
       {
-        "day": "Fri PM",
+        "day": "Fri",
         "disc": "lift",
-        "session": "Full Body + Hip Strength",
+        "session": "Full Body",
         "target": ""
       },
       {
-        "day": "Sat AM",
-        "disc": "swim",
-        "session": "Long Swim",
-        "target": "2,000yd \u00b7 WU: 200yd \u00b7 MS: 1,700yd Z2 steady \u00b7 CD: 100yd"
-      },
-      {
-        "day": "Sat PM",
+        "day": "Sat",
         "disc": "bike",
         "session": "Long Bike",
-        "target": "1:25 \u00b7 easy Z2 125-140W"
+        "target": "Sat PM Long Bike \u00b7 1:25 \u00b7 easy Z2 125-140W"
+      },
+      {
+        "day": "Sat",
+        "disc": "swim",
+        "session": "Long Swim",
+        "target": "Sat AM Long Swim \u00b7 2,000yd \u00b7 WU: 200yd \u00b7 MS: 1,700yd Z2 steady \u00b7 CD: 100yd"
       }
     ],
     "notes": [],
@@ -5011,7 +5180,7 @@ const PLAN_DATA = [
       {
         "day": "Mon PM",
         "disc": "lift",
-        "session": "Full Body + Hip Strength",
+        "session": "Full Body",
         "target": ""
       },
       {
@@ -5034,15 +5203,15 @@ const PLAN_DATA = [
       },
       {
         "day": "Wed PM",
-        "disc": "lift",
-        "session": "Hip Strength",
-        "target": ""
+        "disc": "run",
+        "session": "ULO Run",
+        "target": "30min \u00b7 easy Z2 9:30-10:30/mi \u2014 [SHORT] 4/10 (bonus, off-plan) \u00b7 stopped at 10:31, knee"
       },
       {
         "day": "Thu AM",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 40min Z3 tempo (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "disc": "unknown",
+        "session": "Walk",
+        "target": "1:00 \u00b7 brisk, flat"
       },
       {
         "day": "Thu PM",
@@ -5059,7 +5228,7 @@ const PLAN_DATA = [
       {
         "day": "Fri PM",
         "disc": "lift",
-        "session": "Full Body + Hip Strength",
+        "session": "Full Body",
         "target": ""
       },
       {
@@ -5070,22 +5239,22 @@ const PLAN_DATA = [
       },
       {
         "day": "Sat PM",
-        "disc": "bike",
-        "session": "Long Bike",
-        "target": "1:30 \u00b7 easy Z2 125-140W"
+        "disc": "unknown",
+        "session": "Long Walk",
+        "target": "1:30 \u00b7 brisk, flat"
       }
     ],
     "notes": [],
     "summary": {
       "swim": "5,400yd",
-      "bike": "7:14",
-      "run": "0.0mi",
+      "bike": "4:44",
+      "run": "3.0mi",
       "swim_yd": 5400,
-      "bike_min": 434,
-      "run_mi": 0.0,
+      "bike_min": 284,
+      "run_mi": 3.0,
       "swim_delta": 5,
-      "bike_delta": 3,
-      "run_delta": -100
+      "bike_delta": -33,
+      "run_delta": 0
     }
   },
   {
@@ -5104,14 +5273,14 @@ const PLAN_DATA = [
       {
         "day": "Mon PM",
         "disc": "lift",
-        "session": "Full Body + Hip Strength",
+        "session": "Full Body",
         "target": ""
       },
       {
         "day": "Tue AM",
-        "disc": "bike",
-        "session": "Base Bike",
-        "target": "1:00 \u00b7 easy Z2 125-140W"
+        "disc": "unknown",
+        "session": "Walk",
+        "target": "1:06 \u00b7 brisk, flat"
       },
       {
         "day": "Tue PM",
@@ -5127,15 +5296,15 @@ const PLAN_DATA = [
       },
       {
         "day": "Wed PM",
-        "disc": "lift",
-        "session": "Hip Strength",
-        "target": ""
+        "disc": "unknown",
+        "session": "ULO Walk",
+        "target": "30min \u00b7 bonus \u00b7 walk with run club, no running"
       },
       {
         "day": "Thu AM",
-        "disc": "bike",
-        "session": "Interval Bike",
-        "target": "1:00 \u00b7 WU: 10min Z2 (111-150W) \u00b7 MS: 40min Z3 tempo (151-180W) \u00b7 CD: 10min Z2 (111-150W)"
+        "disc": "unknown",
+        "session": "Walk",
+        "target": "1:00 \u00b7 brisk, flat"
       },
       {
         "day": "Thu PM",
@@ -5152,7 +5321,7 @@ const PLAN_DATA = [
       {
         "day": "Fri PM",
         "disc": "lift",
-        "session": "Full Body + Hip Strength",
+        "session": "Full Body",
         "target": ""
       },
       {
@@ -5163,22 +5332,22 @@ const PLAN_DATA = [
       },
       {
         "day": "Sat PM",
-        "disc": "bike",
-        "session": "Long Bike",
-        "target": "1:30 \u00b7 easy Z2 125-140W"
+        "disc": "unknown",
+        "session": "Long Walk",
+        "target": "1:30 \u00b7 brisk, flat"
       }
     ],
     "notes": [],
     "summary": {
       "swim": "5,400yd",
-      "bike": "7:14",
+      "bike": "3:44",
       "run": "0.0mi",
       "swim_yd": 5400,
-      "bike_min": 434,
+      "bike_min": 224,
       "run_mi": 0.0,
       "swim_delta": 0,
-      "bike_delta": 0,
-      "run_delta": null
+      "bike_delta": -21,
+      "run_delta": -100
     }
   },
   {
@@ -5202,9 +5371,9 @@ const PLAN_DATA = [
       },
       {
         "day": "Tue AM",
-        "disc": "run",
-        "session": "Interval Run",
-        "target": "32min \u00b7 WU: 10min Z2 (9:25-10:00/mi) \u00b7 MS: 3x5min Z4 (7:30-8:00/mi), 2min Z2 rec \u00b7 CD: 10min Z2 (9:25-10:00/mi)"
+        "disc": "unknown",
+        "session": "Walk",
+        "target": "0:39 \u00b7 brisk, flat"
       },
       {
         "day": "Tue PM",
@@ -5220,15 +5389,15 @@ const PLAN_DATA = [
       },
       {
         "day": "Wed PM",
-        "disc": "run",
-        "session": "ULO Run",
-        "target": "30min \u00b7 easy Z2 9:30-10:30/mi"
+        "disc": "unknown",
+        "session": "ULO Walk",
+        "target": "30min \u00b7 bonus \u00b7 walk with run club, no running"
       },
       {
         "day": "Thu AM",
-        "disc": "run",
-        "session": "Base Run",
-        "target": "35min \u00b7 easy Z2 9:30-10:30/mi"
+        "disc": "unknown",
+        "session": "Walk",
+        "target": "0:35 \u00b7 brisk, flat"
       },
       {
         "day": "Thu PM",
@@ -5256,21 +5425,21 @@ const PLAN_DATA = [
       },
       {
         "day": "Sat PM",
-        "disc": "run",
-        "session": "Long Run",
-        "target": "0:50 \u00b7 easy Z2 9:30-10:30/mi throughout"
+        "disc": "unknown",
+        "session": "Long Walk",
+        "target": "0:50 \u00b7 brisk, flat"
       }
     ],
     "notes": [],
     "summary": {
       "swim": "4,200yd",
       "bike": "2:36",
-      "run": "14.8mi",
+      "run": "0.0mi",
       "swim_yd": 4200,
       "bike_min": 156,
-      "run_mi": 14.8,
+      "run_mi": 0.0,
       "swim_delta": -22,
-      "bike_delta": -64,
+      "bike_delta": -30,
       "run_delta": null
     }
   },
@@ -5364,7 +5533,7 @@ const PLAN_DATA = [
       "run_mi": 24.27,
       "swim_delta": 36,
       "bike_delta": 47,
-      "run_delta": 64
+      "run_delta": null
     }
   },
   {
@@ -6163,22 +6332,22 @@ const EXPECTED_COUNTS = {
   "2026-10-17": 2,
   "2026-10-19": 2,
   "2026-10-20": 2,
-  "2026-10-21": 2,
-  "2026-10-22": 2,
+  "2026-10-21": 1,
+  "2026-10-22": 1,
   "2026-10-23": 2,
-  "2026-10-24": 2,
+  "2026-10-24": 1,
   "2026-10-26": 2,
-  "2026-10-27": 2,
-  "2026-10-28": 2,
-  "2026-10-29": 2,
+  "2026-10-27": 1,
+  "2026-10-28": 1,
+  "2026-10-29": 1,
   "2026-10-30": 2,
-  "2026-10-31": 2,
+  "2026-10-31": 1,
   "2026-11-02": 2,
-  "2026-11-03": 2,
+  "2026-11-03": 1,
   "2026-11-04": 1,
-  "2026-11-05": 2,
+  "2026-11-05": 1,
   "2026-11-06": 2,
-  "2026-11-07": 2,
+  "2026-11-07": 1,
   "2026-11-09": 2,
   "2026-11-10": 2,
   "2026-11-11": 1,
@@ -6747,11 +6916,9 @@ const EXPECTED_DISC = {
     "swim": 1
   },
   "2026-10-21": {
-    "bike": 1,
-    "lift": 1
+    "bike": 1
   },
   "2026-10-22": {
-    "bike": 1,
     "swim": 1
   },
   "2026-10-23": {
@@ -6759,23 +6926,19 @@ const EXPECTED_DISC = {
     "lift": 1
   },
   "2026-10-24": {
-    "swim": 1,
-    "bike": 1
+    "swim": 1
   },
   "2026-10-26": {
     "bike": 1,
     "lift": 1
   },
   "2026-10-27": {
-    "bike": 1,
     "swim": 1
   },
   "2026-10-28": {
-    "bike": 1,
-    "lift": 1
+    "bike": 1
   },
   "2026-10-29": {
-    "bike": 1,
     "swim": 1
   },
   "2026-10-30": {
@@ -6783,22 +6946,19 @@ const EXPECTED_DISC = {
     "lift": 1
   },
   "2026-10-31": {
-    "swim": 1,
-    "bike": 1
+    "swim": 1
   },
   "2026-11-02": {
     "bike": 1,
     "lift": 1
   },
   "2026-11-03": {
-    "run": 1,
     "swim": 1
   },
   "2026-11-04": {
     "bike": 1
   },
   "2026-11-05": {
-    "run": 1,
     "swim": 1
   },
   "2026-11-06": {
@@ -6806,8 +6966,7 @@ const EXPECTED_DISC = {
     "lift": 1
   },
   "2026-11-07": {
-    "swim": 1,
-    "run": 1
+    "swim": 1
   },
   "2026-11-09": {
     "bike": 1,
@@ -7636,7 +7795,7 @@ const TRENDS_DATA = {
       "week": "Wk22",
       "label": "Oct 12-18",
       "phase": "Build",
-      "score": null,
+      "score": 11,
       "swim_yd": 0,
       "bike_min": 73.0,
       "run_mi": 3.1,
@@ -7648,9 +7807,30 @@ const TRENDS_DATA = {
       "completed": 2,
       "completed_disc": {
         "bike": 1,
+        "lift": 1,
         "run": 1
       },
       "load_delta": 35
+    },
+    {
+      "week_num": 23,
+      "week": "Wk23",
+      "label": "Oct 19-25",
+      "phase": "Build",
+      "score": null,
+      "swim_yd": 0,
+      "bike_min": 0.0,
+      "run_mi": 1.0,
+      "total_min": 10.5,
+      "long_swim_yd": 0,
+      "long_bike_min": 0.0,
+      "long_run_mi": 1.0,
+      "run_sessions": 1,
+      "completed": 1,
+      "completed_disc": {
+        "run": 1
+      },
+      "load_delta": -89
     }
   ],
   "durability": [
@@ -7807,6 +7987,13 @@ const TRENDS_DATA = {
       "long_bike_min": 73.0,
       "long_run_mi": 3.1,
       "run_sessions": 1
+    },
+    {
+      "week": "Wk23",
+      "long_swim_yd": 0,
+      "long_bike_min": 0.0,
+      "long_run_mi": 1.0,
+      "run_sessions": 1
     }
   ],
   "markers": [
@@ -7892,6 +8079,10 @@ const TRENDS_DATA = {
         },
         {
           "date": "Wk21",
+          "value": 11
+        },
+        {
+          "date": "Wk22",
           "value": 11
         }
       ]
@@ -8137,6 +8328,13 @@ const TRENDS_DATA = {
     },
     {
       "week": "Wk22",
+      "overall_min": 389.85,
+      "swim_min": 37.93333333333333,
+      "bike_min": 212.08333333333334,
+      "run_min": 133.83333333333334
+    },
+    {
+      "week": "Wk23",
       "overall_min": 389.85,
       "swim_min": 37.93333333333333,
       "bike_min": 212.08333333333334,
@@ -8421,6 +8619,19 @@ const TRENDS_DATA = {
       "week_num": 22,
       "week": "Wk22",
       "load_min": 98.2,
+      "readiness": null,
+      "calories": null,
+      "hrv": "",
+      "rhr": "",
+      "sleep": "",
+      "atl": "",
+      "vo2": "",
+      "status": ""
+    },
+    {
+      "week_num": 23,
+      "week": "Wk23",
+      "load_min": 10.5,
       "readiness": null,
       "calories": null,
       "hrv": "",
@@ -9153,7 +9364,7 @@ function renderHeatmap(){
   // Injury periods, drawn as dashed bands over every week column they touch.
   const INJURIES=[
     {start:new Date(2026,5,22), end:new Date(2026,6,19), what:'Ankle sprain'},
-    {start:new Date(2026,9,5),  end:new Date(2026,9,11), what:'Right knee (IT band)'},
+    {start:new Date(2026,9,5),  end:new Date(2026,10,8), what:'Right knee (IT band)'},
   ];
   const cols=[];
   let lastMonth=-1;
